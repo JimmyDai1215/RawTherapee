@@ -87,6 +87,11 @@ void FilmSimulation::onClutSelected()
 {
     Glib::ustring currentClutFilename = m_clutComboBox->getSelectedClut();
 
+    // Picking a LUT switches the tool on, otherwise the choice has no visible effect.
+    if (listener && !batchMode && !getEnabled() && !currentClutFilename.empty() && currentClutFilename != "NULL") {
+        setEnabled(true);
+    }
+
     if ( getEnabled() && !currentClutFilename.empty() && listener && currentClutFilename != m_oldClutFilename ) {
         Glib::ustring clutName, dummy;
         HaldCLUT::splitClutFilename( currentClutFilename, clutName, dummy, dummy );
