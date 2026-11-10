@@ -33,6 +33,7 @@
 #include <lensfun.h>
 
 #include "cachemanager.h"
+#include "crashlog.h"
 #include "config.h"
 #include "editorpanel.h"
 #include "extprog.h"
@@ -352,6 +353,8 @@ int main (int argc, char **argv)
     Glib::init();  // called by Gtk::Main, but this may be important for thread handling, so we call it ourselves now
     Gio::init ();
 
+    CrashLog::install(RTVERSION);
+
 #ifdef _WIN32
     if (GetFileType (GetStdHandle (STD_OUTPUT_HANDLE)) == 0x0003) {
         // started from msys2 console => do not buffer stdout
@@ -465,6 +468,7 @@ int main (int argc, char **argv)
                 getch();
             }
 
+            CrashLog::markNormalExit();
             return ret;
         }
     }
@@ -475,6 +479,7 @@ int main (int argc, char **argv)
         int ret = processLineParams ( argc, argv);
 
         if ( ret <= 0 ) {
+            CrashLog::markNormalExit();
             return ret;
         }
     }
@@ -557,5 +562,6 @@ int main (int argc, char **argv)
 
 #endif
 
+    CrashLog::markNormalExit();
     return ret;
 }

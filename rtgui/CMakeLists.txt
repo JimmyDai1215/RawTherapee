@@ -160,6 +160,7 @@ set(NONCLISOURCEFILES
     iptcpanel.cc
     labgrid.cc
     lockablecolorpicker.cc
+    crashlog.cc
     keyremap.cc
     main.cc
     metadatapanel.cc
