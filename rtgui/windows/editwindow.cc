@@ -16,6 +16,7 @@
 */
 
 #include "editwindow.h"
+#include "keyremap.h"
 #include "editorpanel.h"
 #include "filepanel.h"
 #include "rtengine/procparams.h"
@@ -294,6 +295,7 @@ void EditWindow::toFront ()
 
 bool EditWindow::keyPressed (GdkEventKey* event)
 {
+    KeyRemap::apply(event);
     bool ctrl = event->state & GDK_CONTROL_MASK;
 
     if(event->keyval == GDK_KEY_F11) {

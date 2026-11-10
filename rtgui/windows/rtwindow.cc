@@ -18,6 +18,7 @@
  */
 #include <gtkmm.h>
 #include "rtwindow.h"
+#include "keyremap.h"
 #include "cachemanager.h"
 #include "preferences.h"
 #include "iccprofilecreator.h"
@@ -732,6 +733,7 @@ bool RTWindow::selectEditorPanel (const std::string &name)
 
 bool RTWindow::keyPressed (GdkEventKey* event)
 {
+    KeyRemap::apply(event);
 
     bool ctrl = event->state & GDK_CONTROL_MASK;
     //bool shift = event->state & GDK_SHIFT_MASK;
@@ -811,6 +813,7 @@ bool RTWindow::keyPressed (GdkEventKey* event)
 
 bool RTWindow::keyReleased(GdkEventKey *event)
 {
+    KeyRemap::apply(event);
     if (fpanel && mainNB->get_current_page() == mainNB->page_num(*fpanel)) {
         return fpanel->handleShortcutKeyRelease(event);
     }

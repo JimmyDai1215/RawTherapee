@@ -1,4 +1,7 @@
 #include <algorithm>
+#include <cstdlib>
+#include <cstring>
+#include <memory>
 
 #include <glibmm/fileutils.h>
 #include <glibmm/miscutils.h>
@@ -84,6 +87,108 @@ bool loadFile(
     return res;
 }
 
+// Loads an Adobe/Resolve ".cube" 3D LUT. The table uses the same ordering as
+// a Hald CLUT (red changes fastest), so it maps directly onto the buffer
+// layout used by HaldCLUT::getRGB() with a cube side of LUT_3D_SIZE.
+bool loadCubeFile(
+    const Glib::ustring& filename,
+    AlignedBuffer<std::uint16_t>& clut_image,
+    unsigned int& cube_side
+)
+{
+    gchar* contents = nullptr;
+
+    if (!g_file_get_contents(filename.c_str(), &contents, nullptr, nullptr)) {
+        return false;
+    }
+
+    const std::unique_ptr<gchar, decltype(&g_free)> guard(contents, &g_free);
+
+    unsigned int side = 0;
+    std::size_t total = 0;
+    std::size_t count = 0;
+    float dmin[3] = {0.f, 0.f, 0.f};
+    float dmax[3] = {1.f, 1.f, 1.f};
+    AlignedBuffer<std::uint16_t> image;
+
+    const auto parse3 = [](const char* p, float out[3]) -> bool {
+        for (int i = 0; i < 3; ++i) {
+            char* end = nullptr;
+            out[i] = g_ascii_strtod(p, &end);
+
+            if (end == p) {
+                return false;
+            }
+
+            p = end;
+        }
+
+        return true;
+    };
+
+    for (char* line = contents; line && *line;) {
+        char* next = std::strchr(line, '\n');
+
+        if (next) {
+            *next++ = '\0';
+        }
+
+        while (*line == ' ' || *line == '\t' || *line == '\r') {
+            ++line;
+        }
+
+        if (*line == '\0' || *line == '#') {
+            // blank line or comment
+        } else if (!std::strncmp(line, "LUT_3D_SIZE", 11)) {
+            side = std::strtoul(line + 11, nullptr, 10);
+
+            if (side < 2 || side > 256 || !image.isEmpty()) {
+                return false;
+            }
+
+            total = static_cast<std::size_t>(side) * side * side;
+            AlignedBuffer<std::uint16_t> buffer(total * 4 + 4); // getClutValues() loads one pixel in advance
+            std::memset(buffer.data, 0, (total * 4 + 4) * sizeof(std::uint16_t));
+            image.swap(buffer);
+        } else if (!std::strncmp(line, "LUT_1D_SIZE", 11)) {
+            return false; // 1D LUTs are not supported
+        } else if (!std::strncmp(line, "DOMAIN_MIN", 10)) {
+            if (!parse3(line + 10, dmin)) {
+                return false;
+            }
+        } else if (!std::strncmp(line, "DOMAIN_MAX", 10)) {
+            if (!parse3(line + 10, dmax)) {
+                return false;
+            }
+        } else if ((*line >= '0' && *line <= '9') || *line == '-' || *line == '+' || *line == '.') {
+            float rgb[3];
+
+            if (!side || count >= total || !parse3(line, rgb)) {
+                return false;
+            }
+
+            for (int i = 0; i < 3; ++i) {
+                const float range = dmax[i] - dmin[i];
+                const float v = range > 0.f ? (rgb[i] - dmin[i]) / range : rgb[i];
+                image.data[count * 4 + i] = rtengine::LIM(v, 0.f, 1.f) * 65535.f + 0.5f;
+            }
+
+            ++count;
+        }
+        // Other keywords (TITLE, ...) are ignored.
+
+        line = next;
+    }
+
+    if (!side || count != total) {
+        return false;
+    }
+
+    clut_image.swap(image);
+    cube_side = side;
+    return true;
+}
+
 #if defined(__SSE2__) || defined(RT_SIMDE)
 vfloat2 getClutValues(const AlignedBuffer<std::uint16_t>& clut_image, size_t index)
 {
@@ -129,6 +234,23 @@ rtengine::HaldCLUT::~HaldCLUT()
 
 bool rtengine::HaldCLUT::load(const Glib::ustring& filename)
 {
+    if (filename.size() > 5 && filename.substr(filename.size() - 5).casefold() == Glib::ustring(".cube").casefold()) {
+        unsigned int cube_side = 0;
+
+        if (!loadCubeFile(filename, clut_image, cube_side)) {
+            return false;
+        }
+
+        Glib::ustring name, ext;
+        splitClutFilename(filename, name, ext, clut_profile);
+
+        clut_filename = filename;
+        clut_level = cube_side; // a .cube states the cube side directly
+        flevel_minus_one = static_cast<float>(clut_level - 1) / 65535.0f;
+        flevel_minus_two = static_cast<float>(clut_level - 2);
+        return true;
+    }
+
     if (loadFile(filename, "", clut_image, clut_level)) {
         Glib::ustring name, ext;
         splitClutFilename(filename, name, ext, clut_profile);
