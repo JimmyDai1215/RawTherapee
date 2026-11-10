@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - dev
+      - c1-custom
       - releases
       - 'release-[0-9]+.*'
     tags:
@@ -27,8 +28,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: [release, debug]
-        arch: [x86_64, arm64]
+        build_type: [release]
+        arch: [x86_64]
     env:
       MSYS2_ENV_NAME: ${{ matrix.arch == 'arm64' && 'CLANGARM64' || 'UCRT64' }}
       MSYS2_ENV_PREFIX: ${{ matrix.arch == 'arm64' && 'clangarm64' || 'ucrt64' }}
