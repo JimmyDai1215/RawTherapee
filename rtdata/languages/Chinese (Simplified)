@@ -2898,45 +2898,45 @@ ERROR_MSG_METADATA_VALUE;元数据：将 %1 设为 %2 时出错
 !HISTORY_MSG_112;--unused--
 !HISTORY_MSG_236;--unused--
 !HISTORY_MSG_277;--unused--
-!HISTORY_MSG_290;Black Level - Red
-!HISTORY_MSG_291;Black Level - Green
-!HISTORY_MSG_292;Black Level - Blue
-!HISTORY_MSG_344;W - Meth chroma sl/cur
-!HISTORY_MSG_393;DCP - Look table
-!HISTORY_MSG_394;DCP - Baseline exposure
-!HISTORY_MSG_395;DCP - Base table
-!HISTORY_MSG_407;Retinex - Method
-!HISTORY_MSG_408;Retinex - Radius
-!HISTORY_MSG_410;Retinex - Offset
-!HISTORY_MSG_411;Retinex - Strength
-!HISTORY_MSG_412;Retinex - Gaussian gradient
-!HISTORY_MSG_413;Retinex - Contrast
-!HISTORY_MSG_414;Retinex - Histogram - Lab
-!HISTORY_MSG_415;Retinex - Transmission
+HISTORY_MSG_290;黑电平 - 红
+HISTORY_MSG_291;黑电平 - 绿
+HISTORY_MSG_292;黑电平 - 蓝
+HISTORY_MSG_344;小波 - 色度方法 滑条/曲线
+HISTORY_MSG_393;DCP - 外观表
+HISTORY_MSG_394;DCP - 基准曝光
+HISTORY_MSG_395;DCP - 基础表
+HISTORY_MSG_407;Retinex - 方法
+HISTORY_MSG_408;Retinex - 半径
+HISTORY_MSG_410;Retinex - 偏移
+HISTORY_MSG_411;Retinex - 强度
+HISTORY_MSG_412;Retinex - 高斯渐变
+HISTORY_MSG_413;Retinex - 对比度
+HISTORY_MSG_414;Retinex - 直方图 - Lab
+HISTORY_MSG_415;Retinex - 透射
 !HISTORY_MSG_416;Retinex
-!HISTORY_MSG_417;Retinex - Transmission median
-!HISTORY_MSG_418;Retinex - Threshold
-!HISTORY_MSG_419;Retinex - Color space
-!HISTORY_MSG_420;Retinex - Histogram - HSL
-!HISTORY_MSG_421;Retinex - Gamma
-!HISTORY_MSG_422;Retinex - Gamma
-!HISTORY_MSG_423;Retinex - Gamma slope
-!HISTORY_MSG_424;Retinex - HL threshold
+HISTORY_MSG_417;Retinex - 透射中值
+HISTORY_MSG_418;Retinex - 阈值
+HISTORY_MSG_419;Retinex - 色彩空间
+HISTORY_MSG_420;Retinex - 直方图 - HSL
+HISTORY_MSG_421;Retinex - 伽马
+HISTORY_MSG_422;Retinex - 伽马
+HISTORY_MSG_423;Retinex - 伽马斜率
+HISTORY_MSG_424;Retinex - 高光阈值
 !HISTORY_MSG_425;--unused--
-!HISTORY_MSG_426;Retinex - Hue equalizer
-!HISTORY_MSG_429;Retinex - Iterations
-!HISTORY_MSG_430;Retinex - Transmission gradient
-!HISTORY_MSG_431;Retinex - Strength gradient
-!HISTORY_MSG_432;Retinex - M - Highlights
-!HISTORY_MSG_433;Retinex - M - Highlights TW
-!HISTORY_MSG_434;Retinex - M - Shadows
-!HISTORY_MSG_435;Retinex - M - Shadows TW
-!HISTORY_MSG_436;Retinex - M - Radius
-!HISTORY_MSG_437;Retinex - M - Method
-!HISTORY_MSG_438;Retinex - M - Equalizer
-!HISTORY_MSG_439;Retinex - Process
-!HISTORY_MSG_441;Retinex - Gain transmission
-!HISTORY_MSG_442;Retinex - Scale
+HISTORY_MSG_426;Retinex - 色相均衡器
+HISTORY_MSG_429;Retinex - 迭代次数
+HISTORY_MSG_430;Retinex - 透射渐变
+HISTORY_MSG_431;Retinex - 强度渐变
+HISTORY_MSG_432;Retinex - 蒙版 - 高光
+HISTORY_MSG_433;Retinex - 蒙版 - 高光色调范围
+HISTORY_MSG_434;Retinex - 蒙版 - 阴影
+HISTORY_MSG_435;Retinex - 蒙版 - 阴影色调范围
+HISTORY_MSG_436;Retinex - 蒙版 - 半径
+HISTORY_MSG_437;Retinex - 蒙版 - 方法
+HISTORY_MSG_438;Retinex - 蒙版 - 均衡器
+HISTORY_MSG_439;Retinex - 处理
+HISTORY_MSG_441;Retinex - 透射增益
+HISTORY_MSG_442;Retinex - 缩放
 !HISTORY_MSG_446;--unused--
 !HISTORY_MSG_447;--unused--
 !HISTORY_MSG_448;--unused--
@@ -2953,759 +2953,759 @@ ERROR_MSG_METADATA_VALUE;元数据：将 %1 设为 %2 时出错
 !HISTORY_MSG_466;--unused--
 !HISTORY_MSG_467;--unused--
 !HISTORY_MSG_470;--unused--
-!HISTORY_MSG_503;Local - Spot - Right
-!HISTORY_MSG_504;Local - Spot - Left
-!HISTORY_MSG_505;Local - Spot - Bottom
-!HISTORY_MSG_506;Local - Spot - Top
-!HISTORY_MSG_507;Local - Spot - Center
-!HISTORY_MSG_508;Local - Spot - Size
-!HISTORY_MSG_509;Local - Spot quality method
-!HISTORY_MSG_510;Local - TG - Transition value
-!HISTORY_MSG_511;Local - SD - ΔE scope threshold
-!HISTORY_MSG_513;Local - Spot - Excluding - Scope
-!HISTORY_MSG_514;Local - Spot structure
-!HISTORY_MSG_517;Local - Enable super
-!HISTORY_MSG_527;Local - Color Inverse
-!HISTORY_MSG_532;Local - Exp black
-!HISTORY_MSG_549;Local - Blur scope
-!HISTORY_MSG_551;Local - Blur Luminance only
-!HISTORY_MSG_556;Local - TM scale
-!HISTORY_MSG_558;Local - TM scope
-!HISTORY_MSG_559;Local - Retinex
-!HISTORY_MSG_560;Local - Retinex method
-!HISTORY_MSG_561;Local - Retinex strength
-!HISTORY_MSG_562;Local - Retinex chroma
-!HISTORY_MSG_563;Local - Retinex radius
-!HISTORY_MSG_564;Local - Retinex contrast
-!HISTORY_MSG_565;Local - scope
-!HISTORY_MSG_566;Local - Retinex Gain curve
-!HISTORY_MSG_567;Local - Retinex Inverse
-!HISTORY_MSG_576;Local - cbdl mult
-!HISTORY_MSG_577;Local - cbdl chroma
-!HISTORY_MSG_578;Local - cbdl threshold
-!HISTORY_MSG_579;Local - cbdl scope
-!HISTORY_MSG_581;Local - Denoise lum f 1
-!HISTORY_MSG_582;Local - Denoise lum c
-!HISTORY_MSG_583;Local - Denoise lum detail
-!HISTORY_MSG_584;Local - Denoise equalizer White-Black
-!HISTORY_MSG_585;Local - Denoise chro f
-!HISTORY_MSG_586;Local - Denoise chro c
-!HISTORY_MSG_587;Local - Denoise chro detail
-!HISTORY_MSG_588;Local - Denoise equalizer Blue-Red
-!HISTORY_MSG_589;Local - Denoise bilateral
-!HISTORY_MSG_590;Local - Denoise Scope
-!HISTORY_MSG_591;Local - Avoid color shift
-!HISTORY_MSG_592;Local - Sh Contrast
-!HISTORY_MSG_598;Local - Local contrast scope
-!HISTORY_MSG_599;Local - Retinex dehaze
-!HISTORY_MSG_600;Local - Soft Light enable
-!HISTORY_MSG_601;Local - Soft Light strength
-!HISTORY_MSG_602;Local - Soft Light scope
-!HISTORY_MSG_603;Local - Sh Blur radius
-!HISTORY_MSG_605;Local - Mask preview choice
-!HISTORY_MSG_607;Local - Color Mask C
-!HISTORY_MSG_608;Local - Color Mask L
-!HISTORY_MSG_609;Local - Exp Mask C
-!HISTORY_MSG_610;Local - Exp Mask L
-!HISTORY_MSG_611;Local - Color Mask H
-!HISTORY_MSG_612;Local - Color Structure
-!HISTORY_MSG_613;Local - Exp Structure
-!HISTORY_MSG_614;Local - Exp Mask H
-!HISTORY_MSG_615;Local - Blend color
-!HISTORY_MSG_616;Local - Blend Exp
-!HISTORY_MSG_617;Local - Blur Exp
-!HISTORY_MSG_618;Local - Use Color Mask
-!HISTORY_MSG_619;Local - Use Exp Mask
-!HISTORY_MSG_620;Local - Blur col
-!HISTORY_MSG_621;Local - Exp inverse
-!HISTORY_MSG_622;Local - Spot - Excluding - Spot structure
-!HISTORY_MSG_623;Local - Exp Chroma compensation
-!HISTORY_MSG_634;Local - radius color
-!HISTORY_MSG_635;Local - radius Exp
-!HISTORY_MSG_636;Local - Tool added
-!HISTORY_MSG_637;Local - SH Mask C
-!HISTORY_MSG_638;Local - SH Mask L
-!HISTORY_MSG_639;Local - SH Mask H
-!HISTORY_MSG_640;Local - SH blend
-!HISTORY_MSG_641;Local - Use SH mask
-!HISTORY_MSG_642;Local - radius SH
-!HISTORY_MSG_643;Local - Blur SH
-!HISTORY_MSG_644;Local - inverse SH
-!HISTORY_MSG_646;Local - Exp mask chroma
-!HISTORY_MSG_647;Local - Exp mask gamma
-!HISTORY_MSG_648;Local - Exp mask slope
-!HISTORY_MSG_649;Local - Exp soft radius
-!HISTORY_MSG_650;Local - Color mask chroma
-!HISTORY_MSG_651;Local - Color mask gamma
-!HISTORY_MSG_652;Local - Color mask slope
-!HISTORY_MSG_653;Local - SH mask chroma
-!HISTORY_MSG_654;Local - SH mask gamma
-!HISTORY_MSG_655;Local - SH mask slope
-!HISTORY_MSG_656;Local - Color soft radius
-!HISTORY_MSG_657;Local - Retinex Reduce artifacts
-!HISTORY_MSG_658;Local - CBDL soft radius
-!HISTORY_MSG_659;Local - TG - Transition decay
-!HISTORY_MSG_660;Local - cbdl clarity
-!HISTORY_MSG_661;Local - cbdl contrast residual
-!HISTORY_MSG_662;Local - Denoise lum f 0
-!HISTORY_MSG_663;Local - Denoise lum f 2
+HISTORY_MSG_503;局部 - 调整点 - 右
+HISTORY_MSG_504;局部 - 调整点 - 左
+HISTORY_MSG_505;局部 - 调整点 - 下
+HISTORY_MSG_506;局部 - 调整点 - 上
+HISTORY_MSG_507;局部 - 调整点 - 中心
+HISTORY_MSG_508;局部 - 调整点 - 大小
+HISTORY_MSG_509;局部 - 调整点质量方法
+HISTORY_MSG_510;局部 - 过渡 - 过渡值
+HISTORY_MSG_511;局部 - 形状检测 - ΔE 范围阈值
+HISTORY_MSG_513;局部 - 调整点 - 排除 - 范围
+HISTORY_MSG_514;局部 - 调整点结构
+HISTORY_MSG_517;局部 - 启用超级
+HISTORY_MSG_527;局部 - 色彩反向
+HISTORY_MSG_532;局部 - 曝光 黑点
+HISTORY_MSG_549;局部 - 模糊范围
+HISTORY_MSG_551;局部 - 模糊仅亮度
+HISTORY_MSG_556;局部 - 色调映射 缩放
+HISTORY_MSG_558;局部 - 色调映射 范围
+HISTORY_MSG_559;局部 - Retinex
+HISTORY_MSG_560;局部 - Retinex 方法
+HISTORY_MSG_561;局部 - Retinex 强度
+HISTORY_MSG_562;局部 - Retinex 色度
+HISTORY_MSG_563;局部 - Retinex 半径
+HISTORY_MSG_564;局部 - Retinex 对比度
+HISTORY_MSG_565;局部 - 范围
+HISTORY_MSG_566;局部 - Retinex 增益曲线
+HISTORY_MSG_567;局部 - Retinex 反向
+HISTORY_MSG_576;局部 - 分层反差 倍数
+HISTORY_MSG_577;局部 - 分层反差 色度
+HISTORY_MSG_578;局部 - 分层反差 阈值
+HISTORY_MSG_579;局部 - 分层反差 范围
+HISTORY_MSG_581;局部 - 降噪 亮度 精细 1
+HISTORY_MSG_582;局部 - 降噪 亮度 粗糙
+HISTORY_MSG_583;局部 - 降噪 亮度 细节
+HISTORY_MSG_584;局部 - 降噪均衡器 白-黑
+HISTORY_MSG_585;局部 - 降噪 色度 精细
+HISTORY_MSG_586;局部 - 降噪 色度 粗糙
+HISTORY_MSG_587;局部 - 降噪 色度 细节
+HISTORY_MSG_588;局部 - 降噪均衡器 蓝-红
+HISTORY_MSG_589;局部 - 降噪 双边
+HISTORY_MSG_590;局部 - 降噪 范围
+HISTORY_MSG_591;局部 - 避免色偏
+HISTORY_MSG_592;局部 - 锐化 对比度
+HISTORY_MSG_598;局部 - 局部反差范围
+HISTORY_MSG_599;局部 - Retinex 去雾
+HISTORY_MSG_600;局部 - 柔光 启用
+HISTORY_MSG_601;局部 - 柔光 强度
+HISTORY_MSG_602;局部 - 柔光 范围
+HISTORY_MSG_603;局部 - 锐化 模糊半径
+HISTORY_MSG_605;局部 - 蒙版预览选择
+HISTORY_MSG_607;局部 - 色彩蒙版 C
+HISTORY_MSG_608;局部 - 色彩蒙版 L
+HISTORY_MSG_609;局部 - 曝光蒙版 C
+HISTORY_MSG_610;局部 - 曝光蒙版 L
+HISTORY_MSG_611;局部 - 色彩蒙版 H
+HISTORY_MSG_612;局部 - 色彩 结构
+HISTORY_MSG_613;局部 - 曝光 结构
+HISTORY_MSG_614;局部 - 曝光蒙版 H
+HISTORY_MSG_615;局部 - 混合 色彩
+HISTORY_MSG_616;局部 - 混合 曝光
+HISTORY_MSG_617;局部 - 模糊 曝光
+HISTORY_MSG_618;局部 - 使用色彩蒙版
+HISTORY_MSG_619;局部 - 使用曝光蒙版
+HISTORY_MSG_620;局部 - 模糊 色彩
+HISTORY_MSG_621;局部 - 曝光 反向
+HISTORY_MSG_622;局部 - 调整点 - 排除 - 调整点结构
+HISTORY_MSG_623;局部 - 曝光 色度补偿
+HISTORY_MSG_634;局部 - 半径 色彩
+HISTORY_MSG_635;局部 - 半径 曝光
+HISTORY_MSG_636;局部 - 已添加工具
+HISTORY_MSG_637;局部 - 阴影高光蒙版 C
+HISTORY_MSG_638;局部 - 阴影高光蒙版 L
+HISTORY_MSG_639;局部 - 阴影高光蒙版 H
+HISTORY_MSG_640;局部 - 阴影高光 混合
+HISTORY_MSG_641;局部 - 使用阴影高光蒙版
+HISTORY_MSG_642;局部 - 半径 阴影高光
+HISTORY_MSG_643;局部 - 模糊 阴影高光
+HISTORY_MSG_644;局部 - 反向 阴影高光
+HISTORY_MSG_646;局部 - 曝光蒙版 色度
+HISTORY_MSG_647;局部 - 曝光蒙版 伽马
+HISTORY_MSG_648;局部 - 曝光蒙版 斜率
+HISTORY_MSG_649;局部 - 曝光 柔化半径
+HISTORY_MSG_650;局部 - 色彩蒙版 色度
+HISTORY_MSG_651;局部 - 色彩蒙版 伽马
+HISTORY_MSG_652;局部 - 色彩蒙版 斜率
+HISTORY_MSG_653;局部 - 阴影高光蒙版 色度
+HISTORY_MSG_654;局部 - 阴影高光蒙版 伽马
+HISTORY_MSG_655;局部 - 阴影高光蒙版 斜率
+HISTORY_MSG_656;局部 - 色彩 柔化半径
+HISTORY_MSG_657;局部 - Retinex 减少伪影
+HISTORY_MSG_658;局部 - 分层反差 柔化半径
+HISTORY_MSG_659;局部 - 过渡 - 过渡衰减
+HISTORY_MSG_660;局部 - 分层反差 清晰度
+HISTORY_MSG_661;局部 - 分层反差 残差对比度
+HISTORY_MSG_662;局部 - 降噪 亮度 精细 0
+HISTORY_MSG_663;局部 - 降噪 亮度 精细 2
 !HISTORY_MSG_664;--unused--
-!HISTORY_MSG_665;Local - cbdl mask Blend
-!HISTORY_MSG_666;Local - cbdl mask radius
-!HISTORY_MSG_667;Local - cbdl mask chroma
-!HISTORY_MSG_668;Local - cbdl mask gamma
-!HISTORY_MSG_669;Local - cbdl mask slope
-!HISTORY_MSG_670;Local - cbdl mask C
-!HISTORY_MSG_671;Local - cbdl mask L
-!HISTORY_MSG_672;Local - cbdl mask CL
-!HISTORY_MSG_673;Local - Use cbdl mask
-!HISTORY_MSG_675;Local - TM soft radius
-!HISTORY_MSG_676;Local - TG - Transition differentiation
-!HISTORY_MSG_677;Local - TM amount
-!HISTORY_MSG_678;Local - TM saturation
-!HISTORY_MSG_679;Local - Retinex mask C
-!HISTORY_MSG_680;Local - Retinex mask L
-!HISTORY_MSG_681;Local - Retinex mask CL
-!HISTORY_MSG_682;Local - Retinex mask
-!HISTORY_MSG_683;Local - Retinex mask Blend
-!HISTORY_MSG_684;Local - Retinex mask radius
-!HISTORY_MSG_685;Local - Retinex mask chroma
-!HISTORY_MSG_686;Local - Retinex mask gamma
-!HISTORY_MSG_687;Local - Retinex mask slope
-!HISTORY_MSG_689;Local - Retinex mask transmission map
-!HISTORY_MSG_690;Local - Retinex scale
-!HISTORY_MSG_691;Local - Retinex darkness
-!HISTORY_MSG_692;Local - Retinex lightness
-!HISTORY_MSG_693;Local - Retinex threshold
-!HISTORY_MSG_694;Local - Retinex Laplacian threshold
-!HISTORY_MSG_695;Local - Soft method
-!HISTORY_MSG_696;Local - Retinex Normalize
-!HISTORY_MSG_697;Local - TM Normalize
-!HISTORY_MSG_698;Local - Local contrast Fast Fourier
-!HISTORY_MSG_699;Local - Retinex Fast Fourier
-!HISTORY_MSG_701;Local - Exp Shadows
-!HISTORY_MSG_702;Local - Exp Method
-!HISTORY_MSG_703;Local - Exp Laplacian threshold
-!HISTORY_MSG_704;Local - Exp PDE balance
-!HISTORY_MSG_705;Local - Exp linearity
-!HISTORY_MSG_706;Local - TM mask C
-!HISTORY_MSG_707;Local - TM mask L
-!HISTORY_MSG_708;Local - TM mask CL
-!HISTORY_MSG_709;Local - use TM mask
-!HISTORY_MSG_710;Local - TM mask Blend
-!HISTORY_MSG_711;Local - TM mask radius
-!HISTORY_MSG_712;Local - TM mask chroma
-!HISTORY_MSG_713;Local - TM mask gamma
-!HISTORY_MSG_714;Local - TM mask slope
-!HISTORY_MSG_716;Local - Local method
-!HISTORY_MSG_717;Local - Local contrast
-!HISTORY_MSG_718;Local - Local contrast levels
-!HISTORY_MSG_719;Local - Local contrast residual L
-!HISTORY_MSG_720;Local - Blur mask C
-!HISTORY_MSG_721;Local - Blur mask L
-!HISTORY_MSG_722;Local - Blur mask CL
-!HISTORY_MSG_723;Local - use Blur mask
-!HISTORY_MSG_725;Local - Blur mask Blend
-!HISTORY_MSG_726;Local - Blur mask radius
-!HISTORY_MSG_727;Local - Blur mask chroma
-!HISTORY_MSG_728;Local - Blur mask gamma
-!HISTORY_MSG_729;Local - Blur mask slope
-!HISTORY_MSG_730;Local - Blur method
-!HISTORY_MSG_731;Local - median method
-!HISTORY_MSG_732;Local - median iterations
-!HISTORY_MSG_733;Local - soft radius
-!HISTORY_MSG_734;Local - detail
-!HISTORY_MSG_738;Local - Local contrast Merge L
-!HISTORY_MSG_739;Local - Local contrast Soft radius
-!HISTORY_MSG_740;Local - Local contrast Merge C
-!HISTORY_MSG_741;Local - Local contrast Residual C
-!HISTORY_MSG_742;Local - Exp Laplacian gamma
-!HISTORY_MSG_743;Local - Exp Fattal Amount
-!HISTORY_MSG_744;Local - Exp Fattal Detail
-!HISTORY_MSG_745;Local - Exp Fattal Offset
-!HISTORY_MSG_746;Local - Exp Fattal Sigma
-!HISTORY_MSG_748;Local - Exp Denoise
-!HISTORY_MSG_749;Local - Reti Depth
-!HISTORY_MSG_750;Local - Reti Mode log - lin
-!HISTORY_MSG_751;Local - Reti Dehaze saturation
-!HISTORY_MSG_752;Local - Reti Offset
-!HISTORY_MSG_753;Local - Reti Transmission map
-!HISTORY_MSG_754;Local - Reti Clip
-!HISTORY_MSG_755;Local - TM use tm mask
-!HISTORY_MSG_756;Local - Exp use algo exposure mask
-!HISTORY_MSG_757;Local - Exp Laplacian mask
-!HISTORY_MSG_758;Local - Reti Laplacian mask
-!HISTORY_MSG_759;Local - Exp Laplacian mask
-!HISTORY_MSG_760;Local - Color Laplacian mask
-!HISTORY_MSG_761;Local - SH Laplacian mask
-!HISTORY_MSG_762;Local - cbdl Laplacian mask
-!HISTORY_MSG_763;Local - Blur Laplacian mask
-!HISTORY_MSG_764;Local - Solve PDE Laplacian mask
-!HISTORY_MSG_765;Local - Denoise Detail threshold
-!HISTORY_MSG_766;Local - Blur Fast Fourier
-!HISTORY_MSG_769;Local - Grain Scale
-!HISTORY_MSG_770;Local - Color Mask contrast curve
-!HISTORY_MSG_771;Local - Exp Mask contrast curve
-!HISTORY_MSG_772;Local - SH Mask contrast curve
-!HISTORY_MSG_773;Local - TM Mask contrast curve
-!HISTORY_MSG_774;Local - Reti Mask contrast curve
-!HISTORY_MSG_775;Local - CBDL Mask contrast curve
-!HISTORY_MSG_776;Local - Blur Denoise Mask contrast curve
-!HISTORY_MSG_777;Local - Blur Mask local contrast curve
-!HISTORY_MSG_778;Local - Mask highlights
-!HISTORY_MSG_779;Local - Color Mask local contrast curve
-!HISTORY_MSG_780;Local - Color Mask shadows
-!HISTORY_MSG_781;Local - Contrast Mask Wavelet level
-!HISTORY_MSG_782;Local - Blur Denoise Mask Wavelet levels
-!HISTORY_MSG_783;Local - Color Wavelet levels
-!HISTORY_MSG_784;Local - Mask - ΔE Image Mask
-!HISTORY_MSG_785;Local - Mask - Scope
-!HISTORY_MSG_787;Local - Equalizer multiplier
-!HISTORY_MSG_788;Local - Equalizer detail
-!HISTORY_MSG_789;Local - SH mask amount
-!HISTORY_MSG_790;Local - SH mask anchor
-!HISTORY_MSG_791;Local - Mask Short L curves
-!HISTORY_MSG_792;Local - Mask - Background
-!HISTORY_MSG_794;Local - SH TRC slope
-!HISTORY_MSG_795;Local - Mask save restore image
-!HISTORY_MSG_796;Local - SC - Recursive references
-!HISTORY_MSG_797;Local - Merge Original method
-!HISTORY_MSG_799;Local - Color RGB ToneCurve
-!HISTORY_MSG_800;Local - Color ToneCurve Method
-!HISTORY_MSG_801;Local - Color ToneCurve Special
-!HISTORY_MSG_802;Local - Contrast threshold
-!HISTORY_MSG_803;Local - Color Merge
-!HISTORY_MSG_804;Local - Color mask Structure
-!HISTORY_MSG_805;Local - Blur Noise mask Structure
-!HISTORY_MSG_806;Local - Color mask Structure as tool
-!HISTORY_MSG_807;Local - Blur Noise mask Structure as tool
-!HISTORY_MSG_808;Local - Color mask curve H(H)
-!HISTORY_MSG_809;Local - Vib mask curve C(C)
-!HISTORY_MSG_810;Local - Vib mask curve L(L)
-!HISTORY_MSG_811;Local - Vib mask curve LC(H)
-!HISTORY_MSG_813;Local - Use Vib mask
-!HISTORY_MSG_814;Local - Vib mask Blend
-!HISTORY_MSG_815;Local - Vib mask radius
-!HISTORY_MSG_816;Local - Vib mask chroma
-!HISTORY_MSG_817;Local - Vib mask gamma
-!HISTORY_MSG_818;Local - Vib mask slope
-!HISTORY_MSG_819;Local - Vib mask laplacian
-!HISTORY_MSG_820;Local - Vib mask contrast curve
-!HISTORY_MSG_821;Local - color grid background
-!HISTORY_MSG_822;Local - color background merge
-!HISTORY_MSG_823;Local - color background luminance
-!HISTORY_MSG_824;Local - Exp gradient mask strength
-!HISTORY_MSG_825;Local - Exp gradient mask angle
-!HISTORY_MSG_826;Local - Exp gradient strength
-!HISTORY_MSG_827;Local - Exp gradient angle
-!HISTORY_MSG_828;Local - SH gradient strength
-!HISTORY_MSG_829;Local - SH gradient angle
-!HISTORY_MSG_830;Local - Color gradient strength L
-!HISTORY_MSG_831;Local - Color gradient angle
-!HISTORY_MSG_832;Local - Color gradient strength C
-!HISTORY_MSG_833;Local - Mask gradient feather
-!HISTORY_MSG_834;Local - Color gradient strength H
-!HISTORY_MSG_835;Local - Vib gradient strength L
-!HISTORY_MSG_836;Local - Vib gradient angle
-!HISTORY_MSG_837;Local - Vib gradient strength C
-!HISTORY_MSG_838;Local - Vib gradient strength H
-!HISTORY_MSG_840;Local - CL Curve
-!HISTORY_MSG_841;Local - LC curve
-!HISTORY_MSG_842;Local - Blur mask Radius
-!HISTORY_MSG_843;Local - Blur mask Contrast Threshold
-!HISTORY_MSG_844;Local - Blur mask FFTW
-!HISTORY_MSG_846;Local - Log encoding auto
-!HISTORY_MSG_847;Local - Log encoding Source
-!HISTORY_MSG_849;Local - Log encoding Source auto
-!HISTORY_MSG_850;Local - Log encoding B_Ev
-!HISTORY_MSG_851;Local - Log encoding W_Ev
-!HISTORY_MSG_852;Local - Log encoding Target
-!HISTORY_MSG_853;Local - Log encodind loc contrast
-!HISTORY_MSG_855;Local - Log encoding Whole image
-!HISTORY_MSG_856;Local - Log encoding Shadows range
-!HISTORY_MSG_857;Local - Wavelet blur residual
-!HISTORY_MSG_858;Local - Wavelet blur luminance only
-!HISTORY_MSG_859;Local - Wavelet max blur
-!HISTORY_MSG_860;Local - Wavelet blur levels
-!HISTORY_MSG_861;Local - Wavelet contrast levels
-!HISTORY_MSG_862;Local - Wavelet contrast attenuation
-!HISTORY_MSG_863;Local - Wavelet merge original image
-!HISTORY_MSG_864;Local - Wavelet dir contrast attenuation
-!HISTORY_MSG_865;Local - Wavelet dir contrast delta
-!HISTORY_MSG_866;Local - Wavelet dir compression
-!HISTORY_MSG_868;Local - SD - Hue-Chroma balance
-!HISTORY_MSG_869;Local - Denoise by level
-!HISTORY_MSG_870;Local - Wavelet mask curve H
-!HISTORY_MSG_871;Local - Wavelet mask curve C
-!HISTORY_MSG_872;Local - Wavelet mask curve L
-!HISTORY_MSG_873;Local - Wavelet mask
-!HISTORY_MSG_875;Local - Wavelet mask blend
-!HISTORY_MSG_876;Local - Wavelet mask smooth
-!HISTORY_MSG_877;Local - Wavelet mask chroma
-!HISTORY_MSG_878;Local - Wavelet mask contrast curve
-!HISTORY_MSG_879;Local - Wavelet contrast chroma
-!HISTORY_MSG_880;Local - Wavelet blur chroma
-!HISTORY_MSG_881;Local - Wavelet contrast offset
-!HISTORY_MSG_882;Local - Wavelet blur
-!HISTORY_MSG_883;Local - Wavelet contrast by level
-!HISTORY_MSG_884;Local - Wavelet dir contrast
-!HISTORY_MSG_885;Local - Wavelet tone mapping
-!HISTORY_MSG_886;Local - Wavelet tone mapping compress
-!HISTORY_MSG_887;Local - Wavelet tone mapping compress residual
-!HISTORY_MSG_888;Local - Contrast Wavelet Balance Threshold
-!HISTORY_MSG_889;Local - Contrast Wavelet Graduated Strength
-!HISTORY_MSG_890;Local - Contrast Wavelet Graduated angle
-!HISTORY_MSG_891;Local - Contrast Wavelet Graduated
-!HISTORY_MSG_892;Local - Log encoding Graduated Strength
-!HISTORY_MSG_893;Local - Log encoding Graduated angle
-!HISTORY_MSG_894;Local - SD - ΔE preview color intensity
-!HISTORY_MSG_897;Local - Contrast Wavelet ES strength
-!HISTORY_MSG_898;Local - Contrast Wavelet ES radius
-!HISTORY_MSG_899;Local - Contrast Wavelet ES detail
-!HISTORY_MSG_900;Local - Contrast Wavelet ES gradient
-!HISTORY_MSG_901;Local - Contrast Wavelet ES threshold low
-!HISTORY_MSG_902;Local - Contrast Wavelet ES threshold high
-!HISTORY_MSG_903;Local - Contrast Wavelet ES local contrast
-!HISTORY_MSG_904;Local - Contrast Wavelet ES first level
-!HISTORY_MSG_905;Local - Contrast Wavelet Edge Sharpness
-!HISTORY_MSG_906;Local - Contrast Wavelet ES sensitivity
-!HISTORY_MSG_907;Local - Contrast Wavelet ES amplification
-!HISTORY_MSG_908;Local - Contrast Wavelet ES neighboring
-!HISTORY_MSG_909;Local - Contrast Wavelet ES show
-!HISTORY_MSG_910;Local - SC - Wavelet Edge performance
-!HISTORY_MSG_911;Local - Blur Chroma Luma
-!HISTORY_MSG_912;Local - Blur Guide filter strength
-!HISTORY_MSG_913;Local - Contrast Wavelet Sigma DR
-!HISTORY_MSG_914;Local - Blur Wavelet Sigma BL
-!HISTORY_MSG_915;Local - Edge Wavelet Sigma ED
-!HISTORY_MSG_916;Local - Residual wavelet shadows
-!HISTORY_MSG_917;Local - Residual wavelet shadows threshold
-!HISTORY_MSG_918;Local - Residual wavelet highlights
-!HISTORY_MSG_919;Local - Residual wavelet highlights threshold
-!HISTORY_MSG_920;Local - Wavelet sigma LC
-!HISTORY_MSG_921;Local - Wavelet Graduated sigma LC2
-!HISTORY_MSG_922;Local - SC - Changes in B/W
-!HISTORY_MSG_923;Local - Tool complexity mode
+HISTORY_MSG_665;局部 - 分层反差蒙版 混合
+HISTORY_MSG_666;局部 - 分层反差蒙版 半径
+HISTORY_MSG_667;局部 - 分层反差蒙版 色度
+HISTORY_MSG_668;局部 - 分层反差蒙版 伽马
+HISTORY_MSG_669;局部 - 分层反差蒙版 斜率
+HISTORY_MSG_670;局部 - 分层反差蒙版 C
+HISTORY_MSG_671;局部 - 分层反差蒙版 L
+HISTORY_MSG_672;局部 - 分层反差蒙版 CL
+HISTORY_MSG_673;局部 - 使用分层反差蒙版
+HISTORY_MSG_675;局部 - 色调映射 柔化半径
+HISTORY_MSG_676;局部 - 过渡 - 过渡差异
+HISTORY_MSG_677;局部 - 色调映射 数量
+HISTORY_MSG_678;局部 - 色调映射 饱和度
+HISTORY_MSG_679;局部 - Retinex 蒙版 C
+HISTORY_MSG_680;局部 - Retinex 蒙版 L
+HISTORY_MSG_681;局部 - Retinex 蒙版 CL
+HISTORY_MSG_682;局部 - Retinex 蒙版
+HISTORY_MSG_683;局部 - Retinex 蒙版 混合
+HISTORY_MSG_684;局部 - Retinex 蒙版 半径
+HISTORY_MSG_685;局部 - Retinex 蒙版 色度
+HISTORY_MSG_686;局部 - Retinex 蒙版 伽马
+HISTORY_MSG_687;局部 - Retinex 蒙版 斜率
+HISTORY_MSG_689;局部 - Retinex 蒙版 透射图
+HISTORY_MSG_690;局部 - Retinex 缩放
+HISTORY_MSG_691;局部 - Retinex 暗度
+HISTORY_MSG_692;局部 - Retinex 明度
+HISTORY_MSG_693;局部 - Retinex 阈值
+HISTORY_MSG_694;局部 - Retinex 拉普拉斯阈值
+HISTORY_MSG_695;局部 - 柔化方法
+HISTORY_MSG_696;局部 - Retinex 归一化
+HISTORY_MSG_697;局部 - 色调映射 归一化
+HISTORY_MSG_698;局部 - 局部反差 快速傅里叶
+HISTORY_MSG_699;局部 - Retinex 快速傅里叶
+HISTORY_MSG_701;局部 - 曝光 阴影
+HISTORY_MSG_702;局部 - 曝光 方法
+HISTORY_MSG_703;局部 - 曝光 拉普拉斯阈值
+HISTORY_MSG_704;局部 - 曝光 PDE 平衡
+HISTORY_MSG_705;局部 - 曝光 线性度
+HISTORY_MSG_706;局部 - 色调映射蒙版 C
+HISTORY_MSG_707;局部 - 色调映射蒙版 L
+HISTORY_MSG_708;局部 - 色调映射蒙版 CL
+HISTORY_MSG_709;局部 - 使用色调映射蒙版
+HISTORY_MSG_710;局部 - 色调映射蒙版 混合
+HISTORY_MSG_711;局部 - 色调映射蒙版 半径
+HISTORY_MSG_712;局部 - 色调映射蒙版 色度
+HISTORY_MSG_713;局部 - 色调映射蒙版 伽马
+HISTORY_MSG_714;局部 - 色调映射蒙版 斜率
+HISTORY_MSG_716;局部 - 局部方法
+HISTORY_MSG_717;局部 - 局部反差
+HISTORY_MSG_718;局部 - 局部反差 层级
+HISTORY_MSG_719;局部 - 局部反差 残差 L
+HISTORY_MSG_720;局部 - 模糊蒙版 C
+HISTORY_MSG_721;局部 - 模糊蒙版 L
+HISTORY_MSG_722;局部 - 模糊蒙版 CL
+HISTORY_MSG_723;局部 - 使用模糊蒙版
+HISTORY_MSG_725;局部 - 模糊蒙版 混合
+HISTORY_MSG_726;局部 - 模糊蒙版 半径
+HISTORY_MSG_727;局部 - 模糊蒙版 色度
+HISTORY_MSG_728;局部 - 模糊蒙版 伽马
+HISTORY_MSG_729;局部 - 模糊蒙版 斜率
+HISTORY_MSG_730;局部 - 模糊方法
+HISTORY_MSG_731;局部 - 中值方法
+HISTORY_MSG_732;局部 - 中值迭代次数
+HISTORY_MSG_733;局部 - 柔化半径
+HISTORY_MSG_734;局部 - 细节
+HISTORY_MSG_738;局部 - 局部反差 合并 L
+HISTORY_MSG_739;局部 - 局部反差 柔化半径
+HISTORY_MSG_740;局部 - 局部反差 合并 C
+HISTORY_MSG_741;局部 - 局部反差 残差 C
+HISTORY_MSG_742;局部 - 曝光 拉普拉斯伽马
+HISTORY_MSG_743;局部 - 曝光 Fattal 数量
+HISTORY_MSG_744;局部 - 曝光 Fattal 细节
+HISTORY_MSG_745;局部 - 曝光 Fattal 偏移
+HISTORY_MSG_746;局部 - 曝光 Fattal Sigma
+HISTORY_MSG_748;局部 - 曝光 降噪
+HISTORY_MSG_749;局部 - Retinex 深度
+HISTORY_MSG_750;局部 - Retinex 模式 对数 - 线性
+HISTORY_MSG_751;局部 - Retinex 去雾饱和度
+HISTORY_MSG_752;局部 - Retinex 偏移
+HISTORY_MSG_753;局部 - Retinex 透射图
+HISTORY_MSG_754;局部 - Retinex 裁切
+HISTORY_MSG_755;局部 - 色调映射 使用色调映射蒙版
+HISTORY_MSG_756;局部 - 曝光 使用曝光蒙版算法
+HISTORY_MSG_757;局部 - 曝光 拉普拉斯蒙版
+HISTORY_MSG_758;局部 - Retinex 拉普拉斯蒙版
+HISTORY_MSG_759;局部 - 曝光 拉普拉斯蒙版
+HISTORY_MSG_760;局部 - 色彩 拉普拉斯蒙版
+HISTORY_MSG_761;局部 - 阴影高光 拉普拉斯蒙版
+HISTORY_MSG_762;局部 - 分层反差 拉普拉斯蒙版
+HISTORY_MSG_763;局部 - 模糊 拉普拉斯蒙版
+HISTORY_MSG_764;局部 - 求解 PDE 拉普拉斯蒙版
+HISTORY_MSG_765;局部 - 降噪 细节阈值
+HISTORY_MSG_766;局部 - 模糊 快速傅里叶
+HISTORY_MSG_769;局部 - 颗粒 缩放
+HISTORY_MSG_770;局部 - 色彩蒙版 反差曲线
+HISTORY_MSG_771;局部 - 曝光蒙版 反差曲线
+HISTORY_MSG_772;局部 - 阴影高光蒙版 反差曲线
+HISTORY_MSG_773;局部 - 色调映射蒙版 反差曲线
+HISTORY_MSG_774;局部 - Retinex 蒙版 反差曲线
+HISTORY_MSG_775;局部 - 分层反差蒙版 反差曲线
+HISTORY_MSG_776;局部 - 模糊降噪蒙版 反差曲线
+HISTORY_MSG_777;局部 - 模糊蒙版 局部反差曲线
+HISTORY_MSG_778;局部 - 蒙版 高光
+HISTORY_MSG_779;局部 - 色彩蒙版 局部反差曲线
+HISTORY_MSG_780;局部 - 色彩蒙版 阴影
+HISTORY_MSG_781;局部 - 反差蒙版 小波层级
+HISTORY_MSG_782;局部 - 模糊降噪蒙版 小波层级
+HISTORY_MSG_783;局部 - 色彩 小波层级
+HISTORY_MSG_784;局部 - 蒙版 - ΔE 图像蒙版
+HISTORY_MSG_785;局部 - 蒙版 - 范围
+HISTORY_MSG_787;局部 - 均衡器 倍数
+HISTORY_MSG_788;局部 - 均衡器 细节
+HISTORY_MSG_789;局部 - 阴影高光蒙版 数量
+HISTORY_MSG_790;局部 - 阴影高光蒙版 锚点
+HISTORY_MSG_791;局部 - 蒙版 L 短曲线
+HISTORY_MSG_792;局部 - 蒙版 - 背景
+HISTORY_MSG_794;局部 - 阴影高光 TRC 斜率
+HISTORY_MSG_795;局部 - 蒙版 保存/恢复图像
+HISTORY_MSG_796;局部 - 特殊情况 - 递归参考
+HISTORY_MSG_797;局部 - 合并原图方法
+HISTORY_MSG_799;局部 - 色彩 RGB 色调曲线
+HISTORY_MSG_800;局部 - 色彩 色调曲线方法
+HISTORY_MSG_801;局部 - 色彩 色调曲线特殊
+HISTORY_MSG_802;局部 - 反差阈值
+HISTORY_MSG_803;局部 - 色彩 合并
+HISTORY_MSG_804;局部 - 色彩蒙版 结构
+HISTORY_MSG_805;局部 - 模糊噪点蒙版 结构
+HISTORY_MSG_806;局部 - 色彩蒙版 结构作为工具
+HISTORY_MSG_807;局部 - 模糊噪点蒙版 结构作为工具
+HISTORY_MSG_808;局部 - 色彩蒙版 曲线 H(H)
+HISTORY_MSG_809;局部 - 鲜明度蒙版 曲线 C(C)
+HISTORY_MSG_810;局部 - 鲜明度蒙版 曲线 L(L)
+HISTORY_MSG_811;局部 - 鲜明度蒙版 曲线 LC(H)
+HISTORY_MSG_813;局部 - 使用鲜明度蒙版
+HISTORY_MSG_814;局部 - 鲜明度蒙版 混合
+HISTORY_MSG_815;局部 - 鲜明度蒙版 半径
+HISTORY_MSG_816;局部 - 鲜明度蒙版 色度
+HISTORY_MSG_817;局部 - 鲜明度蒙版 伽马
+HISTORY_MSG_818;局部 - 鲜明度蒙版 斜率
+HISTORY_MSG_819;局部 - 鲜明度蒙版 拉普拉斯
+HISTORY_MSG_820;局部 - 鲜明度蒙版 反差曲线
+HISTORY_MSG_821;局部 - 色彩网格背景
+HISTORY_MSG_822;局部 - 色彩背景合并
+HISTORY_MSG_823;局部 - 色彩背景亮度
+HISTORY_MSG_824;局部 - 曝光 渐变蒙版强度
+HISTORY_MSG_825;局部 - 曝光 渐变蒙版角度
+HISTORY_MSG_826;局部 - 曝光 渐变强度
+HISTORY_MSG_827;局部 - 曝光 渐变角度
+HISTORY_MSG_828;局部 - 阴影高光 渐变强度
+HISTORY_MSG_829;局部 - 阴影高光 渐变角度
+HISTORY_MSG_830;局部 - 色彩 渐变强度 L
+HISTORY_MSG_831;局部 - 色彩 渐变角度
+HISTORY_MSG_832;局部 - 色彩 渐变强度 C
+HISTORY_MSG_833;局部 - 蒙版 渐变羽化
+HISTORY_MSG_834;局部 - 色彩 渐变强度 H
+HISTORY_MSG_835;局部 - 鲜明度 渐变强度 L
+HISTORY_MSG_836;局部 - 鲜明度 渐变角度
+HISTORY_MSG_837;局部 - 鲜明度 渐变强度 C
+HISTORY_MSG_838;局部 - 鲜明度 渐变强度 H
+HISTORY_MSG_840;局部 - CL 曲线
+HISTORY_MSG_841;局部 - LC 曲线
+HISTORY_MSG_842;局部 - 模糊蒙版 半径
+HISTORY_MSG_843;局部 - 模糊蒙版 反差阈值
+HISTORY_MSG_844;局部 - 模糊蒙版 FFTW
+HISTORY_MSG_846;局部 - 对数编码 自动
+HISTORY_MSG_847;局部 - 对数编码 源
+HISTORY_MSG_849;局部 - 对数编码 源自动
+HISTORY_MSG_850;局部 - 对数编码 黑点 Ev
+HISTORY_MSG_851;局部 - 对数编码 白点 Ev
+HISTORY_MSG_852;局部 - 对数编码 目标
+HISTORY_MSG_853;局部 - 对数编码 局部反差
+HISTORY_MSG_855;局部 - 对数编码 整幅图像
+HISTORY_MSG_856;局部 - 对数编码 阴影范围
+HISTORY_MSG_857;局部 - 小波 模糊残差
+HISTORY_MSG_858;局部 - 小波 模糊仅亮度
+HISTORY_MSG_859;局部 - 小波 最大模糊
+HISTORY_MSG_860;局部 - 小波 模糊层级
+HISTORY_MSG_861;局部 - 小波 反差层级
+HISTORY_MSG_862;局部 - 小波 反差衰减
+HISTORY_MSG_863;局部 - 小波 合并原图
+HISTORY_MSG_864;局部 - 小波 方向反差衰减
+HISTORY_MSG_865;局部 - 小波 方向反差差值
+HISTORY_MSG_866;局部 - 小波 方向压缩
+HISTORY_MSG_868;局部 - 形状检测 - 色相-色度平衡
+HISTORY_MSG_869;局部 - 分层降噪
+HISTORY_MSG_870;局部 - 小波蒙版 曲线 H
+HISTORY_MSG_871;局部 - 小波蒙版 曲线 C
+HISTORY_MSG_872;局部 - 小波蒙版 曲线 L
+HISTORY_MSG_873;局部 - 小波蒙版
+HISTORY_MSG_875;局部 - 小波蒙版 混合
+HISTORY_MSG_876;局部 - 小波蒙版 平滑
+HISTORY_MSG_877;局部 - 小波蒙版 色度
+HISTORY_MSG_878;局部 - 小波蒙版 反差曲线
+HISTORY_MSG_879;局部 - 小波 反差色度
+HISTORY_MSG_880;局部 - 小波 模糊色度
+HISTORY_MSG_881;局部 - 小波 反差偏移
+HISTORY_MSG_882;局部 - 小波 模糊
+HISTORY_MSG_883;局部 - 小波 分层反差
+HISTORY_MSG_884;局部 - 小波 方向反差
+HISTORY_MSG_885;局部 - 小波 色调映射
+HISTORY_MSG_886;局部 - 小波 色调映射压缩
+HISTORY_MSG_887;局部 - 小波 色调映射压缩残差
+HISTORY_MSG_888;局部 - 小波反差 平衡阈值
+HISTORY_MSG_889;局部 - 小波反差 渐变强度
+HISTORY_MSG_890;局部 - 小波反差 渐变角度
+HISTORY_MSG_891;局部 - 小波反差 渐变
+HISTORY_MSG_892;局部 - 对数编码 渐变强度
+HISTORY_MSG_893;局部 - 对数编码 渐变角度
+HISTORY_MSG_894;局部 - 形状检测 - ΔE 预览颜色强度
+HISTORY_MSG_897;局部 - 小波反差 边缘锐度 强度
+HISTORY_MSG_898;局部 - 小波反差 边缘锐度 半径
+HISTORY_MSG_899;局部 - 小波反差 边缘锐度 细节
+HISTORY_MSG_900;局部 - 小波反差 边缘锐度 渐变
+HISTORY_MSG_901;局部 - 小波反差 边缘锐度 低阈值
+HISTORY_MSG_902;局部 - 小波反差 边缘锐度 高阈值
+HISTORY_MSG_903;局部 - 小波反差 边缘锐度 局部反差
+HISTORY_MSG_904;局部 - 小波反差 边缘锐度 首层
+HISTORY_MSG_905;局部 - 小波反差 边缘锐度
+HISTORY_MSG_906;局部 - 小波反差 边缘锐度 灵敏度
+HISTORY_MSG_907;局部 - 小波反差 边缘锐度 放大
+HISTORY_MSG_908;局部 - 小波反差 边缘锐度 邻域
+HISTORY_MSG_909;局部 - 小波反差 边缘锐度 显示
+HISTORY_MSG_910;局部 - 特殊情况 - 小波边缘性能
+HISTORY_MSG_911;局部 - 模糊 色度亮度
+HISTORY_MSG_912;局部 - 模糊 引导滤波强度
+HISTORY_MSG_913;局部 - 小波反差 Sigma DR
+HISTORY_MSG_914;局部 - 小波模糊 Sigma BL
+HISTORY_MSG_915;局部 - 小波边缘 Sigma ED
+HISTORY_MSG_916;局部 - 小波残差 阴影
+HISTORY_MSG_917;局部 - 小波残差 阴影阈值
+HISTORY_MSG_918;局部 - 小波残差 高光
+HISTORY_MSG_919;局部 - 小波残差 高光阈值
+HISTORY_MSG_920;局部 - 小波 sigma LC
+HISTORY_MSG_921;局部 - 小波 渐变 sigma LC2
+HISTORY_MSG_922;局部 - 特殊情况 - 黑白中的更改
+HISTORY_MSG_923;局部 - 工具复杂度模式
 !HISTORY_MSG_924;--unused--
-!HISTORY_MSG_925;Local - Scope (color tools)
-!HISTORY_MSG_926;Local - Show mask type
-!HISTORY_MSG_928;Local - Common color mask
-!HISTORY_MSG_929;Local - Mask common scope
-!HISTORY_MSG_930;Local - Mask Common blend luma
-!HISTORY_MSG_931;Local - Mask Common enable
-!HISTORY_MSG_932;Local - Mask Common radius soft
-!HISTORY_MSG_933;Local - Mask Common laplacian
-!HISTORY_MSG_934;Local - Mask Common chroma
-!HISTORY_MSG_935;Local - Mask Common gamma
-!HISTORY_MSG_936;Local - Mask Common slope
-!HISTORY_MSG_937;Local - Mask Common curve C(C)
-!HISTORY_MSG_938;Local - Mask Common curve L(L)
-!HISTORY_MSG_939;Local - Mask Common curve LC(H)
-!HISTORY_MSG_940;Local - Mask Common structure as tool
-!HISTORY_MSG_941;Local - Mask Common structure strength
-!HISTORY_MSG_942;Local - Mask Common H(H) curve
-!HISTORY_MSG_943;Local - Mask Common FFT
-!HISTORY_MSG_944;Local - Mask Common Blur radius
-!HISTORY_MSG_945;Local - Mask Common contrast threshold
-!HISTORY_MSG_946;Local - Mask Common shadows
-!HISTORY_MSG_947;Local - Mask Common Contrast curve
-!HISTORY_MSG_948;Local - Mask Common Wavelet curve
-!HISTORY_MSG_949;Local - Mask Common Threshold levels
-!HISTORY_MSG_950;Local - Mask Common GF strength
-!HISTORY_MSG_951;Local - Mask Common GF angle
-!HISTORY_MSG_952;Local - Mask Common soft radius
-!HISTORY_MSG_953;Local - Mask Common blend chroma
-!HISTORY_MSG_956;Local - CH Curve
-!HISTORY_MSG_959;Local - Inverse blur
-!HISTORY_MSG_962;Local - Log encoding Absolute luminance source
-!HISTORY_MSG_963;Local - Log encoding Absolute luminance target
-!HISTORY_MSG_964;Local - Log encoding Surround
-!HISTORY_MSG_965;Local - Log encoding Saturation s
-!HISTORY_MSG_966;Local - Log encoding Contrast J
-!HISTORY_MSG_967;Local - Log encoding Mask curve C
-!HISTORY_MSG_968;Local - Log encoding Mask curve L
-!HISTORY_MSG_969;Local - Log encoding Mask curve H
-!HISTORY_MSG_970;Local - Log encoding Mask enable
-!HISTORY_MSG_971;Local - Log encoding Mask blend
-!HISTORY_MSG_972;Local - Log encoding Mask radius
-!HISTORY_MSG_973;Local - Log encoding Mask chroma
-!HISTORY_MSG_974;Local - Log encoding Mask contrast
-!HISTORY_MSG_975;Local - Log encoding Lightness J
-!HISTORY_MSG_977;Local - Log encoding Contrast Q
-!HISTORY_MSG_978;Local - Log encoding Sursource
-!HISTORY_MSG_979;Local - Log encoding Brightness Q
-!HISTORY_MSG_980;Local - Log encoding Colorfulness M
-!HISTORY_MSG_981;Local - Log encoding Strength
-!HISTORY_MSG_982;Local - Equalizer hue
-!HISTORY_MSG_983;Local - denoise threshold mask high
-!HISTORY_MSG_984;Local - denoise threshold mask low
-!HISTORY_MSG_985;Local - denoise Laplacian
-!HISTORY_MSG_986;Local - denoise reinforce
-!HISTORY_MSG_987;Local - GF recovery threshold
-!HISTORY_MSG_988;Local - GF threshold mask low
-!HISTORY_MSG_989;Local - GF threshold mask high
-!HISTORY_MSG_990;Local - Denoise recovery threshold
-!HISTORY_MSG_991;Local - Denoise threshold mask low
-!HISTORY_MSG_992;Local - Denoise threshold mask high
-!HISTORY_MSG_993;Local - Denoise Inverse algo
-!HISTORY_MSG_994;Local - GF Inverse algo
-!HISTORY_MSG_995;Local - Denoise decay
-!HISTORY_MSG_996;Local - Color recovery threshold
-!HISTORY_MSG_997;Local - Color threshold mask low
-!HISTORY_MSG_998;Local - Color threshold mask high
-!HISTORY_MSG_999;Local - Color decay
-!HISTORY_MSG_1000;Local - Denoise luminance gray
-!HISTORY_MSG_1001;Local - Log recovery threshold
-!HISTORY_MSG_1002;Local - Log threshold mask low
-!HISTORY_MSG_1003;Local - Log threshold mask high
-!HISTORY_MSG_1004;Local - Log decay
-!HISTORY_MSG_1005;Local - Exp recovery threshold
-!HISTORY_MSG_1006;Local - Exp threshold mask low
-!HISTORY_MSG_1007;Local - Exp threshold mask high
-!HISTORY_MSG_1008;Local - Exp decay
-!HISTORY_MSG_1009;Local - SH recovery threshold
-!HISTORY_MSG_1010;Local - SH threshold mask low
-!HISTORY_MSG_1011;Local - SH threshold mask high
-!HISTORY_MSG_1012;Local - SH decay
-!HISTORY_MSG_1013;Local - vib recovery threshold
-!HISTORY_MSG_1014;Local - vib threshold mask low
-!HISTORY_MSG_1015;Local - vib threshold mask high
-!HISTORY_MSG_1016;Local - vib decay
-!HISTORY_MSG_1017;Local - lc recovery threshold
-!HISTORY_MSG_1018;Local - lc threshold mask low
-!HISTORY_MSG_1019;Local - lc threshold mask high
-!HISTORY_MSG_1020;Local - lc decay
-!HISTORY_MSG_1021;Local - Denoise chrominance gray
-!HISTORY_MSG_1022;Local - TM recovery threshold
-!HISTORY_MSG_1023;Local - TM threshold mask low
-!HISTORY_MSG_1024;Local - TM threshold mask high
-!HISTORY_MSG_1025;Local - TM decay
-!HISTORY_MSG_1026;Local - cbdl recovery threshold
-!HISTORY_MSG_1027;Local - cbdl threshold mask low
-!HISTORY_MSG_1028;Local - cbdl threshold mask high
-!HISTORY_MSG_1029;Local - cbdl decay
-!HISTORY_MSG_1030;Local - reti recovery threshold
-!HISTORY_MSG_1031;Local - reti threshold mask low
-!HISTORY_MSG_1032;Local - reti threshold mask high
-!HISTORY_MSG_1033;Local - reti decay
-!HISTORY_MSG_1034;Local - Nlmeans - strength
-!HISTORY_MSG_1035;Local - Nlmeans - detail
-!HISTORY_MSG_1036;Local - Nlmeans - patch
-!HISTORY_MSG_1037;Local - Nlmeans - radius
-!HISTORY_MSG_1038;Local - Nlmeans - gamma
-!HISTORY_MSG_1039;Local - Grain - gamma
-!HISTORY_MSG_1040;Local - SC - Soft radius
-!HISTORY_MSG_1041;Local - Spot - Munsell
-!HISTORY_MSG_1042;Local - Log encoding - threshold
-!HISTORY_MSG_1043;Local - Exp - normalize
-!HISTORY_MSG_1044;Local - Local contrast strength
-!HISTORY_MSG_1045;Local - Color and Light strength
-!HISTORY_MSG_1046;Local - Denoise strength
-!HISTORY_MSG_1047;Local - SH and Tone Equalizer strength
-!HISTORY_MSG_1048;Local - DR and Exposure strength
-!HISTORY_MSG_1049;Local - TM strength
-!HISTORY_MSG_1050;Local - Log encoding chroma
-!HISTORY_MSG_1051;Local - Residual wavelet gamma
-!HISTORY_MSG_1052;Local - Residual wavelet slope
-!HISTORY_MSG_1053;Local - Denoise gamma
-!HISTORY_MSG_1054;Local - Wavelet gamma
-!HISTORY_MSG_1055;Local - Color and Light gamma
-!HISTORY_MSG_1056;Local - DR and Exposure gamma
-!HISTORY_MSG_1059;Local - CIECAM Autogray
-!HISTORY_MSG_1060;Local - CIECAM Mean luminance source
-!HISTORY_MSG_1061;Local - CIECAM Source absolute
-!HISTORY_MSG_1062;Local - CIECAM Surround Source
-!HISTORY_MSG_1075;Local - CIECAM Surround viewing
-!HISTORY_MSG_1079;Local - CIECAM Sigmoid Q Contrast
-!HISTORY_MSG_1080;Local - CIECAM Sigmoid Q Skew
-!HISTORY_MSG_1081;Local - CIECAM Sigmoid Q Display white point
-!HISTORY_MSG_1082;Local - CIECAM Auto threshold
-!HISTORY_MSG_1083;Local - CIECAM Hue
-!HISTORY_MSG_1084;Local - Uses Black Ev - White Ev
-!HISTORY_MSG_1086;Local - Jz contrast
-!HISTORY_MSG_1087;Local - Jz chroma
-!HISTORY_MSG_1088;Local - Jz hue
-!HISTORY_MSG_1089;Local - Jz Sigmoid contrast
-!HISTORY_MSG_1090;Local - Jz Sigmoid skew
-!HISTORY_MSG_1091;Local - Jz Sigmoid Display White point
-!HISTORY_MSG_1092;Local - Jz adaptation
-!HISTORY_MSG_1094;Local - Jz highligths
-!HISTORY_MSG_1095;Local - Jz highligths thr
-!HISTORY_MSG_1096;Local - Jz shadows
-!HISTORY_MSG_1097;Local - Jz shadows thr
-!HISTORY_MSG_1098;Local - Jz radius SH
-!HISTORY_MSG_1099;Local - Cz(Hz) Curve
-!HISTORY_MSG_1100;Local - Jz reference 100
-!HISTORY_MSG_1101;Local - Jz PQ remap
-!HISTORY_MSG_1102;Local - Jz(Hz) Curve
-!HISTORY_MSG_1104;Local - Sharp gamma
-!HISTORY_MSG_1109;Local - Jz(Jz) curve
-!HISTORY_MSG_1110;Local - Cz(Cz) curve
-!HISTORY_MSG_1111;Local - Cz(Jz) curve
-!HISTORY_MSG_1112;Local - forcejz
+HISTORY_MSG_925;局部 - 范围（色彩工具）
+HISTORY_MSG_926;局部 - 显示蒙版类型
+HISTORY_MSG_928;局部 - 通用色彩蒙版
+HISTORY_MSG_929;局部 - 通用蒙版 范围
+HISTORY_MSG_930;局部 - 通用蒙版 混合亮度
+HISTORY_MSG_931;局部 - 通用蒙版 启用
+HISTORY_MSG_932;局部 - 通用蒙版 柔化半径
+HISTORY_MSG_933;局部 - 通用蒙版 拉普拉斯
+HISTORY_MSG_934;局部 - 通用蒙版 色度
+HISTORY_MSG_935;局部 - 通用蒙版 伽马
+HISTORY_MSG_936;局部 - 通用蒙版 斜率
+HISTORY_MSG_937;局部 - 通用蒙版 曲线 C(C)
+HISTORY_MSG_938;局部 - 通用蒙版 曲线 L(L)
+HISTORY_MSG_939;局部 - 通用蒙版 曲线 LC(H)
+HISTORY_MSG_940;局部 - 通用蒙版 结构作为工具
+HISTORY_MSG_941;局部 - 通用蒙版 结构强度
+HISTORY_MSG_942;局部 - 通用蒙版 H(H) 曲线
+HISTORY_MSG_943;局部 - 通用蒙版 FFT
+HISTORY_MSG_944;局部 - 通用蒙版 模糊半径
+HISTORY_MSG_945;局部 - 通用蒙版 反差阈值
+HISTORY_MSG_946;局部 - 通用蒙版 阴影
+HISTORY_MSG_947;局部 - 通用蒙版 反差曲线
+HISTORY_MSG_948;局部 - 通用蒙版 小波曲线
+HISTORY_MSG_949;局部 - 通用蒙版 阈值层级
+HISTORY_MSG_950;局部 - 通用蒙版 渐变滤镜强度
+HISTORY_MSG_951;局部 - 通用蒙版 渐变滤镜角度
+HISTORY_MSG_952;局部 - 通用蒙版 柔化半径
+HISTORY_MSG_953;局部 - 通用蒙版 混合色度
+HISTORY_MSG_956;局部 - CH 曲线
+HISTORY_MSG_959;局部 - 反向模糊
+HISTORY_MSG_962;局部 - 对数编码 源绝对亮度
+HISTORY_MSG_963;局部 - 对数编码 目标绝对亮度
+HISTORY_MSG_964;局部 - 对数编码 环境
+HISTORY_MSG_965;局部 - 对数编码 饱和度 s
+HISTORY_MSG_966;局部 - 对数编码 对比度 J
+HISTORY_MSG_967;局部 - 对数编码 蒙版曲线 C
+HISTORY_MSG_968;局部 - 对数编码 蒙版曲线 L
+HISTORY_MSG_969;局部 - 对数编码 蒙版曲线 H
+HISTORY_MSG_970;局部 - 对数编码 蒙版启用
+HISTORY_MSG_971;局部 - 对数编码 蒙版混合
+HISTORY_MSG_972;局部 - 对数编码 蒙版半径
+HISTORY_MSG_973;局部 - 对数编码 蒙版色度
+HISTORY_MSG_974;局部 - 对数编码 蒙版对比度
+HISTORY_MSG_975;局部 - 对数编码 明度 J
+HISTORY_MSG_977;局部 - 对数编码 对比度 Q
+HISTORY_MSG_978;局部 - 对数编码 源环境
+HISTORY_MSG_979;局部 - 对数编码 视明度 Q
+HISTORY_MSG_980;局部 - 对数编码 视彩度 M
+HISTORY_MSG_981;局部 - 对数编码 强度
+HISTORY_MSG_982;局部 - 均衡器 色相
+HISTORY_MSG_983;局部 - 降噪 蒙版高阈值
+HISTORY_MSG_984;局部 - 降噪 蒙版低阈值
+HISTORY_MSG_985;局部 - 降噪 拉普拉斯
+HISTORY_MSG_986;局部 - 降噪 加强
+HISTORY_MSG_987;局部 - 引导滤波 恢复阈值
+HISTORY_MSG_988;局部 - 引导滤波 蒙版低阈值
+HISTORY_MSG_989;局部 - 引导滤波 蒙版高阈值
+HISTORY_MSG_990;局部 - 降噪 恢复阈值
+HISTORY_MSG_991;局部 - 降噪 蒙版低阈值
+HISTORY_MSG_992;局部 - 降噪 蒙版高阈值
+HISTORY_MSG_993;局部 - 降噪 反向算法
+HISTORY_MSG_994;局部 - 引导滤波 反向算法
+HISTORY_MSG_995;局部 - 降噪 衰减
+HISTORY_MSG_996;局部 - 色彩 恢复阈值
+HISTORY_MSG_997;局部 - 色彩 蒙版低阈值
+HISTORY_MSG_998;局部 - 色彩 蒙版高阈值
+HISTORY_MSG_999;局部 - 色彩 衰减
+HISTORY_MSG_1000;局部 - 降噪 亮度灰区
+HISTORY_MSG_1001;局部 - 对数 恢复阈值
+HISTORY_MSG_1002;局部 - 对数 蒙版低阈值
+HISTORY_MSG_1003;局部 - 对数 蒙版高阈值
+HISTORY_MSG_1004;局部 - 对数 衰减
+HISTORY_MSG_1005;局部 - 曝光 恢复阈值
+HISTORY_MSG_1006;局部 - 曝光 蒙版低阈值
+HISTORY_MSG_1007;局部 - 曝光 蒙版高阈值
+HISTORY_MSG_1008;局部 - 曝光 衰减
+HISTORY_MSG_1009;局部 - 阴影高光 恢复阈值
+HISTORY_MSG_1010;局部 - 阴影高光 蒙版低阈值
+HISTORY_MSG_1011;局部 - 阴影高光 蒙版高阈值
+HISTORY_MSG_1012;局部 - 阴影高光 衰减
+HISTORY_MSG_1013;局部 - 鲜明度 恢复阈值
+HISTORY_MSG_1014;局部 - 鲜明度 蒙版低阈值
+HISTORY_MSG_1015;局部 - 鲜明度 蒙版高阈值
+HISTORY_MSG_1016;局部 - 鲜明度 衰减
+HISTORY_MSG_1017;局部 - 局部反差 恢复阈值
+HISTORY_MSG_1018;局部 - 局部反差 蒙版低阈值
+HISTORY_MSG_1019;局部 - 局部反差 蒙版高阈值
+HISTORY_MSG_1020;局部 - 局部反差 衰减
+HISTORY_MSG_1021;局部 - 降噪 色度灰区
+HISTORY_MSG_1022;局部 - 色调映射 恢复阈值
+HISTORY_MSG_1023;局部 - 色调映射 蒙版低阈值
+HISTORY_MSG_1024;局部 - 色调映射 蒙版高阈值
+HISTORY_MSG_1025;局部 - 色调映射 衰减
+HISTORY_MSG_1026;局部 - 分层反差 恢复阈值
+HISTORY_MSG_1027;局部 - 分层反差 蒙版低阈值
+HISTORY_MSG_1028;局部 - 分层反差 蒙版高阈值
+HISTORY_MSG_1029;局部 - 分层反差 衰减
+HISTORY_MSG_1030;局部 - Retinex 恢复阈值
+HISTORY_MSG_1031;局部 - Retinex 蒙版低阈值
+HISTORY_MSG_1032;局部 - Retinex 蒙版高阈值
+HISTORY_MSG_1033;局部 - Retinex 衰减
+HISTORY_MSG_1034;局部 - 非局部均值 - 强度
+HISTORY_MSG_1035;局部 - 非局部均值 - 细节
+HISTORY_MSG_1036;局部 - 非局部均值 - 图块
+HISTORY_MSG_1037;局部 - 非局部均值 - 半径
+HISTORY_MSG_1038;局部 - 非局部均值 - 伽马
+HISTORY_MSG_1039;局部 - 颗粒 - 伽马
+HISTORY_MSG_1040;局部 - 特殊情况 - 柔化半径
+HISTORY_MSG_1041;局部 - 调整点 - Munsell
+HISTORY_MSG_1042;局部 - 对数编码 - 阈值
+HISTORY_MSG_1043;局部 - 曝光 - 归一化
+HISTORY_MSG_1044;局部 - 局部反差 强度
+HISTORY_MSG_1045;局部 - 色彩与亮度 强度
+HISTORY_MSG_1046;局部 - 降噪 强度
+HISTORY_MSG_1047;局部 - 阴影高光与色调均衡器 强度
+HISTORY_MSG_1048;局部 - 动态范围与曝光 强度
+HISTORY_MSG_1049;局部 - 色调映射 强度
+HISTORY_MSG_1050;局部 - 对数编码 色度
+HISTORY_MSG_1051;局部 - 小波残差 伽马
+HISTORY_MSG_1052;局部 - 小波残差 斜率
+HISTORY_MSG_1053;局部 - 降噪 伽马
+HISTORY_MSG_1054;局部 - 小波 伽马
+HISTORY_MSG_1055;局部 - 色彩与亮度 伽马
+HISTORY_MSG_1056;局部 - 动态范围与曝光 伽马
+HISTORY_MSG_1059;局部 - CIECAM 自动灰点
+HISTORY_MSG_1060;局部 - CIECAM 源平均亮度
+HISTORY_MSG_1061;局部 - CIECAM 源绝对亮度
+HISTORY_MSG_1062;局部 - CIECAM 源环境
+HISTORY_MSG_1075;局部 - CIECAM 观看环境
+HISTORY_MSG_1079;局部 - CIECAM Sigmoid Q 对比度
+HISTORY_MSG_1080;局部 - CIECAM Sigmoid Q 偏斜
+HISTORY_MSG_1081;局部 - CIECAM Sigmoid Q 显示器白点
+HISTORY_MSG_1082;局部 - CIECAM 自动阈值
+HISTORY_MSG_1083;局部 - CIECAM 色相
+HISTORY_MSG_1084;局部 - 使用黑点 Ev - 白点 Ev
+HISTORY_MSG_1086;局部 - Jz 对比度
+HISTORY_MSG_1087;局部 - Jz 色度
+HISTORY_MSG_1088;局部 - Jz 色相
+HISTORY_MSG_1089;局部 - Jz Sigmoid 对比度
+HISTORY_MSG_1090;局部 - Jz Sigmoid 偏斜
+HISTORY_MSG_1091;局部 - Jz Sigmoid 显示器白点
+HISTORY_MSG_1092;局部 - Jz 适应
+HISTORY_MSG_1094;局部 - Jz 高光
+HISTORY_MSG_1095;局部 - Jz 高光阈值
+HISTORY_MSG_1096;局部 - Jz 阴影
+HISTORY_MSG_1097;局部 - Jz 阴影阈值
+HISTORY_MSG_1098;局部 - Jz 阴影高光半径
+HISTORY_MSG_1099;局部 - Cz(Hz) 曲线
+HISTORY_MSG_1100;局部 - Jz 参考 100
+HISTORY_MSG_1101;局部 - Jz PQ 重映射
+HISTORY_MSG_1102;局部 - Jz(Hz) 曲线
+HISTORY_MSG_1104;局部 - 锐化 伽马
+HISTORY_MSG_1109;局部 - Jz(Jz) 曲线
+HISTORY_MSG_1110;局部 - Cz(Cz) 曲线
+HISTORY_MSG_1111;局部 - Cz(Jz) 曲线
+HISTORY_MSG_1112;局部 - 强制 Jz
 !HISTORY_MSG_1113;Local - HDR PQ
-!HISTORY_MSG_1114;Local - Cie mask enable
-!HISTORY_MSG_1115;Local - Cie mask curve C
-!HISTORY_MSG_1116;Local - Cie mask curve L
-!HISTORY_MSG_1117;Local - Cie mask curve H
-!HISTORY_MSG_1118;Local - Cie mask blend
-!HISTORY_MSG_1119;Local - Cie mask radius
-!HISTORY_MSG_1120;Local - Cie mask chroma
-!HISTORY_MSG_1121;Local - Cie mask contrast curve
-!HISTORY_MSG_1122;Local - Cie mask recovery threshold
-!HISTORY_MSG_1123;Local - Cie mask recovery dark
-!HISTORY_MSG_1124;Local - Cie mask recovery light
-!HISTORY_MSG_1125;Local - Cie mask recovery decay
-!HISTORY_MSG_1126;Local - Cie mask laplacian
-!HISTORY_MSG_1127;Local - Cie mask gamma
-!HISTORY_MSG_1128;Local - Cie mask slope
-!HISTORY_MSG_1129;Local - Cie Relative luminance
-!HISTORY_MSG_1130;Local - Cie Saturation Jz
-!HISTORY_MSG_1131;Local - Mask - Denoise
-!HISTORY_MSG_1132;Local - Cie Wav sigma Jz
-!HISTORY_MSG_1133;Local - Cie Wav level Jz
-!HISTORY_MSG_1134;Local - Cie Wav local contrast Jz
-!HISTORY_MSG_1135;Local - Cie Wav clarity Jz
-!HISTORY_MSG_1136;Local - Cie Wav clarity Cz
-!HISTORY_MSG_1137;Local - Cie Wav clarity Soft
-!HISTORY_MSG_1138;Local - Local - Hz(Hz) Curve
-!HISTORY_MSG_1139;Local - Jz soft Curves H
-!HISTORY_MSG_1140;Local - Jz Threshold chroma
-!HISTORY_MSG_1141;Local - chroma curve Jz(Hz)
-!HISTORY_MSG_1142;Local - strength soft
-!HISTORY_MSG_1143;Local - Jz blackev
-!HISTORY_MSG_1144;Local - Jz whiteev
-!HISTORY_MSG_1145;Local - Jz Log encoding
-!HISTORY_MSG_1146;Local - Jz Log encoding target gray
-!HISTORY_MSG_1147;Local - Jz Scale Yb scene
+HISTORY_MSG_1114;局部 - CIE 蒙版 启用
+HISTORY_MSG_1115;局部 - CIE 蒙版 曲线 C
+HISTORY_MSG_1116;局部 - CIE 蒙版 曲线 L
+HISTORY_MSG_1117;局部 - CIE 蒙版 曲线 H
+HISTORY_MSG_1118;局部 - CIE 蒙版 混合
+HISTORY_MSG_1119;局部 - CIE 蒙版 半径
+HISTORY_MSG_1120;局部 - CIE 蒙版 色度
+HISTORY_MSG_1121;局部 - CIE 蒙版 反差曲线
+HISTORY_MSG_1122;局部 - CIE 蒙版 恢复阈值
+HISTORY_MSG_1123;局部 - CIE 蒙版 恢复暗部
+HISTORY_MSG_1124;局部 - CIE 蒙版 恢复亮部
+HISTORY_MSG_1125;局部 - CIE 蒙版 恢复衰减
+HISTORY_MSG_1126;局部 - CIE 蒙版 拉普拉斯
+HISTORY_MSG_1127;局部 - CIE 蒙版 伽马
+HISTORY_MSG_1128;局部 - CIE 蒙版 斜率
+HISTORY_MSG_1129;局部 - CIE 相对亮度
+HISTORY_MSG_1130;局部 - CIE 饱和度 Jz
+HISTORY_MSG_1131;局部 - 蒙版 - 降噪
+HISTORY_MSG_1132;局部 - CIE 小波 sigma Jz
+HISTORY_MSG_1133;局部 - CIE 小波 层级 Jz
+HISTORY_MSG_1134;局部 - CIE 小波 局部反差 Jz
+HISTORY_MSG_1135;局部 - CIE 小波 清晰度 Jz
+HISTORY_MSG_1136;局部 - CIE 小波 清晰度 Cz
+HISTORY_MSG_1137;局部 - CIE 小波 清晰度 柔化
+HISTORY_MSG_1138;局部 - Hz(Hz) 曲线
+HISTORY_MSG_1139;局部 - Jz 柔化曲线 H
+HISTORY_MSG_1140;局部 - Jz 色度阈值
+HISTORY_MSG_1141;局部 - 色度曲线 Jz(Hz)
+HISTORY_MSG_1142;局部 - 柔化强度
+HISTORY_MSG_1143;局部 - Jz 黑点 Ev
+HISTORY_MSG_1144;局部 - Jz 白点 Ev
+HISTORY_MSG_1145;局部 - Jz 对数编码
+HISTORY_MSG_1146;局部 - Jz 对数编码 目标灰点
+HISTORY_MSG_1147;局部 - Jz 场景 Yb 缩放
 !HISTORY_MSG_1148;Local - Jz Sigmoid
-!HISTORY_MSG_1149;Local - Q Sigmoid & Slope based
-!HISTORY_MSG_1150;Local - Log encoding Q instead Sigmoid Q
-!HISTORY_MSG_BLSHAPE;Blur by level
-!HISTORY_MSG_CATCURVEBLUE;CAL - IA - Brightness Blue
-!HISTORY_MSG_CATCURVEGREEN;CAL - IA - Brightness Green
-!HISTORY_MSG_CATCURVERED;CAL - IA - Brightness Red
-!HISTORY_MSG_CATHUEBLUE;CAL - IA - Hue Blue
-!HISTORY_MSG_CATHUEGREEN;CAL - IA - Hue Green
-!HISTORY_MSG_CATHUERED;CAL - IA - Hue Red
-!HISTORY_MSG_CATSCHROMABLUE;CAL - IA - Saturation Blue
-!HISTORY_MSG_CATSCHROMAGREEN;CAL - IA - Saturation Green
-!HISTORY_MSG_CATSCHROMARED;CAL - IA - Saturation Red
-!HISTORY_MSG_CG_ROLLOFF;Gamut Compression - Rolloff
-!HISTORY_MSG_CG_VALUE;Gamut Compression - Power
-!HISTORY_MSG_CROP_GUIDE_ASPECT_RATIO_PRESET_CHANGED;Crop Guide - Aspect Ratio Preset
-!HISTORY_MSG_CROP_GUIDE_BLEED_BASIS_CHANGED;Crop Guide - Bleed Basis
-!HISTORY_MSG_CROP_GUIDE_BLEED_CHANGED;Crop Guide - Bleed
-!HISTORY_MSG_CROP_GUIDE_PRESET_CHANGED;Crop Guide - Preset
-!HISTORY_MSG_DEHABLACKX;Dehaze X-Trans Black
-!HISTORY_MSG_FF_FROMMETADATA;Flat-Field - From Metadata
-!HISTORY_MSG_GAMUTMUNSEL;Gamut-Munsell
+HISTORY_MSG_1149;局部 - 基于 Sigmoid Q 与斜率
+HISTORY_MSG_1150;局部 - 以对数编码 Q 代替 Sigmoid Q
+HISTORY_MSG_BLSHAPE;分层模糊
+HISTORY_MSG_CATCURVEBLUE;校准 - 输入 - 明度 蓝
+HISTORY_MSG_CATCURVEGREEN;校准 - 输入 - 明度 绿
+HISTORY_MSG_CATCURVERED;校准 - 输入 - 明度 红
+HISTORY_MSG_CATHUEBLUE;校准 - 输入 - 色相 蓝
+HISTORY_MSG_CATHUEGREEN;校准 - 输入 - 色相 绿
+HISTORY_MSG_CATHUERED;校准 - 输入 - 色相 红
+HISTORY_MSG_CATSCHROMABLUE;校准 - 输入 - 饱和度 蓝
+HISTORY_MSG_CATSCHROMAGREEN;校准 - 输入 - 饱和度 绿
+HISTORY_MSG_CATSCHROMARED;校准 - 输入 - 饱和度 红
+HISTORY_MSG_CG_ROLLOFF;色域压缩 - 衰减
+HISTORY_MSG_CG_VALUE;色域压缩 - 强度
+HISTORY_MSG_CROP_GUIDE_ASPECT_RATIO_PRESET_CHANGED;裁剪参考线 - 宽高比预设
+HISTORY_MSG_CROP_GUIDE_BLEED_BASIS_CHANGED;裁剪参考线 - 出血基准
+HISTORY_MSG_CROP_GUIDE_BLEED_CHANGED;裁剪参考线 - 出血
+HISTORY_MSG_CROP_GUIDE_PRESET_CHANGED;裁剪参考线 - 预设
+HISTORY_MSG_DEHABLACKX;去雾 X-Trans 黑点
+HISTORY_MSG_FF_FROMMETADATA;平场 - 来自元数据
+HISTORY_MSG_GAMUTMUNSEL;色域-Munsell
 !HISTORY_MSG_ICL_LABGRIDCIEXY;Cie xy
-!HISTORY_MSG_ICM_BLUROT;Primaries Blue rotation
-!HISTORY_MSG_ICM_BLUSAT;Primaries Blue saturation
-!HISTORY_MSG_ICM_BLUX;Primaries Blue X
-!HISTORY_MSG_ICM_BLUY;Primaries Blue Y
-!HISTORY_MSG_ICM_CAT;Matrix adaptation
-!HISTORY_MSG_ICM_GREROT;Primaries Green rotation
-!HISTORY_MSG_ICM_GRESAT;Primaries Green saturation
-!HISTORY_MSG_ICM_GREX;Primaries Green X
-!HISTORY_MSG_ICM_GREY;Primaries Green Y
-!HISTORY_MSG_ICM_OUTPUT_PRIMARIES;Output - Primaries
-!HISTORY_MSG_ICM_OUTPUT_TEMP;Output - ICC-v4 illuminant D
-!HISTORY_MSG_ICM_OUTPUT_TYPE;Output - Type
-!HISTORY_MSG_ICM_PRESER;Preserve neutral
-!HISTORY_MSG_ICM_PYRWAVTRC;Contrast profile
-!HISTORY_MSG_ICM_REDROT;Primaries Red rotation
-!HISTORY_MSG_ICM_REDSAT;Primaries Red saturation
-!HISTORY_MSG_ICM_REDX;Primaries Red X
-!HISTORY_MSG_ICM_REDY;Primaries Red Y
-!HISTORY_MSG_ICM_REFI;Refinement Colors
-!HISTORY_MSG_ICM_RESIDTRC;Residual contrast
-!HISTORY_MSG_ICM_SHIFTX;Refinement Colors - Shift x
-!HISTORY_MSG_ICM_SHIFTY;Refinement Colors - Shift y
-!HISTORY_MSG_ICM_SIGMATRC;Local contrast Attenation response
-!HISTORY_MSG_ICM_SMOOTHCIE;Smooth highlights
-!HISTORY_MSG_ICM_WGAMUTGAIN;Gain
-!HISTORY_MSG_ICM_WGAMUTPOWER;Power
-!HISTORY_MSG_ICM_WORKING_GAMMA;TRC - Gamma
-!HISTORY_MSG_ICM_WORKING_ILLUM_METHOD;Illuminant method
-!HISTORY_MSG_ICM_WORKING_PRIM_METHOD;Primaries method
-!HISTORY_MSG_ICM_WORKING_SLOPE;TRC - Slope
-!HISTORY_MSG_ICM_WORKING_TRC_METHOD;TRC method
-!HISTORY_MSG_ILLUM;CAL - SC - Illuminant
-!HISTORY_MSG_LOCALLAB_TE_PIVOT;Local - Equalizer pivot
-!HISTORY_MSG_LOCAL_AUTOCAPRADIUS;Local - Sh Auto Capture radius
-!HISTORY_MSG_LOCAL_AUTOSHAR;Local - Sh Auto Contrast
-!HISTORY_MSG_LOCAL_AUTOSP;Local - GHS - Auto SP
-!HISTORY_MSG_LOCAL_AVOIDNEGATIVE;Local - SC - Pre-filter zero and negative values
-!HISTORY_MSG_LOCAL_CAPRADIUS;Local - Sh Capture radius
-!HISTORY_MSG_LOCAL_CIEMASK_BLURCONT;Local - CIECAM Mask blur contrast
-!HISTORY_MSG_LOCAL_CIEMASK_BLURFFT;Local - CIECAM Mask blur FFTW
-!HISTORY_MSG_LOCAL_CIEMASK_BLURRAD;Local - CIECAM Mask blur radius
-!HISTORY_MSG_LOCAL_CIEMASK_CHH;Local - CIECAM Mask curve h(h)
-!HISTORY_MSG_LOCAL_CIEMASK_HIGH;Local - CIECAM Mask highlights
-!HISTORY_MSG_LOCAL_CIEMASK_SHAD;Local - CIECAM Mask shadows
-!HISTORY_MSG_LOCAL_CIEMASK_STRU;Local - CIECAM Mask structure
-!HISTORY_MSG_LOCAL_CIEMASK_STRU_TOOL;Local - CIECAM Mask structure as tool
-!HISTORY_MSG_LOCAL_CIEMASK_WLC;Local - CIECAM Mask wavelet L(L)
-!HISTORY_MSG_LOCAL_CIEMASK_WLEV;Local - CIECAM Mask wavelet levels
-!HISTORY_MSG_LOCAL_CIE_ANGGRAD;Local - CIECAM Gradient angle
-!HISTORY_MSG_LOCAL_CIE_BLACKS;Local - CIECAM Blacks distribution
-!HISTORY_MSG_LOCAL_CIE_BLUXL;Local - CIECAM Blue X
-!HISTORY_MSG_LOCAL_CIE_BLUYL;Local - CIECAM Blue Y
-!HISTORY_MSG_LOCAL_CIE_BRICOMP;Local - CIECAM Brightness compression
-!HISTORY_MSG_LOCAL_CIE_BRICOMPTH;Local - CIECAM Brightness compression threshold
-!HISTORY_MSG_LOCAL_CIE_BWCIE;Local - CIECAM Black and white
-!HISTORY_MSG_LOCAL_CIE_CAT;Local - Matrix adaptation
-!HISTORY_MSG_LOCAL_CIE_CONTSIG;Local CIECAM - Sigmoid contrast
-!HISTORY_MSG_LOCAL_CIE_DETAILJZ;Local - JzCzHz Local contrast
-!HISTORY_MSG_LOCAL_CIE_ENAMASKALL;Local - CIECAM All mask tools
-!HISTORY_MSG_LOCAL_CIE_EXPPRECAM;Local - CIECAM Pre-Cam
-!HISTORY_MSG_LOCAL_CIE_GAM;Local - CIECAM Gamma
-!HISTORY_MSG_LOCAL_CIE_GAMUTCIE;Local - CIECAM Gamut
-!HISTORY_MSG_LOCAL_CIE_GREXL;Local - CIECAM Green X
-!HISTORY_MSG_LOCAL_CIE_GREYL;Local - CIECAM Green Y
-!HISTORY_MSG_LOCAL_CIE_ILL;Local - CIECAM TRC Illuminant
-!HISTORY_MSG_LOCAL_CIE_LOGCIEQ;Local - CIECAM Log encoding Q
-!HISTORY_MSG_LOCAL_CIE_MIDT;Local - CIECAM Midtones
-!HISTORY_MSG_LOCAL_CIE_MIDTMET;Local - CIECAM Midtones Method
-!HISTORY_MSG_LOCAL_CIE_NORM11;Local - CIECAM Normalize luminance 5.11
-!HISTORY_MSG_LOCAL_CIE_PRIM;Local - CIECAM TRC primaries
-!HISTORY_MSG_LOCAL_CIE_REDXL;Local - CIECAM Red X
-!HISTORY_MSG_LOCAL_CIE_REDYL;Local - CIECAM Red Y
-!HISTORY_MSG_LOCAL_CIE_REFI;Local - CIECAM Refinement colors
-!HISTORY_MSG_LOCAL_CIE_SAT;Local - CIECAM Saturation
-!HISTORY_MSG_LOCAL_CIE_SATCIE;Local - CIECAM Saturation control
-!HISTORY_MSG_LOCAL_CIE_SHIFTXL;Local - CIECAM Shift x
-!HISTORY_MSG_LOCAL_CIE_SHIFTYL;Local - CIECAM Shift y
+HISTORY_MSG_ICM_BLUROT;基色 蓝 旋转
+HISTORY_MSG_ICM_BLUSAT;基色 蓝 饱和度
+HISTORY_MSG_ICM_BLUX;基色 蓝 X
+HISTORY_MSG_ICM_BLUY;基色 蓝 Y
+HISTORY_MSG_ICM_CAT;矩阵适应
+HISTORY_MSG_ICM_GREROT;基色 绿 旋转
+HISTORY_MSG_ICM_GRESAT;基色 绿 饱和度
+HISTORY_MSG_ICM_GREX;基色 绿 X
+HISTORY_MSG_ICM_GREY;基色 绿 Y
+HISTORY_MSG_ICM_OUTPUT_PRIMARIES;输出 - 基色
+HISTORY_MSG_ICM_OUTPUT_TEMP;输出 - ICC-v4 光源 D
+HISTORY_MSG_ICM_OUTPUT_TYPE;输出 - 类型
+HISTORY_MSG_ICM_PRESER;保留中性色
+HISTORY_MSG_ICM_PYRWAVTRC;反差配置
+HISTORY_MSG_ICM_REDROT;基色 红 旋转
+HISTORY_MSG_ICM_REDSAT;基色 红 饱和度
+HISTORY_MSG_ICM_REDX;基色 红 X
+HISTORY_MSG_ICM_REDY;基色 红 Y
+HISTORY_MSG_ICM_REFI;精修色彩
+HISTORY_MSG_ICM_RESIDTRC;残差对比度
+HISTORY_MSG_ICM_SHIFTX;精修色彩 - 偏移 x
+HISTORY_MSG_ICM_SHIFTY;精修色彩 - 偏移 y
+HISTORY_MSG_ICM_SIGMATRC;局部反差衰减响应
+HISTORY_MSG_ICM_SMOOTHCIE;平滑高光
+HISTORY_MSG_ICM_WGAMUTGAIN;增益
+HISTORY_MSG_ICM_WGAMUTPOWER;强度
+HISTORY_MSG_ICM_WORKING_GAMMA;TRC - 伽马
+HISTORY_MSG_ICM_WORKING_ILLUM_METHOD;光源方法
+HISTORY_MSG_ICM_WORKING_PRIM_METHOD;基色方法
+HISTORY_MSG_ICM_WORKING_SLOPE;TRC - 斜率
+HISTORY_MSG_ICM_WORKING_TRC_METHOD;TRC 方法
+HISTORY_MSG_ILLUM;校准 - 特殊情况 - 光源
+HISTORY_MSG_LOCALLAB_TE_PIVOT;局部 - 均衡器 枢轴点
+HISTORY_MSG_LOCAL_AUTOCAPRADIUS;局部 - 锐化 自动捕获半径
+HISTORY_MSG_LOCAL_AUTOSHAR;局部 - 锐化 自动对比度
+HISTORY_MSG_LOCAL_AUTOSP;局部 - GHS - 自动 SP
+HISTORY_MSG_LOCAL_AVOIDNEGATIVE;局部 - 特殊情况 - 预过滤零值和负值
+HISTORY_MSG_LOCAL_CAPRADIUS;局部 - 锐化 捕获半径
+HISTORY_MSG_LOCAL_CIEMASK_BLURCONT;局部 - CIECAM 蒙版 模糊反差
+HISTORY_MSG_LOCAL_CIEMASK_BLURFFT;局部 - CIECAM 蒙版 模糊 FFTW
+HISTORY_MSG_LOCAL_CIEMASK_BLURRAD;局部 - CIECAM 蒙版 模糊半径
+HISTORY_MSG_LOCAL_CIEMASK_CHH;局部 - CIECAM 蒙版 曲线 h(h)
+HISTORY_MSG_LOCAL_CIEMASK_HIGH;局部 - CIECAM 蒙版 高光
+HISTORY_MSG_LOCAL_CIEMASK_SHAD;局部 - CIECAM 蒙版 阴影
+HISTORY_MSG_LOCAL_CIEMASK_STRU;局部 - CIECAM 蒙版 结构
+HISTORY_MSG_LOCAL_CIEMASK_STRU_TOOL;局部 - CIECAM 蒙版 结构作为工具
+HISTORY_MSG_LOCAL_CIEMASK_WLC;局部 - CIECAM 蒙版 小波 L(L)
+HISTORY_MSG_LOCAL_CIEMASK_WLEV;局部 - CIECAM 蒙版 小波层级
+HISTORY_MSG_LOCAL_CIE_ANGGRAD;局部 - CIECAM 渐变角度
+HISTORY_MSG_LOCAL_CIE_BLACKS;局部 - CIECAM 黑色分布
+HISTORY_MSG_LOCAL_CIE_BLUXL;局部 - CIECAM 蓝 X
+HISTORY_MSG_LOCAL_CIE_BLUYL;局部 - CIECAM 蓝 Y
+HISTORY_MSG_LOCAL_CIE_BRICOMP;局部 - CIECAM 亮度压缩
+HISTORY_MSG_LOCAL_CIE_BRICOMPTH;局部 - CIECAM 亮度压缩阈值
+HISTORY_MSG_LOCAL_CIE_BWCIE;局部 - CIECAM 黑白
+HISTORY_MSG_LOCAL_CIE_CAT;局部 - 矩阵适应
+HISTORY_MSG_LOCAL_CIE_CONTSIG;局部 CIECAM - Sigmoid 对比度
+HISTORY_MSG_LOCAL_CIE_DETAILJZ;局部 - JzCzHz 局部反差
+HISTORY_MSG_LOCAL_CIE_ENAMASKALL;局部 - CIECAM 全部蒙版工具
+HISTORY_MSG_LOCAL_CIE_EXPPRECAM;局部 - CIECAM 预处理 Cam
+HISTORY_MSG_LOCAL_CIE_GAM;局部 - CIECAM 伽马
+HISTORY_MSG_LOCAL_CIE_GAMUTCIE;局部 - CIECAM 色域
+HISTORY_MSG_LOCAL_CIE_GREXL;局部 - CIECAM 绿 X
+HISTORY_MSG_LOCAL_CIE_GREYL;局部 - CIECAM 绿 Y
+HISTORY_MSG_LOCAL_CIE_ILL;局部 - CIECAM TRC 光源
+HISTORY_MSG_LOCAL_CIE_LOGCIEQ;局部 - CIECAM 对数编码 Q
+HISTORY_MSG_LOCAL_CIE_MIDT;局部 - CIECAM 中间调
+HISTORY_MSG_LOCAL_CIE_MIDTMET;局部 - CIECAM 中间调方法
+HISTORY_MSG_LOCAL_CIE_NORM11;局部 - CIECAM 归一化亮度 5.11
+HISTORY_MSG_LOCAL_CIE_PRIM;局部 - CIECAM TRC 基色
+HISTORY_MSG_LOCAL_CIE_REDXL;局部 - CIECAM 红 X
+HISTORY_MSG_LOCAL_CIE_REDYL;局部 - CIECAM 红 Y
+HISTORY_MSG_LOCAL_CIE_REFI;局部 - CIECAM 精修色彩
+HISTORY_MSG_LOCAL_CIE_SAT;局部 - CIECAM 饱和度
+HISTORY_MSG_LOCAL_CIE_SATCIE;局部 - CIECAM 饱和度控制
+HISTORY_MSG_LOCAL_CIE_SHIFTXL;局部 - CIECAM 偏移 x
+HISTORY_MSG_LOCAL_CIE_SHIFTYL;局部 - CIECAM 偏移 y
 !HISTORY_MSG_LOCAL_CIE_SIG;Local - Sigmoid
-!HISTORY_MSG_LOCAL_CIE_SIGADAP;Local - CIECAM Sigmoid adaptability 5.11
-!HISTORY_MSG_LOCAL_CIE_SIGMET;Local - CIECAM Tone mapping Q
-!HISTORY_MSG_LOCAL_CIE_SKEWSIG;Local CIECAM - Sigmoid skew
-!HISTORY_MSG_LOCAL_CIE_SLOP;Local - CIECAM Slope
-!HISTORY_MSG_LOCAL_CIE_SLOPESMO;Local - CIECAM Gray balance
-!HISTORY_MSG_LOCAL_CIE_SLOPESMOB;Local - CIECAM Blue balance
-!HISTORY_MSG_LOCAL_CIE_SLOPESMOG;Local - CIECAM Green balance
-!HISTORY_MSG_LOCAL_CIE_SLOPESMOQ;Local - CIECAM Gray balance
-!HISTORY_MSG_LOCAL_CIE_SLOPESMOR;Local - CIECAM Red balance
-!HISTORY_MSG_LOCAL_CIE_SMOOTH;Local - CIECAM Scale Yb scene
-!HISTORY_MSG_LOCAL_CIE_SMOOTHINV;Local CIECAM - Inverse color
-!HISTORY_MSG_LOCAL_CIE_SMOOTHLNK;Local CIECAM - Link R G B
-!HISTORY_MSG_LOCAL_CIE_SMOOTHMET;Local - CIECAM Smooth lights method
-!HISTORY_MSG_LOCAL_CIE_SMOOTHTH;Local CIECAM - Attenuation threshold
-!HISTORY_MSG_LOCAL_CIE_SMOOTHTHTRC;Local CIECAM - Highlight attenuation threshold
-!HISTORY_MSG_LOCAL_CIE_SMOOTHTRC;Local CIECAM - Inverse color
-!HISTORY_MSG_LOCAL_CIE_SMOOTHTRCREL;Local CIECAM - Relative gamma mode
-!HISTORY_MSG_LOCAL_CIE_SMOOTHYB;Local - CIECAM Scale Yb viewing
-!HISTORY_MSG_LOCAL_CIE_SMOOTH_HIGH;Local CIECAM - Highlight Attenuation only
-!HISTORY_MSG_LOCAL_CIE_SMOOTH_LUM;Local - CIECAM Levels - Luminosity mode
-!HISTORY_MSG_LOCAL_CIE_STRGRAD;Local - CIECAM Gradient strength L
-!HISTORY_MSG_LOCAL_CIE_STRLOG;Local - CIECAM Log encoding strength
+HISTORY_MSG_LOCAL_CIE_SIGADAP;局部 - CIECAM Sigmoid 适应度 5.11
+HISTORY_MSG_LOCAL_CIE_SIGMET;局部 - CIECAM 色调映射 Q
+HISTORY_MSG_LOCAL_CIE_SKEWSIG;局部 CIECAM - Sigmoid 偏斜
+HISTORY_MSG_LOCAL_CIE_SLOP;局部 - CIECAM 斜率
+HISTORY_MSG_LOCAL_CIE_SLOPESMO;局部 - CIECAM 灰平衡
+HISTORY_MSG_LOCAL_CIE_SLOPESMOB;局部 - CIECAM 蓝平衡
+HISTORY_MSG_LOCAL_CIE_SLOPESMOG;局部 - CIECAM 绿平衡
+HISTORY_MSG_LOCAL_CIE_SLOPESMOQ;局部 - CIECAM 灰平衡
+HISTORY_MSG_LOCAL_CIE_SLOPESMOR;局部 - CIECAM 红平衡
+HISTORY_MSG_LOCAL_CIE_SMOOTH;局部 - CIECAM 场景 Yb 缩放
+HISTORY_MSG_LOCAL_CIE_SMOOTHINV;局部 CIECAM - 反转颜色
+HISTORY_MSG_LOCAL_CIE_SMOOTHLNK;局部 CIECAM - 关联 R G B
+HISTORY_MSG_LOCAL_CIE_SMOOTHMET;局部 - CIECAM 平滑高光方法
+HISTORY_MSG_LOCAL_CIE_SMOOTHTH;局部 CIECAM - 衰减阈值
+HISTORY_MSG_LOCAL_CIE_SMOOTHTHTRC;局部 CIECAM - 高光衰减阈值
+HISTORY_MSG_LOCAL_CIE_SMOOTHTRC;局部 CIECAM - 反转颜色
+HISTORY_MSG_LOCAL_CIE_SMOOTHTRCREL;局部 CIECAM - 相对伽马模式
+HISTORY_MSG_LOCAL_CIE_SMOOTHYB;局部 - CIECAM 观看环境 Yb 缩放
+HISTORY_MSG_LOCAL_CIE_SMOOTH_HIGH;局部 CIECAM - 仅高光衰减
+HISTORY_MSG_LOCAL_CIE_SMOOTH_LUM;局部 - CIECAM 层级 - 明度模式
+HISTORY_MSG_LOCAL_CIE_STRGRAD;局部 - CIECAM 渐变强度 L
+HISTORY_MSG_LOCAL_CIE_STRLOG;局部 - CIECAM 对数编码强度
 !HISTORY_MSG_LOCAL_CIE_TRC;Local - CIECAM TRC
-!HISTORY_MSG_LOCAL_CIE_WEVMETHOD11;Local CIECAM - Black Ev White Ev
-!HISTORY_MSG_LOCAL_CIE_WHITES;Local - CIECAM Whites distribution
-!HISTORY_MSG_LOCAL_CIE_WHITSIG;Local CIECAM - Sigmoid Display white point
-!HISTORY_MSG_LOCAL_CONVBOOST;Local - Sh Corner radius
-!HISTORY_MSG_LOCAL_CONVGAM;Local - Sh Gamma
-!HISTORY_MSG_LOCAL_CONVLAT;Local - Sh Corner iterations
-!HISTORY_MSG_LOCAL_CONVPROT;Local - Sh Central protected area
-!HISTORY_MSG_LOCAL_DEHAZE_BLACK;Local - Dehaze Black
-!HISTORY_MSG_LOCAL_DENOAUTO;Local - Denoise Auto Contrast
-!HISTORY_MSG_LOCAL_DENOCONTRAST;Local - Denoise Contrast threshold
-!HISTORY_MSG_LOCAL_DENOCONTRSHOW;Local - Denoise Show mask contrast
-!HISTORY_MSG_LOCAL_DENOENA;Local - Denoise Enable Contrast threshold
-!HISTORY_MSG_LOCAL_DENOMASK;Local - Denoise Contrast mask
-!HISTORY_MSG_LOCAL_DENOMASKCURV;Local - Denoise Equalizer Denoise mask
-!HISTORY_MSG_LOCAL_DENORATIO;Local - Denoise Ratio flat-structure
-!HISTORY_MSG_LOCAL_FEATHERCIE;Local - CIECAM Gradient feather
-!HISTORY_MSG_LOCAL_FEATHERCOL;Local - Color Gradient feather
-!HISTORY_MSG_LOCAL_FEATHEREXE;Local - Exp Gradient feather
-!HISTORY_MSG_LOCAL_FEATHERLOG;Local - Log Gradient feather
-!HISTORY_MSG_LOCAL_FEATHERMAS;Local - Mask Common gradient feather
-!HISTORY_MSG_LOCAL_FEATHERSH;Local - SH Gradient feather
-!HISTORY_MSG_LOCAL_FEATHERVIB;Local - Vib Gradient feather
-!HISTORY_MSG_LOCAL_FEATHERWAV;Local - Wav Gradient feather
-!HISTORY_MSG_LOCAL_GAMUTMUNSEL;Local - SC - Avoid Color Shift
-!HISTORY_MSG_LOCAL_GHS_AGX;Local - GHS - Matrix
-!HISTORY_MSG_LOCAL_GHS_AUTOBW;Local - GHS - Auto Black point and White point
-!HISTORY_MSG_LOCAL_GHS_MATMET;Local - GHS - Matrix
-!HISTORY_MSG_LOCAL_GHS_SLOPE;Local - GHS - Lab slope factor
-!HISTORY_MSG_LOCAL_LOCKMADL;Local - Denoise Lock MadL
-!HISTORY_MSG_LOCAL_LOCKMADL2;Local - Manual MadL
-!HISTORY_MSG_LOCAL_LOCKMADLS;Local - Denoise - MadL
-!HISTORY_MSG_LOCAL_LOGCIE12;Local - CIECAM - Log encoding
-!HISTORY_MSG_LOCAL_LOG_BLACKS;Local - Log Blacks distribution
-!HISTORY_MSG_LOCAL_LOG_COMPR;Local - Log Compress brightness
-!HISTORY_MSG_LOCAL_LOG_SAT;Local - Log Saturation control
-!HISTORY_MSG_LOCAL_LOG_WHITES;Local - Log Whites distribution
-!HISTORY_MSG_LOCAL_MICH_BLACK;Local - Michaelis-Menten Subtract black
-!HISTORY_MSG_LOCAL_MICH_EXP;Local - Michaelis-Menten Exposure
-!HISTORY_MSG_LOCAL_MICH_HIGH;Local - Michaelis-Menten Attenuation threshold
-!HISTORY_MSG_LOCAL_MICH_JDX;Local - Michaelis-Menten JDx Matrix
-!HISTORY_MSG_LOCAL_MICH_KPAR;Local - Michaelis-Menten Knee Strength
-!HISTORY_MSG_LOCAL_MICH_OUT;Local - Michaelis-Menten Output Max Clamp
-!HISTORY_MSG_LOCAL_MICH_SAT;Local - Michaelis-Menten Saturation
-!HISTORY_MSG_LOCAL_MICH_SPAR;Local - Michaelis-Menten Output Scale
-!HISTORY_MSG_LOCAL_MICH_WHITE;Local - Michaelis-Menten Dynamic range
-!HISTORY_MSG_LOCAL_NLITER;Local - Nlmeans - Iterations
-!HISTORY_MSG_LOCAL_OFFSETWAV;Local Wav offset
-!HISTORY_MSG_LOCAL_PROCESSWAV;Local - Wavelets - Show modifications
-!HISTORY_MSG_LOCAL_QJMETHOD;Local - CIECAM Tone mapping operator Q and J
-!HISTORY_MSG_LOCAL_SHARITERCHECK;Local - Sh Auto limit iterations
-!HISTORY_MSG_LOCAL_SHARREPAR;Local - Sh Strength
-!HISTORY_MSG_LOCAL_SHARSHOW;Local - Sh Show contrast mask
-!HISTORY_MSG_LOCAL_SIGBLCIE;Local - CIECAM Blend 5.11
-!HISTORY_MSG_LOCAL_SIGDACIE;Local - CIECAM Contrast 5.11
-!HISTORY_MSG_LOCAL_SIGFORCEBW;Local - Jz White Ev and Black Ev 5.11
-!HISTORY_MSG_LOCAL_SIGJZ11;Local - Jz Sigmoid J 5.11
-!HISTORY_MSG_LOCAL_SIGJZ11BL;Local - Jz Blend 5.11
-!HISTORY_MSG_LOCAL_SIGJZ11CONT;Local - Jz Contrast 5.11
-!HISTORY_MSG_LOCAL_SIGJZ11GRAY;Local - Jz Threshold 5.11
-!HISTORY_MSG_LOCAL_SIGQ11;Local - CIECAM Sigmoid Q - deprecated
-!HISTORY_MSG_LOCAL_SIGQ12;Local - CIECAM Sigmoid Q and Slope based
-!HISTORY_MSG_LOCAL_SIGSENSICIE;Local - CIECAM Adaptability 5.11
-!HISTORY_MSG_LOCAL_SIGTHCIE;Local - CIECAM Threshold 5.11
-!HISTORY_MSG_LOCAL_TMO_SATUR;Local Exp Fattal Saturation
-!HISTORY_MSG_PDSHARPEN_NOISECAP;CS - Presharpening denoise
-!HISTORY_MSG_PDSHARPEN_NOISECAPAFTER;CS - Postsharpening denoise luminance
-!HISTORY_MSG_PDSHARPEN_NOISECAPTYPE;CS - Presharpening type
-!HISTORY_MSG_PDSHARPEN_SHOWCAP;CS - Show mask contrast
-!HISTORY_MSG_PREPROCWB_MODE;Preprocess WB Mode
-!HISTORY_MSG_SIGMADIR;Dir Attenuation response
-!HISTORY_MSG_SPOT_ENTRY;Spot removal - Point modif.
-!HISTORY_MSG_TRANS_SCALE;Geometry - Scale
-!HISTORY_MSG_TRANS_SCALE_HORIZONTALLY;Geometry - Scale horizontally
-!HISTORY_MSG_TRANS_SCALE_VERTICALLY;Geometry - Scale vertically
-!HISTORY_MSG_WAVBALCHROM;Equalizer chrominance
-!HISTORY_MSG_WAVBALLUM;Equalizer luminance
-!HISTORY_MSG_WAVDENOISEH;High levels Local contrast
-!HISTORY_MSG_WAVDETEND;Details soft
-!HISTORY_MSG_WAVEDGS;Edge stopping
-!HISTORY_MSG_WAVGUIDH;Local contrast-Hue equalizer
-!HISTORY_MSG_WAVLEVDEN;High level local contrast
-!HISTORY_MSG_WAVLIMDEN;Interaction 56 14
-!HISTORY_MSG_WAVLOWTHR;Threshold low contrast
-!HISTORY_MSG_WAVMIXMET;Reference local contrast
-!HISTORY_MSG_WAVOLDSH;Old algorithm
-!HISTORY_MSG_WAVSCALE;Scale
+HISTORY_MSG_LOCAL_CIE_WEVMETHOD11;局部 CIECAM - 黑点 Ev 白点 Ev
+HISTORY_MSG_LOCAL_CIE_WHITES;局部 - CIECAM 白色分布
+HISTORY_MSG_LOCAL_CIE_WHITSIG;局部 CIECAM - Sigmoid 显示器白点
+HISTORY_MSG_LOCAL_CONVBOOST;局部 - 锐化 边角半径
+HISTORY_MSG_LOCAL_CONVGAM;局部 - 锐化 伽马
+HISTORY_MSG_LOCAL_CONVLAT;局部 - 锐化 边角迭代次数
+HISTORY_MSG_LOCAL_CONVPROT;局部 - 锐化 中心保护区域
+HISTORY_MSG_LOCAL_DEHAZE_BLACK;局部 - 去雾 黑点
+HISTORY_MSG_LOCAL_DENOAUTO;局部 - 降噪 自动对比度
+HISTORY_MSG_LOCAL_DENOCONTRAST;局部 - 降噪 反差阈值
+HISTORY_MSG_LOCAL_DENOCONTRSHOW;局部 - 降噪 显示反差蒙版
+HISTORY_MSG_LOCAL_DENOENA;局部 - 降噪 启用反差阈值
+HISTORY_MSG_LOCAL_DENOMASK;局部 - 降噪 反差蒙版
+HISTORY_MSG_LOCAL_DENOMASKCURV;局部 - 降噪 均衡器降噪蒙版
+HISTORY_MSG_LOCAL_DENORATIO;局部 - 降噪 平坦区与结构区比例
+HISTORY_MSG_LOCAL_FEATHERCIE;局部 - CIECAM 渐变羽化
+HISTORY_MSG_LOCAL_FEATHERCOL;局部 - 色彩 渐变羽化
+HISTORY_MSG_LOCAL_FEATHEREXE;局部 - 曝光 渐变羽化
+HISTORY_MSG_LOCAL_FEATHERLOG;局部 - 对数 渐变羽化
+HISTORY_MSG_LOCAL_FEATHERMAS;局部 - 通用蒙版 渐变羽化
+HISTORY_MSG_LOCAL_FEATHERSH;局部 - 阴影高光 渐变羽化
+HISTORY_MSG_LOCAL_FEATHERVIB;局部 - 鲜明度 渐变羽化
+HISTORY_MSG_LOCAL_FEATHERWAV;局部 - 小波 渐变羽化
+HISTORY_MSG_LOCAL_GAMUTMUNSEL;局部 - 特殊情况 - 避免色偏
+HISTORY_MSG_LOCAL_GHS_AGX;局部 - GHS - 矩阵
+HISTORY_MSG_LOCAL_GHS_AUTOBW;局部 - GHS - 自动黑点和白点
+HISTORY_MSG_LOCAL_GHS_MATMET;局部 - GHS - 矩阵
+HISTORY_MSG_LOCAL_GHS_SLOPE;局部 - GHS - Lab 斜率系数
+HISTORY_MSG_LOCAL_LOCKMADL;局部 - 降噪 锁定 MadL
+HISTORY_MSG_LOCAL_LOCKMADL2;局部 - 手动 MadL
+HISTORY_MSG_LOCAL_LOCKMADLS;局部 - 降噪 - MadL
+HISTORY_MSG_LOCAL_LOGCIE12;局部 - CIECAM - 对数编码
+HISTORY_MSG_LOCAL_LOG_BLACKS;局部 - 对数 黑色分布
+HISTORY_MSG_LOCAL_LOG_COMPR;局部 - 对数 压缩亮度
+HISTORY_MSG_LOCAL_LOG_SAT;局部 - 对数 饱和度控制
+HISTORY_MSG_LOCAL_LOG_WHITES;局部 - 对数 白色分布
+HISTORY_MSG_LOCAL_MICH_BLACK;局部 - Michaelis-Menten 减去黑点
+HISTORY_MSG_LOCAL_MICH_EXP;局部 - Michaelis-Menten 曝光
+HISTORY_MSG_LOCAL_MICH_HIGH;局部 - Michaelis-Menten 衰减阈值
+HISTORY_MSG_LOCAL_MICH_JDX;局部 - Michaelis-Menten JDx 矩阵
+HISTORY_MSG_LOCAL_MICH_KPAR;局部 - Michaelis-Menten 拐点强度
+HISTORY_MSG_LOCAL_MICH_OUT;局部 - Michaelis-Menten 输出最大值钳制
+HISTORY_MSG_LOCAL_MICH_SAT;局部 - Michaelis-Menten 饱和度
+HISTORY_MSG_LOCAL_MICH_SPAR;局部 - Michaelis-Menten 输出缩放
+HISTORY_MSG_LOCAL_MICH_WHITE;局部 - Michaelis-Menten 动态范围
+HISTORY_MSG_LOCAL_NLITER;局部 - 非局部均值 - 迭代次数
+HISTORY_MSG_LOCAL_OFFSETWAV;局部 小波偏移
+HISTORY_MSG_LOCAL_PROCESSWAV;局部 - 小波 - 显示修改
+HISTORY_MSG_LOCAL_QJMETHOD;局部 - CIECAM 色调映射算子 Q 与 J
+HISTORY_MSG_LOCAL_SHARITERCHECK;局部 - 锐化 自动限制迭代次数
+HISTORY_MSG_LOCAL_SHARREPAR;局部 - 锐化 强度
+HISTORY_MSG_LOCAL_SHARSHOW;局部 - 锐化 显示反差蒙版
+HISTORY_MSG_LOCAL_SIGBLCIE;局部 - CIECAM 混合 5.11
+HISTORY_MSG_LOCAL_SIGDACIE;局部 - CIECAM 对比度 5.11
+HISTORY_MSG_LOCAL_SIGFORCEBW;局部 - Jz 白点 Ev 与黑点 Ev 5.11
+HISTORY_MSG_LOCAL_SIGJZ11;局部 - Jz Sigmoid J 5.11
+HISTORY_MSG_LOCAL_SIGJZ11BL;局部 - Jz 混合 5.11
+HISTORY_MSG_LOCAL_SIGJZ11CONT;局部 - Jz 对比度 5.11
+HISTORY_MSG_LOCAL_SIGJZ11GRAY;局部 - Jz 阈值 5.11
+HISTORY_MSG_LOCAL_SIGQ11;局部 - CIECAM Sigmoid Q - 已弃用
+HISTORY_MSG_LOCAL_SIGQ12;局部 - CIECAM 基于 Sigmoid Q 与斜率
+HISTORY_MSG_LOCAL_SIGSENSICIE;局部 - CIECAM 适应度 5.11
+HISTORY_MSG_LOCAL_SIGTHCIE;局部 - CIECAM 阈值 5.11
+HISTORY_MSG_LOCAL_TMO_SATUR;局部 曝光 Fattal 饱和度
+HISTORY_MSG_PDSHARPEN_NOISECAP;捕获锐化 - 锐化前降噪
+HISTORY_MSG_PDSHARPEN_NOISECAPAFTER;捕获锐化 - 锐化后亮度降噪
+HISTORY_MSG_PDSHARPEN_NOISECAPTYPE;捕获锐化 - 锐化前类型
+HISTORY_MSG_PDSHARPEN_SHOWCAP;捕获锐化 - 显示反差蒙版
+HISTORY_MSG_PREPROCWB_MODE;预处理白平衡模式
+HISTORY_MSG_SIGMADIR;方向衰减响应
+HISTORY_MSG_SPOT_ENTRY;污点去除 - 点已修改
+HISTORY_MSG_TRANS_SCALE;几何 - 缩放
+HISTORY_MSG_TRANS_SCALE_HORIZONTALLY;几何 - 水平缩放
+HISTORY_MSG_TRANS_SCALE_VERTICALLY;几何 - 垂直缩放
+HISTORY_MSG_WAVBALCHROM;均衡器 色度
+HISTORY_MSG_WAVBALLUM;均衡器 亮度
+HISTORY_MSG_WAVDENOISEH;高层级局部反差
+HISTORY_MSG_WAVDETEND;细节柔化
+HISTORY_MSG_WAVEDGS;边缘停止
+HISTORY_MSG_WAVGUIDH;局部反差-色相均衡器
+HISTORY_MSG_WAVLEVDEN;高层级局部反差
+HISTORY_MSG_WAVLIMDEN;相互作用 56 14
+HISTORY_MSG_WAVLOWTHR;低反差阈值
+HISTORY_MSG_WAVMIXMET;参考局部反差
+HISTORY_MSG_WAVOLDSH;旧算法
+HISTORY_MSG_WAVSCALE;缩放
 !HISTORY_MSG_WAVSIGM;Sigma
-!HISTORY_MSG_WAVSLIMET;Method
-!HISTORY_MSG_WBITC_CUSTOM;Itcwb Custom
-!HISTORY_MSG_WBITC_DELTA;Itcwb Delta green
-!HISTORY_MSG_WBITC_FGREEN;Itcwb Green - student
-!HISTORY_MSG_WBITC_FORCE;Itcwb Force
-!HISTORY_MSG_WBITC_GREEN;Green refinement
-!HISTORY_MSG_WBITC_MINSIZE;Patch min size
-!HISTORY_MSG_WBITC_NOPURPLE;Itcwb Nopurple
-!HISTORY_MSG_WBITC_OBS;Remove algo 2 passes
-!HISTORY_MSG_WBITC_PONDER;Itcwb ponderated
-!HISTORY_MSG_WBITC_PRECIS;Itcwb Precision
-!HISTORY_MSG_WBITC_PRIM;Primaries
-!HISTORY_MSG_WBITC_RGREEN;Itcwb Green range
-!HISTORY_MSG_WBITC_SAMPLING;Low sampling
-!HISTORY_MSG_WBITC_SIZE;Itcwb Size
-!HISTORY_MSG_WBITC_SORTED;Itcwb ponderated
-!HISTORY_MSG_WBITC_THRES;Itcwb Threshold
+HISTORY_MSG_WAVSLIMET;方法
+HISTORY_MSG_WBITC_CUSTOM;Itcwb 自定义
+HISTORY_MSG_WBITC_DELTA;Itcwb 绿色差值
+HISTORY_MSG_WBITC_FGREEN;Itcwb 绿色 - student
+HISTORY_MSG_WBITC_FORCE;Itcwb 强制
+HISTORY_MSG_WBITC_GREEN;绿色精修
+HISTORY_MSG_WBITC_MINSIZE;色块最小尺寸
+HISTORY_MSG_WBITC_NOPURPLE;Itcwb 不使用紫色
+HISTORY_MSG_WBITC_OBS;移除两遍算法
+HISTORY_MSG_WBITC_PONDER;Itcwb 加权
+HISTORY_MSG_WBITC_PRECIS;Itcwb 精度
+HISTORY_MSG_WBITC_PRIM;基色
+HISTORY_MSG_WBITC_RGREEN;Itcwb 绿色范围
+HISTORY_MSG_WBITC_SAMPLING;低采样
+HISTORY_MSG_WBITC_SIZE;Itcwb 大小
+HISTORY_MSG_WBITC_SORTED;Itcwb 加权
+HISTORY_MSG_WBITC_THRES;Itcwb 阈值
 !ICCPROFCREATOR_COPYRIGHT_RESET_TOOLTIP;Reset to the default copyright, granted to 'RawTherapee, CC0'.
 ICCPROFCREATOR_DESCRIPTION_ADDPARAM;将伽马和斜率值附加到描述中
 !ICCPROFCREATOR_DESCRIPTION_TOOLTIP;Leave empty to set the default description.
