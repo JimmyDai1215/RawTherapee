@@ -2893,8 +2893,8 @@ ZOOMPANEL_ZOOMOUT;缩放拉远\n快捷键：<b>-</b>
 !!!!!!!!!!!!!!!!!!!!!!!!!
 
 ERROR_MSG_METADATA_VALUE;元数据：将 %1 设为 %2 时出错
-!EXIFPANEL_ACTIVATE_ALL_HINT;Select all tags
-!EXIFPANEL_ACTIVATE_NONE_HINT;Unselect all tags
+EXIFPANEL_ACTIVATE_ALL_HINT;选择全部标签
+EXIFPANEL_ACTIVATE_NONE_HINT;取消选择全部标签
 !HISTORY_MSG_112;--unused--
 !HISTORY_MSG_236;--unused--
 !HISTORY_MSG_277;--unused--
@@ -3706,9 +3706,9 @@ HISTORY_MSG_WBITC_SAMPLING;低采样
 HISTORY_MSG_WBITC_SIZE;Itcwb 大小
 HISTORY_MSG_WBITC_SORTED;Itcwb 加权
 HISTORY_MSG_WBITC_THRES;Itcwb 阈值
-!ICCPROFCREATOR_COPYRIGHT_RESET_TOOLTIP;Reset to the default copyright, granted to 'RawTherapee, CC0'.
+ICCPROFCREATOR_COPYRIGHT_RESET_TOOLTIP;重置为默认版权声明，即授予“RawTherapee, CC0”。
 ICCPROFCREATOR_DESCRIPTION_ADDPARAM;将伽马和斜率值附加到描述中
-!ICCPROFCREATOR_DESCRIPTION_TOOLTIP;Leave empty to set the default description.
+ICCPROFCREATOR_DESCRIPTION_TOOLTIP;留空则使用默认描述。
 ICCPROFCREATOR_ICCVERSION;ICC 版本：
 ICCPROFCREATOR_ILL;光源：
 !ICCPROFCREATOR_ILL_41;D41
@@ -3719,7 +3719,7 @@ ICCPROFCREATOR_ILL_63;D63：DCI-P3 影院
 !ICCPROFCREATOR_ILL_65;D65
 !ICCPROFCREATOR_ILL_80;D80
 !ICCPROFCREATOR_ILL_INC;StdA 2856K
-!ICCPROFCREATOR_ILL_TOOLTIP;You can set the illuminant for ICC v4 profiles and also for ICC v2 profiles.
+ICCPROFCREATOR_ILL_TOOLTIP;可以为 ICC v4 配置文件设置光源，ICC v2 配置文件同样可以。
 ICCPROFCREATOR_PRIMARIES;基色：
 !ICCPROFCREATOR_PRIM_ACESP0;ACES AP0
 !ICCPROFCREATOR_PRIM_ACESP1;ACES AP1
@@ -3737,35 +3737,35 @@ ICCPROFCREATOR_PRIM_GREY;绿 Y
 ICCPROFCREATOR_PRIM_REDX;红 X
 ICCPROFCREATOR_PRIM_REDY;红 Y
 !ICCPROFCREATOR_PRIM_SRGB;sRGB
-!ICCPROFCREATOR_PRIM_TOOLTIP;You can set custom primaries for ICC v4 profiles and also for ICC v2 profiles.
+ICCPROFCREATOR_PRIM_TOOLTIP;可以为 ICC v4 配置文件设置自定义基色，ICC v2 配置文件同样可以。
 !ICCPROFCREATOR_PRIM_WIDEG;Widegamut
 !ICCPROFCREATOR_PROF_V2;ICC v2
 !ICCPROFCREATOR_PROF_V4;ICC v4
 ICCPROFCREATOR_SLOPE;斜率
-!IPTCPANEL_CATEGORYHINT;Identifies the subject of the image in the opinion of the provider.
-!IPTCPANEL_CITYHINT;Enter the name of the city pictured in this image.
+IPTCPANEL_CATEGORYHINT;按提供者的看法标明图像的主题。
+IPTCPANEL_CITYHINT;输入图像中所拍摄城市的名称。
 IPTCPANEL_COPYRIGHT;版权声明
-!IPTCPANEL_COPYRIGHTHINT;Enter a Notice on the current owner of the Copyright for this image, such as ©2008 Jane Doe.
+IPTCPANEL_COPYRIGHTHINT;输入此图像当前版权所有者的声明，例如 ©2008 Jane Doe。
 IPTCPANEL_CREATOR;创作者
-!IPTCPANEL_CREATORHINT;Enter the name of the person that created this image.
+IPTCPANEL_CREATORHINT;输入创作此图像的人的姓名。
 IPTCPANEL_CREATORJOBTITLE;创作者职务
-!IPTCPANEL_CREATORJOBTITLEHINT;Enter the Job Title of the person listed in the Creator field.
-!IPTCPANEL_DATECREATEDHINT;Enter the Date the image was taken.
-!IPTCPANEL_DESCRIPTIONHINT;Enter a 'caption' describing the who, what, and why of what is happening in this image, this might include names of people, and/or their role in the action that is taking place within the image.
+IPTCPANEL_CREATORJOBTITLEHINT;输入“创作者”栏中所列人员的职务。
+IPTCPANEL_DATECREATEDHINT;输入图像的拍摄日期。
+IPTCPANEL_DESCRIPTIONHINT;输入一段“说明”，描述图像中是谁、发生了什么以及原因，可以包含人物姓名和/或他们在画面事件中的角色。
 IPTCPANEL_DESCRIPTIONWRITER;描述撰写人
-!IPTCPANEL_DESCRIPTIONWRITERHINT;Enter the name of the person involved in writing, editing or correcting the description of the image.
-!IPTCPANEL_HEADLINEHINT;Enter a brief publishable synopsis or summary of the contents of the image.
-!IPTCPANEL_INSTRUCTIONSHINT;Enter information about embargoes, or other restrictions not covered by the Copyright field.
-!IPTCPANEL_SOURCEHINT;Enter or edit the name of a person or party who has a role in the content supply chain, such as a person or entity from whom you received this image from.
+IPTCPANEL_DESCRIPTIONWRITERHINT;输入参与撰写、编辑或校正图像描述的人的姓名。
+IPTCPANEL_HEADLINEHINT;输入一段可发表的图像内容简介或摘要。
+IPTCPANEL_INSTRUCTIONSHINT;输入关于禁发期或其他未在“版权”栏中涵盖的限制信息。
+IPTCPANEL_SOURCEHINT;输入或编辑在内容供应链中承担角色的个人或机构名称，例如向你提供此图像的个人或实体。
 IPTCPANEL_SUPPCATEGORIES;补充类别
-!IPTCPANEL_SUPPCATEGORIESHINT;Further refines the subject of the image.
-!IPTCPANEL_TITLEHINT;Enter a short verbal and human readable name for the image, this may be the file name.
+IPTCPANEL_SUPPCATEGORIESHINT;进一步细化图像的主题。
+IPTCPANEL_TITLEHINT;为图像输入一个简短、易读的名称，可以是文件名。
 IPTCPANEL_TRANSREFERENCE;任务 ID
-!IPTCPANEL_TRANSREFERENCEHINT;Enter a number or identifier needed for workflow control or tracking.
+IPTCPANEL_TRANSREFERENCEHINT;输入工作流程控制或追踪所需的编号或标识符。
 MAIN_BUTTON_ICCPROFCREATOR;ICC 配置文件生成器
-!MAIN_BUTTON_NAVSYNC_TOOLTIP;Synchronize the File Browser or Filmstrip with the Editor to reveal the thumbnail of the currently opened image, and clear any active filters.\nShortcut: <b>x</b>\n\nAs above, but without clearing active filters:\nShortcut: <b>y</b>\n(Note that the thumbnail of the opened image will not be shown if filtered out).
-!MAIN_MSG_IMAGEUNPROCESSED;This command requires all selected images to be queue-processed first.
-!MAIN_TOOLTIP_BEFOREAFTERLOCK;<b>Lock</b> / <b>Unlock</b> the <b>Before</b> view\n\n<b>Lock</b>: keep the <b>Before</b> view unchanged.\nUseful to evaluate the cumulative effect of multiple tools.\nAdditionally, comparisons can be made to any state in the History.\n\n<b>Unlock</b>: the <b>Before</b> view will follow the <b>After</b> view one step behind, showing the image before the effect of the currently used tool.
+MAIN_BUTTON_NAVSYNC_TOOLTIP;将文件浏览器或胶片条与编辑器同步，显示当前打开图像的缩略图，并清除所有生效的筛选条件。\n快捷键：<b>x</b>\n\n同上，但不清除生效的筛选条件：\n快捷键：<b>y</b>\n（注意：如果当前图像被筛选条件排除，其缩略图将不会显示）。
+MAIN_MSG_IMAGEUNPROCESSED;此命令要求所有选中的图像先经过队列处理。
+MAIN_TOOLTIP_BEFOREAFTERLOCK;<b>锁定</b> / <b>解锁</b> <b>处理前</b>视图\n\n<b>锁定</b>：保持<b>处理前</b>视图不变。\n适合评估多个工具叠加后的累积效果。\n此外，还可以与历史记录中的任意状态进行对比。\n\n<b>解锁</b>：<b>处理前</b>视图将落后<b>处理后</b>视图一步，显示当前所用工具生效之前的图像。
 PARTIALPASTE_FLATFIELDFROMMETADATA;来自元数据的平场
 !PARTIALPASTE_RETINEX;Retinex
 PREFERENCES_BROWSERECURSIVEFOLLOWLINKS;浏览子文件夹时跟随符号链接
@@ -3776,9 +3776,9 @@ PREFERENCES_CUSTPROFBUILDKEYFORMAT_NAME;名称
 PREFERENCES_CUSTPROFBUILDKEYFORMAT_TID;标签 ID
 PREFERENCES_EXTEDITOR_BYPASS_OUTPUT_PROFILE;绕过输出配置文件
 PREFERENCES_EXTEDITOR_FLOAT32;32 位浮点 TIFF 输出
-!PREFERENCES_INSPECT_MAXBUFFERS_TOOLTIP;Set the maximum number of images stored in cache when hovering over them in the File Browser; systems with little RAM (2GB) should keep this value set to 1 or 2.
+PREFERENCES_INSPECT_MAXBUFFERS_TOOLTIP;设置在文件浏览器中鼠标悬停图像时缓存的最大图像数量；内存较小（2GB）的系统应将此值设为 1 或 2。
 PREFERENCES_WBAFORC;强制使用额外算法
-!PREFERENCES_WBAGREENDELTA;Delta temperature in green iterate loop (if Force Extra enabled)
+PREFERENCES_WBAGREENDELTA;绿色迭代循环中的色温差（需启用“强制使用额外算法”）
 PREFERENCES_WBANOPURP;不使用紫色
 PREFERENCES_WBAPATCH;图像中使用的最大颜色数
 PREFERENCES_WBAPRECIS;精确算法 - 使用的尺度
@@ -3786,26 +3786,26 @@ PREFERENCES_WBASIZEREF;参考色大小与直方图色大小之比
 PREFERENCES_WBASORT;按色度而非直方图排序
 PROGRESSDLG_PROFILECHANGEDINBROWSER;处理配置文件已在浏览器中更改
 QUEUE_DESTPREVIEW_TITLE;选择一张缩略图以在此预览其目标路径
-!QUEUE_DESTPREVIEW_TOOLTIP;Destination path for the first selected image appears here
-!QUEUE_LOCATION_TEMPLATE_HELP_BUTTON_TOOLTIP;Show or hide a help panel with instructions for creating location templates
-!QUEUE_LOCATION_TEMPLATE_HELP_EXAMPLES_BODY;If you want to save the output image alongside the source image, write:\n<b>%p1/%f</b>\n\nIf you want to save the output image in a folder named '<i>converted</i>' located in the source photo's folder, write:\n<b>%p1/converted/%f</b>\n\nIf you want the output folder name to include the format (file name extension) of the output image, write:\n<b>%p1/converted_%e/%f</b>\n\nIf you want to save the output image in\n'<i>/home/tom/photos/converted/2010-10-31</i>', write:\n<b>%p-3/converted/%P-4/%f</b>
+QUEUE_DESTPREVIEW_TOOLTIP;第一张选中图像的目标路径显示在这里
+QUEUE_LOCATION_TEMPLATE_HELP_BUTTON_TOOLTIP;显示或隐藏帮助面板，其中有创建路径模板的说明
+QUEUE_LOCATION_TEMPLATE_HELP_EXAMPLES_BODY;如果想把输出图像保存在源图像旁边，请写：\n<b>%p1/%f</b>\n\n如果想把输出图像保存在源照片所在文件夹下名为“<i>converted</i>”的文件夹中，请写：\n<b>%p1/converted/%f</b>\n\n如果想让输出文件夹名包含输出图像的格式（文件扩展名），请写：\n<b>%p1/converted_%e/%f</b>\n\n如果想把输出图像保存到\n“<i>/home/tom/photos/converted/2010-10-31</i>”，请写：\n<b>%p-3/converted/%P-4/%f</b>
 QUEUE_LOCATION_TEMPLATE_HELP_EXAMPLES_TITLE;常见示例
-!QUEUE_LOCATION_TEMPLATE_HELP_FORMAT_BODY;<b>%e</b> will be replaced by the photo's output format, as determined from the output file's file name extension.
+QUEUE_LOCATION_TEMPLATE_HELP_FORMAT_BODY;<b>%e</b> 会被替换为照片的输出格式，该格式由输出文件的扩展名决定。
 QUEUE_LOCATION_TEMPLATE_HELP_FORMAT_TITLE;输出文件格式/文件扩展名
-!QUEUE_LOCATION_TEMPLATE_HELP_INTRO;The output template field allows you to to dynamically customize the destination folder and filename. When you include certain specifiers, which begin with <b>%</b>, they are replaced by the program when each file is being saved.\n\nThe sections below describe each type of specifier.
+QUEUE_LOCATION_TEMPLATE_HELP_INTRO;输出模板栏可以让你动态自定义目标文件夹和文件名。模板中以 <b>%</b> 开头的特定占位符，会在保存每个文件时由程序替换。\n\n以下各节说明每种占位符。
 QUEUE_LOCATION_TEMPLATE_HELP_PATHS_BODY_1;以此路径为例：
 QUEUE_LOCATION_TEMPLATE_HELP_PATHS_BODY_2;格式化字符串的含义如下：
 !QUEUE_LOCATION_TEMPLATE_HELP_PATHS_EXAMPLE_LINUX;/home/tom/photos/2010-10-31/photo1.raw
 !QUEUE_LOCATION_TEMPLATE_HELP_PATHS_EXAMPLE_WINDOWS;D:\tom\photos\2010-10-31\photo1.raw
-!QUEUE_LOCATION_TEMPLATE_HELP_PATHS_INTRO;The <b>%dN</b>, <b>%d-N</b>, <b>%pN</b>, <b>%p-N</b>, <b>%PN</b> and <b>%P-N</b> (N = 1..9) specifiers will be replaced by elements of the image file's directory path.\nThe format specifiers operate as follows:\n  <b>%dN</b> = Nth directory from the end of the path\n  <b>%d-N</b> = Nth directory from the start of the path\n  <b>%pN</b>  = all directories up to the Nth from the end of the path\n  <b>%p-N</b> = the first N directories in the path\n  <b>%PN</b>  = the last N directories in the path\n  <b>%P-N</b> = all directories from the Nth to the end of the path\n  <b>%f</b> = base filename (no extension)
-!QUEUE_LOCATION_TEMPLATE_HELP_PATHS_INTRO_WINDOWS;For Windows paths, <b>%d-1</b> is the drive letter and colon, and <b>%d-2</b> is the base directory on that drive.
+QUEUE_LOCATION_TEMPLATE_HELP_PATHS_INTRO;<b>%dN</b>、<b>%d-N</b>、<b>%pN</b>、<b>%p-N</b>、<b>%PN</b> 和 <b>%P-N</b>（N = 1..9）会被替换为图像文件目录路径中的组成部分。\n各占位符的含义如下：\n  <b>%dN</b> = 从路径末尾数第 N 个目录\n  <b>%d-N</b> = 从路径开头数第 N 个目录\n  <b>%pN</b>  = 从开头到倒数第 N 个目录为止的所有目录\n  <b>%p-N</b> = 路径中的前 N 个目录\n  <b>%PN</b>  = 路径中的后 N 个目录\n  <b>%P-N</b> = 从第 N 个目录到路径末尾的所有目录\n  <b>%f</b> = 基本文件名（不含扩展名）
+QUEUE_LOCATION_TEMPLATE_HELP_PATHS_INTRO_WINDOWS;对于 Windows 路径，<b>%d-1</b> 是盘符加冒号，<b>%d-2</b> 是该盘上的根目录。
 QUEUE_LOCATION_TEMPLATE_HELP_PATHS_TITLE;目录与部分路径
-!QUEUE_LOCATION_TEMPLATE_HELP_RANK_BODY;<b>%r</b> will be replaced by the photo's rank. If the photo is unranked, '<i>0</i>' is used. If the photo is in the trash, '<i>x</i>' is used.
+QUEUE_LOCATION_TEMPLATE_HELP_RANK_BODY;<b>%r</b> 会被替换为照片的评级。未评级的照片使用“<i>0</i>”，在回收站中的照片使用“<i>x</i>”。
 QUEUE_LOCATION_TEMPLATE_HELP_RANK_TITLE;评级
 QUEUE_LOCATION_TEMPLATE_HELP_RESULT_MISMATCH;错误：第二次结果不同：
-!QUEUE_LOCATION_TEMPLATE_HELP_SEQUENCE_BODY;<b>%s1</b>, ..., <b>%s9</b> will be replaced by the photo's initial position in the queue at the time the queue is started. The number specifies the padding, e.g. <b>%s3</b> results in '<i>001</i>'.
+QUEUE_LOCATION_TEMPLATE_HELP_SEQUENCE_BODY;<b>%s1</b>、...、<b>%s9</b> 会被替换为队列开始时照片在队列中的初始位置。数字指定补零位数，例如 <b>%s3</b> 得到“<i>001</i>”。
 QUEUE_LOCATION_TEMPLATE_HELP_SEQUENCE_TITLE;队列中的位置/序号
-!QUEUE_LOCATION_TEMPLATE_HELP_TIMESTAMP_BODY;Three different date/time values may be used in templates:\n  <b>%tE"%Y-%m-%d"</b> = when export started\n  <b>%tF"%Y-%m-%d"</b> = when file was last saved\n  <b>%tP"%Y-%m-%d"</b> = when photo was taken\nThe quoted string defines the format of the resulting date and/or time. The format string <b>%tF"%Y-%m-%d"</b> is just one example. The string can use all conversion specifiers defined for the g_date_time_format function (see https://docs.gtk.org/glib/method.DateTime.format.html).\n\nExample format strings:
+QUEUE_LOCATION_TEMPLATE_HELP_TIMESTAMP_BODY;模板中可以使用三种不同的日期/时间值：\n  <b>%tE"%Y-%m-%d"</b> = 导出开始的时间\n  <b>%tF"%Y-%m-%d"</b> = 文件上次保存的时间\n  <b>%tP"%Y-%m-%d"</b> = 照片拍摄的时间\n引号中的字符串定义所得日期和/或时间的格式。格式字符串 <b>%tF"%Y-%m-%d"</b> 只是一个例子。该字符串可以使用 g_date_time_format 函数定义的所有转换说明符（见 https://docs.gtk.org/glib/method.DateTime.format.html）。\n\n格式字符串示例：
 QUEUE_LOCATION_TEMPLATE_HELP_TIMESTAMP_TITLE;日期和时间
 QUEUE_LOCATION_TEMPLATE_HELP_TITLE;创建输出模板
 SAMPLEFORMAT_1;8 位无符号
@@ -3813,17 +3813,17 @@ SAMPLEFORMAT_2;16 位无符号
 SAMPLEFORMAT_4;24 位 LogLuv
 SAMPLEFORMAT_8;32 位 LogLuv
 SAVEDLG_BIGTIFF;BigTIFF（不支持元数据）
-!SAVEDLG_SUBSAMP_TOOLTIP;Best compression:\nJ:a:b 4:2:0\nh/v 2/2\nChroma halved horizontally and vertically.\n\nBalanced:\nJ:a:b 4:2:2\nh/v 2/1\nChroma halved horizontally.\n\nBest quality:\nJ:a:b 4:4:4\nh/v 1/1\nNo chroma subsampling.
-!SHCSELECTOR_TOOLTIP;Click right mouse button to reset the position of those 3 sliders.
-!SOFTPROOF_GAMUTCHECK_TOOLTIP;Highlight pixels with out-of-gamut colors with respect to:\n- the printer profile, if one is set and soft-proofing is enabled,\n- the output profile, if a printer profile is not set and soft-proofing is enabled,\n- the monitor profile, if soft-proofing is disabled.
-!SOFTPROOF_TOOLTIP;Soft-proofing simulates the appearance of the image:\n- when printed, if a printer profile is set in Preferences > Color Management,\n- when viewed on a display that uses the current output profile, if a printer profile is not set.
+SAVEDLG_SUBSAMP_TOOLTIP;最佳压缩：\nJ:a:b 4:2:0\nh/v 2/2\n色度在水平和垂直方向均减半。\n\n均衡：\nJ:a:b 4:2:2\nh/v 2/1\n色度在水平方向减半。\n\n最佳质量：\nJ:a:b 4:4:4\nh/v 1/1\n无色度子采样。
+SHCSELECTOR_TOOLTIP;单击鼠标右键可重置这 3 个滑条的位置。
+SOFTPROOF_GAMUTCHECK_TOOLTIP;高亮显示超出色域的像素，参照对象为：\n- 打印机配置文件（已设置且启用了软打样时），\n- 输出配置文件（未设置打印机配置文件且启用了软打样时），\n- 显示器配置文件（未启用软打样时）。
+SOFTPROOF_TOOLTIP;软打样模拟图像的呈现效果：\n- 如果在“参数设置 > 色彩管理”中设置了打印机配置文件，则模拟打印效果，\n- 如果未设置打印机配置文件，则模拟在使用当前输出配置文件的显示器上观看的效果。
 SORT_BY_DATE;按日期
 SORT_BY_EXIF;按 EXIF
 SORT_BY_LABEL;按颜色标签
 SORT_BY_NAME;按名称
 SORT_BY_RANK;按评级
 TC_LOCALLAB_PRIM_SHIFTX;偏移 x
-!TC_LOCALLAB_PRIM_SHIFTX_TOOLTIP;In combination with "Refine colors", allows you to:\n 1) for low values, adjust the image purity.\n 2) for higher values, carry out moderate color toning.\nBe careful not to go outside the CIE xy diagram.
+TC_LOCALLAB_PRIM_SHIFTX_TOOLTIP;与“精修色彩”配合使用，可以：\n 1) 数值较低时，调整图像的纯度。\n 2) 数值较高时，进行适度的调色。\n注意不要超出 CIE xy 色度图。
 TC_LOCALLAB_PRIM_SHIFTY;偏移 y
 TC_PRIM_BLUROT;蓝 旋转
 TC_PRIM_BLUSAT;蓝 饱和
@@ -3840,14 +3840,14 @@ TC_PRIM_REDSAT;红 饱和
 TC_PRIM_REFI;精修色彩（白点）
 THRESHOLDSELECTOR_B;下
 THRESHOLDSELECTOR_T;上
-!TOOLBAR_TOOLTIP_COLORPICKER;Lockable Color Picker\n\nWhen the tool is active:\n- Add a picker: <b>left-click</b>.\n- Drag a picker: <b>left-click and drag</b>.\n- Delete a picker: <b>right-click</b>.\n- Delete all pickers: <b>Ctrl</b>+<b>Shift</b>+<b>right-click</b>.\n- Revert to hand tool: <b>right-click</b> outside any picker.
-!TOOLBAR_TOOLTIP_PERSPECTIVE;<b>Perspective Correction</b>\n\nEdit control lines to correct perspective distortion. Click this button again to apply correction.
+TOOLBAR_TOOLTIP_COLORPICKER;可锁定取色器\n\n工具启用时：\n- 添加取色点：<b>左键单击</b>。\n- 拖动取色点：<b>左键单击并拖动</b>。\n- 删除取色点：<b>右键单击</b>。\n- 删除全部取色点：<b>Ctrl</b>+<b>Shift</b>+<b>右键单击</b>。\n- 返回抓手工具：在任何取色点之外<b>右键单击</b>。
+TOOLBAR_TOOLTIP_PERSPECTIVE;<b>透视校正</b>\n\n编辑控制线以校正透视畸变。再次单击此按钮即可应用校正。
 TP_BWMIX_ALGO;OYCPM 算法
-!TP_BWMIX_ALGO_TOOLTIP;Linear: will produce a normal <b>linear</b> response.\nSpecial effects: will produce special effects by mixing channels <b>non-linearly</b>.
+TP_BWMIX_ALGO_TOOLTIP;线性：产生正常的<b>线性</b>响应。\n特殊效果：通过<b>非线性</b>混合通道产生特殊效果。
 TP_BWMIX_CC_ENABLED;调整互补色
-!TP_BWMIX_CC_TOOLTIP;Enable to allow automatic adjustment of complementary colors in ROYGCBPM mode.
-!TP_BWMIX_RGBLABEL_HINT;Final RGB factors that take care of all the mixer options.\n'Total' displays the sum of the RGB values:\n- always 100% in relative mode\n- higher (lighter) or lower (darker) than 100% in absolute mode.
-!TP_BWMIX_RGB_TOOLTIP;Mix the RGB channels. Use presets for guidance.\nPay attention to negative values that may cause artifacts or erratic behavior.
+TP_BWMIX_CC_TOOLTIP;启用后，在 ROYGCBPM 模式下自动调整互补色。
+TP_BWMIX_RGBLABEL_HINT;综合所有混合器选项后的最终 RGB 系数。\n“总计”显示 RGB 值之和：\n- 相对模式下始终为 100%\n- 绝对模式下高于（更亮）或低于（更暗）100%。
+TP_BWMIX_RGB_TOOLTIP;混合 RGB 通道，可参考预设。\n注意负值可能导致伪影或异常表现。
 !TP_COLORAPP_IL41;D41
 !TP_COLORAPP_IL50;D50
 !TP_COLORAPP_IL55;D55
@@ -3856,13 +3856,13 @@ TP_BWMIX_CC_ENABLED;调整互补色
 !TP_COLORAPP_IL75;D75
 !TP_COLORAPP_MOD02;CAM02
 !TP_COLORAPP_MOD16;CAM16
-!TP_COLORAPP_SOURCEF_TOOLTIP;Corresponds to the shooting conditions and how to bring the conditions and data back to a 'normal' area. Normal means average or standard conditions and data, i.e. without taking into account CIECAM corrections.
-!TP_COLORAPP_TEMP2_TOOLTIP;Either symmetrical mode temp = White balance.\nEither select illuminant always set Tint=1.\n\nA temp=2856\nD41 temp=4100\nD50 temp=5003\nD55 temp=5503\nD60 temp=6000\nD65 temp=6504\nD75 temp=7504
-!TP_COLORAPP_TEMPOUT_TOOLTIP;Temperature and Tint.\nDepending on the choices made previously, the selected temperature is:\nWhite balance\nA temp=2856\nD41 temp=4100\nD50 temp=5003\nD55 temp=5503\nD60 temp=6000\nD65 temp=6504\nD75 temp=7504\nFree.
-!TP_COLORAPP_TEMP_TOOLTIP;To select an illuminant, always set Tint=1.\n\nA temp=2856\nD41 temp=4100\nD50 temp=5003\nD55 temp=5503\nD60 temp=6000\nD65 temp=6504\nD75 temp=7504
-!TP_COLORAPP_VIEWINGF_TOOLTIP;Takes into account the support on which the final image will be viewed (monitor, TV, projector, printer, etc.), as well as its environment. This process will take the data coming from process 'Image Adjustments' and 'bring' it to the support in such a way that the viewing conditions and its environment are taken into account.
-!TP_COLORAPP_YBOUT_TOOLTIP;Yb is the relative luminance of the background, expressed in % of gray. 18% gray corresponds to a background luminance of 50% expressed in CIE L.\nThe data is based on the mean luminance of the image.
-!TP_COLORAPP_YBSCEN_TOOLTIP;Yb is the relative luminance of the background, expressed in % of gray. 18% gray corresponds to a background luminance of 50% expressed in CIE L.\nThe data is based on the mean luminance of the image.
+TP_COLORAPP_SOURCEF_TOOLTIP;对应拍摄条件，以及如何把这些条件和数据带回“正常”范围。正常指平均或标准的条件与数据，即不考虑 CIECAM 校正。
+TP_COLORAPP_TEMP2_TOOLTIP;要么使用对称模式，色温 = 白平衡。\n要么选择光源，此时始终将色调设为 1。\n\nA 色温=2856\nD41 色温=4100\nD50 色温=5003\nD55 色温=5503\nD60 色温=6000\nD65 色温=6504\nD75 色温=7504
+TP_COLORAPP_TEMPOUT_TOOLTIP;色温和色调。\n取决于之前的选择，所选色温为：\n白平衡\nA 色温=2856\nD41 色温=4100\nD50 色温=5003\nD55 色温=5503\nD60 色温=6000\nD65 色温=6504\nD75 色温=7504\n自由。
+TP_COLORAPP_TEMP_TOOLTIP;选择光源时，始终将色调设为 1。\n\nA 色温=2856\nD41 色温=4100\nD50 色温=5003\nD55 色温=5503\nD60 色温=6000\nD65 色温=6504\nD75 色温=7504
+TP_COLORAPP_VIEWINGF_TOOLTIP;考虑最终观看图像的媒介（显示器、电视、投影仪、打印机等）及其环境。此过程接收来自“图像调整”过程的数据，并将其“带到”目标媒介上，同时考虑观看条件及其环境。
+TP_COLORAPP_YBOUT_TOOLTIP;Yb 是背景的相对亮度，以灰度百分比表示。18% 灰对应以 CIE L 表示的 50% 背景亮度。\n该数据基于图像的平均亮度。
+TP_COLORAPP_YBSCEN_TOOLTIP;Yb 是背景的相对亮度，以灰度百分比表示。18% 灰对应以 CIE L 表示的 50% 背景亮度。\n该数据基于图像的平均亮度。
 !TP_COLORTONING_AB;o C/L
 !TP_COLORTONING_BY;o C/L
 TP_COLORTONING_LABGRID_VALUES;高光：a=%1 b=%2\n阴影：a=%3 b=%4
@@ -3873,28 +3873,28 @@ TP_COLORTONING_LABGRID_VALUES;高光：a=%1 b=%2\n阴影：a=%3 b=%4
 !TP_COMPRESSGAMUT_ACESP1;ACES AP1
 !TP_COMPRESSGAMUT_ADOBE;Adobe RGB *
 TP_COMPRESSGAMUT_BETA;Beta - 接近 Pointer 色域 *
-!TP_COMPRESSGAMUT_COLORSPACE_TOOLTIP;Gamut Compression is a tool that allows you to compress highly chromatic camera-source colorimetric data into a smaller gamut.\n Negative out-of-gamut pixel values are problematic for working on images and should be avoided if possible.\n Blue LEDs are perceived as highly colorful and colors found in beetles, flowers and hummingbirds are often over saturated.\n\nThis is not a gamut conversion : converting from one gamut to another changes the values of the pixels. However it does not actually change the colorimetric meaning of the pixel data. You could say that by converting between gamuts, you are changing the frame of reference with respect to the same colors. After compression, the working profile is restored.\n\n Set the gamut limits using the appropriate workspace. For example:\n The display gamut (sRGB, DCI P3,...). \n The gamut of an output file for use by another software (Rec 2020, Beta near Pointers's Gamut...).\n\n Workspaces marked with an asterisk (*) have pre-calculated threshold values for Cyan, Magenta, and Yellow. Note that these values are approximate and correspond to a Working profile set to Rec2020. For challenging images (LED, sunset, etc.), manual adjustment is necessary; be mindful of potential artifacts.
+TP_COMPRESSGAMUT_COLORSPACE_TOOLTIP;色域压缩工具可以把相机源数据中色度极高的色彩压缩到更小的色域内。\n 超出色域的负像素值会给图像处理带来问题，应尽量避免。\n 蓝色 LED 在感知上色彩非常浓烈，甲虫、花朵和蜂鸟身上的颜色也常常过饱和。\n\n这不是色域转换：从一个色域转换到另一个色域会改变像素值，但并不改变像素数据的色度学含义。可以说，色域转换只是改变了描述同一批颜色的参照系。压缩完成后，工作配置文件会被恢复。\n\n 请用合适的工作空间设定色域边界，例如：\n 显示器色域（sRGB、DCI P3 等）。\n 供其他软件使用的输出文件色域（Rec 2020、Beta 接近 Pointer 色域等）。\n\n 带星号（*）的工作空间已预先计算好青、品红、黄的阈值。注意这些数值是近似值，对应工作配置文件为 Rec2020 的情况。对于难处理的图像（LED、日落等），需要手动调整，并留意可能出现的伪影。
 TP_COMPRESSGAMUT_DCIP3;DCI-P3 影院 *
-!TP_COMPRESSGAMUT_LIMIT_TOOLTIP;Maximum Distance Limit: is the distance outside of the gamut boundary that will be compressed to fit the gamut boundary. For example, a value of 1.2 will compress distance values of 1.2 to a value of 1.0. \nIndividual controls are given for each color component. They are named cyan magenta and yellow because they actually control the maximum distance from the edge of the triangle (primaries related to the CIExy diagram - Pointer's Gamut), not the corner. For example, boosting the value of the cyan distance limit will increase the distance from which values are mapped to the edge between the blue and green corners of the triangle.\nThe distance limits also control the RGB ratios of the compressed values, which affect the apparent hue.\n\nThe distances are relative to the Target Compression Gamut. If the checkboxes for the Cyan, Magenta, and Yellow sliders are enabled, then an automatic value is suggested. Manual adjustments may be required.
+TP_COMPRESSGAMUT_LIMIT_TOOLTIP;最大距离限制：指色域边界之外、将被压缩到色域边界内的距离。例如数值 1.2 会把 1.2 的距离值压缩到 1.0。\n每个颜色分量都有单独的控制。它们被命名为青、品红、黄，是因为它们实际控制的是到三角形（与 CIExy 色度图相关的基色 - Pointer 色域）边的最大距离，而不是到角的距离。例如，提高青色距离限制，会增大被映射到三角形蓝角与绿角之间那条边的数值的起始距离。\n距离限制还控制压缩后数值的 RGB 比例，从而影响表观色相。\n\n这些距离相对于目标压缩色域。如果青、品红、黄滑条的复选框已勾选，则会给出自动建议值。可能仍需手动调整。
 !TP_COMPRESSGAMUT_MACLABELRGB;R: %1 G: %2 B: %3
-!TP_COMPRESSGAMUT_MACLABELRGB_TOOLTIP;Displays the maximum values for the three channels (achromatic): Red, Green, and Blue.\n\nProvides an estimate accurate to within 15% of the Cyan, Magenta, and Yellow values. This estimate should provide useful information for better adjusting the Maximum Distance Limits which should be set greater than 1.\n If the checkboxes for the Cyan, Magenta, and Yellow sliders in 'Maximum Distance Limits' are enabled, then an automatic value is suggested. Manual adjustments may be required.
-!TP_COMPRESSGAMUT_MACLABEL_TOOLTIP;Displays the highest measured value of the 3 RGB (achromatic) channels. This value helps to understand :\n * The state of the image and the reciprocal influence of : a) the Working and Target Gamut Compression profiles; b) 'Highlight reconstruction'.\n * Whether the ‘White point’ needs to be refined - see ‘Generalized Hyperbolic Stretch’ (GHS)  for example.\n\nEffect of values:\n * Very high values, for example greater than 5 or even 10 and more, often indicate the use of an LED or halogen illuminant (with Color Propagation) and a significant color-gamut overshoot. Try 'GHS > Auto Black point and White point', 'White Balance > Blue/Red Equalizer', 'Abstract Profile > Primaries and Illuminant'\n * High values between 2 and 4 are often linked to an excessive light source (sun, etc.) or incorrect exposure settings that have resulted in out-of-range values on the sensor. Try using 'Highlight reconstruction > Color Propagation'.\n * Low values, less than 1, often indicate poorly adjusted white and black points i.e.‘White point (linear WP)’ and ‘Black point (linear BP)’ : see for example GHS.\n\nNotes:\n * Using values higher than 'Maximum distance limits' for the three 'Maximum achromatic value' sliders offers little benefit.\n * Using low values for the three Threshold sliders (whether combined or not with low values for the Power slider, can lead to significant desaturation and color shifts.\n\nThere is a link, but not a correlation, between this value and the three Maximum Distance Limits.
-!TP_COMPRESSGAMUT_POWER_TOOLTIP;Power: Controls the aggressiveness of the compression curve.\n Higher power values result in more compressed values distributed closer to the gamut boundary. This will increase the "color purity" or "saturation" once the image has been rendered through a display transform.\n Higher values have a smoother transition.
+TP_COMPRESSGAMUT_MACLABELRGB_TOOLTIP;显示三个通道（消色差）的最大值：红、绿、蓝。\n\n给出青、品红、黄数值的估计，精度在 15% 以内。该估计可为更好地调整“最大距离限制”提供参考，后者应设为大于 1。\n 如果“最大距离限制”中青、品红、黄滑条的复选框已勾选，则会给出自动建议值。可能仍需手动调整。
+TP_COMPRESSGAMUT_MACLABEL_TOOLTIP;显示 RGB 三个通道（消色差）中测得的最高值。该数值有助于了解：\n * 图像的状态，以及以下因素的相互影响：a) 工作配置文件与目标色域压缩配置文件；b)“高光重建”。\n * “白点”是否需要进一步调整 - 例如参见“广义双曲拉伸”（GHS）。\n\n数值的含义：\n * 非常高的数值，例如大于 5 甚至 10 以上，通常表明使用了 LED 或卤素光源（配合色彩传播），并且明显超出色域。可尝试“GHS > 自动黑点和白点”、“白平衡 > 蓝/红均衡器”、“抽象配置文件 > 基色与光源”\n * 2 到 4 之间的较高数值，通常与过强的光源（太阳等）或不正确的曝光设置有关，导致传感器上出现超出范围的数值。可尝试“高光重建 > 色彩传播”。\n * 小于 1 的低数值，通常表明白点和黑点调整不当，即“白点（线性 WP）”和“黑点（线性 BP）”：例如参见 GHS。\n\n注意：\n * 让三个“最大消色差值”滑条的数值高于“最大距离限制”，益处不大。\n * 三个阈值滑条使用低数值（无论是否同时使用低的强度滑条数值），可能导致明显的去饱和与色偏。\n\n该数值与三个最大距离限制之间存在联系，但并非相关关系。
+TP_COMPRESSGAMUT_POWER_TOOLTIP;强度：控制压缩曲线的激进程度。\n 强度值越高，压缩后的数值分布得越靠近色域边界。经显示变换渲染后，这会提高图像的“色彩纯度”或“饱和度”。\n 数值越高，过渡越平滑。
 !TP_COMPRESSGAMUT_PROPHOTO;ProPhoto
 TP_COMPRESSGAMUT_PWR;强度
 !TP_COMPRESSGAMUT_REC2020;Rec. 2020
 TP_COMPRESSGAMUT_ROLLOFF;衰减
 !TP_COMPRESSGAMUT_SRGB;sRGB *
-!TP_COMPRESSGAMUT_THRESHOLD_TOOLTIP;Threshold: controls the percentage of the outer gamut that will be affected. A value of 0.8 will compress out of gamut values into the outer 20% of the gamut. The inner 80% of the gamut core will not be affected. You can adjust the colors separately: for example if you want to protect magenta and yellow a little more than cyan, you could set the threshold a bit higher for cyan.\n\nThe thresholds are relative to the Target Compression Gamut.\n Some workspaces are marked with an asterisk (*). In this case, the threshold values are pre-calculated. Note that these values are approximate and correspond to a Working profile set to Rec2020. For challenging images (LED, sunset, etc.), manual adjustment is necessary; be mindful of potential artifacts.
+TP_COMPRESSGAMUT_THRESHOLD_TOOLTIP;阈值：控制受影响的色域外围部分所占的百分比。数值 0.8 会把超出色域的数值压缩到色域最外侧的 20% 中，色域核心的内侧 80% 不受影响。可以分别调整各颜色：例如，如果想对品红和黄的保护比青多一些，可以把青的阈值设得高一点。\n\n这些阈值相对于目标压缩色域。\n 部分工作空间带有星号（*），这种情况下阈值已预先计算好。注意这些数值是近似值，对应工作配置文件为 Rec2020 的情况。对于难处理的图像（LED、日落等），需要手动调整，并留意可能出现的伪影。
 TP_CROP_GUIDE_ASPECT_RATIO;内接宽高比裁剪参考线：
 TP_CROP_GUIDE_BLEED;出血
 TP_CROP_GUIDE_NO_ASPECT_RATIO_GUIDES;无宽高比参考线
-!TP_CROP_GUIDE_TOOLTIP;Display preview-only guides for the current crop.\n\nInscribed aspect ratio guides fit the selected aspect ratio in the current crop. The orientation is determined automatically based on the crop aspect ratio.\n\n<b>Click</b> - Enable only the selected preset\n<b>Ctrl-Click</b> - Enable the selected preset as an additional guide
+TP_CROP_GUIDE_TOOLTIP;为当前裁剪显示仅用于预览的参考线。\n\n内接宽高比参考线会把所选宽高比适配到当前裁剪内。方向根据裁剪的宽高比自动确定。\n\n<b>单击</b> - 仅启用所选预设\n<b>Ctrl-单击</b> - 将所选预设作为附加参考线启用
 !TP_CROP_PPI;PPI
-!TP_DIRPYRDENOISE_CHROMINANCE_METHOD_TOOLTIP;Manual\nActs on the full image.\nYou control the noise reduction settings manually.\n\nAutomatic global\nActs on the full image.\n9 zones are used to calculate a global chrominance noise reduction setting.\n\nAutomatic multi-zones\nNo preview - works only during saving, but using the 'Preview' method by matching the tile size and center to the preview size and center you can get an idea of the expected results.\nThe image is divided into tiles (about 10 to 70 depending on image size) and each tile receives its own chrominance noise reduction settings.\n\nPreview\nActs on the whole image.\nThe part of the image visible in the preview is used to calculate global chrominance noise reduction settings.
+TP_DIRPYRDENOISE_CHROMINANCE_METHOD_TOOLTIP;手动\n作用于整幅图像。\n由你手动控制降噪设置。\n\n自动全局\n作用于整幅图像。\n使用 9 个区域计算全局色度降噪设置。\n\n自动多区域\n无预览 - 仅在保存时生效，但使用“预览”方法并让分块大小和中心与预览的大小和中心一致，可以大致了解预期效果。\n图像被划分为若干分块（视图像尺寸约 10 到 70 个），每个分块获得各自的色度降噪设置。\n\n预览\n作用于整幅图像。\n使用预览中可见的图像部分计算全局色度降噪设置。
 TP_DIRPYRDENOISE_CHROMINANCE_PMZ;预览多区域
-!TP_DIRPYREQUALIZER_ALGO_TOOLTIP;Fine: closer to the colors of the skin, minimizing the action on other colors\nLarge: avoid more artifacts.
-!TP_DIRPYREQUALIZER_HUESKIN_TOOLTIP;This pyramid is for the upper part, so far as the algorithm at its maximum efficiency.\nTo the lower part, the transition zones.\nIf you need to move the area significantly to the left or right - or if there are artifacts: the <b>white balance is incorrect</b>\nYou can slightly reduce the zone to prevent the rest of the image is affected.
+TP_DIRPYREQUALIZER_ALGO_TOOLTIP;精细：更贴近肤色，尽量减少对其他颜色的作用\n宽泛：更能避免伪影。
+TP_DIRPYREQUALIZER_HUESKIN_TOOLTIP;金字塔的上部是算法效率最高的区域。\n下部是过渡区。\n如果需要把该区域明显向左或向右移动，或者出现了伪影：说明<b>白平衡不正确</b>\n可以略微缩小该区域，以免影响图像的其余部分。
 TP_FLATFIELD_FROMMETADATA;来自元数据
 TP_FRAMING_BORDER_SIZE_UNIFORM_RELATIVE;统一相对值
 TP_FRAMING_FRAMED_HEIGHT;含边框高度
@@ -3904,54 +3904,54 @@ TP_FRAMING_METHOD_BBOX;边界框
 TP_FRAMING_METHOD_FIXED;固定边框
 TP_FRAMING_METHOD_STANDARD;标准
 TP_ICM_APPLYBASELINEEXPOSUREOFFSET;基准曝光
-!TP_ICM_APPLYBASELINEEXPOSUREOFFSET_TOOLTIP;Employ the embedded DCP baseline exposure offset. The setting is only available if the selected DCP has one.
+TP_ICM_APPLYBASELINEEXPOSUREOFFSET_TOOLTIP;使用 DCP 内嵌的基准曝光偏移。仅当所选 DCP 包含该项时可用。
 TP_ICM_APPLYHUESATMAP;基础表
-!TP_ICM_APPLYHUESATMAP_TOOLTIP;Employ the embedded DCP base table (HueSatMap). The setting is only available if the selected DCP has one.
+TP_ICM_APPLYHUESATMAP_TOOLTIP;使用 DCP 内嵌的基础表（HueSatMap）。仅当所选 DCP 包含该项时可用。
 TP_ICM_APPLYLOOKTABLE;外观表
-!TP_ICM_APPLYLOOKTABLE_TOOLTIP;Employ the embedded DCP look table. The setting is only available if the selected DCP has one.
+TP_ICM_APPLYLOOKTABLE_TOOLTIP;使用 DCP 内嵌的外观表。仅当所选 DCP 包含该项时可用。
 TP_ICM_BW;黑白
 TP_ICM_COMPRESS;目标色域
 !TP_ICM_COMPRESSGAMUT_ADOBE;Adobe
 !TP_ICM_COMPRESSGAMUT_DCIP3;DCIP3
 !TP_ICM_COMPRESSGAMUT_REC2020;Rec2020
 !TP_ICM_COMPRESSGAMUT_SRGB;sRGB
-!TP_ICM_COMPRESS_TOOLTIP; Placed at the end of the processing pipeline, this tool allows you to compress the data to fit into the output profile, for example. If Color Appearance & Lighting is enabled, it will take the compression into account.\n\n This output gamut compression is much simpler than at the beginning of the processing pipeline because unless the user has exaggerated the settings, the gamut will already be close to the Working Profile, hence the simplified graphical interface.\n\n More often than not, you will not see any changes to the image or the histogram when using Gamut Compression. This is because it does not convert the data from Working profile (often Rec2020) to Target Gamut (often sRGB), but compresses it to fit the Target gamut (often sRGB) while remaining in Working profile (often Rec2020), and the upstream treatments must have preserved the gamut. The effect is visible on Led’s, flowers with high saturation. On a normal landscape or portrait, there is most often no change.
+TP_ICM_COMPRESS_TOOLTIP; 此工具位于处理流程末端，可以压缩数据，使其适配例如输出配置文件。如果启用了“色貌与光照”，它会把压缩考虑在内。\n\n 这里的输出色域压缩比处理流程开头的要简单得多，因为除非用户的设置过于夸张，色域已经接近工作配置文件，所以界面也做了简化。\n\n 多数情况下，使用色域压缩时你不会看到图像或直方图有任何变化。这是因为它并不把数据从工作配置文件（通常是 Rec2020）转换到目标色域（通常是 sRGB），而是在保持工作配置文件（通常是 Rec2020）的同时把数据压缩到目标色域（通常是 sRGB）之内，而且上游处理应当已经保住了色域。效果在 LED、高饱和度的花朵上可见。在普通的风景或人像上，大多没有变化。
 TP_ICM_COMPRGAMUT;最终增益与色域压缩
 TP_ICM_COMP_GAIN;增益（Ev）
 TP_ICM_COMP_POWER;强度
 TP_ICM_DCPILLUMINANT;光源
 TP_ICM_DCPILLUMINANT_INTERPOLATED;插值
-!TP_ICM_DCPILLUMINANT_TOOLTIP;Select which embedded DCP illuminant to employ. Default is 'interpolated' which is a mix between the two based on white balance. The setting is only available if a dual-illuminant DCP with interpolation support is selected.
-!TP_ICM_ILLUMPRIM_TOOLTIP;Choose the illuminant closest to the shooting conditions.\nChanges can only be made when the 'Destination primaries' selection is set to 'Custom (sliders)'.
-!TP_ICM_INPUTCAMERAICC_TOOLTIP;Use RawTherapee's camera-specific DCP or ICC input color profiles. These profiles are more precise than simpler matrix ones. They are not available for all cameras. These profiles are stored in the /iccprofiles/input and /dcpprofiles folders and are automatically retrieved based on a file name matching to the exact model name of the camera.
-!TP_ICM_INPUTCAMERA_TOOLTIP;Use a simple color matrix from dcraw, an enhanced RawTherapee version (whichever is available based on camera model) or one embedded in the DNG.
+TP_ICM_DCPILLUMINANT_TOOLTIP;选择使用 DCP 内嵌的哪个光源。默认为“插值”，即根据白平衡在两者之间混合。仅当选择了支持插值的双光源 DCP 时可用。
+TP_ICM_ILLUMPRIM_TOOLTIP;选择最接近拍摄条件的光源。\n仅当“目标基色”设为“自定义（滑条）”时才能更改。
+TP_ICM_INPUTCAMERAICC_TOOLTIP;使用 RawTherapee 针对具体相机的 DCP 或 ICC 输入色彩配置文件。这些配置文件比简单的矩阵配置文件更精确，但并非所有相机都有。它们存放在 /iccprofiles/input 和 /dcpprofiles 文件夹中，并根据与相机确切型号名匹配的文件名自动调用。
+TP_ICM_INPUTCAMERA_TOOLTIP;使用来自 dcraw 的简单色彩矩阵、RawTherapee 的增强版本（视相机型号而定，有哪个用哪个）或 DNG 内嵌的矩阵。
 !TP_ICM_LABGRID_CIEXY;R(x)=%1 R(y)=%2\nG(x)=%3 G(y)=%4\nB(x)=%5 B(y)=%6
 TP_ICM_NEUTRAL;重置基色与光源
-!TP_ICM_OUTPUTPROFILE_TOOLTIP;By default all RTv4 or RTv2 profiles are with TRC - sRGB: g=2.4 s=12.92\n\nWith 'ICC Profile Creator' you can generate v4 or v2 profiles with the following choices;\n-Primaries: Aces AP0, Aces AP1, AdobeRGB, Prophoto, Rec2020, sRGB, Widegamut, BestRGB, BetaRGB, BruceRGB, Custom\n-TRC: BT709, sRGB, linear, standard g=2.2, standard g=1.8, Custom\n-Illuminant: D41, D50, D55, D60, D65, D80, stdA 2856K
-!TP_ICM_POWER_TOOLTIP;Modifies global image appearance, similar to the Exposure slider, by applying a positive or negative Ev adjustment to the RGB data. This allows for better control of either the color gamut or the saturation; for the latter, small values of plus or minus 0.1 to 0.4 are sufficient. Higher gain values allow for future use with HDR displays.
-!TP_ICM_PRIMBLU_TOOLTIP;Primaries Blue:\nsRGB x=0.15 y=0.06\nAdobe x=0.15 y=0.06\nWidegamut x=0.157 y=0.018\nRec2020 x=0.131 y=0.046\nACES P1 x=0.128 y= 0.044\nACES P0 x=0.0001 y=-0.077\nProphoto x=0.0366 y=0.0001\nBruceRGB x=0.15 y=0.06\nBeta RGB x=0.1265 y=0.0352\nBestRGB x=0.131 y=0.046
+TP_ICM_OUTPUTPROFILE_TOOLTIP;默认情况下，所有 RTv4 或 RTv2 配置文件的 TRC 均为 sRGB：g=2.4 s=12.92\n\n使用“ICC 配置文件生成器”可以生成 v4 或 v2 配置文件，可选项如下：\n-基色：Aces AP0、Aces AP1、AdobeRGB、Prophoto、Rec2020、sRGB、Widegamut、BestRGB、BetaRGB、BruceRGB、自定义\n-TRC：BT709、sRGB、线性、标准 g=2.2、标准 g=1.8、自定义\n-光源：D41、D50、D55、D60、D65、D80、stdA 2856K
+TP_ICM_POWER_TOOLTIP;通过对 RGB 数据施加正或负的 Ev 调整来改变图像的整体外观，类似曝光滑条。这样可以更好地控制色域或饱和度；对于后者，正负 0.1 到 0.4 的小数值就足够了。更高的增益值可供将来配合 HDR 显示器使用。
+TP_ICM_PRIMBLU_TOOLTIP;蓝基色：\nsRGB x=0.15 y=0.06\nAdobe x=0.15 y=0.06\nWidegamut x=0.157 y=0.018\nRec2020 x=0.131 y=0.046\nACES P1 x=0.128 y= 0.044\nACES P0 x=0.0001 y=-0.077\nProphoto x=0.0366 y=0.0001\nBruceRGB x=0.15 y=0.06\nBeta RGB x=0.1265 y=0.0352\nBestRGB x=0.131 y=0.046
 TP_ICM_PRIMFRAME;基色与光源
-!TP_ICM_PRIMGRE_TOOLTIP;Primaries Green:\nsRGB x=0.3 y=0.6\nAdobe x=0.21 y=0.71\nWidegamut x=0.115 y=0.826\nRec2020 x=0.17 y=0.797\nACES P1 x=0.165 y= 0.83\nACES P0 x=0.0 y=1.0\nProphoto x=0.1596 y=0.8404\nBruceRGB x=0.28 y=0.65\nBeta RGB x=0.1986 y=0.7551\nBest RGB x=0.2150 0.7750
-!TP_ICM_PRIMILLUM_TOOLTIP;You can change an image from its original mode ('working profile') to a different mode ('destination primaries'). When you choose a different color mode for an image, you permanently change the color values in the image.\n\nChanging the 'primaries' is quite complex and difficult to use. It requires a lot of experimenting.\n It is capable of making exotic color adjustments as Channel Mixer primaries.\n Allows you to modify the camera calibration with Custom (sliders).
-!TP_ICM_PRIMREDROT_TOOLTIP;Change the Red, Green, and Blue primaries. The first slider rotates the primary color, in degrees, around the white point. The second increases or decreases the saturation relative to the white point.\n\nBe very careful when using this type of tool - whether it's polar sliders, linear sliders, or CIExy graphs. If you go outside the CIExy diagram, you'll generate imaginary colors, how will they be handled? If you reduce the primary values too much, you risk out-of-gamut data. Use with caution, and with small values, while monitoring the primaries' deviation from the CIExy diagram.
-!TP_ICM_PRIMRED_TOOLTIP;Primaries Red:\nsRGB x=0.64 y=0.33\nAdobe x=0.64 y=0.33\nWidegamut x=0.735 y=0.265\nRec2020 x=0.708 y=0.292\nACES P1 x=0.713 y= 0.293\nACES P0 x=0.7347 y=0.2653\nProphoto x=0.7347 y=0.2653\nBruceRGB x=0.64 y=0.33\nBeta RGB x=0.688 y=0.3112\nBestRGB x=0.7347 y=0.2653
+TP_ICM_PRIMGRE_TOOLTIP;绿基色：\nsRGB x=0.3 y=0.6\nAdobe x=0.21 y=0.71\nWidegamut x=0.115 y=0.826\nRec2020 x=0.17 y=0.797\nACES P1 x=0.165 y= 0.83\nACES P0 x=0.0 y=1.0\nProphoto x=0.1596 y=0.8404\nBruceRGB x=0.28 y=0.65\nBeta RGB x=0.1986 y=0.7551\nBest RGB x=0.2150 0.7750
+TP_ICM_PRIMILLUM_TOOLTIP;可以把图像从原始模式（“工作配置文件”）更改为另一种模式（“目标基色”）。为图像选择不同的色彩模式时，图像中的颜色值会被永久改变。\n\n更改“基色”相当复杂，不易使用，需要大量尝试。\n 它能像通道混合器那样做出特殊的色彩调整。\n 可以通过“自定义（滑条）”修改相机校准。
+TP_ICM_PRIMREDROT_TOOLTIP;更改红、绿、蓝基色。第一个滑条让基色绕白点旋转（单位为度）。第二个滑条增减相对于白点的饱和度。\n\n使用这类工具时务必非常小心 - 无论是极坐标滑条、线性滑条还是 CIExy 图。如果超出 CIExy 色度图，就会产生虚色，它们将如何被处理？如果把基色数值降得太多，可能出现超出色域的数据。请谨慎使用，并采用小数值，同时留意基色偏离 CIExy 色度图的情况。
+TP_ICM_PRIMRED_TOOLTIP;红基色：\nsRGB x=0.64 y=0.33\nAdobe x=0.64 y=0.33\nWidegamut x=0.735 y=0.265\nRec2020 x=0.708 y=0.292\nACES P1 x=0.713 y= 0.293\nACES P0 x=0.7347 y=0.2653\nProphoto x=0.7347 y=0.2653\nBruceRGB x=0.64 y=0.33\nBeta RGB x=0.688 y=0.3112\nBestRGB x=0.7347 y=0.2653
 TP_ICM_REDFRAME;自定义基色
 TP_ICM_SAVEREFERENCE;保存参考图像
-!TP_ICM_SAVEREFERENCE_APPLYWB_TOOLTIP;Generally, apply the white balance when saving images to create ICC profiles, and do not apply the white balance to create DCP profiles.
-!TP_ICM_SAVEREFERENCE_TOOLTIP;Save the linear TIFF image before the input profile is applied. The result can be used for calibration purposes and generation of a camera profile.
-!TP_ICM_TRCFRAME_TOOLTIP;Also known as 'synthetic' or 'virtual' profiles, which are applied at the end of the processing pipeline (prior to CIECAM) allowing you to create custom image effects.\nYou can make changes to the:\n 'Tone response curve', which modifies the tones of the image.\n 'Illuminant', which allows you to change the profile primaries to adapt them to the shooting conditions.\n 'Destination primaries', which allows you to change the destination primaries with three main uses - channel mixer, restore image color (saturation), and calibration.\nNote: Abstract profiles take into account the built-in working profiles without modifying them. They do not work with custom working profiles.
+TP_ICM_SAVEREFERENCE_APPLYWB_TOOLTIP;一般来说，保存用于制作 ICC 配置文件的图像时应用白平衡，制作 DCP 配置文件时不应用白平衡。
+TP_ICM_SAVEREFERENCE_TOOLTIP;在应用输入配置文件之前保存线性 TIFF 图像。结果可用于校准以及生成相机配置文件。
+TP_ICM_TRCFRAME_TOOLTIP;也称为“合成”或“虚拟”配置文件，在处理流程末端（CIECAM 之前）应用，可以创建自定义的图像效果。\n可以更改：\n “色调响应曲线”，改变图像的影调。\n “光源”，更改配置文件的基色以适应拍摄条件。\n “目标基色”，更改目标基色，主要有三种用途 - 通道混合器、恢复图像色彩（饱和度）以及校准。\n注意：抽象配置文件会考虑内置的工作配置文件，但不修改它们。它们不适用于自定义工作配置文件。
 TP_ICM_TRC_MAX;RGB 最大值=%1
 TP_ICM_TRC_MAX_END;最终 RGB 最大值=%1
 !TP_ICM_TRC_MAX_END_NO;---
-!TP_ICM_TRC_MAX_TOOLTIP;Provides information on out-of-limit RGB values. Values greater than 1 clearly indicate that we are out of gamut whereas for values less than 1, we cannot say whether the image is within gamut or not because it depends, for example, on the luminance. This check is performed at the end of the Abstract Profile and takes into account all parameters. The ‘Attenuation threshold’ slider can be used to limit the RGB values.\n\nChanges made to 'Color Appearance and Lighting', 'Final Gain and Gamut Compression' are not taken into account.
+TP_ICM_TRC_MAX_TOOLTIP;提供超限 RGB 值的信息。大于 1 的数值明确表示超出了色域；而对于小于 1 的数值，无法判断图像是否在色域内，因为这还取决于亮度等因素。此检查在抽象配置文件的末端进行，并考虑所有参数。可以用“衰减阈值”滑条限制 RGB 值。\n\n“色貌与光照”和“最终增益与色域压缩”中的更改不在考虑之内。
 TP_ICM_TRC_SAT_MAX;最终饱和度最大值=%1
-!TP_ICM_TRC_SAT_MAX_TOOLTIP;Provides information on out-of-limit RGB values and RGB saturation. Values greater than 1 for ‘Final RGB Max’ and ‘Final Saturation Max’ clearly indicate that we are out of gamut whereas for values less than 1, we cannot say whether the image is within gamut or not because it depends, for example, on the luminance. This check is performed at the end of the processing pipeline and takes into account all parameters. Changes made in Color Appearance & Lighting and in Final Gain & Gamut Compression are taken into account.\n\nAdjusting the Gain (Ev) and Gamut Compression (Target Gamut and Power) settings will allow you to see the impact of these adjustments. You should also observe the histogram, which takes into account the output profile therefore the gamma. This data, which is directly related to the RGB values and Saturation and is in the Working Profile, is in linear mode.\n\n The data is only displayed if Target Gamut is enabled, or if Gain (Ev) is not equal to 0.
-!TP_ICM_TRC_TOOLTIP;Allows you to change the default sRGB 'Tone response curve' in RT (g=2.4 s=12.92).\nThis TRC modifies the tones of the image. The RGB and Lab values, histogram and output (screen, TIF, JPG) are changed:\n-Gamma acts mainly on light tones -Slope acts mainly on dark tones.\nYou can choose any pair of 'gamma and slope' (values >1) and the algorithm will ensure that there is continuity between the linear and parabolic parts of the curve.\nA selection other than 'none' activates the 'Illuminant' and 'Destination primaries' menus.
+TP_ICM_TRC_SAT_MAX_TOOLTIP;提供超限 RGB 值和 RGB 饱和度的信息。“最终 RGB 最大值”和“最终饱和度最大值”大于 1 明确表示超出了色域；而对于小于 1 的数值，无法判断图像是否在色域内，因为这还取决于亮度等因素。此检查在处理流程末端进行，并考虑所有参数。“色貌与光照”和“最终增益与色域压缩”中的更改也在考虑之内。\n\n调整增益（Ev）和色域压缩（目标色域与强度）设置，可以看到这些调整的影响。还应观察直方图，它考虑了输出配置文件，因此也考虑了伽马。这些数据与 RGB 值和饱和度直接相关，处于工作配置文件中，为线性模式。\n\n 仅当启用了目标色域，或增益（Ev）不等于 0 时才显示这些数据。
+TP_ICM_TRC_TOOLTIP;可以更改 RT 中默认的 sRGB“色调响应曲线”（g=2.4 s=12.92）。\n该 TRC 会改变图像的影调。RGB 和 Lab 数值、直方图以及输出（屏幕、TIF、JPG）都会改变：\n-伽马主要作用于亮调 -斜率主要作用于暗调。\n可以选择任意一组“伽马和斜率”（数值 >1），算法会保证曲线的线性部分与抛物线部分之间连续。\n选择“无”以外的选项会激活“光源”和“目标基色”菜单。
 TP_ICM_WORKING_CAT;矩阵适应
 !TP_ICM_WORKING_CAT_BRAD;Bradford
 !TP_ICM_WORKING_CAT_CAT02;Cat02
 !TP_ICM_WORKING_CAT_CAT16;Cat16
-!TP_ICM_WORKING_CAT_TOOLTIP;Performs the chromatic adaptation of the XYZ conversion matrix. Default: Bradford
+TP_ICM_WORKING_CAT_TOOLTIP;对 XYZ 转换矩阵进行色适应。默认：Bradford
 !TP_ICM_WORKING_CAT_VK;Von Kries
 TP_ICM_WORKING_CAT_XYZ;XYZ 缩放
 TP_ICM_WORKING_CIEDIAG;CIE xy 色度图
@@ -3969,7 +3969,7 @@ TP_ICM_WORKING_ILLU_2000;钨丝灯 2000K
 !TP_ICM_WORKING_ILLU_STDA;stdA 2875K
 TP_ICM_WORKING_PRESER;保留柔和色调
 TP_ICM_WORKING_PRIM;目标基色
-!TP_ICM_WORKING_PRIMFRAME_TOOLTIP;You have three options for modifying the primaries by selecting them from the 'Destination primaries' combo box:\n1) By selecting 'Custom (Linear sliders)' and changing the linear coordinates of Red, Green, and Blue (Rx,  Ry,  Gx,  Gy,  Bx,  By). In this case: a) the graphical representation of the CIExy diagram is updated; b) the polar coordinates 'Hue rotation: R.rot, G.rot, B.rot' and 'Saturation (with reference to the distance to the White point): R.sat, G.sat, B.sat' remain at zero. The system calculates the new X, Y, and Z values, taking into account the actual White Point.\n\n2) By directly changing the values using the CIExy diagram. When 'Custom CIExy diagram' is selected in 'Destination primaries', you can modify the values of the three primaries directly on the graph. The system calculates the new X, Y, and Z values. Note that in this case, the White Point position on the graph will not be updated. The polar coordinates (R.rot,  R.sat,  G.rot,  G.sat,  B.rot,  B.sat) remain at zero. Despite the small size of this CIExy diagram, it is probably the best way to master the system. Three small fixed dots represent the positions of the Rec2020 primaries, the default 'Working profile'. This allows you to see the adjustments you are making.\n\n3) With the 'Custom' (Polar sliders)  the polar coordinates 'Hue rotation: R.rot, G.rot, B.rot' and 'Saturation (with reference to the distance to the White point): R.sat, G.sat, B.sat': a) the graphical representation of the CIExy diagram is updated; b) the linear coordinates (Rx, Ry, Gx, Gy, Bx, By) are not updated. The system calculates the new X, Y, and Z values. After selecting polar coordinates: a) if you change the combo box to 'Custom (CIE xy Diagram)', the linear coordinate values will be updated. The polar coordinates (R.rot, R.sat, G.rot, G.sat, B.rot, B.sat) will remain at zero; b) if you change the combo box to 'Custom (Linear sliders)', the system will revert to the default values.\n\nBe very careful when using this type of tool - whether it's polar sliders, linear sliders, or CIExy graphs. If you go outside the CIExy diagram, you'll generate imaginary colors, how will they be handled? If you reduce the primary values too much, you risk out-of-gamut data. Use with caution, and with small values, while monitoring the primaries' deviation from the CIExy diagram.
+TP_ICM_WORKING_PRIMFRAME_TOOLTIP;在“目标基色”下拉框中选择后，有三种方式修改基色：\n1) 选择“自定义（线性滑条）”并更改红、绿、蓝的线性坐标（Rx,  Ry,  Gx,  Gy,  Bx,  By）。此时：a) CIExy 色度图的图形会更新；b) 极坐标“色相旋转：R.rot, G.rot, B.rot”和“饱和度（以到白点的距离为参照）：R.sat, G.sat, B.sat”保持为零。系统会结合实际白点计算新的 X、Y、Z 值。\n\n2) 直接在 CIExy 色度图上更改数值。在“目标基色”中选择“自定义 CIExy 色度图”后，可以直接在图上修改三个基色的值。系统会计算新的 X、Y、Z 值。注意此时图上的白点位置不会更新。极坐标（R.rot,  R.sat,  G.rot,  G.sat,  B.rot,  B.sat）保持为零。尽管这个 CIExy 色度图尺寸很小，它可能是掌握这套系统的最佳方式。三个固定的小点表示 Rec2020 基色的位置，即默认的“工作配置文件”。这样可以看到自己所做的调整。\n\n3) 使用“自定义（极坐标滑条）”，即极坐标“色相旋转：R.rot, G.rot, B.rot”和“饱和度（以到白点的距离为参照）：R.sat, G.sat, B.sat”：a) CIExy 色度图的图形会更新；b) 线性坐标（Rx, Ry, Gx, Gy, Bx, By）不会更新。系统会计算新的 X、Y、Z 值。选择极坐标之后：a) 如果把下拉框改为“自定义（CIE xy 色度图）”，线性坐标值会被更新，极坐标（R.rot, R.sat, G.rot, G.sat, B.rot, B.sat）保持为零；b) 如果把下拉框改为“自定义（线性滑条）”，系统会恢复默认值。\n\n使用这类工具时务必非常小心 - 无论是极坐标滑条、线性滑条还是 CIExy 图。如果超出 CIExy 色度图，就会产生虚色，它们将如何被处理？如果把基色数值降得太多，可能出现超出色域的数据。请谨慎使用，并采用小数值，同时留意基色偏离 CIExy 色度图的情况。
 !TP_ICM_WORKING_PRIM_AC0;ACESp0
 !TP_ICM_WORKING_PRIM_ACE;ACESp1
 !TP_ICM_WORKING_PRIM_ADOB;Adobe RGB
@@ -3985,7 +3985,7 @@ TP_ICM_WORKING_PRIM_FREE;自定义 LA（滑条）
 !TP_ICM_WORKING_PRIM_PROP;ProPhoto
 !TP_ICM_WORKING_PRIM_REC;Rec2020
 !TP_ICM_WORKING_PRIM_SRGB;sRGB
-!TP_ICM_WORKING_PRIM_TOOLTIP;Performs a gamut control. Destination primaries (Advanced) allows you to change the destination primaries to restore or change image color (saturation). The color balance is significantly preserved when the 'Working Profile' and the 'Destination primaries' are similar. 'Working Profile' is not modified.\nWhen 'Custom LA (sliders)' is selected, you can modify the values of the 3 primaries (Red, Green, and Blue) for x and y.
+TP_ICM_WORKING_PRIM_TOOLTIP;执行色域控制。目标基色（高级）可以更改目标基色，以恢复或改变图像色彩（饱和度）。当“工作配置文件”与“目标基色”相近时，色彩平衡能在很大程度上得到保留。“工作配置文件”不会被修改。\n选择“自定义 LA（滑条）”时，可以修改 3 个基色（红、绿、蓝）的 x 和 y 值。
 !TP_ICM_WORKING_PRIM_WID;WideGamut
 !TP_ICM_WORKING_TRC_18;Prophoto g=1.8
 !TP_ICM_WORKING_TRC_22;Adobe g=2.2
@@ -3993,7 +3993,7 @@ TP_ICM_WORKING_PRIM_FREE;自定义 LA（滑条）
 TP_ICM_WORKING_TRC_LIN;线性 g=1
 TP_ICM_WORKING_TRC_SLOPE;斜率
 !TP_ICM_WORKING_TRC_SRGB;sRGB g=2.4 s=12.92
-!TP_ICM_WORKING_TRC_TOOLTIP;Only for built-in profiles.
+TP_ICM_WORKING_TRC_TOOLTIP;仅适用于内置配置文件。
 TP_LABCURVE_CURVEEDITOR_A_RANGE1;绿 饱和
 TP_LABCURVE_CURVEEDITOR_A_RANGE2;绿 柔和
 TP_LABCURVE_CURVEEDITOR_A_RANGE3;红 柔和
@@ -4013,31 +4013,31 @@ TP_LENSGEOM_SCALE_VERTICALLY;垂直缩放
 TP_LOCALLAB_ACTIV;仅亮度
 TP_LOCALLAB_ADJ;色彩均衡器
 TP_LOCALLAB_APSATUR;饱和度
-!TP_LOCALLAB_ARTIF_TOOLTIP;ΔE scope threshold increases the range of ΔE scope. High values are for very wide gamut images.\nIncreasing ΔE decay can improve shape detection, but can also reduce the scope.
-!TP_LOCALLAB_AVOIDCOLORSHIFT_TOOLTIP;Fit colors into gamut of the working color space and apply Munsell correction (Uniform Perceptual Lab). Default: Munsell only.\n\nMunsell only: Fixes Lab mode hue drifts due to non-linearity when chromaticity is changed (Uniform Perceptual Lab).\nLab: Applies a gamut control in relative colorimetric. Munsell is then applied.\nXYZ Absolute: Applies gamut control in absolute colorimetric. Munsell is then applied.\nXYZ Relative: Applies gamut control in relative colorimetric. Munsell is then applied. The result is not the same as Lab.
+TP_LOCALLAB_ARTIF_TOOLTIP;ΔE 范围阈值可以扩大 ΔE 范围的作用区间。高数值适用于色域非常宽的图像。\n增大 ΔE 衰减可以改善形状检测，但也可能缩小范围。
+TP_LOCALLAB_AVOIDCOLORSHIFT_TOOLTIP;把颜色适配到工作色彩空间的色域内，并应用 Munsell 校正（均匀感知 Lab）。默认：仅 Munsell。\n\n仅 Munsell：修正改变色度时因非线性导致的 Lab 模式色相漂移（均匀感知 Lab）。\nLab：以相对色度方式进行色域控制，然后应用 Munsell。\nXYZ 绝对：以绝对色度方式进行色域控制，然后应用 Munsell。\nXYZ 相对：以相对色度方式进行色域控制，然后应用 Munsell。结果与 Lab 不同。
 TP_LOCALLAB_AVOIDNEG;预过滤零值和负值
 TP_LOCALLAB_AVOIDRAD;柔化半径
 TP_LOCALLAB_BALANEXP;拉普拉斯平衡
-!TP_LOCALLAB_BALAN_TOOLTIP;Changes the ΔE algorithm parameters.\nTakes into account more or less a*b* or L*, or more or less C or H.\nNot for Denoise.
+TP_LOCALLAB_BALAN_TOOLTIP;更改 ΔE 算法的参数。\n或多或少地考虑 a*b* 或 L*，或者或多或少地考虑 C 或 H。\n不适用于降噪。
 TP_LOCALLAB_BASELOG;阴影范围（对数底）
 TP_LOCALLAB_BILATERAL;双边滤波
 TP_LOCALLAB_BLACK_EV;黑点 Ev
 TP_LOCALLAB_BLENDMASKCOL;混合
 TP_LOCALLAB_BLENDMASKMASK;加/减亮度蒙版
 TP_LOCALLAB_BLENDMASKMASKAB;加/减色度蒙版
-!TP_LOCALLAB_BLENDMASKMASK_TOOLTIP;If this slider = 0 no action.\nAdd or subtract the mask from the original image.
-!TP_LOCALLAB_BLENDMASK_TOOLTIP;If blend = 0 only shape detection is improved.\nIf blend > 0 the mask is added to the image. If blend < 0 the mask is subtracted from the image.
+TP_LOCALLAB_BLENDMASKMASK_TOOLTIP;此滑条 = 0 时不起作用。\n把蒙版加到原图上，或从原图中减去。
+TP_LOCALLAB_BLENDMASK_TOOLTIP;混合 = 0 时仅改善形状检测。\n混合 > 0 时蒙版被加到图像上。混合 < 0 时蒙版从图像中减去。
 TP_LOCALLAB_BLGUID;引导滤波
-!TP_LOCALLAB_BLMETHOD_TOOLTIP;Normal: direct blur and noise with all settings.\nInverse: blur and noise with all settings. Warning, some settings may give curious results.
+TP_LOCALLAB_BLMETHOD_TOOLTIP;普通：使用全部设置直接进行模糊和加噪。\n反向：使用全部设置进行模糊和加噪。注意，某些设置可能产生奇怪的结果。
 TP_LOCALLAB_BLNORM;普通
-!TP_LOCALLAB_BLUMETHOD_TOOLTIP;To blur the background and isolate the foreground:\n-blur the background by completely covering the image with a spot (high values for scope and transition and 'Normal' or 'Inverse' in checkbox).\n-Isolate the foreground by using one or more 'Excluding' spots and increase the scope and/or use the masks and Recovery Based On Luminance Mask.\n\nThis module (including the 'Gaussian Blur - Noise - Grain', 'Median' and 'Guided filter') can be used in addition to the main-menu noise reduction.
-!TP_LOCALLAB_BLURCOLDE_TOOLTIP;The image used to calculate dE is blurred slightly to avoid taking isolated pixels into account.
+TP_LOCALLAB_BLUMETHOD_TOOLTIP;要模糊背景并突出前景：\n-用一个调整点完全覆盖图像来模糊背景（范围和过渡取高数值，复选框选“普通”或“反向”）。\n-使用一个或多个“排除”调整点来隔离前景，并增大范围和/或使用蒙版以及“基于亮度蒙版的恢复”。\n\n此模块（包括“高斯模糊 - 噪点 - 颗粒”、“中值”和“引导滤波”）可以与主菜单的降噪配合使用。
+TP_LOCALLAB_BLURCOLDE_TOOLTIP;用于计算 dE 的图像会被轻微模糊，以免把孤立像素计算在内。
 TP_LOCALLAB_BLURLEVELFRA;模糊层级
-!TP_LOCALLAB_BLURMASK_TOOLTIP;Uses a large-radius blur to create a mask that allows you to vary the contrast of the image and/or darken/lighten parts of it.
-!TP_LOCALLAB_BLURRMASK_TOOLTIP;Allows you to vary the 'radius' of the Gaussian blur (0 to 1000).
+TP_LOCALLAB_BLURMASK_TOOLTIP;使用大半径模糊创建蒙版，用来改变图像的对比度和/或压暗/提亮图像的局部。
+TP_LOCALLAB_BLURRMASK_TOOLTIP;可以改变高斯模糊的“半径”（0 到 1000）。
 TP_LOCALLAB_BLWH;所有更改强制为黑白
-!TP_LOCALLAB_BLWH_TOOLTIP;Force color components 'a' and 'b' to zero.\nUseful for black and white processing, or film simulation.
-!TP_LOCALLAB_BWCIE_TOOLTIP;Only usable in Global mode or if Scope is set to 100.\nThe 'Black and White' option shows only the luminance in the histogram making it easier to adjust the shadows and highlights when using the Gamma and Slope sliders and the Tone Mapping Operators.
+TP_LOCALLAB_BLWH_TOOLTIP;强制把颜色分量“a”和“b”设为零。\n适用于黑白处理或胶片模拟。
+TP_LOCALLAB_BWCIE_TOOLTIP;仅在全局模式下或范围设为 100 时可用。\n“黑白”选项使直方图只显示亮度，在使用伽马和斜率滑条以及色调映射算子时更容易调整阴影和高光。
 TP_LOCALLAB_BWEVNONE;无
 TP_LOCALLAB_BWEVNONE11;无
 !TP_LOCALLAB_BWEVSIG;Sigmoid
@@ -4045,22 +4045,22 @@ TP_LOCALLAB_BWEVSIG11;已启用
 TP_LOCALLAB_BWEVSLOP;基于斜率
 TP_LOCALLAB_BWFORCE;使用黑点 Ev 与白点 Ev
 TP_LOCALLAB_CAM16PQREMAP;HDR PQ（峰值亮度）
-!TP_LOCALLAB_CAM16PQREMAP_TOOLTIP;PQ (Perceptual Quantizer) adapted to CAM16 (experimental). Allows you to change the internal PQ function (usually 10000 cd/m2 - default 100 cd/m2 - disabled for 100 cd/m2).\nCan be used to adapt to different devices and images, for example, to match CAM16 processing with the maximum monitor brightness of 400cd/m2.
+TP_LOCALLAB_CAM16PQREMAP_TOOLTIP;适配 CAM16 的 PQ（感知量化器）（实验性）。可以更改内部的 PQ 函数（通常为 10000 cd/m2 - 默认 100 cd/m2 - 在 100 cd/m2 时禁用）。\n可用于适配不同的设备和图像，例如让 CAM16 处理与 400cd/m2 的显示器最大亮度相匹配。
 !TP_LOCALLAB_CAMMODE_CAM16;CAM16
 !TP_LOCALLAB_CAMMODE_JZ;Jz Cz Hz
 !TP_LOCALLAB_CH;CL - LC
 TP_LOCALLAB_CHRO46LABEL;色度层级 456：平均=%1 高=%2
 TP_LOCALLAB_CHROLABEL;色度层级 0123：平均=%1 高=%2
 TP_LOCALLAB_CHROMABLU;色度层级
-!TP_LOCALLAB_CHROMABLU_TOOLTIP;Increases or reduces the effect depending on the luma settings.\nValues under 1 reduce the effect. Values greater than 1 increase the effect.
-!TP_LOCALLAB_CHROMACB_TOOLTIP;Increases or reduces the effect depending on the luma settings.\nValues under 1 reduce the effect. Values greater than 1 increase the effect.
+TP_LOCALLAB_CHROMABLU_TOOLTIP;根据亮度设置增强或减弱效果。\n小于 1 的数值减弱效果，大于 1 的数值增强效果。
+TP_LOCALLAB_CHROMACB_TOOLTIP;根据亮度设置增强或减弱效果。\n小于 1 的数值减弱效果，大于 1 的数值增强效果。
 TP_LOCALLAB_CHROMALEV;色度层级
-!TP_LOCALLAB_CHROMASK_TOOLTIP;Changes the chroma of the mask if one exists (i.e. C(C) or LC(H) is activated).
-!TP_LOCALLAB_CIECAMLOG_TOOLTIP;This module is based on the CIECAM Color Appearance model which was designed to better simulate how human vision perceives colors under different lighting conditions.\nThe first CIECAM process 'Scene conditions' is carried out by Log encoding, it also uses 'Absolute luminance' at the time of shooting.\nThe second CIECAM process 'Image adjustments' is simplified and uses only 3 variables (local contrast, contrast J, saturation s).\nThe third CIECAM process 'Viewing conditions' adapts the output to the intended viewing conditions (monitor, TV, projector, printer, etc.) so that the chromatic and contrast appearance is preserved across the display environment.
+TP_LOCALLAB_CHROMASK_TOOLTIP;如果存在蒙版（即启用了 C(C) 或 LC(H)），则更改蒙版的色度。
+TP_LOCALLAB_CIECAMLOG_TOOLTIP;此模块基于 CIECAM 色貌模型，该模型旨在更好地模拟人眼视觉在不同光照条件下对色彩的感知。\n第一个 CIECAM 过程“场景条件”由对数编码完成，同时使用拍摄时的“绝对亮度”。\n第二个 CIECAM 过程“图像调整”经过简化，只使用 3 个变量（局部反差、对比度 J、饱和度 s）。\n第三个 CIECAM 过程“观看条件”使输出适应预期的观看条件（显示器、电视、投影仪、打印机等），从而在不同显示环境下保持色彩和反差的观感。
 TP_LOCALLAB_CIECOLORFRA;色彩
 TP_LOCALLAB_CIELIGHTCONTFRA;光照与对比度
 TP_LOCALLAB_CIELIGHTFRA;光照
-!TP_LOCALLAB_CIEMODE_TOOLTIP;In Default mode, CIECAM is added at the end of the process. 'Mask And Modifications' and 'Recovery Based On Luminance Mask' are available for'CAM16 and JzCzHz' at your disposal .\nYou can also integrate CIECAM into other tools if you wish (TM, Wavelet, Dynamic Range, Log encoding). The results for these tools will be different to those without CIECAM. In this mode, you can also use 'Mask And Modifications' and 'Recovery Based On Luminance Mask'.
+TP_LOCALLAB_CIEMODE_TOOLTIP;在默认模式下，CIECAM 被加在处理流程末端。“蒙版与修改”和“基于亮度蒙版的恢复”可用于“CAM16 和 JzCzHz”。\n如果愿意，也可以把 CIECAM 整合到其他工具中（色调映射、小波、动态范围、对数编码）。这些工具的结果会与不使用 CIECAM 时不同。在此模式下，同样可以使用“蒙版与修改”和“基于亮度蒙版的恢复”。
 TP_LOCALLAB_CIE_SMOOTHFRAME;高光衰减与层级
 TP_LOCALLAB_CIE_SMOOTHFRAME12;色调映射算子
 TP_LOCALLAB_CIE_SMOOTH_EV;基于 Ev
@@ -4071,38 +4071,38 @@ TP_LOCALLAB_CIE_SMOOTH_LEVELSTRC;RGB 通道 TRC
 TP_LOCALLAB_CIE_SMOOTH_NONE;无
 TP_LOCALLAB_CIE_SMOOTH_SIG;基于 Sigmoid
 TP_LOCALLAB_CIE_SMOOTH_TRC;基于 TRC
-!TP_LOCALLAB_CIRCRAD_TOOLTIP;Contains the references of the spot, useful for shape detection (hue, luma, chroma, Sobel).\nLow values may be useful for processing foliage.\nHigh values may be useful for processing skin.
+TP_LOCALLAB_CIRCRAD_TOOLTIP;包含调整点的参考值，用于形状检测（色相、亮度、色度、Sobel）。\n低数值可能适合处理树叶。\n高数值可能适合处理皮肤。
 TP_LOCALLAB_CLARICRES;合并色度
 TP_LOCALLAB_CLARIFRA;清晰度与锐化蒙版/混合与柔化图像
-!TP_LOCALLAB_CLARIJZ_TOOLTIP;Levels 0 to 4 (included): 'Sharp mask' is enabled\nLevels 5 and above: 'Clarity' is enabled.
+TP_LOCALLAB_CLARIJZ_TOOLTIP;层级 0 到 4（含）：启用“锐化蒙版”\n层级 5 及以上：启用“清晰度”。
 TP_LOCALLAB_CLARILRES;合并亮度
 TP_LOCALLAB_CLARISOFT;柔化半径
-!TP_LOCALLAB_CLARISOFTJZ_TOOLTIP;The 'Soft radius' slider (guided filter algorithm) reduces halos and irregularities for Clarity, Sharp Mask and Local contrast wavelets Jz.
-!TP_LOCALLAB_CLARISOFT_TOOLTIP;The 'Soft radius' slider (guided filter algorithm) reduces halos and irregularities for Clarity, Sharp Mask and all wavelet pyramid processes. To deactivate, set slider to zero.
+TP_LOCALLAB_CLARISOFTJZ_TOOLTIP;“柔化半径”滑条（引导滤波算法）可减少清晰度、锐化蒙版和 Jz 小波局部反差产生的光晕和不规则现象。
+TP_LOCALLAB_CLARISOFT_TOOLTIP;“柔化半径”滑条（引导滤波算法）可减少清晰度、锐化蒙版和所有小波金字塔处理产生的光晕和不规则现象。将滑条设为零即可停用。
 TP_LOCALLAB_CLARITYML;清晰度
-!TP_LOCALLAB_CLARI_TOOLTIP;Levels 0 to 4 (included): 'Sharp mask' is enabled\nLevels 5 and above: 'Clarity' is enabled.\nUseful if you use 'Wavelet level tone mapping'.
+TP_LOCALLAB_CLARI_TOOLTIP;层级 0 到 4（含）：启用“锐化蒙版”\n层级 5 及以上：启用“清晰度”。\n在使用“小波层级色调映射”时有用。
 TP_LOCALLAB_CLIPTM;裁切还原数据（增益）
-!TP_LOCALLAB_COLORDEPREV_TOOLTIP;Preview ΔE button in Settings will only work if you have activated 'Sharpening', 'Soft Light and Original Retinex', 'Blur/Grain and Denoise', 'Dehaze and Retinex', or 'Contrast by Detail Levels' in the 'Add tool to current spot' menu.\nFor others tools, the Preview ΔE button is in the tool, which allows previewing ΔE with several tools enabled. Prefer using Mask And Modifications.
-!TP_LOCALLAB_COLORDE_TOOLTIP;Show a blue color preview for ΔE selection if negative and green if positive.\n\nMask And Modifications (show modified areas without mask): show actual modifications if positive, show enhanced modifications (luminance only) with blue and yellow if negative.
+TP_LOCALLAB_COLORDEPREV_TOOLTIP;设置中的“预览 ΔE”按钮仅在“为当前调整点添加工具”菜单中启用了“锐化”、“柔光与原始 Retinex”、“模糊/颗粒与降噪”、“去雾与 Retinex”或“分层反差调整”时才起作用。\n对于其他工具，“预览 ΔE”按钮位于工具内部，这样可以在启用多个工具时预览 ΔE。建议优先使用“蒙版与修改”。
+TP_LOCALLAB_COLORDE_TOOLTIP;预览 ΔE 选区时，负值显示为蓝色，正值显示为绿色。\n\n蒙版与修改（显示被修改区域，无蒙版）：正值时显示实际修改，负值时以蓝色和黄色显示增强后的修改（仅亮度）。
 TP_LOCALLAB_COLORFRAME;主色
 TP_LOCALLAB_COMPFRA;方向反差
 TP_LOCALLAB_COMPRCIE;亮度压缩
 TP_LOCALLAB_COMPRCIETH;压缩阈值
 TP_LOCALLAB_COMPREFRA;小波层级色调映射
-!TP_LOCALLAB_COMPRLOG_TOOLTIP;This algorithm compress the data before log conversion, above the threshold slider value. To use in conjunction with Whites distribution.
+TP_LOCALLAB_COMPRLOG_TOOLTIP;此算法在对数转换之前压缩高于阈值滑条数值的数据。请与“白色分布”配合使用。
 TP_LOCALLAB_CONTCOL;反差阈值
 TP_LOCALLAB_CONTFRA;分层反差
-!TP_LOCALLAB_CONTRASTCURVMASK_TOOLTIP;Allows you to freely change the contrast of the mask.\n Has a similar function to the Gamma and Slope sliders.\n It allows you to target certain parts of the image (usually the lightest parts of the mask by using the curve to exclude the darker parts).May create artifacts.
+TP_LOCALLAB_CONTRASTCURVMASK_TOOLTIP;可以自由改变蒙版的对比度。\n 功能与伽马和斜率滑条相似。\n 可以用来针对图像的特定部分（通常是蒙版最亮的部分，用曲线排除较暗的部分）。可能产生伪影。
 TP_LOCALLAB_CONTRESID;对比度
-!TP_LOCALLAB_CONTTHMASK_TOOLTIP;Allows you to determine which parts of the image will be impacted based on the texture.
+TP_LOCALLAB_CONTTHMASK_TOOLTIP;可以根据纹理决定图像的哪些部分受影响。
 TP_LOCALLAB_CSTHRESHOLDBLUR;小波层级选择
 TP_LOCALLAB_CURV;明度 - 对比度 - 色度“超级”
 TP_LOCALLAB_CURVCURR;普通
-!TP_LOCALLAB_CURVEEDITORM_CC_TOOLTIP;If the curves are at the top, the mask is completely black and no changes are made to the image.\nAs you lower the curve, the mask gradually becomes more colorful and bright, progressively changing the image.\n\nIt is recommended (but not mandatory) to position the top of the curves on the gray boundary line which represents the reference values of chroma, luma, hue for the spot.
-!TP_LOCALLAB_CURVEEDITOR_CC_TOOLTIP;If curves are at the top, the mask is completely black and no changes are made to the image.\nAs you lower the curve, the mask gradually becomes more colorful and bright, progressively changing the image.\n\nIt is recommended (but not mandatory) to position the top of the curves on the gray boundary line which represents the reference values of chroma, luma, hue for the spot.
-!TP_LOCALLAB_CURVEEDITOR_LL_TOOLTIP;To activate the curves, set the 'Curve type' combo box to 'Normal'.
-!TP_LOCALLAB_CURVEEDITOR_TONES_TOOLTIP;L=f(L), can be used with L(H) in Color and Light.
-!TP_LOCALLAB_CURVEMETHOD_TOOLTIP;'Normal', the curve L=f(L) uses the same algorithm as the lightness slider.
+TP_LOCALLAB_CURVEEDITORM_CC_TOOLTIP;曲线位于顶部时，蒙版全黑，图像不发生任何变化。\n随着曲线下降，蒙版逐渐变得更有色彩、更亮，图像也随之逐步改变。\n\n建议（但不强制）把曲线顶部放在灰色边界线上，该线代表调整点的色度、亮度、色相参考值。
+TP_LOCALLAB_CURVEEDITOR_CC_TOOLTIP;曲线位于顶部时，蒙版全黑，图像不发生任何变化。\n随着曲线下降，蒙版逐渐变得更有色彩、更亮，图像也随之逐步改变。\n\n建议（但不强制）把曲线顶部放在灰色边界线上，该线代表调整点的色度、亮度、色相参考值。
+TP_LOCALLAB_CURVEEDITOR_LL_TOOLTIP;要启用曲线，请把“曲线类型”下拉框设为“普通”。
+TP_LOCALLAB_CURVEEDITOR_TONES_TOOLTIP;L=f(L)，可与“色彩与亮度”中的 L(H) 配合使用。
+TP_LOCALLAB_CURVEMETHOD_TOOLTIP;“普通”：曲线 L=f(L) 使用与明度滑条相同的算法。
 TP_LOCALLAB_CURVNONE;禁用曲线
 TP_LOCALLAB_DARKRETI;暗度
 TP_LOCALLAB_DEHAZE_BLACK;黑色
@@ -4110,68 +4110,68 @@ TP_LOCALLAB_DELTAD;Delta 平衡
 TP_LOCALLAB_DELTAEC;ΔE 图像蒙版
 TP_LOCALLAB_DENOI1_EXP;基于亮度蒙版的降噪
 TP_LOCALLAB_DENOI2_EXP;基于亮度蒙版的恢复
-!TP_LOCALLAB_DENOIBILAT_TOOLTIP;Allows you to reduce impulse or 'salt &amp; pepper' noise.
-!TP_LOCALLAB_DENOICHROC_TOOLTIP;Allows you to deal with blotches and packets of noise.
-!TP_LOCALLAB_DENOICHRODET_TOOLTIP;Allows you to recover chrominance detail by progressively applying a Fourier transform (DCT).
-!TP_LOCALLAB_DENOICHROF_TOOLTIP;Allows you to adjust fine-detail chrominance noise.
+TP_LOCALLAB_DENOIBILAT_TOOLTIP;可以减少脉冲噪点或“椒盐”噪点。
+TP_LOCALLAB_DENOICHROC_TOOLTIP;可以处理色斑和成团的噪点。
+TP_LOCALLAB_DENOICHRODET_TOOLTIP;通过逐步应用傅里叶变换（DCT）恢复色度细节。
+TP_LOCALLAB_DENOICHROF_TOOLTIP;可以调整精细细节的色度噪点。
 TP_LOCALLAB_DENOIENA;启用反差阈值
-!TP_LOCALLAB_DENOIEQUALCHRO_TOOLTIP;Allows you to direct the chroma noise reduction towards either the blue-yellow or red-green colors.
-!TP_LOCALLAB_DENOIEQUAL_TOOLTIP;Allows you to carry out more or less noise reduction in either the shadows or the highlights.
+TP_LOCALLAB_DENOIEQUALCHRO_TOOLTIP;可以让色度降噪偏向蓝-黄或红-绿方向的颜色。
+TP_LOCALLAB_DENOIEQUAL_TOOLTIP;可以在阴影或高光中进行或多或少的降噪。
 TP_LOCALLAB_DENOIFRA;降噪设置
 TP_LOCALLAB_DENOIHUE;降噪均衡器
 TP_LOCALLAB_DENOIHUECONT;降噪均衡器蒙版
-!TP_LOCALLAB_DENOILUMDETAIL_TOOLTIP;Allows you to recover luminance detail by progressively applying a Fourier transform (DCT).
+TP_LOCALLAB_DENOILUMDETAIL_TOOLTIP;通过逐步应用傅里叶变换（DCT）恢复亮度细节。
 TP_LOCALLAB_DENOIMASK;降噪色度蒙版
-!TP_LOCALLAB_DENOIMASK_TOOLTIP;For all tools, allows you to control the chromatic noise level of the mask.\nUseful for better control of chrominance and to avoid artifacts when using the LC(h) curve.
-!TP_LOCALLAB_DENOIQUA_TOOLTIP;Conservative mode preserves low frequency detail. Aggressive mode removes low frequency detail.\nConservative and Aggressive modes use wavelets and DCT and can be used in conjunction with 'Non-local Means – Luminance'.
+TP_LOCALLAB_DENOIMASK_TOOLTIP;适用于所有工具，可以控制蒙版的色度噪点水平。\n有助于更好地控制色度，并在使用 LC(h) 曲线时避免伪影。
+TP_LOCALLAB_DENOIQUA_TOOLTIP;保守模式保留低频细节，激进模式去除低频细节。\n保守和激进模式都使用小波和 DCT，可与“非局部均值 – 亮度”配合使用。
 TP_LOCALLAB_DENOIRATIO;平坦区与结构区比例
-!TP_LOCALLAB_DENOITHR_TOOLTIP;Adjusts edge detection to help reduce noise in uniform, low-contrast areas.
+TP_LOCALLAB_DENOITHR_TOOLTIP;调整边缘检测，帮助减少均匀、低反差区域的噪点。
 TP_LOCALLAB_DENOIWAVCH;小波：色度
 TP_LOCALLAB_DENOIWAVLUM;小波：亮度
 TP_LOCALLAB_DENOI_MASK;降噪反差蒙版
-!TP_LOCALLAB_DENOI_TOOLTIP;This module can be used for noise reduction either on its own (at the end of the processing pipeline) or in addition to the Noise Reduction module in the Detail tab (which works at the beginning of the pipeline).\n Scope allows you to differentiate the action based on color (ΔE).\nMinimum spot size: 128x128.
-!TP_LOCALLAB_DENORADIUS_TOOLTIP;Allows you to differentiate the denoising action as a function of image detail and uniform background.\n The resulting action is a combination of the noise reduction and that of the mask created by 'Contrast threshold'\n On very noisy images you can reduce the mask noise.\n You can also differentiate the action with the curve 'Equalizer denoise mask'.\n The ratio flat-structured areas allows you to correct the action between the two.\n\nOn noisy images and in Raw format, you should use the 'Presharpening denoise' and ‘Postsharpening denoise’ functions for more effective mask action.
+TP_LOCALLAB_DENOI_TOOLTIP;此模块可以单独用于降噪（在处理流程末端），也可以作为细节选项卡中降噪模块（作用于流程开头）的补充。\n 范围可以让你根据颜色（ΔE）区分作用。\n调整点最小尺寸：128x128。
+TP_LOCALLAB_DENORADIUS_TOOLTIP;可以根据图像细节和均匀背景区分降噪作用。\n 最终作用是降噪与“反差阈值”所生成蒙版的结合\n 在噪点很重的图像上，可以降低蒙版的噪点。\n 也可以用“降噪均衡器蒙版”曲线区分作用。\n 平坦区与结构区比例可以让你修正两者之间的作用。\n\n对于噪点较重的 Raw 图像，应使用“锐化前降噪”和“锐化后降噪”功能，使蒙版的作用更有效。
 TP_LOCALLAB_DETAILFRA;边缘检测 - DCT
 TP_LOCALLAB_DETAILTHR;亮度/色度细节阈值
 TP_LOCALLAB_DISAB_CIECAM;禁用 CIECAM 或弱 Jz 环境
 TP_LOCALLAB_ENABLE_MASK;启用蒙版
 TP_LOCALLAB_ENABLE_MASKAFT;使用全部曝光算法
 TP_LOCALLAB_ENABLE_MASKALL;启用全部蒙版工具
-!TP_LOCALLAB_ENARETIMASKTMAP_TOOLTIP;If enabled the Mask uses Restored Data after Transmission Map instead of Original data.
+TP_LOCALLAB_ENARETIMASKTMAP_TOOLTIP;启用后，蒙版使用透射图之后的还原数据，而不是原始数据。
 TP_LOCALLAB_ENH;增强
 TP_LOCALLAB_ENHDEN;增强 + 色度降噪
 TP_LOCALLAB_EQUIL;归一化亮度
-!TP_LOCALLAB_EQUILTM_TOOLTIP;Reconstruct luminance so that the mean and variance of the output image are identical to those of the original.
+TP_LOCALLAB_EQUILTM_TOOLTIP;重建亮度，使输出图像的均值和方差与原图一致。
 TP_LOCALLAB_ESTOP;边缘停止
 TP_LOCALLAB_EV_DUPL;副本：
-!TP_LOCALLAB_EXCLUTYPE_TOOLTIP;Normal spot uses recursive data.\n\nExcluding spot reinitializes all selective editing data.\nCan be used to totally or partially cancel a previous action or to carry out operations in Inverse mode.\nUse 'Scope' (Excluding) to set the exclusion intensity.\n\n'Full image' allows you to use the selective editing tools on the whole image.\nThe RT Spot delimiters are set beyond the image preview boundaries.\nThe transition is set to 100.\nNote: You may have to reposition the RT Spot slightly and adjust the Spot size to get the desired effect.\nNote: Using Denoise or Wavelet or FFTW in full-image mode uses large amounts of memory and may cause the application to crash on lower capacity systems.\n\n'Global' allows you to use the selective editing tools on the whole image, without using Delta E or transitions.
-!TP_LOCALLAB_EXPCBDL_TOOLTIP;Can be used to remove marks on the sensor or lens by reducing the contrast on the appropriate detail level(s).
-!TP_LOCALLAB_EXPCHROMA_TOOLTIP;Use in association with 'Exposure compensation f' and 'Contrast Attenuator f' to avoid desaturating colors.
-!TP_LOCALLAB_EXPCOMP_TOOLTIP;For portraits or images with a low color gradient. You can change 'Shape detection' in 'Settings':\n\nIncrease 'ΔE scope threshold'\nReduce 'ΔE decay'\nIncrease 'Lightness-chroma balance (ΔE)'
-!TP_LOCALLAB_EXPCONTRASTPYR_TOOLTIP;See the documentation for Wavelet Levels.\nThere are some differences in the Selective Editing version, which has more tools and more possibilities for working on individual detail levels.\nE.g. wavelet-level tone mapping.
-!TP_LOCALLAB_EXPCONTRAST_TOOLTIP;Avoid spots that are too small ( < 32x32 pixels).\nUse low 'Transition value' and high 'Transition decay' and 'Scope' to simulate small spots and deal with defects.\nUse 'Clarity and Sharp mask and Blend and Soften Images' if necessary by adjusting 'Soft radius' to reduce artifacts.
-!TP_LOCALLAB_EXPGRADCOL_TOOLTIP;A graduated filter is available in Color & Light (luminance, chrominance & hue gradients, and 'Merge file'), Exposure (luminance gradient), Exposure Mask (luminance gradient), Shadows/Highlights (luminance gradient), Vibrance (luminance, chrominance & hue gradients), Local contrast & wavelet pyramid (local contrast gradient).\nThe graduated filter preview is only accurate when the image is viewed in fit-to-screen mode.\n\nThe graduated filter is only available in Full image or Global mode.
-!TP_LOCALLAB_EXPLAPBAL_TOOLTIP;Changes the transformed/original image blend.
-!TP_LOCALLAB_EXPLAPGAMM_TOOLTIP;Changes the behaviour for images with too much or too little contrast by adding a gamma curve before and after the Laplace transform.
-!TP_LOCALLAB_EXPLAPLIN_TOOLTIP;Changes the behaviour for underexposed images by adding a linear component prior to applying the Laplace transform.
-!TP_LOCALLAB_EXPLAP_TOOLTIP;Moving the slider to the right progressively reduces the contrast.
-!TP_LOCALLAB_EXPMERGEFILE_TOOLTIP;Allows you to use GIMP or Photoshop layer blend modes (difference, multiply, soft light, overlay, etc.) with opacity control.\nOriginal image: merge current spot with original.\nPrevious spot: merge current spot with previous (if there is only one spot, previous = original).\nBackground: merge current spot with a color and luminance background (fewer possibilties).
-!TP_LOCALLAB_EXPNOISEMETHOD_TOOLTIP;Applies a median filter before the Laplace transform to prevent artifacts (noise).\nYou can also use the 'Denoise' tool.
-!TP_LOCALLAB_EXPOSURE_TOOLTIP;Modify exposure in L*a*b space using Laplacian PDE algorithms to take into account dE and minimize artifacts.
+TP_LOCALLAB_EXCLUTYPE_TOOLTIP;普通调整点使用递归数据。\n\n排除调整点会重新初始化所有局部编辑数据。\n可用于全部或部分取消之前的操作，或以反向模式进行操作。\n用“范围”（排除）设置排除强度。\n\n“整幅图像”可以让你在整幅图像上使用局部编辑工具。\nRT 调整点的边界被设在图像预览边界之外。\n过渡被设为 100。\n注意：可能需要略微移动 RT 调整点并调整其大小，才能得到想要的效果。\n注意：在整幅图像模式下使用降噪、小波或 FFTW 会占用大量内存，在配置较低的系统上可能导致程序崩溃。\n\n“全局”可以让你在整幅图像上使用局部编辑工具，而不使用 Delta E 或过渡。
+TP_LOCALLAB_EXPCBDL_TOOLTIP;通过降低相应细节层级的反差，可用于去除传感器或镜头上的污渍痕迹。
+TP_LOCALLAB_EXPCHROMA_TOOLTIP;与“曝光补偿 f”和“反差衰减器 f”配合使用，以避免色彩去饱和。
+TP_LOCALLAB_EXPCOMP_TOOLTIP;适用于人像或色彩渐变较弱的图像。可以在“设置”中更改“形状检测”：\n\n增大“ΔE 范围阈值”\n减小“ΔE 衰减”\n增大“明度-色度平衡（ΔE）”
+TP_LOCALLAB_EXPCONTRASTPYR_TOOLTIP;请参阅小波层级的文档。\n局部编辑版本有一些不同，它有更多工具，也有更多针对单个细节层级的处理方式。\n例如小波层级色调映射。
+TP_LOCALLAB_EXPCONTRAST_TOOLTIP;避免使用过小的调整点（< 32x32 像素）。\n用较低的“过渡值”、较高的“过渡衰减”和“范围”来模拟小调整点并处理瑕疵。\n必要时使用“清晰度与锐化蒙版/混合与柔化图像”，并调整“柔化半径”以减少伪影。
+TP_LOCALLAB_EXPGRADCOL_TOOLTIP;渐变滤镜可用于：色彩与亮度（亮度、色度与色相渐变，以及“合并文件”）、曝光（亮度渐变）、曝光蒙版（亮度渐变）、阴影/高光（亮度渐变）、鲜明度（亮度、色度与色相渐变）、局部反差与小波金字塔（局部反差渐变）。\n只有以适应屏幕的方式查看图像时，渐变滤镜的预览才准确。\n\n渐变滤镜仅在整幅图像或全局模式下可用。
+TP_LOCALLAB_EXPLAPBAL_TOOLTIP;更改变换后图像与原图的混合比例。
+TP_LOCALLAB_EXPLAPGAMM_TOOLTIP;在拉普拉斯变换前后加入伽马曲线，改变对反差过高或过低图像的处理方式。
+TP_LOCALLAB_EXPLAPLIN_TOOLTIP;在应用拉普拉斯变换之前加入线性分量，改变对欠曝图像的处理方式。
+TP_LOCALLAB_EXPLAP_TOOLTIP;向右移动滑条会逐步降低对比度。
+TP_LOCALLAB_EXPMERGEFILE_TOOLTIP;可以使用 GIMP 或 Photoshop 的图层混合模式（差值、正片叠底、柔光、叠加等），并可控制不透明度。\n原图：把当前调整点与原图合并。\n上一个调整点：把当前调整点与上一个合并（如果只有一个调整点，上一个 = 原图）。\n背景：把当前调整点与带颜色和亮度的背景合并（可选项较少）。
+TP_LOCALLAB_EXPNOISEMETHOD_TOOLTIP;在拉普拉斯变换之前应用中值滤波，以防止伪影（噪点）。\n也可以使用“降噪”工具。
+TP_LOCALLAB_EXPOSURE_TOOLTIP;使用拉普拉斯 PDE 算法在 L*a*b 空间中修改曝光，以考虑 dE 并尽量减少伪影。
 TP_LOCALLAB_EXPRETITOOLS;高级 Retinex 工具
-!TP_LOCALLAB_EXPSHARP_TOOLTIP;Spot minimum 39*39 RL Deconvolution.\nSpot minimum 150*150 Capture Deconvolution.\nUse low Transition Gradient values and high 'Transition decay' and Scope values to simulate smaller spots.
-!TP_LOCALLAB_FATFRAME_TOOLTIP;PDE Fattal – uses the Fattal Tone-mapping algorithm.
+TP_LOCALLAB_EXPSHARP_TOOLTIP;RL 反卷积的调整点最小为 39*39。\n捕获反卷积的调整点最小为 150*150。\n用较低的过渡渐变值、较高的“过渡衰减”和范围值来模拟更小的调整点。
+TP_LOCALLAB_FATFRAME_TOOLTIP;PDE Fattal – 使用 Fattal 色调映射算法。
 !TP_LOCALLAB_FATLEVEL;Sigma
 TP_LOCALLAB_FATSAT;饱和度控制
-!TP_LOCALLAB_FEATH_TOOLTIP;Gradient width as a percentage of the Spot diagonal\nUsed by all graduated filters in all tools.\nNo action if a graduated filter hasn't been activated.
+TP_LOCALLAB_FEATH_TOOLTIP;渐变宽度，以调整点对角线的百分比表示\n用于所有工具中的所有渐变滤镜。\n如果没有启用渐变滤镜，则不起作用。
 TP_LOCALLAB_FEATVALUE;渐变羽化
 TP_LOCALLAB_FEATVALUE_MASK;渐变羽化（渐变滤镜蒙版）
 !TP_LOCALLAB_FFTCOL_MASK;FFTW ƒ
 TP_LOCALLAB_FULLIMAGE;整幅图像的黑点 Ev 与白点 Ev
-!TP_LOCALLAB_FULLIMAGELOG_TOOLTIP;Calculates the Ev levels for the whole image.
-!TP_LOCALLAB_GAMCOL_TOOLTIP;Apply a gamma on Luminance L*a*b* datas.\nIf gamma = 3.0 Luminance 'linear' is used.
-!TP_LOCALLAB_GAMC_TOOLTIP;Apply a gamma on Luminance L*a*b* datas before and after treatment Pyramid 1 and Pyramid 2.\nIf gamma = 3.0 Luminance 'linear' is used.
-!TP_LOCALLAB_GAMMASK_TOOLTIP;Adjusting Gamma and Slope can provide a soft and artifact-free transformation of the mask by progressively modifying 'L' to avoid any discontinuities.
+TP_LOCALLAB_FULLIMAGELOG_TOOLTIP;计算整幅图像的 Ev 水平。
+TP_LOCALLAB_GAMCOL_TOOLTIP;对 L*a*b* 亮度数据应用伽马。\n伽马 = 3.0 时使用“线性”亮度。
+TP_LOCALLAB_GAMC_TOOLTIP;在金字塔 1 和金字塔 2 处理的前后，对 L*a*b* 亮度数据应用伽马。\n伽马 = 3.0 时使用“线性”亮度。
+TP_LOCALLAB_GAMMASK_TOOLTIP;调整伽马和斜率可以通过逐步修改“L”来避免任何不连续，从而让蒙版得到柔和且无伪影的变换。
 !TP_LOCALLAB_GAMUTLABRELA;Lab
 TP_LOCALLAB_GAMW;伽马（小波金字塔）
 !TP_LOCALLAB_GHSCOLORNO;---
@@ -4187,41 +4187,41 @@ TP_LOCALLAB_GHSMAT5;Cat16（RGB 协调）
 TP_LOCALLAB_GHSMATO;无（中性）
 TP_LOCALLAB_GHSMAXRGB;RGB 最大值与 3 西格玛：最大=%1 3S=%2
 !TP_LOCALLAB_GHSMAXRGBNO;---
-!TP_LOCALLAB_GHSMAXRGB_TOOLTIP;This allows you to preview the changes you make. The main settings that have an effect are 'Stretch factor (D)' and 'Local intensity (b)'.\n\n Try to obtain a value close to or lower (to your liking) than 0.18 for 'Estimated middle grey', although this isn't mandatory as there are other processing steps afterward.\n\n ‘RGB max’ corresponds to the maximum value of the data; it may only affect a few pixels. ‘3 Sigmas’ corresponds to the limit of truly significant data. You can adjust all GHS settings, but particularly 'Protect Highlights (HP)' and 'Highlight attenuation', in order to avoid, if possible, them exceeding the value of 1.\n\n The purpose of GHS is not to produce a perfect image, but to prepare the image - while keeping some room for maneuver - for further processing.
+TP_LOCALLAB_GHSMAXRGB_TOOLTIP;可以预览你所做的更改。起主要作用的设置是“拉伸系数（D）”和“局部强度（b）”。\n\n 尽量让“估计中灰”的数值接近或低于（视个人喜好）0.18，不过这不是必须的，因为之后还有其他处理步骤。\n\n “RGB 最大值”对应数据的最大值，可能只影响少数像素。“3 西格玛”对应真正有意义数据的上限。可以调整所有 GHS 设置，尤其是“保护高光（HP）”和“高光衰减”，尽可能避免它们超过 1。\n\n GHS 的目的不是产生完美的图像，而是在保留一定余量的同时，为后续处理准备好图像。
 !TP_LOCALLAB_GHSMIDGREYNO;---
 !TP_LOCALLAB_GHSSYMNO;---
 TP_LOCALLAB_GHS_AGX;AgX 矩阵
-!TP_LOCALLAB_GHS_AGXMAT2_TOOLTIP;Use the LMS (Long, Medium, Short) transformation, depending on the user's selection. LMS is a color space transform which represents the response of the three types of cone cells of the human eye, named for their responsivity (sensitivity) peaks at long, medium, and short wavelengths.\n\nThese transformations, in the form of matrix, modify each R, G and B channel for each pixel, giving priority to certain dominant colors according to your choice.\n * None - leaves the data unchanged (default).\n * Agx - accentuates each R, G, B channel quite strongly so that the LMS data is perceived as more colorful.\n * JzAzBz (XYZ High dynamic) - modifies the LMS distribution, by acting on X, Y, Z to better account for images with a high ‘linear WP’.\n * Cat16 (XYZ harmonious) - modifies the LMS distribution, by acting, on X, Y, Z - ensures a more harmonious distribution of colors while respecting the eye/brain interaction.\n * JzAzBz (RGB High dynamic) - modifies the LMS distribution, by acting, like AgX, on the 3 channels R, G, B to better account for images with a high ‘linear WP’.\n * Cat16 (RGB harmonious) - modifies the LMS distribution, by acting, like AgX, on the 3 channels R, G and B - ensures a more harmonious distribution of colors while respecting the eye/brain interaction.\n\n\nFor JzAzBz and Cat16, the XYZ mode : JzAzBz (XYZ High dynamic) and Cat16 (XYZ harmonious) should ensure better color and luminance fidelity.\n\nThis transformation only affects the modifications made by GHS: 'White Point (linear)', 'Black Point (linear)', 'Symmetry point (SP)' and of course the action on Stretch factor (D) and Local intensity (b). It is imperative to review the GHS settings each time the matrix is changed. It is strongly recommended to activate 'Auto Black point and White point' (except in Inverse mode). Observe the histogram in the two modes 'Working profile - linear' and 'Gamma - corrected output profile'.\n\nBe careful :\n * Not to confuse Cat16 with CIECAM. Cat16 is only the conversion matrix, while CIECAM (Color Appearance and Lighting) is a complete colorimetry process that takes physiological aspects into account.\n * The JzAzBz matrix here, does not take into account the notions of 'Absolute luminance' and so does not use the notion of PQ (Perceptual Quantizer). Do not confuse with the module in Selective Editing > JzCzHz.
-!TP_LOCALLAB_GHS_AGX_MAT_TOOLTIP;Performs the entire GHS processing, including Matrix conversion either AgX or JzAzBz or Cat16. For JzAzBz and Cat16 you have the choice between a transformation in RGB mode or in XYZ mode (preferably).\n * To allow this matrix to be enabled or disabled,  the 'Auto Black point and White point' must be disabled.\n * You need to re-enable 'Auto Black point and White point' to recalculate the values of 'Black Point (linear)', 'White Point (linear)' and 'Symmetry point (SP)'.
-!TP_LOCALLAB_GHS_AGX_TOOLTIP;Performs the entire GHS processing, including AgX conversion.\n * To allow AgX to be enabled or disabled, 'Auto Black point and White point' must be  disabled.\n * You need to re-enable 'Auto Black point and White point' to recalculate the values of 'linear BP', 'linear WP' and 'Symmetry point (SP)'.
-!TP_LOCALLAB_GHS_BLPHLPAUTO_TOOLTIP;Automatically adjust the 'Black point' and 'White point' values.\n Not available in Inverse GHS mode and must be disabled to allow Inverse GHS to work. It must be disabled (and re-enabled) in order to change 'Matrix conversion (AgX, JzAzBz, Cat16)'.\n Generally, the automatic settings will be satisfactory.\n If necessary, you can subsequently adjust the two points:\n * The 'Black point': using negative slider values may help when the shadows are particularly blocked.\n * Manually increase the ‘White point’ value if necessary, especially if it is less than 1, to give the system more flexibility by avoiding possible gamut overflows due to GHS or subsequent adjustments.
-!TP_LOCALLAB_GHS_INV_TOOLTIP;Inverse GHS is useful for reducing overall contrast or recovering your original image. It adds contrast on the far right and left of the histogram, brightening the deep shadows, darkening the bright highlights, and squeezing the histogram towards the middle.\n\n * The Generalized Hyperbolic Inverse transformation allows you to recover your original image, subject to mathematical precision, but you can also use it for other purposes. This feature is more like the 'Excluding spot' but more powerful.\n\n * If the White point and Black point were changed in normal mode (automatic or not), they will likely need to be readjusted. The white point often needs to be readjusted lower. There is interaction between the two settings. In the majority of cases, especially when used as a second GHS Spot, the adjustments will be small, or even unnecessary.\n\n * Can be used as a second GHS spot after a first GHS Spot in Global or 'Full image' mode, most often with 'Spot method = Normal spot', for example to darken a sky or a sunset.\n\n * To allow Inverse GHS to work the checkbox 'Auto Black point & White point' must be disabled.
+TP_LOCALLAB_GHS_AGXMAT2_TOOLTIP;根据用户的选择使用 LMS（长、中、短）变换。LMS 是一种色彩空间变换，表示人眼三种视锥细胞的响应，以它们在长、中、短波长处的响应（灵敏度）峰值命名。\n\n这些变换以矩阵形式修改每个像素的 R、G、B 各通道，并根据你的选择优先突出某些主色。\n * 无 - 保持数据不变（默认）。\n * Agx - 较强地强化 R、G、B 各通道，使 LMS 数据看起来色彩更丰富。\n * JzAzBz（XYZ 高动态）- 通过作用于 X、Y、Z 来改变 LMS 分布，以更好地处理“线性 WP”较高的图像。\n * Cat16（XYZ 协调）- 通过作用于 X、Y、Z 来改变 LMS 分布 - 在尊重眼脑相互作用的同时，保证色彩分布更协调。\n * JzAzBz（RGB 高动态）- 像 AgX 一样作用于 R、G、B 三个通道来改变 LMS 分布，以更好地处理“线性 WP”较高的图像。\n * Cat16（RGB 协调）- 像 AgX 一样作用于 R、G、B 三个通道来改变 LMS 分布 - 在尊重眼脑相互作用的同时，保证色彩分布更协调。\n\n\n对于 JzAzBz 和 Cat16，XYZ 模式即 JzAzBz（XYZ 高动态）和 Cat16（XYZ 协调）应能保证更好的色彩和亮度保真度。\n\n此变换只影响 GHS 所做的修改：“白点（线性）”、“黑点（线性）”、“对称点（SP）”，当然还有对拉伸系数（D）和局部强度（b）的作用。每次更改矩阵后都必须重新检查 GHS 设置。强烈建议启用“自动黑点和白点”（反向模式除外）。请在“工作配置文件 - 线性”和“伽马 - 校正后的输出配置文件”两种模式下观察直方图。\n\n请注意：\n * 不要把 Cat16 与 CIECAM 混淆。Cat16 只是转换矩阵，而 CIECAM（色貌与光照）是考虑了生理因素的完整色度学处理过程。\n * 这里的 JzAzBz 矩阵不考虑“绝对亮度”的概念，因此不使用 PQ（感知量化器）的概念。不要与“局部编辑 > JzCzHz”中的模块混淆。
+TP_LOCALLAB_GHS_AGX_MAT_TOOLTIP;执行完整的 GHS 处理，包括 AgX、JzAzBz 或 Cat16 的矩阵转换。对于 JzAzBz 和 Cat16，可以选择在 RGB 模式或 XYZ 模式（推荐）下变换。\n * 要启用或停用此矩阵，必须先停用“自动黑点和白点”。\n * 需要重新启用“自动黑点和白点”，才能重新计算“黑点（线性）”、“白点（线性）”和“对称点（SP）”的数值。
+TP_LOCALLAB_GHS_AGX_TOOLTIP;执行完整的 GHS 处理，包括 AgX 转换。\n * 要启用或停用 AgX，必须先停用“自动黑点和白点”。\n * 需要重新启用“自动黑点和白点”，才能重新计算“线性 BP”、“线性 WP”和“对称点（SP）”的数值。
+TP_LOCALLAB_GHS_BLPHLPAUTO_TOOLTIP;自动调整“黑点”和“白点”的数值。\n 在反向 GHS 模式下不可用，并且必须停用它才能让反向 GHS 工作。要更改“矩阵转换（AgX、JzAzBz、Cat16）”，也必须先停用（再重新启用）它。\n 一般来说，自动设置的结果是令人满意的。\n 必要时，之后可以调整这两个点：\n * “黑点”：当阴影特别死黑时，使用负的滑条数值可能有帮助。\n * 必要时手动提高“白点”的数值，尤其是当它小于 1 时，这样可以避免 GHS 或后续调整可能造成的色域溢出，给系统更多余地。
+TP_LOCALLAB_GHS_INV_TOOLTIP;反向 GHS 适合用来降低整体反差或恢复原始图像。它在直方图的最右端和最左端增加反差，提亮深阴影、压暗亮高光，并把直方图向中间挤压。\n\n * 广义双曲反变换可以让你恢复原始图像（受数学精度限制），但也可以用于其他目的。这项功能更像“排除调整点”，但更强大。\n\n * 如果在正常模式下更改过白点和黑点（无论是否自动），它们很可能需要重新调整。白点通常需要调低。两项设置之间存在相互影响。多数情况下，尤其是作为第二个 GHS 调整点使用时，调整幅度会很小，甚至不需要调整。\n\n * 可以在全局或“整幅图像”模式的第一个 GHS 调整点之后，作为第二个 GHS 调整点使用，通常配合“调整点方法 = 普通调整点”，例如用来压暗天空或日落。\n\n * 要让反向 GHS 工作，必须停用“自动黑点和白点”复选框。
 !TP_LOCALLAB_GHS_MODECUR;GHS
 TP_LOCALLAB_GHS_SLOPE;Lab 斜率系数（S）
-!TP_LOCALLAB_GHS_SLOPE_TOOLTIP;Changes the slope of the Lab transform to improve shadow rendering.
-!TP_LOCALLAB_GRADGEN_TOOLTIP;Adjusts luminance gradient strength.
-!TP_LOCALLAB_GRADSTRAB_TOOLTIP;Adjusts chroma gradient strength.
+TP_LOCALLAB_GHS_SLOPE_TOOLTIP;更改 Lab 变换的斜率，以改善阴影的呈现。
+TP_LOCALLAB_GRADGEN_TOOLTIP;调整亮度渐变强度。
+TP_LOCALLAB_GRADSTRAB_TOOLTIP;调整色度渐变强度。
 TP_LOCALLAB_GRADSTRCHRO;色度渐变强度
 TP_LOCALLAB_GRADSTRHUE;色相渐变强度
 TP_LOCALLAB_GRADSTRHUE2;色相渐变强度
-!TP_LOCALLAB_GRADSTRHUE_TOOLTIP;Adjusts hue gradient strength.
+TP_LOCALLAB_GRADSTRHUE_TOOLTIP;调整色相渐变强度。
 TP_LOCALLAB_GRALWFRA;渐变滤镜（局部反差：全图与全局）
-!TP_LOCALLAB_GRIDFRAME_TOOLTIP;You can use this tool as a brush. Use a small spot and adapt the 'Transition value' and 'Transition decay'\nOnly 'Normal' mode and possibly Hue, Saturation, Color, Luminosity are concerned by Merge background (ΔE).
-!TP_LOCALLAB_GRIDMETH_TOOLTIP;Color toning: the luminance is taken into account when varying chroma. Equivalent to H=f(H) if the 'white dot' on the grid remains at zero and you only vary the 'black dot'. Equivalent to 'Color toning' if you vary the 2 dots.\n\nDirect: acts directly on the chroma.
+TP_LOCALLAB_GRIDFRAME_TOOLTIP;可以把此工具当作画笔使用。使用一个小调整点，并调整“过渡值”和“过渡衰减”\n只有“普通”模式以及可能的色相、饱和度、颜色、明度模式与“合并背景（ΔE）”有关。
+TP_LOCALLAB_GRIDMETH_TOOLTIP;色调分离：改变色度时考虑亮度。如果网格上的“白点”保持在零，只移动“黑点”，则等同于 H=f(H)。如果同时移动两个点，则等同于“色调分离”。\n\n直接：直接作用于色度。
 TP_LOCALLAB_GUIDBL;柔化半径
-!TP_LOCALLAB_GUIDBL_TOOLTIP;Applies a guided filter with adjustable radius. Allows you to reduce artifacts or blur the image.
-!TP_LOCALLAB_GUIDEPSBL_TOOLTIP;Changes the distribution function of the guided filter. Negative values simulate a Gaussian blur.
-!TP_LOCALLAB_GUIDFILTER_TOOLTIP;Can reduce or increase artifacts.
-!TP_LOCALLAB_GUIDSTRBL_TOOLTIP;Intensity of the guided filter.
+TP_LOCALLAB_GUIDBL_TOOLTIP;应用半径可调的引导滤波。可以减少伪影或模糊图像。
+TP_LOCALLAB_GUIDEPSBL_TOOLTIP;更改引导滤波的分布函数。负值模拟高斯模糊。
+TP_LOCALLAB_GUIDFILTER_TOOLTIP;可能减少也可能增加伪影。
+TP_LOCALLAB_GUIDSTRBL_TOOLTIP;引导滤波的强度。
 TP_LOCALLAB_HIGHMASKCOL;高光
 !TP_LOCALLAB_HLH;H
 TP_LOCALLAB_IND;独立（鼠标）
 TP_LOCALLAB_INDSL;独立（鼠标 + 滑条）
 TP_LOCALLAB_INVMASK;反向算法
 TP_LOCALLAB_JAB;使用黑点 Ev 与白点 Ev
-!TP_LOCALLAB_JABADAP_TOOLTIP;Perceptual Uniform adaptation.\nAutomatically adjusts the relationship between Jz and saturation taking into account 'Absolute luminance'.
+TP_LOCALLAB_JABADAP_TOOLTIP;感知均匀适应。\n结合“绝对亮度”自动调整 Jz 与饱和度之间的关系。
 TP_LOCALLAB_JZ100;Jz 参考 100cd/m2
-!TP_LOCALLAB_JZ100_TOOLTIP;Automatically adjusts the reference Jz 100 cd/m2 level (image signal).\nChanges the saturation level and action of 'PU adaptation' (Perceptual Uniform adaptation).
+TP_LOCALLAB_JZ100_TOOLTIP;自动调整 Jz 参考 100 cd/m2 的水平（图像信号）。\n会改变饱和度水平以及“PU 适应”（感知均匀适应）的作用。
 TP_LOCALLAB_JZADAP;PU 适应
 TP_LOCALLAB_JZCH;色度
 TP_LOCALLAB_JZCHROM;色度
@@ -4229,22 +4229,22 @@ TP_LOCALLAB_JZCLARICRES;合并色度 Cz
 TP_LOCALLAB_JZCLARILRES;合并 Jz
 TP_LOCALLAB_JZCONT;对比度
 TP_LOCALLAB_JZFORCE;强制最大 Jz 为 1
-!TP_LOCALLAB_JZFORCE_TOOLTIP;Allows you to force the maximum Jz value to 1 for better slider and curve response.
+TP_LOCALLAB_JZFORCE_TOOLTIP;可以把最大 Jz 值强制为 1，使滑条和曲线的响应更好。
 TP_LOCALLAB_JZFRA;Jz Cz Hz 图像调整
 TP_LOCALLAB_JZHFRA;Hz 曲线
 TP_LOCALLAB_JZHJZFRA;Jz(Hz) 曲线
 TP_LOCALLAB_JZHUECIE;色相旋转
 TP_LOCALLAB_JZLOG;Jz 对数编码
-!TP_LOCALLAB_JZLOGWBS_TOOLTIP;Black Ev and White Ev adjustments can be different depending on whether Log encoding or Sigmoid is used.\nFor Sigmoid, a change (increase in most cases) of White Ev may be necessary to obtain a better rendering of highlights, contrast and saturation.
-!TP_LOCALLAB_JZLOGWB_TOOLTIP;If Auto is enabled, it will calculate and adjust the Ev levels and the 'Mean luminance Yb%' for the spot area. The resulting values will be used by all Jz operations including 'Log encoding Jz'.\nAlso calculates the absolute luminance at the time of shooting.
-!TP_LOCALLAB_JZLOGYBOUT_TOOLTIP;Yb is the relative luminance of the background, expressed as a percentage of gray. 18% gray corresponds to a background luminance of 50% when expressed in CIE L.\nThe data is based on the mean luminance of the image.\nWhen used with Log encoding, the mean luminance is used to determine the amount of gain that needs to be applied to the signal prior to the Log encoding. Lower values of mean luminance will result in increased gain.
-!TP_LOCALLAB_JZMODECAM_TOOLTIP;Jz (only in 'Advanced' mode). Only operational if the output device (monitor) is HDR (peak luminance higher than 100 cd/m2 - ideally between 4000 and 10000 cd/m2. Black point luminance inferior to 0.005 cd/m2). This supposes a) the ICC-PCS for the screen uses Jzazbz (or XYZ), b) works in real precision, c) that the monitor is calibrated (if possible with a DCI-P3 or Rec-2020 gamut), d) that the usual gamma (sRGB or BT709) is replaced by a Perceptual Quantiser (PQ) function.
+TP_LOCALLAB_JZLOGWBS_TOOLTIP;黑点 Ev 和白点 Ev 的调整可能因使用对数编码还是 Sigmoid 而不同。\n对于 Sigmoid，可能需要更改（多数情况下是提高）白点 Ev，以获得更好的高光、对比度和饱和度表现。
+TP_LOCALLAB_JZLOGWB_TOOLTIP;启用“自动”后，会计算并调整调整点区域的 Ev 水平和“平均亮度 Yb%”。所得数值将用于所有 Jz 操作，包括“Jz 对数编码”。\n同时计算拍摄时的绝对亮度。
+TP_LOCALLAB_JZLOGYBOUT_TOOLTIP;Yb 是背景的相对亮度，以灰度百分比表示。18% 灰对应以 CIE L 表示的 50% 背景亮度。\n该数据基于图像的平均亮度。\n与对数编码一起使用时，平均亮度用于确定在对数编码之前需要对信号施加多少增益。平均亮度越低，增益越大。
+TP_LOCALLAB_JZMODECAM_TOOLTIP;Jz（仅在“高级”模式下）。仅当输出设备（显示器）为 HDR 时才有效（峰值亮度高于 100 cd/m2 - 理想情况下在 4000 到 10000 cd/m2 之间。黑点亮度低于 0.005 cd/m2）。这要求 a) 屏幕的 ICC-PCS 使用 Jzazbz（或 XYZ），b) 以实数精度工作，c) 显示器已校准（尽可能具有 DCI-P3 或 Rec-2020 色域），d) 通常的伽马（sRGB 或 BT709）被感知量化器（PQ）函数取代。
 TP_LOCALLAB_JZPQFRA;Jz 重映射
-!TP_LOCALLAB_JZPQFRA_TOOLTIP;Allows you to adapt the Jz algorithm to an SDR environment or to the characteristics (performance) of an HDR environment as follows:\n a) for luminance values between 0 and 100 cd/m2, the system behaves as if it were in an SDR environment.\n b) for luminance values between 100 and 10000 cd/m2, you can adapt the algorithm to the HDR characteristics of the image and the monitor.\n\nIf 'PQ - Peak luminance' is set to 10000, 'Jz remappping' behaves in the same way as the original Jzazbz algorithm.
+TP_LOCALLAB_JZPQFRA_TOOLTIP;可以让 Jz 算法适应 SDR 环境，或适应 HDR 环境的特性（性能），方式如下：\n a) 对于 0 到 100 cd/m2 之间的亮度值，系统的表现如同处于 SDR 环境。\n b) 对于 100 到 10000 cd/m2 之间的亮度值，可以让算法适应图像和显示器的 HDR 特性。\n\n如果“PQ - 峰值亮度”设为 10000，“Jz 重映射”的表现与原始 Jzazbz 算法相同。
 TP_LOCALLAB_JZPQREMAP;PQ - 峰值亮度（cd/m2）
-!TP_LOCALLAB_JZPQREMAP_TOOLTIP;PQ (Perceptual Quantizer) - allows you to change the internal PQ function (usually 10000 cd/m2 - default 120 cd/m2).\nCan be used to adapt to different images, processes and devices.
+TP_LOCALLAB_JZPQREMAP_TOOLTIP;PQ（感知量化器）- 可以更改内部的 PQ 函数（通常为 10000 cd/m2 - 默认 120 cd/m2）。\n可用于适配不同的图像、处理流程和设备。
 TP_LOCALLAB_JZQTOJ;相对亮度
-!TP_LOCALLAB_JZQTOJ_TOOLTIP;Allows you to use 'Relative luminance' instead of 'Absolute luminance' - Brightness becomes Lightness.\nThe changes affect: the Brightness slider, the Contrast slider and the Jz(Jz) curve.
+TP_LOCALLAB_JZQTOJ_TOOLTIP;可以用“相对亮度”代替“绝对亮度” - 视明度变为明度。\n这些更改影响：视明度滑条、对比度滑条和 Jz(Jz) 曲线。
 TP_LOCALLAB_JZSOFTCIE;柔化半径（引导滤波）
 TP_LOCALLAB_JZSTRSOFTCIE;引导滤波强度
 TP_LOCALLAB_JZTARGET_EV;观看环境平均亮度（Yb%）
@@ -4257,126 +4257,126 @@ TP_LOCALLAB_LAPLACC;ΔØ 蒙版拉普拉斯 PDE 求解
 TP_LOCALLAB_LAPLACE;ΔE 拉普拉斯阈值
 TP_LOCALLAB_LAPLACEXP;拉普拉斯阈值
 TP_LOCALLAB_LAPMASKCOL;拉普拉斯阈值
-!TP_LOCALLAB_LAPRAD1_TOOLTIP;Increases the contrast of the mask by increasing the luminance values of the lighter areas. Can be used in conjunction with the L(L) and LC(H) curves.
-!TP_LOCALLAB_LAPRAD2_TOOLTIP;Smooth radius uses a guided filter to decrease artifacts and smooth out the transition.
-!TP_LOCALLAB_LAPRAD_TOOLTIP;Smooth radius uses a guided filter to decrease artifacts and smooth out the transition.
-!TP_LOCALLAB_LAP_MASK_TOOLTIP;Solves PDEs for all Laplacian masks.\nIf enabled the Laplacian threshold mask reduces artifacts and smooths the result.\nIf disabled the response is linear.
+TP_LOCALLAB_LAPRAD1_TOOLTIP;通过提高较亮区域的亮度值来增加蒙版的反差。可与 L(L) 和 LC(H) 曲线配合使用。
+TP_LOCALLAB_LAPRAD2_TOOLTIP;平滑半径使用引导滤波来减少伪影并使过渡更平滑。
+TP_LOCALLAB_LAPRAD_TOOLTIP;平滑半径使用引导滤波来减少伪影并使过渡更平滑。
+TP_LOCALLAB_LAP_MASK_TOOLTIP;为所有拉普拉斯蒙版求解 PDE。\n启用时，拉普拉斯阈值蒙版可减少伪影并使结果更平滑。\n停用时，响应是线性的。
 TP_LOCALLAB_LCLABELS;残差噪点层级
-!TP_LOCALLAB_LCLABELS_TOOLTIP;Displays the mean and high-end noise values for the area shown in the Preview Panel (at 100% zoom). The noise values are grouped by wavelet levels 0,1,2,3 and 4,5,6.\nThe displayed values are indicative only and are designed to assist with denoise adjustments. They should not be interpreted as absolute noise levels.\n\n 300: Very noisy\n 100-300: Noisy\n 50-100: Moderatly noisy\n < 50: Low noise\n\nThey allow you to see:\n*The impact of Noise Reduction in the main-menu Detail tab.\n*The influence of Non-local Means, Wavelets and DCT on the luminance noise.\n*The influence of Wavelets and DCT on the chroma noise.\n*The influence of Capture Sharpening and Demosaicing.
-!TP_LOCALLAB_LC_FFTW_TOOLTIP;FFT improves quality and allows the use of large radii, but increases processing time (depends on the area to be processed). Preferable to use only for large radii. The size of the area can be reduced by a few pixels to optimize the FFTW. This can reduce the processing time by a factor of 1.5 to 10.
+TP_LOCALLAB_LCLABELS_TOOLTIP;显示预览面板中所示区域（100% 缩放）的平均噪点值和高端噪点值。噪点值按小波层级 0、1、2、3 和 4、5、6 分组。\n显示的数值仅供参考，用于辅助调整降噪，不应理解为绝对的噪点水平。\n\n 300：噪点非常重\n 100-300：噪点重\n 50-100：噪点中等\n < 50：噪点低\n\n通过它们可以看到：\n*主菜单细节选项卡中降噪的影响。\n*非局部均值、小波和 DCT 对亮度噪点的影响。\n*小波和 DCT 对色度噪点的影响。\n*捕获锐化和去马赛克的影响。
+TP_LOCALLAB_LC_FFTW_TOOLTIP;FFT 能提高质量并允许使用大半径，但会增加处理时间（取决于待处理区域）。建议仅用于大半径。可以把区域尺寸缩小几个像素来优化 FFTW，这能把处理时间缩短为原来的 1/1.5 到 1/10。
 TP_LOCALLAB_LEVELBLUR;最大模糊层级
-!TP_LOCALLAB_LEVELWAV_TOOLTIP;The Level is automatically adapted to the size of the spot and the preview.\nFrom level 9 size max 512 to level 1 size max = 4.
+TP_LOCALLAB_LEVELWAV_TOOLTIP;层级会根据调整点和预览的大小自动适配。\n从层级 9（最大尺寸 512）到层级 1（最大尺寸 = 4）。
 TP_LOCALLAB_LEVFRA;层级
-!TP_LOCALLAB_LIGHTN_TOOLTIP;In inverse mode: selection = -100 forces luminance to zero.
+TP_LOCALLAB_LIGHTN_TOOLTIP;在反向模式下：选择 = -100 会强制亮度为零。
 TP_LOCALLAB_LINEAR;线性度
-!TP_LOCALLAB_LIST_TOOLTIP;You can select 3 levels of complexity for each tool: Basic, Standard and Advanced.\nThe default setting for all tools is Basic but this can be changed in the Preferences window.\nYou can also change the level of complexity on a per-tool basis while you are editing.
-!TP_LOCALLAB_LMASK_LEVEL_TOOLTIP;Allows you to decrease or increase the effect on particular levels of detail in the mask by targeting certain luminance zones (in general the lightest).
-!TP_LOCALLAB_LMASK_LL_TOOLTIP;Allows you to freely change the contrast of the mask.\n Has a similar function to the Gamma and Slope sliders.\n It allows you to target certain parts of the image (usually the lightest parts of the mask by using the curve to exclude the darker parts). May create artifacts.
+TP_LOCALLAB_LIST_TOOLTIP;每个工具可以选择 3 种复杂度：基础、标准和高级。\n所有工具的默认设置为基础，可以在参数设置窗口中更改。\n编辑时也可以逐个工具更改复杂度。
+TP_LOCALLAB_LMASK_LEVEL_TOOLTIP;可以通过针对特定亮度区域（一般是最亮的区域），减弱或增强蒙版中特定细节层级上的效果。
+TP_LOCALLAB_LMASK_LL_TOOLTIP;可以自由改变蒙版的对比度。\n 功能与伽马和斜率滑条相似。\n 可以用来针对图像的特定部分（通常是蒙版最亮的部分，用曲线排除较暗的部分）。可能产生伪影。
 TP_LOCALLAB_LOCCONT;USM 锐化
 TP_LOCALLAB_LOCKMADL;锁定 MadL 噪点评估
 TP_LOCALLAB_LOCKMADL2;手动设置
-!TP_LOCALLAB_LOCKMADL2_TOOLTIP;Allows you to manually control MadL values. Be careful: this function assumes mastery of the concepts of noise reduction using wavelets. Make sure that the initial values for the selected area have been set automatically.\n\nBe careful not to confuse the action on MadL which is a noise estimation only used in Wavelet Denoise where the strength is set in Selective Editing using a curve and a selected level (Aggressive / Conservative). The MadL scale is exponential and not linear.\n\nThe first levels of wavelet decomposition provide visible noise reduction, whereas the higher levels have more affect on banding.
-!TP_LOCALLAB_LOCKMADLFRA_TOOLTIP;Shows the actual values of Median Absolute Deviation (MadL).\nIf 'Locks MadL noise evaluation' is not enabled you can manually change these values which will affect the entire image.\nThe first levels 0,1,2,3 for the Horizontal direction,7,8,9,10 for the Vertical direction and 14,15,16,17 for the Diagonal, act on the detail noise. The higher levels have more effect on banding noise.\n\nLuminance noise reduction is a function that implements MadL (depending on level and direction) divided by the level of detail (high, medium, low frequency), the actual value of the decomposition at that location (depending on level and direction) and the curve applied by the user according to the level of wavelet decomposition.
-!TP_LOCALLAB_LOCKMADL_TOOLTIP;Allows you to lock the noise evaluation used for Wavelet denoise.\n\nWavelet denoise uses MadL (Median absolute deviation luminance) to act on the noise based on a slider or a curve.\nRawtherapee's pipeline design results in different MadL values depending on the preview position and leads to differences in output.\n\nIf you enable this checkbox, the value used for global processing will be the preview at that time. This will allow you to prioritize a specific area, background, or face for noise reduction, rather than an overall average value. Of course, you should only check the box once you've selected the area.
+TP_LOCALLAB_LOCKMADL2_TOOLTIP;可以手动控制 MadL 值。注意：此功能要求你掌握小波降噪的相关概念。请确保所选区域的初始值是自动设定的。\n\n注意不要把对 MadL 的操作混淆：MadL 只是用于小波降噪的噪点估计，而降噪强度是在局部编辑中通过曲线和所选级别（激进/保守）设定的。MadL 的刻度是指数的，不是线性的。\n\n小波分解的前几个层级带来可见的降噪效果，而较高的层级对条带的影响更大。
+TP_LOCALLAB_LOCKMADLFRA_TOOLTIP;显示绝对中位差（MadL）的实际数值。\n如果未启用“锁定 MadL 噪点评估”，可以手动更改这些数值，这会影响整幅图像。\n水平方向的前几个层级 0、1、2、3，垂直方向的 7、8、9、10，以及对角方向的 14、15、16、17，作用于细节噪点。较高的层级对条带噪点的影响更大。\n\n亮度降噪是这样一个函数：它用 MadL（取决于层级和方向）除以细节级别（高、中、低频），并结合该位置上分解的实际数值（取决于层级和方向），以及用户按小波分解层级施加的曲线。
+TP_LOCALLAB_LOCKMADL_TOOLTIP;可以锁定小波降噪所用的噪点评估。\n\n小波降噪使用 MadL（亮度绝对中位差），根据滑条或曲线对噪点起作用。\nRawtherapee 的处理流程设计使 MadL 值随预览位置而不同，从而导致输出存在差异。\n\n如果勾选此复选框，全局处理所用的数值将取自当时的预览。这样可以让降噪优先针对某个特定区域、背景或人脸，而不是整体平均值。当然，应当在选好区域之后再勾选。
 TP_LOCALLAB_LOC_CONTRASTPYR;金字塔 1：
 TP_LOCALLAB_LOC_CONTRASTPYR2;金字塔 2：
 TP_LOCALLAB_LOC_CONTRASTPYR2LAB; 分层反差/色调映射/方向反差
 TP_LOCALLAB_LOC_CONTRASTPYRLAB; 渐变滤镜/边缘锐度/模糊
 TP_LOCALLAB_LOC_RESIDPYR;残差图像（主）
-!TP_LOCALLAB_LOGAUTOGRAYJZ_TOOLTIP;Automatically calculates the 'Mean luminance' for the scene conditions.
-!TP_LOCALLAB_LOGAUTOGRAY_TOOLTIP;Automatically calculates the 'Mean luminance' for the scene conditions when the 'Automatic' button in Relative Exposure Levels is pressed.
-!TP_LOCALLAB_LOGAUTO_TOOLTIP;Pressing this button will calculate the dynamic range and 'Mean luminance' for the scene conditions if the 'Auto mean luminance (Yb%)' is checked).\nAlso calculates the absolute luminance at the time of shooting.\nPress the button again to adjust the automatically calculated values.
-!TP_LOCALLAB_LOGBASE_TOOLTIP;Default = 2.\nValues less than 2 reduce the action of the algorithm making the shadows darker and the highlights brighter.\nWith values greater than 2, the shadows are grayer and the highlights become more washed out.
-!TP_LOCALLAB_LOGCATAD_TOOLTIP;Chromatic adaptation allows us to interpret a color according to its spatio-temporal environment.\nUseful when the white balance deviates significantly from the D50 reference.\nAdapts colors to the illuminant of the output device.
+TP_LOCALLAB_LOGAUTOGRAYJZ_TOOLTIP;自动计算场景条件的“平均亮度”。
+TP_LOCALLAB_LOGAUTOGRAY_TOOLTIP;按下“相对曝光水平”中的“自动”按钮时，自动计算场景条件的“平均亮度”。
+TP_LOCALLAB_LOGAUTO_TOOLTIP;按下此按钮将计算场景条件的动态范围和“平均亮度”（需勾选“自动平均亮度（Yb%）”）。\n同时计算拍摄时的绝对亮度。\n再次按下按钮可调整自动计算出的数值。
+TP_LOCALLAB_LOGBASE_TOOLTIP;默认 = 2。\n小于 2 的数值会减弱算法的作用，使阴影更暗、高光更亮。\n大于 2 的数值会使阴影更灰、高光更显发白。
+TP_LOCALLAB_LOGCATAD_TOOLTIP;色适应让我们能够根据颜色所处的时空环境来解读它。\n在白平衡明显偏离 D50 参考时有用。\n使颜色适应输出设备的光源。
 TP_LOCALLAB_LOGCIE;对数编码
 TP_LOCALLAB_LOGCIEQ;CIECAM 对数编码 Q（已弃用）
-!TP_LOCALLAB_LOGCIEQ_TOOLTIP;Activating the checkbox allows you to switch between Log encoding based on the 3 RGB channels, and Log encoding based solely on CIECAM’s brightness (Q) channel.\nUsing the Q channel instead of the RGB channels helps avoid undesirable edge effects such as hue and saturation shifts.\nHowever, the settings are more difficult to optimise because Q is unbounded and CIECAM alters the data to take into account the surround conditions, simultaneous contrast, etc.\nYou may have to adjust the following:\n   Scene conditions: Mean luminance (Yb), Whites &amp; Blacks distribution, Black Ev, White Ev.\n   Source Data Adjustments : Brightness compression, Strength.\n\nNote: when using Log encoding (Q), be careful not to activate the Disable CIECAM option in the Scene Conditions, Surround menu.
-!TP_LOCALLAB_LOGCIE_TOOLTIP;Allows you to use Black Ev, White Ev, White and Black distribution, Scene Mean luminance(Yb%) and Viewing Mean luminance(Yb%) for tone-mapping using 'Log encoding' with Brightness compression.
+TP_LOCALLAB_LOGCIEQ_TOOLTIP;勾选此复选框可以在基于 RGB 三通道的对数编码与仅基于 CIECAM 视明度（Q）通道的对数编码之间切换。\n用 Q 通道代替 RGB 通道有助于避免色相和饱和度偏移等不良的边缘效应。\n不过，这些设置更难优化，因为 Q 没有上界，而且 CIECAM 会修改数据以考虑环境条件、同时对比等因素。\n可能需要调整以下各项：\n   场景条件：平均亮度（Yb）、白色与黑色分布、黑点 Ev、白点 Ev。\n   源数据调整：亮度压缩、强度。\n\n注意：使用对数编码（Q）时，小心不要在“场景条件”的“环境”菜单中启用“禁用 CIECAM”选项。
+TP_LOCALLAB_LOGCIE_TOOLTIP;可以把黑点 Ev、白点 Ev、白色与黑色分布、场景平均亮度（Yb%）和观看环境平均亮度（Yb%）用于色调映射，即使用带亮度压缩的“对数编码”。
 TP_LOCALLAB_LOGCOLORFL;视彩度（M）
-!TP_LOCALLAB_LOGCOLORF_TOOLTIP;Perceived amount of hue in relation to gray.\nIndicator that a stimulus appears more or less colored.
+TP_LOCALLAB_LOGCOLORF_TOOLTIP;相对于灰色所感知到的色相量。\n表示刺激看起来色彩更多或更少的指标。
 TP_LOCALLAB_LOGCONQL;对比度（Q）
 TP_LOCALLAB_LOGCONTHRES;反差阈值（J 与 Q）
 TP_LOCALLAB_LOGCONTL;对比度（J）
-!TP_LOCALLAB_LOGCONTL_TOOLTIP;Contrast (J) in CIECAM16 takes into account the increase in perceived coloration with luminance.
-!TP_LOCALLAB_LOGCONTQ_TOOLTIP;Contrast (Q) in CIECAM16 takes into account the increase in perceived coloration with brightness.
-!TP_LOCALLAB_LOGCONTTHRES_TOOLTIP;Adjusts the mid-tone contrast range (J &amp; Q).\nPositive values progressively reduce the effect of the Contrast sliders (J &amp; Q). Negative values progressively increase the effect of the Contrast sliders.
-!TP_LOCALLAB_LOGDETAIL_TOOLTIP;Acts mainly on high frequencies.
-!TP_LOCALLAB_LOGENCOD_TOOLTIP;Tone Mapping with Logarithmic encoding (ACES).\nUseful for underexposed images or images with high dynamic range.\n\nTwo-step process: 1) Dynamic Range calculation 2) Manual adjustment.
-!TP_LOCALLAB_LOGFRAME_TOOLTIP;Allows you to calculate and adjust the Ev levels and the 'Mean luminance Yb%' (source gray point) for the spot area. The resulting values will be used by all Lab operations and most RGB operations in the pipeline.\nAlso calculates the absolute luminance at the time of shooting.
-!TP_LOCALLAB_LOGLIGHTQ_TOOLTIP;Perceived amount of light emanating from a stimulus.\nIndicator that a stimulus appears to be more or less bright, clear.
+TP_LOCALLAB_LOGCONTL_TOOLTIP;CIECAM16 中的对比度（J）考虑了感知色彩随亮度增加而增强的现象。
+TP_LOCALLAB_LOGCONTQ_TOOLTIP;CIECAM16 中的对比度（Q）考虑了感知色彩随视明度增加而增强的现象。
+TP_LOCALLAB_LOGCONTTHRES_TOOLTIP;调整中间调的对比度范围（J &amp; Q）。\n正值逐步减弱对比度滑条（J &amp; Q）的效果，负值逐步增强对比度滑条的效果。
+TP_LOCALLAB_LOGDETAIL_TOOLTIP;主要作用于高频。
+TP_LOCALLAB_LOGENCOD_TOOLTIP;使用对数编码（ACES）的色调映射。\n适用于欠曝图像或高动态范围图像。\n\n分两步：1) 计算动态范围 2) 手动调整。
+TP_LOCALLAB_LOGFRAME_TOOLTIP;可以计算并调整调整点区域的 Ev 水平和“平均亮度 Yb%”（源灰点）。所得数值将用于流程中的所有 Lab 操作和大多数 RGB 操作。\n同时计算拍摄时的绝对亮度。
+TP_LOCALLAB_LOGLIGHTQ_TOOLTIP;感知到的由刺激发出的光量。\n表示刺激看起来更亮、更明或相反的指标。
 TP_LOCALLAB_LOGLIN;对数模式
 TP_LOCALLAB_LOGPFRA;相对曝光水平
 TP_LOCALLAB_LOGPFRA2;对数编码设置
-!TP_LOCALLAB_LOGREPART_TOOLTIP;Allows you to adjust the relative strength of the log-encoded image with respect to the original image.\nDoes not affect the CIECAM component.
-!TP_LOCALLAB_LOGSATURL_TOOLTIP;Saturation (s) in CIECAM16 corresponds to the color of a stimulus in relation to its own brightness.\nActs mainly on medium tones and on the highlights.
-!TP_LOCALLAB_LOGSCENE_TOOLTIP;Corresponds to the shooting conditions.
-!TP_LOCALLAB_LOGSURSOUR_TOOLTIP;Changes tones and colors to take into account the Scene conditions.\n\n<b>Average</b>: Average light conditions (standard). The image will not change.\n\n<b>Dim</b>: Dim conditions. The image will become slightly brighter.\n\n<b>Dark</b>: Dark conditions. The image will become more bright.
-!TP_LOCALLAB_LOGVIEWING_TOOLTIP;Corresponds to the medium on which the final image will be viewed (monitor, TV, projector, printer, etc.), as well as the surrounding conditions.
+TP_LOCALLAB_LOGREPART_TOOLTIP;可以调整对数编码后图像相对于原图的强度。\n不影响 CIECAM 部分。
+TP_LOCALLAB_LOGSATURL_TOOLTIP;CIECAM16 中的饱和度（s）对应刺激的色彩相对于其自身视明度的程度。\n主要作用于中间调和高光。
+TP_LOCALLAB_LOGSCENE_TOOLTIP;对应拍摄条件。
+TP_LOCALLAB_LOGSURSOUR_TOOLTIP;更改影调和色彩以考虑场景条件。\n\n<b>平均</b>：平均光照条件（标准）。图像不会改变。\n\n<b>昏暗</b>：昏暗条件。图像会略微变亮。\n\n<b>黑暗</b>：黑暗条件。图像会变得更亮。
+TP_LOCALLAB_LOGVIEWING_TOOLTIP;对应最终观看图像的媒介（显示器、电视、投影仪、打印机等）以及周围环境条件。
 !TP_LOCALLAB_LUM;LL - CC
 TP_LOCALLAB_LUM46LABEL;亮度层级 456：平均=%1 高=%2
 TP_LOCALLAB_LUMASK;背景色/亮度蒙版
-!TP_LOCALLAB_LUMASK_TOOLTIP;Adjusts the shade of gray or color of the mask background in Show Mask (Mask And Modifications).
+TP_LOCALLAB_LUMASK_TOOLTIP;在“显示蒙版”（蒙版与修改）中调整蒙版背景的灰度或颜色。
 TP_LOCALLAB_LUMLABEL;亮度层级 0123：平均=%1 高=%2
 TP_LOCALLAB_MADLDIRD;对角层级 0..6/14-20
 TP_LOCALLAB_MADLDIRH;水平层级 0..6
 TP_LOCALLAB_MADLDIRV;垂直层级 0..6/7-13
 TP_LOCALLAB_MADLFRA;绝对中位差（L）
 TP_LOCALLAB_MASFRAME;蒙版与合并
-!TP_LOCALLAB_MASFRAME_TOOLTIP;For all masks.\nTakes into account the ΔE image to avoid modifying the selection area when the following Mask Tools are used: Gamma, Slope, Chroma, Contrast curve, Local contrast (by wavelet level), Blur Mask and Structure Mask (if enabled ).\nDisabled when Inverse mode is used.
+TP_LOCALLAB_MASFRAME_TOOLTIP;适用于所有蒙版。\n使用以下蒙版工具时，会考虑 ΔE 图像以避免改变选区：伽马、斜率、色度、反差曲线、局部反差（按小波层级）、模糊蒙版和结构蒙版（如已启用）。\n使用反向模式时停用。
 TP_LOCALLAB_MASKCOM;通用色彩蒙版
 TP_LOCALLAB_MASKCOM_TOOLNAME;通用色彩蒙版
-!TP_LOCALLAB_MASKCOM_TOOLTIP;A tool in its own right.\nCan be used to adjust the image appearance (chrominance, luminance, contrast) and texture as a function of Scope.
-!TP_LOCALLAB_MASKCURVE_TOOLTIP;The 3 curves are set to 1 (maximum) by default:\nC=f(C) the chroma varies according to the chrominance. You can decrease the chroma to improve the selection. By setting this curve close to zero (with a low value of C to activate the curve) you can desaturate the background in Inverse mode.\nL=f(L) the luminance varies according to the luminance, so you can decrease the brightness to improve the selection.\nL and C = f(H) luminance and chroma vary with hue, so you can decrease luminance and chroma to improve selection.
-!TP_LOCALLAB_MASKDECAY_TOOLTIP;Manages the rate of decay for the gray levels in the mask.\n Decay = 1 linear, Decay > 1 sharper parabolic transitions, Decay < 1 more gradual transitions.
-!TP_LOCALLAB_MASKDEINV_TOOLTIP;Reverses the way the algorithm interprets the mask.\nIf checked black and very light areas will be decreased.
-!TP_LOCALLAB_MASKDE_TOOLTIP;Used to target the denoise as a function of the image luminance information contained in the L(L) or LC(H) masks (Mask and Modifications).\n The L(L) mask or the LC(H) mask must be enabled to use this function.\n If the mask is below the 'dark' threshold, then the Denoise will be applied progressively.\n iIf the mask is above the 'light' threshold, then the Denoise will be applied progressively.\n Between the two, the image settings without the Denoise will be maintained, unless you adjust the sliders 'Gray area luminance denoise' or 'Gray area chrominance denoise'.
-!TP_LOCALLAB_MASKGF_TOOLTIP;Used to target the Guided Filter as a function of the image luminance information contained in the L(L) or LC(H) masks (Mask and Modifications).\n The L(L) mask or the LC(H) mask must be enabled to use this function.\n If the mask is below the 'dark' threshold, then the GF will be applied progressively.\n If the mask is above the 'light' threshold, then the GF will be applied progressively.\n Between the two, the image settings without the GF will be maintained.
+TP_LOCALLAB_MASKCOM_TOOLTIP;一个独立的工具。\n可用于根据范围调整图像外观（色度、亮度、反差）和纹理。
+TP_LOCALLAB_MASKCURVE_TOOLTIP;3 条曲线默认均设为 1（最大）：\nC=f(C) 色度随色度变化。可以降低色度以改善选区。把这条曲线设到接近零（用较低的 C 值来激活曲线），可以在反向模式下让背景去饱和。\nL=f(L) 亮度随亮度变化，因此可以降低亮度以改善选区。\nL 和 C = f(H) 亮度和色度随色相变化，因此可以降低亮度和色度以改善选区。
+TP_LOCALLAB_MASKDECAY_TOOLTIP;控制蒙版中灰度级的衰减速率。\n 衰减 = 1 为线性，衰减 > 1 为更陡的抛物线过渡，衰减 < 1 为更平缓的过渡。
+TP_LOCALLAB_MASKDEINV_TOOLTIP;反转算法解读蒙版的方式。\n勾选后，黑色和非常亮的区域会被减弱。
+TP_LOCALLAB_MASKDE_TOOLTIP;用于根据 L(L) 或 LC(H) 蒙版（蒙版与修改）中包含的图像亮度信息来定向降噪。\n 必须启用 L(L) 蒙版或 LC(H) 蒙版才能使用此功能。\n 如果蒙版低于“暗”阈值，降噪将逐步施加。\n 如果蒙版高于“亮”阈值，降噪将逐步施加。\n 两者之间保持未降噪的图像设置，除非调整“灰区亮度降噪”或“灰区色度降噪”滑条。
+TP_LOCALLAB_MASKGF_TOOLTIP;用于根据 L(L) 或 LC(H) 蒙版（蒙版与修改）中包含的图像亮度信息来定向引导滤波。\n 必须启用 L(L) 蒙版或 LC(H) 蒙版才能使用此功能。\n 如果蒙版低于“暗”阈值，引导滤波将逐步施加。\n 如果蒙版高于“亮”阈值，引导滤波将逐步施加。\n 两者之间保持未使用引导滤波的图像设置。
 TP_LOCALLAB_MASKH;色相曲线
-!TP_LOCALLAB_MASKHIGTHRESCB_TOOLTIP;Lighter-tone limit above which CBDL (Luminance only) parameters will be restored progressively to their original values prior to being modified by the CBDL settings .\n You can use certain tools in 'Mask and Modifications' to change the gray levels:'Smooth radius', Gamma and Slope, 'Contrast curve'.\nUse a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKHIGTHRESC_TOOLTIP;Lighter-tone limit above which the parameters will be restored progressively to their original values prior to being modified by the Color and Light settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Structure mask', 'Blur mask', 'Smooth radius', Gamma and Slope, 'Contrast curve', 'Local contrast' (wavelets).\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKHIGTHRESD_TOOLTIP; The denoise is progressively decreased from 100% at the threshold setting to 0% at the maximum white value (as determined by the mask).\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Structure mask', 'Smooth radius', Gamma and Slope, 'Contrast curve', 'Local contrast' (wavelets).\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKHIGTHRESE_TOOLTIP;Lighter-tone limit above which the parameters will be restored progressively to their original values prior to being modified by the 'Dynamic range and Exposure' settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Smooth radius', Gamma and Slope, 'Contrast curve'.\n Use a 'lockable colorpicker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKHIGTHRESL_TOOLTIP;Lighter-tone limit above which the parameters will be restored progressively to their original values prior to being modified by the Log encoding settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels:'Smooth radius', 'Contrast curve'.\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKHIGTHRESRETI_TOOLTIP;Lighter-tone limit above which Retinex (Luminance only) parameters will be restored progressively to their original values prior to being modified by the Retinex settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Smooth radius', Gamma and Slope, 'Contrast curve'.\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKHIGTHRESS_TOOLTIP;Lighter-tone limit above which the parameters will be restored progressively to their original values prior to being modified by the Shadows Highlights settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Smooth radius', Gamma and Slope, 'Contrast curve'.\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKHIGTHRESTM_TOOLTIP;Lighter-tone limit above which the parameters will be restored progressively to their original values prior to being modified by the Tone Mapping settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Smooth radius', Gamma and Slope, 'Contrast curve'.\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKHIGTHRESVIB_TOOLTIP;Lighter-tone limit above which the parameters will be restored progressively to their original values prior to being modified by the Vibrance and Warm Cool settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels:'Smooth radius', Gamma and Slope, 'Contrast curve'.\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKHIGTHRESWAV_TOOLTIP;Lighter-tone limit above which the parameters will be restored progressively to their original values prior to being modified by the Local contrast and Wavelet settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Smooth radius', Gamma and Slope, 'Contrast curve'.\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKHIGTHRES_TOOLTIP; The Guided Filter is progressively decreased from 100% at the threshold setting to 0% at the maximum white value (as determined by the mask).\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'structure mask', 'Smooth radius', 'Gamma and slope', 'Contrast curve', 'Local contrast wavelet'.\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
+TP_LOCALLAB_MASKHIGTHRESCB_TOOLTIP;亮调界限，高于该界限时，参数将逐步恢复为被分层反差设置修改之前的原始值（仅亮度）。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、伽马和斜率、“反差曲线”。\n在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKHIGTHRESC_TOOLTIP;亮调界限，高于该界限时，参数将逐步恢复为被色彩与亮度设置修改之前的原始值。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“结构蒙版”、“模糊蒙版”、“平滑半径”、伽马和斜率、“反差曲线”、“局部反差（小波）”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKHIGTHRESD_TOOLTIP; 降噪从阈值处的 100% 逐步减少到最大白色值（由蒙版决定）处的 0%。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“结构蒙版”、“平滑半径”、伽马和斜率、“反差曲线”、“局部反差（小波）”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKHIGTHRESE_TOOLTIP;亮调界限，高于该界限时，参数将逐步恢复为被“动态范围与曝光”设置修改之前的原始值。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、伽马和斜率、“反差曲线”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKHIGTHRESL_TOOLTIP;亮调界限，高于该界限时，参数将逐步恢复为被对数编码设置修改之前的原始值。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、“反差曲线”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKHIGTHRESRETI_TOOLTIP;亮调界限，高于该界限时，参数将逐步恢复为被Retinex设置修改之前的原始值（仅亮度）。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、伽马和斜率、“反差曲线”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKHIGTHRESS_TOOLTIP;亮调界限，高于该界限时，参数将逐步恢复为被阴影高光设置修改之前的原始值。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、伽马和斜率、“反差曲线”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKHIGTHRESTM_TOOLTIP;亮调界限，高于该界限时，参数将逐步恢复为被色调映射设置修改之前的原始值。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、伽马和斜率、“反差曲线”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKHIGTHRESVIB_TOOLTIP;亮调界限，高于该界限时，参数将逐步恢复为被鲜明度与冷暖设置修改之前的原始值。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、伽马和斜率、“反差曲线”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKHIGTHRESWAV_TOOLTIP;亮调界限，高于该界限时，参数将逐步恢复为被局部反差与小波设置修改之前的原始值。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、伽马和斜率、“反差曲线”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKHIGTHRES_TOOLTIP; 引导滤波从阈值处的 100% 逐步减少到最大白色值（由蒙版决定）处的 0%。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“结构蒙版”、“平滑半径”、伽马和斜率、“反差曲线”、“局部反差（小波）”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
 TP_LOCALLAB_MASKLCTHR;亮区亮度阈值
 TP_LOCALLAB_MASKLCTHR2;亮区亮度阈值
 TP_LOCALLAB_MASKLCTHRLOW;暗区亮度阈值
 TP_LOCALLAB_MASKLCTHRLOW2;暗区亮度阈值
 TP_LOCALLAB_MASKLCTHRMID;灰区亮度降噪
 TP_LOCALLAB_MASKLCTHRMIDCH;灰区色度降噪
-!TP_LOCALLAB_MASKLC_TOOLTIP;Used by wavelet luminance.\nThis allows you to target the denoise based on the image luminance information contained in the L(L) or LC(H) mask (Mask and Modifications).\n The L(L) mask or the LC(H) mask must be enabled to use this function.\n 'Dark area luminance threshold'. If 'Reinforce denoise in dark and light areas' > 1 the denoise is progressively increased from 0% at the threshold setting to 100% at the maximum black value (determined by mask).\n 'Light area luminance threshold'. The denoise is progressively decreased from 100% at the threshold setting to 0% at the maximum white value (determined by mask).\n In the area between the two thresholds, the denoise settings are not affected by the mask.
+TP_LOCALLAB_MASKLC_TOOLTIP;用于小波亮度。\n可以根据 L(L) 或 LC(H) 蒙版（蒙版与修改）中包含的图像亮度信息来定向降噪。\n 必须启用 L(L) 蒙版或 LC(H) 蒙版才能使用此功能。\n “暗区亮度阈值”：如果“加强暗区和亮区的降噪”> 1，降噪从阈值处的 0% 逐步增加到最大黑色值（由蒙版决定）处的 100%。\n “亮区亮度阈值”：降噪从阈值处的 100% 逐步减少到最大白色值（由蒙版决定）处的 0%。\n 在两个阈值之间的区域，降噪设置不受蒙版影响。
 TP_LOCALLAB_MASKLNOISELOW;加强暗区/亮区
-!TP_LOCALLAB_MASKLOWTHRESCB_TOOLTIP;Dark-tone limit below which the CBDL parameters (Luminance only) will be restored progressively to their original values prior to being modified by the CBDL settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Smooth radius', Gamma and Slope, 'Contrast curve'.\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKLOWTHRESC_TOOLTIP;Dark-tone limit below which the parameters will be restored progressively to their original values prior to being modified by the Color and Light settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Structure mask', 'blur mask', 'Smooth radius', Gamma and Slope, 'Contrast curve', 'Local contrast' (wavelets).\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKLOWTHRESD_TOOLTIP;The denoise is progressively increased from 0% at the threshold setting to 100% at the maximum black value (as determined by the mask).\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Structure mask', 'Smooth radius', Gamma and Slope, 'Contrast curve', 'Local contrast' (wavelets).\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKLOWTHRESE_TOOLTIP;Dark-tone limit below which the parameters will be restored progressively to their original values prior to being modified by the 'Dynamic range and Exposure' settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Smooth radius', Gamma and Slope, 'Contrast curve'.\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKLOWTHRESL_TOOLTIP;Dark-tone limit below which the parameters will be restored progressively to their original values prior to being modified by the Log encoding settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels:'Smooth radius', 'Contrast curve'.\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKLOWTHRESRETI_TOOLTIP;Dark-tone limit below which the Retinex (Luminance only) parameters will be restored progressively to their original values prior to being modified by the Retinex settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Smooth radius', Gamma and Slope, 'Contrast curve'.\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKLOWTHRESS_TOOLTIP;Dark-tone limit below which the parameters will be restored progressively to their original values prior to being modified by the Shadows Highlights settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Smooth radius', Gamma and Slope, 'Contrast curve'.\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKLOWTHRESTM_TOOLTIP;Dark-tone limit below which the parameters will be restored progressively to their original values prior to being modified by the Tone Mapping settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Smooth radius', Gamma and Slope, 'Contrast curve'.\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKLOWTHRESVIB_TOOLTIP;Dark-tone limit below which the parameters will be restored progressively to their original values prior to being modified by the Vibrance and Warm Cool settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Smooth radius', Gamma and Slope, 'Contrast curve'.\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKLOWTHRESWAV_TOOLTIP;Dark-tone limit below which the parameters will be restored progressively to their original values prior to being modified by the Local contrast and Wavelet settings.\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Smooth radius', Gamma and Slope, 'Contrast curve'.\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKLOWTHRES_TOOLTIP;The Guided Filter is progressively increased from 0% at the threshold setting to 100% at the maximum black value (as determined by the mask).\n You can use certain tools in 'Mask and Modifications' to change the gray levels: 'Structure mask', 'Smooth radius', Gamma and Slope, 'Contrast curve', 'Local contrast' (wavelets).\n Use a 'lockable color picker' on the mask to see which areas will be affected. Make sure you set 'Background color mask' = 0 in Settings.
-!TP_LOCALLAB_MASKRECOL_TOOLTIP;Used to modulate the effect of the Color and Light settings based on the image luminance information contained in the L(L) or LC(H) masks (Mask and Modifications).\n The L(L) mask or the LC(H) mask must be enabled to use this function.\n The 'dark' and 'light' areas below the dark threshold and above the light threshold will be restored progressively to their original values prior to being modified by the Color and Light settings \n In between these two areas, the full value of the Color and Light settings will be applied.
-!TP_LOCALLAB_MASKREEXP_TOOLTIP;Used to modulate the effect of the 'Dynamic range and Exposure' settings based on the image luminance information contained in the L(L) or LC(H) masks (Mask and Modifications).\n The L(L) mask or the LC(H) mask must be enabled to use this function.\n The 'dark' and 'light' areas below the dark threshold and above the light threshold will be restored progressively to their original values prior to being modified by the 'Dynamic range and Exposure' settings \n In between these two areas, the full value of the 'Dynamic range and Exposure' settings will be applied.
-!TP_LOCALLAB_MASKRELOG_TOOLTIP;Used to modulate the effect of the Log encoding settings based on the image luminance information contained in the L(L) or LC(H) masks (Mask and Modifications).\n The L(L) mask or the LC(H) mask must be enabled to use this function.\n The 'dark' and 'light' areas below the dark threshold and above the light threshold will be restored progressively to their original values prior to being modified by the Log encoding settings - can be used to restore highlights reconstructed by Color propagation \n In between these two areas, the full value of the Log encoding settings will be applied.
-!TP_LOCALLAB_MASKRESCB_TOOLTIP;Used to modulate the effect of the CBDL (Luminance only) settings based on the image luminance information contained in the L(L) or LC(H) masks (Mask and Modifications).\n The L(L) mask or the LC(H) mask must be enabled to use this function.\n The 'dark' and 'light' areas below the dark threshold and above the light threshold will be restored progressively to their original values prior to being modified by the CBDL settings \n In between these two areas, the full value of the CBDL settings will be applied.
-!TP_LOCALLAB_MASKRESH_TOOLTIP;Used to modulate the effect of the Shadows Highlights settings based on the image luminance information contained in the L(L) or LC(H) masks (Mask and Modifications).\n The L(L) mask or the LC(H) mask must be enabled to use this function.\n The 'dark' and 'light' areas below the dark threshold and above the light threshold will be restored progressively to their original values prior to being modified by the Shadows Highlights settings \n In between these two areas, the full value of the Shadows Highlights settings will be applied.
-!TP_LOCALLAB_MASKRESRETI_TOOLTIP;Used to modulate the effect of the Retinex (Luminance only) settings based on the image luminance information contained in the L(L) or LC(H) masks (Mask and Modifications).\n The L(L) mask or the LC(H) mask must be enabled to use this function.\n The 'dark' and 'light' areas below the dark threshold and above the light threshold will be restored progressively to their original values prior to being modified by the Retinex settings \n In between these two areas, the full value of the Retinex settings will be applied.
-!TP_LOCALLAB_MASKRESTM_TOOLTIP;Used to modulate the effect of the Tone Mapping settings based on the image luminance information contained in the L(L) or LC(H) masks (Mask and Modifications).\n The L(L) mask or the LC(H) mask must be enabled to use this function.\n The 'dark' and 'light' areas below the dark threshold and above the light threshold will be restored progressively to their original values prior to being modified by the Tone Mapping settings \n In between these two areas, the full value of the Tone Mapping settings will be applied.
-!TP_LOCALLAB_MASKRESVIB_TOOLTIP;Used to modulate the effect of the Vibrance and Warm Cool settings based on the image luminance information contained in the L(L) or LC(H) masks (Mask and Modifications).\n The L(L) mask or the LC(H) mask must be enabled to use this function.\n The 'dark' and 'light' areas below the dark threshold and above the light threshold will be restored progressively to their original values prior to being modified by the Vibrance and Warm Cool settings \n In between these two areas, the full value of the Vibrance and Warm Cool settings will be applied.
-!TP_LOCALLAB_MASKRESWAV_TOOLTIP;Used to modulate the effect of the Local contrast and Wavelet settings based on the image luminance information contained in the L(L) or LC(H) masks (Mask and Modifications).\n The L(L) mask or the LC(H) mask must be enabled to use this function.\n The 'dark' and 'light' areas below the dark threshold and above the light threshold will be restored progressively to their original values prior to being modified by the Local contrast and Wavelet settings \n In between these two areas, the full value of the Local contrast and Wavelet settings will be applied.
+TP_LOCALLAB_MASKLOWTHRESCB_TOOLTIP;暗调界限，低于该界限时，参数将逐步恢复为被分层反差设置修改之前的原始值（仅亮度）。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、伽马和斜率、“反差曲线”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKLOWTHRESC_TOOLTIP;暗调界限，低于该界限时，参数将逐步恢复为被色彩与亮度设置修改之前的原始值。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“结构蒙版”、“模糊蒙版”、“平滑半径”、伽马和斜率、“反差曲线”、“局部反差（小波）”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKLOWTHRESD_TOOLTIP;降噪从阈值处的 0% 逐步增加到最大黑色值（由蒙版决定）处的 100%。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“结构蒙版”、“平滑半径”、伽马和斜率、“反差曲线”、“局部反差（小波）”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKLOWTHRESE_TOOLTIP;暗调界限，低于该界限时，参数将逐步恢复为被“动态范围与曝光”设置修改之前的原始值。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、伽马和斜率、“反差曲线”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKLOWTHRESL_TOOLTIP;暗调界限，低于该界限时，参数将逐步恢复为被对数编码设置修改之前的原始值。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、“反差曲线”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKLOWTHRESRETI_TOOLTIP;暗调界限，低于该界限时，参数将逐步恢复为被Retinex设置修改之前的原始值（仅亮度）。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、伽马和斜率、“反差曲线”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKLOWTHRESS_TOOLTIP;暗调界限，低于该界限时，参数将逐步恢复为被阴影高光设置修改之前的原始值。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、伽马和斜率、“反差曲线”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKLOWTHRESTM_TOOLTIP;暗调界限，低于该界限时，参数将逐步恢复为被色调映射设置修改之前的原始值。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、伽马和斜率、“反差曲线”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKLOWTHRESVIB_TOOLTIP;暗调界限，低于该界限时，参数将逐步恢复为被鲜明度与冷暖设置修改之前的原始值。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、伽马和斜率、“反差曲线”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKLOWTHRESWAV_TOOLTIP;暗调界限，低于该界限时，参数将逐步恢复为被局部反差与小波设置修改之前的原始值。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“平滑半径”、伽马和斜率、“反差曲线”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKLOWTHRES_TOOLTIP;引导滤波从阈值处的 0% 逐步增加到最大黑色值（由蒙版决定）处的 100%。\n 可以使用“蒙版与修改”中的某些工具来改变灰度级：“结构蒙版”、“平滑半径”、伽马和斜率、“反差曲线”、“局部反差（小波）”。\n 在蒙版上使用“可锁定取色器”查看哪些区域会受影响。请确保在设置中把“蒙版背景色”设为 0。
+TP_LOCALLAB_MASKRECOL_TOOLTIP;用于根据 L(L) 或 LC(H) 蒙版（蒙版与修改）中包含的图像亮度信息来调节色彩与亮度设置的效果。\n 必须启用 L(L) 蒙版或 LC(H) 蒙版才能使用此功能。\n 低于暗阈值的“暗”区和高于亮阈值的“亮”区将逐步恢复为被色彩与亮度设置修改之前的原始值 \n 在这两个区域之间，色彩与亮度设置将完全生效。
+TP_LOCALLAB_MASKREEXP_TOOLTIP;用于根据 L(L) 或 LC(H) 蒙版（蒙版与修改）中包含的图像亮度信息来调节“动态范围与曝光”设置的效果。\n 必须启用 L(L) 蒙版或 LC(H) 蒙版才能使用此功能。\n 低于暗阈值的“暗”区和高于亮阈值的“亮”区将逐步恢复为被“动态范围与曝光”设置修改之前的原始值 \n 在这两个区域之间，“动态范围与曝光”设置将完全生效。
+TP_LOCALLAB_MASKRELOG_TOOLTIP;用于根据 L(L) 或 LC(H) 蒙版（蒙版与修改）中包含的图像亮度信息来调节对数编码设置的效果。\n 必须启用 L(L) 蒙版或 LC(H) 蒙版才能使用此功能。\n 低于暗阈值的“暗”区和高于亮阈值的“亮”区将逐步恢复为被对数编码设置修改之前的原始值 - 可用于恢复由色彩传播重建的高光 \n 在这两个区域之间，对数编码设置将完全生效。
+TP_LOCALLAB_MASKRESCB_TOOLTIP;用于根据 L(L) 或 LC(H) 蒙版（蒙版与修改）中包含的图像亮度信息来调节分层反差（仅亮度）设置的效果。\n 必须启用 L(L) 蒙版或 LC(H) 蒙版才能使用此功能。\n 低于暗阈值的“暗”区和高于亮阈值的“亮”区将逐步恢复为被分层反差设置修改之前的原始值 \n 在这两个区域之间，分层反差设置将完全生效。
+TP_LOCALLAB_MASKRESH_TOOLTIP;用于根据 L(L) 或 LC(H) 蒙版（蒙版与修改）中包含的图像亮度信息来调节阴影高光设置的效果。\n 必须启用 L(L) 蒙版或 LC(H) 蒙版才能使用此功能。\n 低于暗阈值的“暗”区和高于亮阈值的“亮”区将逐步恢复为被阴影高光设置修改之前的原始值 \n 在这两个区域之间，阴影高光设置将完全生效。
+TP_LOCALLAB_MASKRESRETI_TOOLTIP;用于根据 L(L) 或 LC(H) 蒙版（蒙版与修改）中包含的图像亮度信息来调节Retinex（仅亮度）设置的效果。\n 必须启用 L(L) 蒙版或 LC(H) 蒙版才能使用此功能。\n 低于暗阈值的“暗”区和高于亮阈值的“亮”区将逐步恢复为被Retinex设置修改之前的原始值 \n 在这两个区域之间，Retinex设置将完全生效。
+TP_LOCALLAB_MASKRESTM_TOOLTIP;用于根据 L(L) 或 LC(H) 蒙版（蒙版与修改）中包含的图像亮度信息来调节色调映射设置的效果。\n 必须启用 L(L) 蒙版或 LC(H) 蒙版才能使用此功能。\n 低于暗阈值的“暗”区和高于亮阈值的“亮”区将逐步恢复为被色调映射设置修改之前的原始值 \n 在这两个区域之间，色调映射设置将完全生效。
+TP_LOCALLAB_MASKRESVIB_TOOLTIP;用于根据 L(L) 或 LC(H) 蒙版（蒙版与修改）中包含的图像亮度信息来调节鲜明度与冷暖设置的效果。\n 必须启用 L(L) 蒙版或 LC(H) 蒙版才能使用此功能。\n 低于暗阈值的“暗”区和高于亮阈值的“亮”区将逐步恢复为被鲜明度与冷暖设置修改之前的原始值 \n 在这两个区域之间，鲜明度与冷暖设置将完全生效。
+TP_LOCALLAB_MASKRESWAV_TOOLTIP;用于根据 L(L) 或 LC(H) 蒙版（蒙版与修改）中包含的图像亮度信息来调节局部反差与小波设置的效果。\n 必须启用 L(L) 蒙版或 LC(H) 蒙版才能使用此功能。\n 低于暗阈值的“暗”区和高于亮阈值的“亮”区将逐步恢复为被局部反差与小波设置修改之前的原始值 \n 在这两个区域之间，局部反差与小波设置将完全生效。
 TP_LOCALLAB_MASKUNUSABLE;蒙版已禁用（在“蒙版与修改”中启用）
 TP_LOCALLAB_MASKUSABLE;蒙版已启用（蒙版与修改）
-!TP_LOCALLAB_MASK_TOOLTIP;You can enable multiple masks for a tool by activating another tool and using only the mask (set the tool sliders to 0 ).\n\nYou can also duplicate the spot and place it close to the first spot. The small variations in the spot references allow you to make fine adjustments.
+TP_LOCALLAB_MASK_TOOLTIP;可以为一个工具启用多个蒙版：启用另一个工具并只使用它的蒙版（把该工具的滑条设为 0）。\n\n也可以复制调整点并把它放在第一个调整点附近。调整点参考值的细微差异可以让你做精细调整。
 TP_LOCALLAB_MEDIAN;中值 低
-!TP_LOCALLAB_MEDIANITER_TOOLTIP;The number of successive iterations carried out by the median filter.
-!TP_LOCALLAB_MEDIAN_TOOLTIP;You can choose a median value in the range 3x3 to 9x9 pixels. Higher values increase noise reduction and blur.
+TP_LOCALLAB_MEDIANITER_TOOLTIP;中值滤波连续执行的迭代次数。
+TP_LOCALLAB_MEDIAN_TOOLTIP;可以在 3x3 到 9x9 像素的范围内选择中值。数值越高，降噪和模糊越强。
 TP_LOCALLAB_MEDNONE;无
 TP_LOCALLAB_MERCOL;色彩
 TP_LOCALLAB_MERDCOL;合并背景（ΔE）
@@ -4386,9 +4386,9 @@ TP_LOCALLAB_MERFOR;颜色减淡
 TP_LOCALLAB_MERFOU;正片叠底
 TP_LOCALLAB_MERGE1COLFRA;与原图/上一步/背景合并
 TP_LOCALLAB_MERGECOLFRA;蒙版：LCh 与结构
-!TP_LOCALLAB_MERGECOLFRMASK_TOOLTIP;Allows you to create masks based on the 3 LCh curves and/or a structure-detection algorithm.
-!TP_LOCALLAB_MERGEMER_TOOLTIP;Takes ΔE into account when merging files (equivalent of scope in this case).
-!TP_LOCALLAB_MERGEOPA_TOOLTIP;Opacity = % of current spot to be merged with original or previous Spot.\nContrast threshold : adjusts result as a function of contrast in original image.
+TP_LOCALLAB_MERGECOLFRMASK_TOOLTIP;可以基于 3 条 LCh 曲线和/或结构检测算法创建蒙版。
+TP_LOCALLAB_MERGEMER_TOOLTIP;合并文件时考虑 ΔE（此时相当于范围）。
+TP_LOCALLAB_MERGEOPA_TOOLTIP;不透明度 = 当前调整点与原图或上一个调整点合并的百分比。\n反差阈值：根据原图的反差调整结果。
 TP_LOCALLAB_MERHEI;叠加
 TP_LOCALLAB_MERHUE;色相
 TP_LOCALLAB_MERLUCOL;亮度
@@ -4406,25 +4406,25 @@ TP_LOCALLAB_MERTHI;颜色加深
 TP_LOCALLAB_MERTHR;差值
 TP_LOCALLAB_MERTWE;排除
 TP_LOCALLAB_MERTWO;减去
-!TP_LOCALLAB_METHODCAP_TOOLTIP;You can use two methods:\n 1. RL Deconvolution, which is similar to the version used in the Detail tab.\n\n 2. Capture Deconvolution, which is an adaptation of Capture Sharpening in the Raw tab for use in Selective Editing, and allows you to use this algorithm either in standalone mode or after denoising. Capture Sharpening's capabilities allow for finer sharpening control by allowing you to soften the corner sharpness to enhance focus on the main subject. The results in the TIF/JPG outputs correspond to those in the 'fit to screen'view.
-!TP_LOCALLAB_METHOD_TOOLTIP;'Enhanced + chroma denoise' significantly increases processing times.\nBut reduce artifacts.
+TP_LOCALLAB_METHODCAP_TOOLTIP;可以使用两种方法：\n 1. RL 反卷积，与细节选项卡中使用的版本类似。\n\n 2. 捕获反卷积，它是把 Raw 选项卡中的捕获锐化改造后用于局部编辑，可以单独使用该算法，也可以在降噪之后使用。捕获锐化的能力可以实现更精细的锐化控制：可以减弱边角的锐度，从而突出主体的焦点。TIF/JPG 输出的结果与“适应屏幕”视图中的一致。
+TP_LOCALLAB_METHOD_TOOLTIP;“增强 + 色度降噪”会显著增加处理时间。\n但能减少伪影。
 TP_LOCALLAB_MICHBLACK;减去线性黑点
 TP_LOCALLAB_MICHBLWH;减去黑点=%1 白点=%2
 !TP_LOCALLAB_MICHBLWHNO;---
-!TP_LOCALLAB_MICHBLWH_TOOLTIP;Allows you to see the effect of the two checkboxes:\n * Subtract black: reduces the value of the linear black point to almost zero by subtracting the indicated value.\n * White point: after subtracting the black point, the RGB values are divided by the ‘Linear dynamic range’ (i.e. the displayed white point value minus the old black point).\n\n Reducing the black point to almost zero and taking into account the linear dynamic range as described allows the algorithm to produce better contrast and better consideration of the real gamut).\n Activating JDx Matrix’will reduce the ‘Linear dynamic range’ and change the color balance.
-!TP_LOCALLAB_MICHDR_TOOLTIP; Subtract linear black: reduces the linear black point values to almost zero. This makes optimal use of the available data by increasing overall contrast and reducing haze effects.\n\nLinear dynamic range: allows you to include any data outside the color gamut (in the case of sunsets for example). Enabling ‘Highlight reconstruction’ > Color Propagation can provide a significant improvement.\n\nAttenuation threshold: uses an exponential function to reduce highlights likely to cause gamut overshoot.
+TP_LOCALLAB_MICHBLWH_TOOLTIP;可以看到两个复选框的效果：\n * 减去黑点：通过减去所示数值，把线性黑点的值降到接近零。\n * 白点：减去黑点后，RGB 值除以“线性动态范围”（即显示的白点值减去原来的黑点）。\n\n 把黑点降到接近零，并按上述方式考虑线性动态范围，可以让算法产生更好的反差，并更好地考虑实际色域。\n 启用 JDx 矩阵会减小“线性动态范围”并改变色彩平衡。
+TP_LOCALLAB_MICHDR_TOOLTIP; 减去线性黑点：把线性黑点的值降到接近零。这样可以提高整体反差、减轻雾感，从而最充分地利用现有数据。\n\n线性动态范围：可以把色域之外的数据也包含进来（例如日落的情况）。启用“高光重建”> 色彩传播可以带来明显改善。\n\n衰减阈值：使用指数函数减弱可能导致色域溢出的高光。
 TP_LOCALLAB_MICHEXP;曝光（Ev）
 TP_LOCALLAB_MICHFRA;Michaelis-Menten 设置
 TP_LOCALLAB_MICHHIGH;衰减阈值
 TP_LOCALLAB_MICHJDX;JDx 矩阵
-!TP_LOCALLAB_MICHJDX_TOOLTIP;The JDx checkbox allows the user to choose either the default or the JDx LMS transformations. LMS is a color space transform which represents the response (sensitivity) of the three types of cone cell in the human eye at long, medium, and short wavelengths.\n\nThese transformations are matrices that modify each of the R G B channels for each individual pixel, giving priority to certain dominant colors depending on the selected option\n * Unchecked: leaves the data unchanged (default).\n * JDx: accentuates each of the R G B channels by acting on X Y Z such that the LMS data is perceived as being more colorful.
+TP_LOCALLAB_MICHJDX_TOOLTIP;JDx 复选框让用户选择默认的或 JDx 的 LMS 变换。LMS 是一种色彩空间变换，表示人眼三种视锥细胞在长、中、短波长处的响应（灵敏度）。\n\n这些变换是矩阵，修改每个像素的 R G B 各通道，并根据所选选项优先突出某些主色\n * 未勾选：保持数据不变（默认）。\n * JDx：通过作用于 X Y Z 来强化 R G B 各通道，使 LMS 数据看起来色彩更丰富。
 TP_LOCALLAB_MICHKPAR;拐点强度（K）
 TP_LOCALLAB_MICHOUT;输出最大值钳制
 TP_LOCALLAB_MICHSAT;饱和度
 TP_LOCALLAB_MICHSPAR;输出缩放（S）
 TP_LOCALLAB_MICHTONEFRA;色调曲线
 TP_LOCALLAB_MICHWHITE;线性动态范围
-!TP_LOCALLAB_MICH_TOOLTIP;This tone mapper uses the Michaelis-Menten equation, which is borrowed from biochemistry to describe enzyme kinetics. In image processing, it creates a smooth, saturating curve that is useful for tone mapping.\n\n * Exposure: Adjusts the input image brightness.\n * Output scale (S): Controls the maximum asymptotic value of the curve; essentially the output white level.\n * Knee strength (K): Determines the “knee” of the curve. Lower values result in a sharper transition to the compressed highlight region.\n * Saturation: Adjusts color saturation post-tone mapping.\n * Output max clamp: Sets the final clipping point for the output values.
+TP_LOCALLAB_MICH_TOOLTIP;此色调映射器使用 Michaelis-Menten 方程，该方程借自生物化学，原本用于描述酶动力学。在图像处理中，它产生一条平滑的饱和曲线，适合用于色调映射。\n\n * 曝光：调整输入图像的亮度。\n * 输出缩放（S）：控制曲线的最大渐近值，本质上就是输出白电平。\n * 拐点强度（K）：决定曲线的“拐点”。数值越低，向被压缩的高光区域的过渡越陡。\n * 饱和度：调整色调映射之后的色彩饱和度。\n * 输出最大值钳制：设定输出值的最终裁切点。
 TP_LOCALLAB_MIDTCIE;数值
 TP_LOCALLAB_MIDTCIEFRA;中间调
 TP_LOCALLAB_MIDTCIEM1;伽马与斜率之前
@@ -4432,25 +4432,25 @@ TP_LOCALLAB_MIDTCIEM2;伽马与斜率之后
 TP_LOCALLAB_MIDTCIEM3;CAM16 之后
 TP_LOCALLAB_MIDTCIEMAIN;中间调
 TP_LOCALLAB_MLABEL;还原数据 最小=%1 最大=%2
-!TP_LOCALLAB_MLABEL_TOOLTIP;The values should be close to Min=0 Max=32768 (log mode) but other values are possible.You can adjust 'Clip restored data (gain)' and 'Offset' to normalize.\nRecovers image data without blending.
+TP_LOCALLAB_MLABEL_TOOLTIP;数值应接近 最小=0 最大=32768（对数模式），但其他数值也可以。可以调整“裁切还原数据（增益）”和“偏移”来归一化。\n不经混合恢复图像数据。
 TP_LOCALLAB_MRFIV;背景
 TP_LOCALLAB_MRFOU;上一个调整点
-!TP_LOCALLAB_MULTIPL_TOOLTIP;Wide-range tone adjustment: -18EV to +4EV. The first slider acts on very dark tones between -18EV and -6EV. The last slider acts on light tones up to 4EV.
-!TP_LOCALLAB_NLDENOISENLGAM_TOOLTIP;Lower values preserve details and texture, higher values increase denoise.\nIf gamma = 3.0 Luminance 'linear' is used.
-!TP_LOCALLAB_NLDENOISENLITER_TOOLTIP;Run multiple iterations of Nlmeans. Results are often better with multiple iterations and low Strength.
-!TP_LOCALLAB_NLDENOISENLPAT_TOOLTIP;Use this slider to adapt the amount of denoise to the size of the objects to be processed.
-!TP_LOCALLAB_NLDENOISENLRAD_TOOLTIP;Higher values increase denoise at the expense of processing time.
-!TP_LOCALLAB_NLDENOISE_TOOLTIP;'Detail recovery' acts on a Laplacian transform to target uniform areas rather than areas with detail.
+TP_LOCALLAB_MULTIPL_TOOLTIP;宽范围影调调整：-18EV 到 +4EV。第一个滑条作用于 -18EV 到 -6EV 之间的极暗影调。最后一个滑条作用于最高到 4EV 的亮调。
+TP_LOCALLAB_NLDENOISENLGAM_TOOLTIP;数值较低时保留细节和纹理，数值较高时增强降噪。\n伽马 = 3.0 时使用“线性”亮度。
+TP_LOCALLAB_NLDENOISENLITER_TOOLTIP;运行多次非局部均值迭代。多次迭代配合低强度，结果往往更好。
+TP_LOCALLAB_NLDENOISENLPAT_TOOLTIP;用此滑条让降噪量适应待处理对象的大小。
+TP_LOCALLAB_NLDENOISENLRAD_TOOLTIP;数值越高降噪越强，代价是处理时间更长。
+TP_LOCALLAB_NLDENOISE_TOOLTIP;“细节恢复”作用于拉普拉斯变换，以针对均匀区域而非有细节的区域。
 TP_LOCALLAB_NLFRA;非局部均值：亮度
-!TP_LOCALLAB_NLFRAME_TOOLTIP;Non-local means denoising takes a mean of all pixels in the image, weighted by how similar they are to the target pixel.\nReduces loss of detail compared with local mean algorithms.\nOnly luminance noise is taken into account. Chrominance noise is best processed using wavelets and Fourier transforms (DCT).\nCan be used in conjunction with 'Luminance denoise by level' or on its own.
+TP_LOCALLAB_NLFRAME_TOOLTIP;非局部均值降噪对图像中所有像素取均值，并按它们与目标像素的相似程度加权。\n与局部均值算法相比，细节损失更少。\n只考虑亮度噪点。色度噪点最好用小波和傅里叶变换（DCT）处理。\n可以与“分层亮度降噪”配合使用，也可以单独使用。
 TP_LOCALLAB_NLITER;迭代次数
 TP_LOCALLAB_NLPAT;最大图块尺寸
 TP_LOCALLAB_NLRAD;最大半径
 TP_LOCALLAB_NOISECHROCOARSE;粗糙色度（小波）
-!TP_LOCALLAB_NOISECHROC_TOOLTIP;If superior to zero, high quality algorithm is enabled.\nCoarse is for slider >=0.02.
+TP_LOCALLAB_NOISECHROC_TOOLTIP;大于零时启用高质量算法。\n粗糙对应滑条 >=0.02。
 TP_LOCALLAB_NOISECHRODETAIL;色度细节恢复
 TP_LOCALLAB_NOISECHROFINE;精细色度（小波）
-!TP_LOCALLAB_NOISEGAM_TOOLTIP;If gamma = 1 Luminance 'Lab' is used. If gamma = 3.0 Luminance 'linear' is used.\nLower values preserve details and texture, higher values increase denoise.
+TP_LOCALLAB_NOISEGAM_TOOLTIP;伽马 = 1 时使用“Lab”亮度。伽马 = 3.0 时使用“线性”亮度。\n数值较低时保留细节和纹理，数值较高时增强降噪。
 TP_LOCALLAB_NOISELEQUAL;黑白均衡器
 TP_LOCALLAB_NOISELUMCOARSE;粗糙亮度（小波）
 TP_LOCALLAB_NOISELUMFINE;精细亮度 1（小波）
@@ -4458,70 +4458,70 @@ TP_LOCALLAB_NOISELUMFINETWO;精细亮度 2（小波）
 TP_LOCALLAB_NOISELUMFINEZERO;精细亮度 0（小波）
 !TP_LOCALLAB_NUL_TOOLTIP;.
 TP_LOCALLAB_ORIGLC;仅与原图合并
-!TP_LOCALLAB_ORRETILAP_TOOLTIP;Modifies ΔE prior to any changes made by 'Scope'. This allows you to differentiate the action for different parts of the image (with respect to the background for example).
-!TP_LOCALLAB_ORRETISTREN_TOOLTIP;Acts on the Laplacian threshold, the greater the action, the more the differences in contrast will be reduced.
+TP_LOCALLAB_ORRETILAP_TOOLTIP;在“范围”产生任何更改之前修改 ΔE。这样可以对图像的不同部分区分作用（例如相对于背景）。
+TP_LOCALLAB_ORRETISTREN_TOOLTIP;作用于拉普拉斯阈值，作用越强，反差差异被减小得越多。
 TP_LOCALLAB_PDE;反差衰减器 - 动态范围压缩
 TP_LOCALLAB_PDEFRA;反差衰减器 ƒ
-!TP_LOCALLAB_PDEFRAME_TOOLTIP;PDE IPOL algorithm adapted for RawTherapee: gives different results and requires different settings compared to main-menu 'Exposure'.\nMay be useful for under-exposed or high dynamic range images.
-!TP_LOCALLAB_PRECAMGAMUT_TOOLTIP;If checked, ensures a gamut control just after primary conversion to XYZ.
-!TP_LOCALLAB_PRECAMREFIMAIN_TOOLTIP;Allows you to move the white-point in such a way that it approaches the dominant color. This action modifies the purity. In combination with "Shift x" and "Shift y", allows you to carry out moderate color toning.
-!TP_LOCALLAB_PRECAMREFI_TOOLTIP;Allows you to move the white-point in such a way that it approaches the dominant color. This action modifies the purity.
-!TP_LOCALLAB_PRECAM_TOOLTIP;Source Data Adjustments modifies the dynamic range (using log encoding), image tones (including midtones) and primaries (using a simplified Abstract Profile), just prior to the CIECAM process. The following parameters can be adjusted\nGamma: acts mainly on light tones\nSlope: acts mainly on dark tones. The algorithm ensures that there is continuity between the linear and parabolic parts of the curve for all combinations of gamma and slope (values >1) .\nDestination primaries: Allows you to adjust the destination primaries to restore or change the image color (saturation). The color balance is largely preserved when the Working Profile and ‘Destination primaries’ are similar. The Working Profile is not modified. You can also fine tune the primaries and illuminant (white-point). Moving a primary away from the white point reduces saturation and vice versa. Pay attention to the gamut.
+TP_LOCALLAB_PDEFRAME_TOOLTIP;为 RawTherapee 改造的 PDE IPOL 算法：与主菜单的“曝光”相比，结果不同，所需设置也不同。\n可能适用于欠曝或高动态范围图像。
+TP_LOCALLAB_PRECAMGAMUT_TOOLTIP;勾选后，在基色转换到 XYZ 之后立即进行色域控制。
+TP_LOCALLAB_PRECAMREFIMAIN_TOOLTIP;可以移动白点，使其靠近主色。此操作会改变纯度。与“偏移 x”和“偏移 y”配合，可以进行适度的调色。
+TP_LOCALLAB_PRECAMREFI_TOOLTIP;可以移动白点，使其靠近主色。此操作会改变纯度。
+TP_LOCALLAB_PRECAM_TOOLTIP;源数据调整在 CIECAM 处理之前，修改动态范围（使用对数编码）、图像影调（包括中间调）和基色（使用简化的抽象配置文件）。可以调整以下参数\n伽马：主要作用于亮调\n斜率：主要作用于暗调。对于伽马和斜率的所有组合（数值 >1），算法都保证曲线的线性部分与抛物线部分之间连续。\n目标基色：可以调整目标基色，以恢复或改变图像色彩（饱和度）。当工作配置文件与“目标基色”相近时，色彩平衡在很大程度上得到保留。工作配置文件不会被修改。还可以微调基色和光源（白点）。把基色移离白点会降低饱和度，反之亦然。请留意色域。
 TP_LOCALLAB_PRIMILLFRAME;基色与光源
 TP_LOCALLAB_PROCESSWAV;用小波显示被修改区域
-!TP_LOCALLAB_PROCESSWAV_TOOLTIP;Wavelet decomposition:\nShows the changes made by the wavelet settings.\n\nYou see the changes made to the decomposed image, factoring in the deltaE and transitions, when you modify the wavelet settings. Note that this is different from Wavelet levels in the Advanced tab in which you always see the results of the decomposition.
+TP_LOCALLAB_PROCESSWAV_TOOLTIP;小波分解：\n显示小波设置所做的更改。\n\n修改小波设置时，你看到的是分解后图像上的更改，其中已计入 deltaE 和过渡。注意这与高级选项卡中的小波层级不同，后者始终显示分解的结果。
 TP_LOCALLAB_QJMODE;色调映射算子 Q(CAM16) 与 J(Jz)
 TP_LOCALLAB_QJMODE_511;5.11 已弃用
 !TP_LOCALLAB_QJMODE_512;5.12
-!TP_LOCALLAB_QJMODE_TOOLTIP;The tone-mapping operators that use brightness data (Q for CAM16 and J for Jz) have been modified in RawTherapee version 5.12. This allows you to select either the current or the deprecated version.
+TP_LOCALLAB_QJMODE_TOOLTIP;使用视明度数据（CAM16 的 Q 和 Jz 的 J）的色调映射算子在 RawTherapee 5.12 版中做了修改。这里可以选择当前版本或已弃用的版本。
 TP_LOCALLAB_QUAL_METHOD;全局质量
 TP_LOCALLAB_QUANONEALL;关闭
 TP_LOCALLAB_QUANONEWAV;仅非局部均值
-!TP_LOCALLAB_RADIUS_TOOLTIP;Uses a Fast Fourier Transform for radius > 30.
+TP_LOCALLAB_RADIUS_TOOLTIP;半径 > 30 时使用快速傅里叶变换。
 TP_LOCALLAB_RADMASKCOL;平滑半径
-!TP_LOCALLAB_RECOTHRES02_TOOLTIP;If the 'Recovery threshold' value is greater than 1, the mask in Mask and Modifications takes into account any previous modifications made to the image but not those made with the current tool (e.g. Color and Light, Wavelet, CAM16, etc.)\nIf the value of the 'Recovery threshold' is less than 1, the mask in Mask and Modifications does not take into account any previous modifications to the image.\n\nIn both cases, the 'Recovery threshold' acts on the masked image as modified by the current tool (Color and Light, Wavelet, CAM16, etc.).
+TP_LOCALLAB_RECOTHRES02_TOOLTIP;如果“恢复阈值”大于 1，“蒙版与修改”中的蒙版会考虑此前对图像所做的任何修改，但不考虑当前工具（例如色彩与亮度、小波、CAM16 等）所做的修改\n如果“恢复阈值”小于 1，“蒙版与修改”中的蒙版不考虑此前对图像的任何修改。\n\n两种情况下，“恢复阈值”都作用于经当前工具（色彩与亮度、小波、CAM16 等）修改后的蒙版图像。
 TP_LOCALLAB_RECURS;递归参考
-!TP_LOCALLAB_RECURS_TOOLTIP;Forces the algorithm to recalculate the references after each tool is applied.\nAlso useful for working with masks.
-!TP_LOCALLAB_REPARCOL_TOOLTIP;Allows you to adjust the relative strength of the Color and Light image with respect to the original image.
-!TP_LOCALLAB_REPARDEN_TOOLTIP;Allows you to adjust the relative strength of the denoised image with respect to the original image.
-!TP_LOCALLAB_REPAREXP_TOOLTIP;Allows you to adjust the relative strength of the Dynamic Range and Exposure image with respect to the original image.
-!TP_LOCALLAB_REPARSH_TOOLTIP;Allows you to adjust the relative strength of the Shadows/Highlights and Tone Equalizer image with respect to the original image.
-!TP_LOCALLAB_REPARTM_TOOLTIP;Allows you to adjust the relative strength of the Tone mapping image with respect to the original image.
-!TP_LOCALLAB_REPARW_TOOLTIP;Allows you to adjust the relative strength of the local contrast and wavelet image with respect to the original image.
+TP_LOCALLAB_RECURS_TOOLTIP;强制算法在每个工具应用之后重新计算参考值。\n在使用蒙版时也有用。
+TP_LOCALLAB_REPARCOL_TOOLTIP;可以调整色彩与亮度图像相对于原图的强度。
+TP_LOCALLAB_REPARDEN_TOOLTIP;可以调整降噪后图像相对于原图的强度。
+TP_LOCALLAB_REPAREXP_TOOLTIP;可以调整动态范围与曝光图像相对于原图的强度。
+TP_LOCALLAB_REPARSH_TOOLTIP;可以调整阴影/高光与色调均衡器图像相对于原图的强度。
+TP_LOCALLAB_REPARTM_TOOLTIP;可以调整色调映射图像相对于原图的强度。
+TP_LOCALLAB_REPARW_TOOLTIP;可以调整局部反差与小波图像相对于原图的强度。
 TP_LOCALLAB_RESIDBLUR;模糊残差图像
 TP_LOCALLAB_RESIDCHRO;残差图像色度
 TP_LOCALLAB_RESIDCOMP;压缩残差图像
 TP_LOCALLAB_RESIDCONT;残差图像对比度
 !TP_LOCALLAB_RETIFRA;Retinex
-!TP_LOCALLAB_RETIFRAME_TOOLTIP;Retinex can be useful for processing images: \nthat are blurred, foggy or hazy (in addition to Dehaze).\nthat contain large differences in luminance.\nIt can also be used for special effects (tone mapping).
+TP_LOCALLAB_RETIFRAME_TOOLTIP;Retinex 适合处理以下图像：\n模糊、有雾或朦胧的图像（作为去雾的补充）。\n亮度差异很大的图像。\n也可用于特殊效果（色调映射）。
 TP_LOCALLAB_RETIM;原始 Retinex
 TP_LOCALLAB_RETITOOLFRA;Retinex 工具
-!TP_LOCALLAB_RETI_LIGHTDARK_TOOLTIP;Has no effect when the value of 'Lightness = 1' or 'Darkness =2'.\nFor other values, the last step of a 'Multiple scale Retinex' algorithm (similar to 'local contrast') is applied. These 2 cursors, associated with 'Strength' allow you to make adjustments upstream of local contrast.
-!TP_LOCALLAB_RETI_LIMDOFFS_TOOLTIP;Adjusts the internal parameters to optimize the response.\nPreferable to keep the 'Restored data' values close to Min=0 and Max=32768 (log mode), but other values are possible.
-!TP_LOCALLAB_RETI_LOGLIN_TOOLTIP;Logarithm mode introduces more contrast but will also generate more halos.
-!TP_LOCALLAB_RETI_NEIGH_VART_TOOLTIP;The radius and variance sliders allow you adjust haze and target either the foreground or the background.
-!TP_LOCALLAB_RETI_SCALE_TOOLTIP;If Scale=1, Retinex behaves like local contrast with additional possibilities.\nIncreasing the value of Scale increases the intensity of the recursive action at the expense of processing time.
-!TP_LOCALLAB_RSTPROTECT_TOOLTIP;Red and skin-tone protection affects the Saturation, Chroma and Colorfulness sliders.
+TP_LOCALLAB_RETI_LIGHTDARK_TOOLTIP;当“明度 = 1”或“暗度 = 2”时不起作用。\n对于其他数值，会应用“多尺度 Retinex”算法的最后一步（类似“局部反差”）。这两个滑条与“强度”配合，可以在局部反差的上游进行调整。
+TP_LOCALLAB_RETI_LIMDOFFS_TOOLTIP;调整内部参数以优化响应。\n最好让“还原数据”的数值接近 最小=0 和 最大=32768（对数模式），但其他数值也可以。
+TP_LOCALLAB_RETI_LOGLIN_TOOLTIP;对数模式带来更多反差，但也会产生更多光晕。
+TP_LOCALLAB_RETI_NEIGH_VART_TOOLTIP;半径和方差滑条可以调整雾感，并针对前景或背景。
+TP_LOCALLAB_RETI_SCALE_TOOLTIP;如果缩放=1，Retinex 的表现类似局部反差，但有更多可能性。\n增大缩放的数值会增强递归作用的强度，代价是处理时间更长。
+TP_LOCALLAB_RSTPROTECT_TOOLTIP;红色和肤色保护影响饱和度、色度和视彩度滑条。
 TP_LOCALLAB_SATCIE;饱和度控制
-!TP_LOCALLAB_SATCIE_TOOLTIP;Modifies the image saturation whenever the gamma/slope ratio is different from 2.4/12.92. It aims to compensate for the desaturation caused by significant luminance variations.\nValues between 0.2 and 1.0 are often sufficient.
+TP_LOCALLAB_SATCIE_TOOLTIP;只要伽马/斜率之比不同于 2.4/12.92，就会修改图像饱和度。其目的是补偿亮度大幅变化造成的去饱和。\n0.2 到 1.0 之间的数值通常就足够了。
 TP_LOCALLAB_SCALEGR;缩放
 TP_LOCALLAB_SCALERETI;缩放
 TP_LOCALLAB_SCALTM;缩放
 TP_LOCALLAB_SCOPEMASK;范围（ΔE 图像蒙版）
-!TP_LOCALLAB_SCOPEMASK_TOOLTIP;Enabled if ΔE Image Mask is enabled.\nLow values avoid retouching selected area.
-!TP_LOCALLAB_SENSIEXCLU_TOOLTIP;Adjust the colors to be excluded.
-!TP_LOCALLAB_SENSIMASK_TOOLTIP;Scope adjustment specific to common mask tool.\nActs on the difference between the original image and the mask.\nUses the luma, chroma and hue references from the center of the spot\n\nYou can also adjust the ΔE of the mask itself by using 'Scope (ΔE image mask)' in 'Settings' > 'Mask and Merge'.
-!TP_LOCALLAB_SENSI_TOOLTIP;Adjusts the scope of the action:\nSmall values limit the action to colors similar to those in the center of the spot.\nHigh values let the tool act on a wider range of colors.
+TP_LOCALLAB_SCOPEMASK_TOOLTIP;在启用 ΔE 图像蒙版时启用。\n低数值可避免修改所选区域。
+TP_LOCALLAB_SENSIEXCLU_TOOLTIP;调整要排除的颜色。
+TP_LOCALLAB_SENSIMASK_TOOLTIP;通用蒙版工具专用的范围调整。\n作用于原图与蒙版之间的差异。\n使用调整点中心的亮度、色度和色相参考值\n\n也可以用“设置”>“蒙版与合并”中的“范围（ΔE 图像蒙版）”调整蒙版自身的 ΔE。
+TP_LOCALLAB_SENSI_TOOLTIP;调整作用范围：\n小数值把作用限制在与调整点中心相近的颜色上。\n高数值让工具作用于更广的颜色范围。
 TP_LOCALLAB_SH4;Michaelis-Menten 色调映射器（MM）
-!TP_LOCALLAB_SHADHMASK_TOOLTIP;Lowers the highlights of the mask in the same way as the shadows/highlights algorithm.
-!TP_LOCALLAB_SHADMASK_TOOLTIP;Lifts the shadows of the mask in the same way as the shadows/highlights algorithm.
-!TP_LOCALLAB_SHADOWHIGHLIGHT_TOOLTIP;Adjust shadows and highlights either with 'Shadows Highlights' sliders, 'Tone Equalizer', 'Generalized Hyperbolic Stretch' (GHS), or 'Michaelis-Menten Tone mapping' (MM).\nCan be used instead of, or in conjunction with the Exposure module, or for GHS / MM as a tone mapper.
+TP_LOCALLAB_SHADHMASK_TOOLTIP;以与阴影/高光算法相同的方式压低蒙版的高光。
+TP_LOCALLAB_SHADMASK_TOOLTIP;以与阴影/高光算法相同的方式提亮蒙版的阴影。
+TP_LOCALLAB_SHADOWHIGHLIGHT_TOOLTIP;用“阴影高光”滑条、“色调均衡器”、“广义双曲拉伸”（GHS）或“Michaelis-Menten 色调映射”（MM）调整阴影和高光。\n可以代替曝光模块使用，也可以与之配合；GHS / MM 还可以作为色调映射器使用。
 TP_LOCALLAB_SHARCAPFRAME;边角
 TP_LOCALLAB_SHARDAMPING;阻尼
 TP_LOCALLAB_SHARFRAME;修改
 TP_LOCALLAB_SHARRLFRAME;RL 反卷积设置
 TP_LOCALLAB_SHORTC;“L”蒙版短曲线
-!TP_LOCALLAB_SHORTCMASK_TOOLTIP;Short circuit the 2 curves L(L) and L(H).\nAllows you to mix the current image with the original image modified by the mask job.\nUsable with masks 2, 3, 4, 6, 7.
+TP_LOCALLAB_SHORTCMASK_TOOLTIP;使 L(L) 和 L(H) 两条曲线短路。\n可以把当前图像与经蒙版处理修改后的原图混合。\n可用于蒙版 2、3、4、6、7。
 TP_LOCALLAB_SHOWC;蒙版与修改
 TP_LOCALLAB_SHOWC1;合并文件
 TP_LOCALLAB_SHOWCB;蒙版与修改
@@ -4530,9 +4530,9 @@ TP_LOCALLAB_SHOWE;蒙版与修改
 TP_LOCALLAB_SHOWFOURIER;傅里叶 ƒ(dct)
 TP_LOCALLAB_SHOWLAPLACE;∆ 拉普拉斯（首次）
 TP_LOCALLAB_SHOWLC;蒙版与修改
-!TP_LOCALLAB_SHOWMASKCOL_TOOLTIP;Displays Masks and Modifications.\nBeware, you can only view one tool mask at a time.\nShow modified image: shows the modified image including the effect of any adjustments and masks.\nShow modified areas without mask: shows the modifications before any masks are applied.\nShow modified areas with mask: shows the modifications after a mask has been applied.\nShow mask: shows the aspect of the mask including the effect of any curves and filters.\nShow spot structure: allows you to see the structure-detection mask when the 'Spot structure' cursor is activated (when available).\nNote: The mask is applied before the shape detection algorithm.
-!TP_LOCALLAB_SHOWMASKSOFT_TOOLTIP;Allows you to visualize the different stages of the Fourier process.\n Laplace - calculates the second derivative of the Laplace transform as a function of the threshold.\nFourier - shows the Laplacian transform with DCT.\nPoisson - shows the solution of the Poisson DCE.\nNo luminance normalization - shows result without any luminance normalization.
-!TP_LOCALLAB_SHOWMASKTYP_TOOLTIP;Can be used with 'Mask And Modifications'.\nIf 'Blur and noise' is selected, the mask cannot be used for Denoise.\nIf Denoise is selected, the mask cannot be used for 'Blur and noise'.\nIf 'Blur and noise + Denoise' is selected, the mask is shared. Note that in this case, the Scope sliders for both 'Blur and noise' and Denoise will be active so it is advisable to use the option 'Show modifications with mask' when making any adjustments.
+TP_LOCALLAB_SHOWMASKCOL_TOOLTIP;显示蒙版与修改。\n注意，一次只能查看一个工具的蒙版。\n显示修改后的图像：显示包含所有调整和蒙版效果的修改后图像。\n显示被修改区域（无蒙版）：显示应用任何蒙版之前的修改。\n显示被修改区域（含蒙版）：显示应用蒙版之后的修改。\n显示蒙版：显示蒙版的样子，包含所有曲线和滤镜的效果。\n显示调整点结构：在“调整点结构”滑条启用时（如可用），可以查看结构检测蒙版。\n注意：蒙版在形状检测算法之前应用。
+TP_LOCALLAB_SHOWMASKSOFT_TOOLTIP;可以查看傅里叶处理的各个阶段。\n 拉普拉斯 - 根据阈值计算拉普拉斯变换的二阶导数。\n傅里叶 - 显示用 DCT 得到的拉普拉斯变换。\n泊松 - 显示泊松 DCE 的解。\n不做亮度归一化 - 显示未经任何亮度归一化的结果。
+TP_LOCALLAB_SHOWMASKTYP_TOOLTIP;可与“蒙版与修改”配合使用。\n如果选择“模糊与噪点”，蒙版不能用于降噪。\n如果选择降噪，蒙版不能用于“模糊与噪点”。\n如果选择“模糊与噪点 + 降噪”，蒙版是共用的。注意这种情况下，“模糊与噪点”和降噪的范围滑条都会生效，因此建议在调整时使用“显示修改（含蒙版）”选项。
 TP_LOCALLAB_SHOWMNONE;显示修改后的图像
 TP_LOCALLAB_SHOWMODIF;显示被修改区域（无蒙版）
 TP_LOCALLAB_SHOWMODIF2;显示被修改区域
@@ -4546,7 +4546,7 @@ TP_LOCALLAB_SHOWSTRUC;显示调整点结构（高级）
 TP_LOCALLAB_SHOWSTRUCEX;显示调整点结构（高级）
 TP_LOCALLAB_SHOWT;蒙版与修改
 TP_LOCALLAB_SHOWVI;蒙版与修改
-!TP_LOCALLAB_SHTRC_TOOLTIP;Based on 'working profile' (only those provided), modifies the tones of the image by acting on a TRC (Tone Response Curve).\nGamma acts mainly on light tones.\nSlope acts mainly on dark tones.\nIt is recommended that the TRC of both devices (monitor and output profile) be sRGB (default).
+TP_LOCALLAB_SHTRC_TOOLTIP;基于“工作配置文件”（仅限自带的那些），通过作用于 TRC（色调响应曲线）来修改图像的影调。\n伽马主要作用于亮调。\n斜率主要作用于暗调。\n建议两个设备（显示器和输出配置文件）的 TRC 都是 sRGB（默认）。
 TP_LOCALLAB_SIGBLACKSSCIE;黑色分布
 !TP_LOCALLAB_SIGCIE;Sigmoid
 TP_LOCALLAB_SIGFRA;基于 Sigmoid Q 与斜率
@@ -4554,29 +4554,29 @@ TP_LOCALLAB_SIGFRA11;Sigmoid Q（已弃用）
 TP_LOCALLAB_SIGGAMJCIE;伽马
 !TP_LOCALLAB_SIGJZFRA;Sigmoid Jz
 TP_LOCALLAB_SIGJZFRA11;Sigmoid Jz（已弃用）
-!TP_LOCALLAB_SIGMOID16_TOOLTIP;Allows you to simulate a tone mapping appearance using both 'CIECAM' and 'Sigmoid Q' or 'Slope based Q'. Sigmoid Q has three sliders:\na) Contrast acts on the shape of the sigmoid curve and consequently on the strength\nb) Skew (gray point) distributes the action according to the luminance.\nc) Display White point (cd/m2) - mode advanced. \n\nSlope based has only one slider: Gray balance (slope).\n\nThis new version of Sigmoid is incompatible with previous versions 5.11 and earlier. Log encoding inside CIECAM is removed.
+TP_LOCALLAB_SIGMOID16_TOOLTIP;可以同时使用“CIECAM”和“Sigmoid Q”或“基于斜率的 Q”来模拟色调映射的观感。Sigmoid Q 有三个滑条：\na) 对比度作用于 sigmoid 曲线的形状，从而影响强度\nb) 偏斜（灰点）根据亮度分配作用。\nc) 显示器白点（cd/m2）- 高级模式。\n\n基于斜率只有一个滑条：灰平衡（斜率）。\n\n这个新版 Sigmoid 与 5.11 及更早的版本不兼容。CIECAM 内部的对数编码已被移除。
 TP_LOCALLAB_SIGMOIDBL;显示器白点（cd/m2）
 TP_LOCALLAB_SIGMOIDBL11;混合
 TP_LOCALLAB_SIGMOIDLOGAUTO;自动阈值
-!TP_LOCALLAB_SIGMOIDLOGEV_TOOLTIP;If the combo box selection 'Black Ev and White Ev' is 'Sigmoid and Log encoding' instead of 'Sigmoid only', the two algorithms 'Log encoding' and 'Sigmoid' are used together.
+TP_LOCALLAB_SIGMOIDLOGEV_TOOLTIP;如果“黑点 Ev 与白点 Ev”下拉框选的是“Sigmoid 和对数编码”而不是“仅 Sigmoid”，则“对数编码”和“Sigmoid”两种算法会一起使用。
 TP_LOCALLAB_SIGMOIDNORMCIE;场景 Yb 缩放
 TP_LOCALLAB_SIGMOIDNORMCIE11;归一化亮度
-!TP_LOCALLAB_SIGMOIDNORMCIEBLEND_TOOLTIP;Blend acts on the final aspect of the image, contrast and luminance. Ratio between original and output image.
-!TP_LOCALLAB_SIGMOIDNORMCIEDISP_TOOLTIP;Allows you to adapt the white point to the peak luminance of the display device. Its position in the processing pipeline is not optimal so use with caution.
-!TP_LOCALLAB_SIGMOIDNORMCIE_TOOLTIP;Reconstruct luminance so that the mean and variance of the output image take into account those of the original.\nAll the adjustments acting on J or Q are taken into account, including those which are not relative to Sigmoid Q.
+TP_LOCALLAB_SIGMOIDNORMCIEBLEND_TOOLTIP;混合作用于图像的最终样貌、反差和亮度。即原图与输出图像之间的比例。
+TP_LOCALLAB_SIGMOIDNORMCIEDISP_TOOLTIP;可以让白点适应显示设备的峰值亮度。它在处理流程中的位置并不理想，请谨慎使用。
+TP_LOCALLAB_SIGMOIDNORMCIE_TOOLTIP;重建亮度，使输出图像的均值和方差考虑原图的均值和方差。\n所有作用于 J 或 Q 的调整都会被考虑，包括与 Sigmoid Q 无关的调整。
 TP_LOCALLAB_SIGMOIDQJ;色调映射 Q
 TP_LOCALLAB_SIGMOIDQJ11;黑点 Ev 与白点 Ev
-!TP_LOCALLAB_SIGMOIDQJCOMPRCIE_TOOLTIP;When the combo box selection 'Uses Black Ev and White Ev' is 'Sigmoid and Log encoding Q' or 'Log encoding instead of Sigmoid' checked. This algorithm compress the data above the threshold slider value. The last value stands for brightness (Q) and should be close as possible to the value 'Compression threshold' (calculate when 'Auto threshold" checked, often > 1).
+TP_LOCALLAB_SIGMOIDQJCOMPRCIE_TOOLTIP;当“使用黑点 Ev 与白点 Ev”下拉框选的是“Sigmoid 和对数编码 Q”，或勾选了“以对数编码代替 Sigmoid”时生效。此算法压缩高于阈值滑条数值的数据。最后一个数值代表视明度（Q），应尽量接近“压缩阈值”的数值（勾选“自动阈值”时计算得出，通常 > 1）。
 TP_LOCALLAB_SIGMOIDSENSI;适应度
 TP_LOCALLAB_SIGMOIDTH;偏斜
 TP_LOCALLAB_SIGMOIDTH11;阈值（灰点）
-!TP_LOCALLAB_SIGMOIDWHITESCIE_TOOLTIP;Allows you, in Automatic when the dynamic range of the image is high, to change the distribution of lights in whites and deep blacks.\nCan be used with Log encoding or Sigmoid with Black Ev and White Ev enabled.\n\nThe algorithm does not change the basic data, but acts on the components necessary to calculate the Dynamic range, Black Ev, White Ev and the Gray point.
-!TP_LOCALLAB_SIGMOID_TOOLTIP;Allows you to simulate a tone mapping appearance using both the 'Jz' and 'Sigmoid' function. Two sliders:\na) Contrast acts on the shape of the sigmoid curve and consequently on the strength\nb) Skew (Gray point) distributes the action according to the luminance.\n\nThis new version of Sigmoid is incompatible with previous versions 5.11 and earlier.
+TP_LOCALLAB_SIGMOIDWHITESCIE_TOOLTIP;在自动模式下，当图像动态范围较大时，可以改变白色和深黑色中光的分布。\n可在启用黑点 Ev 与白点 Ev 的情况下，与对数编码或 Sigmoid 配合使用。\n\n该算法不改变基础数据，而是作用于计算动态范围、黑点 Ev、白点 Ev 和灰点所需的分量。
+TP_LOCALLAB_SIGMOID_TOOLTIP;可以同时使用“Jz”和“Sigmoid”函数来模拟色调映射的观感。有两个滑条：\na) 对比度作用于 sigmoid 曲线的形状，从而影响强度\nb) 偏斜（灰点）根据亮度分配作用。\n\n这个新版 Sigmoid 与 5.11 及更早的版本不兼容。
 TP_LOCALLAB_SIGSLOPJCIE;斜率
 TP_LOCALLAB_SIGTRCCIE;源数据调整
 TP_LOCALLAB_SIGWHITESCIE;白色分布
 TP_LOCALLAB_SLOMASKCOL;斜率
-!TP_LOCALLAB_SLOMASK_TOOLTIP;Adjusting Gamma and Slope can provide a soft and artifact-free transformation of the mask by progressively modifying 'L' to avoid any discontinuities.
+TP_LOCALLAB_SLOMASK_TOOLTIP;调整伽马和斜率可以通过逐步修改“L”来避免任何不连续，从而让蒙版得到柔和且无伪影的变换。
 TP_LOCALLAB_SLOPESMOOTH;灰平衡（斜率）
 TP_LOCALLAB_SLOPESMOOTHB;蓝色斜率
 TP_LOCALLAB_SLOPESMOOTHG;绿色斜率
@@ -4593,7 +4593,7 @@ TP_LOCALLAB_SMOOTHCIE_INV;反转颜色
 TP_LOCALLAB_SMOOTHCIE_LNK;关联 R、G、B
 TP_LOCALLAB_SMOOTHCIE_LUM;明度模式
 TP_LOCALLAB_SMOOTHCIE_SCA;场景 Yb 缩放
-!TP_LOCALLAB_SMOOTHCIE_TOOLTIP;Complements the processing performed by Gamma, Slope and Midtones by applying either:\n* asymptotic highlight attenuation,\n* or tone mapping.\nPlease note that this does not replace highlight reconstruction.\n\n* Ev based: attenuates highlights using an exponential function.\n\n* Gamma based: attenuates highlights using a hyperbolic function and partial tone mapping.\n\n* Slope based: uses tone mapping. Slope (gray balance) acts on the dynamic range and affects shadows and contrast. 'Scale Yb scene' is a function of White Ev.\n\n* RGB channel slope: similar to 'Slope based', but differentiable for each R, G, B channel. Attenuation threshold modifies mid gray and shadow/highlight balance.\n\n* Sigmoid based: applies Sigmoid tone mapping with the Contrast and Skew sliders. Display white point (cd/m2) adjusts the maximum screen luminance. This new version of Sigmoid is incompatible with versions 5.11 and earlier..\n\n* TRC based: applies a simplified Tone Response Curve (TRC) to each individual R, G, B channel. Modifies the gamma by adjusting the shadow/highlight distribution (levels). 'Relative gamma' mode is a simplified method that takes into account the Slope. 'Highlight attenuation threshold' reduces the effect on the highlights.\n\n* For the RGB operators 'RGB channel slope' and 'TRC based', the 'Invert color' checkbox simulates a film negative function.
+TP_LOCALLAB_SMOOTHCIE_TOOLTIP;作为伽马、斜率和中间调处理的补充，应用以下之一：\n* 渐近式高光衰减，\n* 或色调映射。\n请注意这不能代替高光重建。\n\n* 基于 Ev：用指数函数衰减高光。\n\n* 基于伽马：用双曲函数和部分色调映射衰减高光。\n\n* 基于斜率：使用色调映射。斜率（灰平衡）作用于动态范围，并影响阴影和反差。“场景 Yb 缩放”是白点 Ev 的函数。\n\n* RGB 通道斜率：类似“基于斜率”，但可对 R、G、B 各通道分别设置。衰减阈值会改变中灰以及阴影/高光的平衡。\n\n* 基于 Sigmoid：用对比度和偏斜滑条进行 Sigmoid 色调映射。显示器白点（cd/m2）调整屏幕最大亮度。这个新版 Sigmoid 与 5.11 及更早的版本不兼容。\n\n* 基于 TRC：对 R、G、B 各通道分别应用简化的色调响应曲线（TRC）。通过调整阴影/高光分布（层级）来修改伽马。“相对伽马”模式是一种考虑了斜率的简化方法。“高光衰减阈值”可减弱对高光的影响。\n\n* 对于“RGB 通道斜率”和“基于 TRC”这两个 RGB 算子，“反转颜色”复选框可模拟胶片负片的功能。
 TP_LOCALLAB_SMOOTHCIE_TRC;反转颜色
 TP_LOCALLAB_SMOOTHCIE_TRCREL;相对伽马模式
 TP_LOCALLAB_SMOOTHCIE_YB;观看环境 Yb 缩放
@@ -4601,89 +4601,89 @@ TP_LOCALLAB_SMOOTHCONTSIG;对比度
 TP_LOCALLAB_SMOOTHSKEWSIG;偏斜
 TP_LOCALLAB_SMOOTHWHITSIG;显示器白点（cd/m2）
 TP_LOCALLAB_SOFT;柔光与原始 Retinex
-!TP_LOCALLAB_SOFTMETHOD_TOOLTIP;Apply a Soft-light blend (identical to the global adjustment). Carry out dodge and burn using the original Retinex algorithm.
+TP_LOCALLAB_SOFTMETHOD_TOOLTIP;应用柔光混合（与全局调整相同）。使用原始 Retinex 算法进行加深和减淡。
 TP_LOCALLAB_SOFTRADIUSCOL;柔化半径
-!TP_LOCALLAB_SOFTRADIUSCOL_TOOLTIP;Applies a guided filter to the output image to reduce possible artifacts.
+TP_LOCALLAB_SOFTRADIUSCOL_TOOLTIP;对输出图像应用引导滤波，以减少可能出现的伪影。
 TP_LOCALLAB_SOFT_TOOLNAME;柔光与原始 Retinex
 TP_LOCALLAB_SPECCASE;特殊情况
 TP_LOCALLAB_SPECIAL;RGB 曲线的特殊用法
-!TP_LOCALLAB_SPECIAL_TOOLTIP;The checkbox allows you to remove all other actions i.e. 'Scope', masks, sliders etc., (except for transitions) and use just the effect of the RGB tone-curve.
-!TP_LOCALLAB_SPRADIUS_TOOLTIP;Try setting an automatic Symmetry Point (SP) estimation, only in RGB mode. May require manual adjustment.
-!TP_LOCALLAB_STRENGRID_TOOLTIP;You can adjust the desired effect with 'strength', but you can also use the 'scope' function which allows you to delimit the action (e.g. to isolate a particular color).
+TP_LOCALLAB_SPECIAL_TOOLTIP;勾选此复选框可以去掉所有其他作用，即“范围”、蒙版、滑条等（过渡除外），只使用 RGB 色调曲线的效果。
+TP_LOCALLAB_SPRADIUS_TOOLTIP;尝试自动估计对称点（SP），仅在 RGB 模式下可用。可能需要手动调整。
+TP_LOCALLAB_STRENGRID_TOOLTIP;可以用“强度”调整想要的效果，也可以使用“范围”功能来限定作用区域（例如隔离某种特定颜色）。
 TP_LOCALLAB_STRUC;结构
 TP_LOCALLAB_STRUCCOL;调整点结构
 TP_LOCALLAB_STRUCCOL1;调整点结构
-!TP_LOCALLAB_STRUCT_TOOLTIP;Uses the Sobel algorithm to take into account structure for shape detection.\nActivate 'Mask And Modifications' > 'Show spot structure' (Advanced mode) to see a preview of the mask (without modifications).\n\nCan be used in conjunction with the Structure Mask, Blur Mask and 'Local contrast' (by wavelet level) to improve edge detection.\n\nEffects of adjustments using Lightness, Contrast, Chrominance, Exposure or other non-mask-related tools visible using either 'Show modified image' or 'Show modified areas with mask'.
+TP_LOCALLAB_STRUCT_TOOLTIP;使用 Sobel 算法，在形状检测中考虑结构。\n启用“蒙版与修改”>“显示调整点结构”（高级模式）可以预览蒙版（不含修改）。\n\n可与结构蒙版、模糊蒙版和“局部反差”（按小波层级）配合使用，以改善边缘检测。\n\n使用明度、对比度、色度、曝光或其他与蒙版无关的工具所做调整的效果，可以通过“显示修改后的图像”或“显示被修改区域（含蒙版）”看到。
 TP_LOCALLAB_STRUMASKCOL;结构蒙版强度
-!TP_LOCALLAB_STRUMASK_TOOLTIP;Structure mask (slider) with the checkbox 'Structure mask as tool' unchecked: In this case a mask showing the structure will be generated even if none of the 3 curves is activated. Structure masks are available for mask (Blur and denoise') and mask(Color &amp; Light).
-!TP_LOCALLAB_STRUSTRMASK_TOOLTIP;Moderate use of this slider is recommended!
+TP_LOCALLAB_STRUMASK_TOOLTIP;结构蒙版（滑条），未勾选“将结构蒙版作为工具”复选框时：即使 3 条曲线都未启用，也会生成一个显示结构的蒙版。结构蒙版可用于蒙版（模糊与降噪）和蒙版（色彩与亮度）。
+TP_LOCALLAB_STRUSTRMASK_TOOLTIP;建议适度使用此滑条！
 TP_LOCALLAB_STYPE;形状方法
-!TP_LOCALLAB_STYPE_TOOLTIP;You can choose between:\nSymmetrical - left handle linked to right, top handle linked to bottom.\nIndependent - all handles are independent.
+TP_LOCALLAB_STYPE_TOOLTIP;可以在以下两者之间选择：\n对称 - 左手柄与右手柄联动，上手柄与下手柄联动。\n独立 - 所有手柄相互独立。
 TP_LOCALLAB_SYM;对称（鼠标）
 TP_LOCALLAB_SYMSL;对称（鼠标 + 滑条）
 TP_LOCALLAB_TE_PIVOT;枢轴点（Ev）
 TP_LOCALLAB_THRES;结构阈值
 TP_LOCALLAB_TLABEL;TM 最小=%1 最大=%2 平均=%3 Sig=%4
-!TP_LOCALLAB_TLABEL_TOOLTIP;Transmission map result.\nMin and Max are used by Variance.\nTm=Min TM=Max of Transmission Map.\nYou can normalize the results with the threshold slider.
+TP_LOCALLAB_TLABEL_TOOLTIP;透射图结果。\n最小和最大值被方差使用。\nTm=透射图的最小值 TM=透射图的最大值。\n可以用阈值滑条对结果归一化。
 TP_LOCALLAB_TM_MASK;使用透射图
-!TP_LOCALLAB_TONEMAPESTOP_TOOLTIP;This slider affects edge sensitivity.\n The greater the value, the more likely a change in contrast will be interpreted as an 'edge'.\n If set to zero the tone mapping will have an effect similar to unsharp masking.
-!TP_LOCALLAB_TONEMAPGAM_TOOLTIP;The Gamma slider shifts the tone-mapping effect towards either the shadows or the highlights.
-!TP_LOCALLAB_TONEMAPREWEI_TOOLTIP;In some cases tone mapping may result in a cartoonish appearance, and in some rare cases soft but wide halos may appear.\n Increasing the number of reweighting iterates will help fight some of these problems.
-!TP_LOCALLAB_TONEMAP_TOOLTIP;Same as the tone mapping tool in the main menu.\nThe main-menu tool must be deactivated if this tool is used.
-!TP_LOCALLAB_TONEMASCALE_TOOLTIP;This slider allows you to adjust the transition between 'local' and 'global' contrast.\nThe greater the value, the larger a detail needs to be for it to be boosted.
+TP_LOCALLAB_TONEMAPESTOP_TOOLTIP;此滑条影响边缘灵敏度。\n 数值越大，反差变化越容易被判定为“边缘”。\n 设为零时，色调映射的效果类似 USM 锐化。
+TP_LOCALLAB_TONEMAPGAM_TOOLTIP;伽马滑条让色调映射的效果偏向阴影或高光。
+TP_LOCALLAB_TONEMAPREWEI_TOOLTIP;某些情况下，色调映射可能产生卡通化的外观，极少数情况下可能出现柔和但宽的光晕。\n 增加重加权迭代次数有助于缓解其中一些问题。
+TP_LOCALLAB_TONEMAP_TOOLTIP;与主菜单中的色调映射工具相同。\n使用此工具时，必须停用主菜单中的工具。
+TP_LOCALLAB_TONEMASCALE_TOOLTIP;此滑条可以调整“局部”反差与“全局”反差之间的过渡。\n数值越大，细节需要越大才会被增强。
 TP_LOCALLAB_TOOLCOL;将结构蒙版作为工具
-!TP_LOCALLAB_TOOLCOLFRMASK_TOOLTIP;Allows you to modify the mask, if one exists.
+TP_LOCALLAB_TOOLCOLFRMASK_TOOLTIP;如果存在蒙版，可以修改它。
 TP_LOCALLAB_TOOLMASK;蒙版工具
-!TP_LOCALLAB_TOOLMASK_TOOLTIP;Structure mask (slider) with the checkbox 'Structure mask as tool' checked: in this case a mask showing the structure will be generated after one or more of the 2 curves L(L) or LC(H) has been modified.\n Here, the 'Structure mask' behaves like the other Mask tools : Gamma, Slope, etc.\n It allows you to vary the action on the mask according to the structure of the image.
-!TP_LOCALLAB_TRANSITWEAK_TOOLTIP;Adjust transition decay function: 1 linear , 2 parabolic, 3 cubic up to ^25.\nCan be used in conjunction with very low transition values to reduce defects (CBDL, Wavelets, Color &amp; Light).
-!TP_LOCALLAB_TRANSIT_TOOLTIP;Adjust smoothness of transition between affected and unaffected areas as a percentage of the 'radius'.
+TP_LOCALLAB_TOOLMASK_TOOLTIP;结构蒙版（滑条），勾选了“将结构蒙版作为工具”复选框时：在修改了 L(L) 或 LC(H) 两条曲线中的一条或多条之后，会生成一个显示结构的蒙版。\n 此时“结构蒙版”的表现与其他蒙版工具相同：伽马、斜率等。\n 可以根据图像的结构改变对蒙版的作用。
+TP_LOCALLAB_TRANSITWEAK_TOOLTIP;调整过渡衰减函数：1 线性，2 抛物线，3 三次，最高到 ^25。\n可与非常低的过渡值配合使用，以减少瑕疵（分层反差、小波、色彩与亮度）。
+TP_LOCALLAB_TRANSIT_TOOLTIP;调整受影响区域与未受影响区域之间过渡的平滑度，以“半径”的百分比表示。
 TP_LOCALLAB_TRANSMISSIONGAIN;透射增益
 TP_LOCALLAB_TRANSMISSIONMAP;透射图
-!TP_LOCALLAB_TRANSMISSION_TOOLTIP;Transmission according to transmission.\nAbscissa: transmission from negative values (min), mean, and positive values (max).\nOrdinate: amplification or reduction.\nYou can adjust this curve to change the Transmission and reduce artifacts.
+TP_LOCALLAB_TRANSMISSION_TOOLTIP;透射随透射的变化。\n横坐标：透射，从负值（最小）、均值到正值（最大）。\n纵坐标：放大或减弱。\n可以调整此曲线来改变透射并减少伪影。
 TP_LOCALLAB_TRCFRAME;色调响应曲线与中间调
 TP_LOCALLAB_USEMASK;拉普拉斯
 TP_LOCALLAB_VART;方差（对比度）
-!TP_LOCALLAB_VIBRA_TOOLTIP;Adjusts vibrance (essentially the same as the global adjustment).\nCarries out the equivalent of a white-balance adjustment using a CIECAM algorithm.
-!TP_LOCALLAB_VIS_TOOLTIP;<b>Click</b> to show/hide selected Control Spot.\n<b>Ctrl</b>+<b>click</b> to show/hide all Control Spot.
-!TP_LOCALLAB_WASDEN_TOOLTIP;Luminance noise reduction: the left-hand side of the curve including the dark-gray/light-gray boundary corresponds to the first 3 levels 0, 1, 2 (fine detail). The right hand side of the curve corresponds to the coarser details (level 3, 4, 5, 6).
-!TP_LOCALLAB_WAT_BALTHRES_TOOLTIP;Balances the action within each level.
-!TP_LOCALLAB_WAT_BLURLC_TOOLTIP;The default blur setting affects all 3 L*a* b* components (luminance and colour).\nWhen checked, only luminance is blurred.
-!TP_LOCALLAB_WAT_CLARIC_TOOLTIP;'Merge chroma' is used to select the intensity of the desired effect on chrominance.
-!TP_LOCALLAB_WAT_CLARIL_TOOLTIP;'Merge luma' is used to select the intensity of the desired effect on luminance.
-!TP_LOCALLAB_WAT_CONTCHROMALEV_TOOLTIP;'Chroma levels': adjusts the 'a' and 'b' components of Lab* as a proportion of the luminance value.
-!TP_LOCALLAB_WAT_CONTOFFSET_TOOLTIP;Offset modifies the balance between low-contrast and high-contrast details.\nHigh values will amplify contrast changes to the higher-contrast details, whereas low values will amplify contrast changes to low-contrast details.\nBy using a low 'Attenuation response' value you can select which contrast values will be enhanced.
-!TP_LOCALLAB_WAT_DELTABAL_TOOLTIP;By moving the slider to the left, the lower levels are accentuated. To the right, the lower levels are reduced and the higher levels accentuated.
-!TP_LOCALLAB_WAT_EXPRESID_TOOLTIP;The residual image behaves in the same way as the main image when making adjustments to contrast, chroma etc.
-!TP_LOCALLAB_WAT_GRADW_TOOLTIP;The more you move the slider to the right, the more effective the detection algorithm will be and the less noticeable the effects of local contrast.
-!TP_LOCALLAB_WAT_LEVELLOCCONTRAST_TOOLTIP;Low to high local contrast from left to right on the x-axis.\nIncreases or decreases local contrast on the y-axis.
-!TP_LOCALLAB_WAT_LOCCONTRASTEDG_TOOLTIP;You can adjust the distribution of local contrast by wavelet level based on the initial intensity of the contrast. This will modify the effects of perspective and relief in the image, and/or reduce the contrast values for very low initial contrast levels.
-!TP_LOCALLAB_WAT_ORIGLC_TOOLTIP;'Merge only with original image', prevents the 'Wavelet Pyramid' settings from interfering with 'Clarity' and 'Sharp mask'.
-!TP_LOCALLAB_WAT_RESIDBLUR_TOOLTIP;Blurs the residual image, independent of the levels.
-!TP_LOCALLAB_WAT_RESIDCOMP_TOOLTIP;Compresses the residual image to increase or reduce contrast.
-!TP_LOCALLAB_WAT_SIGMALC_TOOLTIP;The effect of the local contrast adjustment is stronger for medium-contrast details and weaker for high and low-contrast details.\n This slider controls how quickly the effect dampens towards the extreme contrasts.\nThe higher the value of the slider, the wider the range of contrasts that will receive the full effect of the local contrast adjustment and the higher the risk of generating artifacts.\nThe lower the value, the more the effect will be pinpointed towards a narrow range of contrast values.
-!TP_LOCALLAB_WAT_STRENGTHW_TOOLTIP;Intensity of edge-effect detection.
-!TP_LOCALLAB_WAT_STRWAV_TOOLTIP;Allows the local contrast to be varied according to a chosen gradient and angle. The variation of the luminance signal is taken into account and not the luminance.
-!TP_LOCALLAB_WAT_THRESHOLDWAV_TOOLTIP;Range of wavelet levels used throughout the Wavelets module.
-!TP_LOCALLAB_WAT_WAVBLURCURV_TOOLTIP;Allows you to blur each level of decomposition.\nThe finest to coarsest levels of decomposition are from left to right.
-!TP_LOCALLAB_WAT_WAVCBDL_TOOLTIP;Similar to Contrast By Detail Levels. Fine to coarse detail levels from left to right on the x-axis.
-!TP_LOCALLAB_WAT_WAVDELTABAL_TOOLTIP;Acts on the balance of the three directions (horizontal, vertical and diagonal) based on the luminance of the image.\nBy default the shadows or highlights are reduced to avoid artifacts.
-!TP_LOCALLAB_WAT_WAVESHOW_TOOLTIP;Shows all of the 'Edge sharpness' tools. It is advisable to read the Wavelet Levels documentation.
-!TP_LOCALLAB_WAT_WAVLEVELBLUR_TOOLTIP;Allows you to adjust the maximum effect of blurring on the levels.
-!TP_LOCALLAB_WAT_WAVSHAPE_TOOLTIP;Low to high local contrast from left to right on the x-axis\nIncrease or decrease local contrast on the y-axis.
-!TP_LOCALLAB_WAT_WAVTM_TOOLTIP;The lower (negative) part compresses each level of decomposition creating a tone mapping effect.\nThe upper (positive) part attenuates the contrast by level.\nThe finest to coarsest levels of decomposition are from left to right on the x-axis.
-!TP_LOCALLAB_WAVBLUR_TOOLTIP;Allows you to blur each level of the decomposition, as well as the residual image.
+TP_LOCALLAB_VIBRA_TOOLTIP;调整鲜明度（与全局调整基本相同）。\n使用 CIECAM 算法进行相当于白平衡调整的操作。
+TP_LOCALLAB_VIS_TOOLTIP;<b>单击</b>显示/隐藏所选调整点。\n<b>Ctrl</b>+<b>单击</b>显示/隐藏全部调整点。
+TP_LOCALLAB_WASDEN_TOOLTIP;亮度降噪：曲线左侧（包括深灰/浅灰分界线）对应前 3 个层级 0、1、2（精细细节）。曲线右侧对应较粗的细节（层级 3、4、5、6）。
+TP_LOCALLAB_WAT_BALTHRES_TOOLTIP;平衡每个层级内的作用。
+TP_LOCALLAB_WAT_BLURLC_TOOLTIP;默认的模糊设置影响 L*a* b* 全部 3 个分量（亮度和色彩）。\n勾选后只模糊亮度。
+TP_LOCALLAB_WAT_CLARIC_TOOLTIP;“合并色度”用于选择对色度施加效果的强度。
+TP_LOCALLAB_WAT_CLARIL_TOOLTIP;“合并亮度”用于选择对亮度施加效果的强度。
+TP_LOCALLAB_WAT_CONTCHROMALEV_TOOLTIP;“色度层级”：按亮度值的比例调整 Lab* 的“a”和“b”分量。
+TP_LOCALLAB_WAT_CONTOFFSET_TOOLTIP;偏移改变低反差细节与高反差细节之间的平衡。\n高数值会放大较高反差细节的反差变化，低数值会放大低反差细节的反差变化。\n使用较低的“衰减响应”值，可以选择哪些反差值会被增强。
+TP_LOCALLAB_WAT_DELTABAL_TOOLTIP;向左移动滑条会强化较低的层级。向右移动则减弱较低的层级、强化较高的层级。
+TP_LOCALLAB_WAT_EXPRESID_TOOLTIP;调整反差、色度等时，残差图像的表现与主图像相同。
+TP_LOCALLAB_WAT_GRADW_TOOLTIP;滑条越往右移，检测算法越有效，局部反差的效果越不明显。
+TP_LOCALLAB_WAT_LEVELLOCCONTRAST_TOOLTIP;x 轴从左到右为局部反差从低到高。\ny 轴为增加或减少局部反差。
+TP_LOCALLAB_WAT_LOCCONTRASTEDG_TOOLTIP;可以根据反差的初始强度，按小波层级调整局部反差的分布。这会改变图像中透视感和立体感的效果，和/或降低初始反差非常低的部分的反差值。
+TP_LOCALLAB_WAT_ORIGLC_TOOLTIP;“仅与原图合并”可防止“小波金字塔”设置干扰“清晰度”和“锐化蒙版”。
+TP_LOCALLAB_WAT_RESIDBLUR_TOOLTIP;模糊残差图像，与层级无关。
+TP_LOCALLAB_WAT_RESIDCOMP_TOOLTIP;压缩残差图像以增加或降低反差。
+TP_LOCALLAB_WAT_SIGMALC_TOOLTIP;局部反差调整对中等反差细节的效果较强，对高反差和低反差细节的效果较弱。\n 此滑条控制效果向极端反差衰减的速度。\n滑条数值越高，获得完整局部反差调整效果的反差范围越宽，产生伪影的风险也越高。\n数值越低，效果越集中在较窄的反差范围内。
+TP_LOCALLAB_WAT_STRENGTHW_TOOLTIP;边缘效应检测的强度。
+TP_LOCALLAB_WAT_STRWAV_TOOLTIP;可以按所选的渐变和角度改变局部反差。考虑的是亮度信号的变化，而不是亮度本身。
+TP_LOCALLAB_WAT_THRESHOLDWAV_TOOLTIP;整个小波模块使用的小波层级范围。
+TP_LOCALLAB_WAT_WAVBLURCURV_TOOLTIP;可以模糊每个分解层级。\n从左到右为从最精细到最粗糙的分解层级。
+TP_LOCALLAB_WAT_WAVCBDL_TOOLTIP;类似分层反差调整。x 轴从左到右为从精细到粗糙的细节层级。
+TP_LOCALLAB_WAT_WAVDELTABAL_TOOLTIP;根据图像亮度，作用于三个方向（水平、垂直、对角）之间的平衡。\n默认会减弱阴影或高光以避免伪影。
+TP_LOCALLAB_WAT_WAVESHOW_TOOLTIP;显示全部“边缘锐度”工具。建议阅读小波层级的文档。
+TP_LOCALLAB_WAT_WAVLEVELBLUR_TOOLTIP;可以调整模糊对各层级的最大效果。
+TP_LOCALLAB_WAT_WAVSHAPE_TOOLTIP;x 轴从左到右为局部反差从低到高\ny 轴为增加或减少局部反差。
+TP_LOCALLAB_WAT_WAVTM_TOOLTIP;下半部分（负值）压缩每个分解层级，产生色调映射效果。\n上半部分（正值）按层级衰减反差。\nx 轴从左到右为从最精细到最粗糙的分解层级。
+TP_LOCALLAB_WAVBLUR_TOOLTIP;可以模糊每个分解层级以及残差图像。
 TP_LOCALLAB_WAVCOMP;分层压缩
 TP_LOCALLAB_WAVCOMPRE;分层压缩
-!TP_LOCALLAB_WAVCOMPRE_TOOLTIP;Allows you to apply tone mapping or reduce local contrast on individual levels.\nFine to coarse detail levels from left to right on the x-axis.
-!TP_LOCALLAB_WAVCOMP_TOOLTIP;Allows you to apply local contrast based on the direction of the wavelet decomposition : horizontal, vertical, diagonal.
+TP_LOCALLAB_WAVCOMPRE_TOOLTIP;可以在单个层级上应用色调映射或降低局部反差。\nx 轴从左到右为从精细到粗糙的细节层级。
+TP_LOCALLAB_WAVCOMP_TOOLTIP;可以根据小波分解的方向应用局部反差：水平、垂直、对角。
 TP_LOCALLAB_WAVCON;分层反差
-!TP_LOCALLAB_WAVCONTF_TOOLTIP;Similar to Contrast By Detail Levels. Fine to coarse detail levels from left to right on the x-axis.
-!TP_LOCALLAB_WAVEEDG_TOOLTIP;Improves sharpness by targeting the action of local contrast on the edges. It has the same functions as the corresponding module in Wavelet Levels and uses the same settings.
-!TP_LOCALLAB_WAVEMASK_LEVEL_TOOLTIP;Range of wavelet levels used in 'Local contrast' (by wavelet level).
-!TP_LOCALLAB_WAVGRAD_TOOLTIP;Allows the local contrast to be varied according to a chosen gradient and angle. The variation of the luminance signal is taken into account and not the luminance.
-!TP_LOCALLAB_WAVHUE_TOOLTIP;Allows you to reduce or increase the denoise based on hue.
+TP_LOCALLAB_WAVCONTF_TOOLTIP;类似分层反差调整。x 轴从左到右为从精细到粗糙的细节层级。
+TP_LOCALLAB_WAVEEDG_TOOLTIP;把局部反差的作用集中在边缘上，以提高锐度。其功能与小波层级中的对应模块相同，并使用相同的设置。
+TP_LOCALLAB_WAVEMASK_LEVEL_TOOLTIP;“局部反差”（按小波层级）中使用的小波层级范围。
+TP_LOCALLAB_WAVGRAD_TOOLTIP;可以按所选的渐变和角度改变局部反差。考虑的是亮度信号的变化，而不是亮度本身。
+TP_LOCALLAB_WAVHUE_TOOLTIP;可以根据色相减弱或增强降噪。
 TP_LOCALLAB_WAVLEV;分层模糊
-!TP_LOCALLAB_WAVMASK_TOOLTIP;Uses wavelets to modify the local contrast of the mask and reinforce or reduce the structure (skin, buildings, etc.).
+TP_LOCALLAB_WAVMASK_TOOLTIP;使用小波修改蒙版的局部反差，加强或减弱结构（皮肤、建筑等）。
 TP_LOCALLAB_WEDIANHI;中值 高
 TP_LOCALLAB_WHITE_EV;白点 Ev
 TP_LOCALLAB_ZCAMFRA;ZCAM 图像调整
@@ -4692,16 +4692,16 @@ TP_LOCAL_HEIGHT;下
 TP_LOCAL_HEIGHT_T;上
 TP_LOCAL_WIDTH;右
 TP_LOCAL_WIDTH_L;左
-!TP_LOCRETI_METHOD_TOOLTIP;Low = Reinforce low light.\nUniform = Evenly distributed.\nHigh = Reinforce strong light.
-!TP_PDSHARPENING_CONTRASTRADIUSSE_TOOLTIP;The 'contrast threshold' and 'Capture radius' sliders allow you to control a mask that decides which areas are affected by sharpening and which are left untouched.
-!TP_PDSHARPENING_GAMMA_TOOLTIP;Allows you to differentiate the effect by varying the ratio between shadows and highlights. The mask is sensitive to this setting.
-!TP_PDSHARPENING_RADIUS_TOOLTIP;When in-camera blurring occurs, the effective resolution is no longer dependent on pixel size and instead, has a radius that increases in proportion to the amount of blurring.\n The purpose of this tool is to reduce this blurring by trying to automatically guess the radius needed to counteract the effect.\n\n You can also choose to adjust the radius yourself bearing in mind that if the value is too low, there will not be enough sharpening and if it is too high, it will lead to strong haloing on the edges. Don’t forget that you are only trying to undo the in-camera blurring.
+TP_LOCRETI_METHOD_TOOLTIP;低 = 加强弱光。\n均匀 = 均匀分布。\n高 = 加强强光。
+TP_PDSHARPENING_CONTRASTRADIUSSE_TOOLTIP;“反差阈值”和“捕获半径”滑条可以控制一个蒙版，由它决定哪些区域被锐化、哪些区域保持不变。
+TP_PDSHARPENING_GAMMA_TOOLTIP;可以通过改变阴影与高光之间的比例来区分效果。蒙版对此设置敏感。
+TP_PDSHARPENING_RADIUS_TOOLTIP;当相机内产生模糊时，有效分辨率不再取决于像素大小，而是具有一个随模糊程度成比例增大的半径。\n 此工具的目的是尝试自动推测抵消该效应所需的半径，从而减轻这种模糊。\n\n 也可以自己调整半径，但要记住：数值过低则锐化不足，数值过高则会在边缘产生强烈的光晕。别忘了你只是在尝试还原相机内的模糊。
 TP_RAW_1PASSMEDIUM;1 次（Markesteijn）
 TP_RAW_2PASS;1 次 + 快速
 TP_RAW_3PASSBEST;3 次（Markesteijn）
 TP_RAW_4PASS;3 次 + 快速
 TP_RAW_FAST;快速
-!TP_RAW_SENSOR_XTRANS_DMETHOD_TOOLTIP;3-pass gives best results (recommended for low ISO images).\n1-pass is almost undistinguishable from 3-pass for high ISO images and is faster.\n+fast gives less artifacts in flat areas.
+TP_RAW_SENSOR_XTRANS_DMETHOD_TOOLTIP;3 次的结果最好（推荐用于低 ISO 图像）。\n对于高 ISO 图像，1 次与 3 次几乎没有区别，而且更快。\n+快速 在平坦区域产生的伪影更少。
 TP_RAW_SENSOR_XTRANS_LABEL;X-Trans 阵列传感器
 !TP_RAW_XTRANS;X-Trans
 TP_RAW_XTRANSFAST;快速 X-Trans
@@ -4710,33 +4710,33 @@ TP_RESIZE_LONG;长边
 TP_RESIZE_SE;短边：
 TP_RESIZE_SHORT;短边
 !TP_RETINEX_CURVEEDITOR_CD;L=f(L)
-!TP_RETINEX_CURVEEDITOR_CD_TOOLTIP;Luminance according to luminance L=f(L)\nCorrect raw data to reduce halos and artifacts.
+TP_RETINEX_CURVEEDITOR_CD_TOOLTIP;亮度随亮度变化 L=f(L)\n校正 raw 数据以减少光晕和伪影。
 TP_RETINEX_CURVEEDITOR_LH;强度=f(H)
-!TP_RETINEX_CURVEEDITOR_LH_TOOLTIP;Strength according to hue Strength=f(H)\nThis curve also acts on chroma when using the 'Highlight' retinex method.
+TP_RETINEX_CURVEEDITOR_LH_TOOLTIP;强度随色相变化 强度=f(H)\n使用“高光”Retinex 方法时，此曲线也作用于色度。
 !TP_RETINEX_CURVEEDITOR_MAP;L=f(L)
-!TP_RETINEX_CURVEEDITOR_MAP_TOOLTIP;This curve can be applied alone or with a Gaussian mask or wavelet mask.\nBeware of artifacts!
+TP_RETINEX_CURVEEDITOR_MAP_TOOLTIP;此曲线可以单独应用，也可以与高斯蒙版或小波蒙版一起应用。\n小心伪影！
 TP_RETINEX_FREEGAMMA;自由伽马
 TP_RETINEX_GAIN;增益
 TP_RETINEX_GAINOFFS;增益与偏移（亮度）
 TP_RETINEX_GAINTRANSMISSION;透射增益
-!TP_RETINEX_GAINTRANSMISSION_TOOLTIP;Increase or reduce the transmission map to achieve the desired luminance. The x-axis is the transmission. The y-axis is the gain.
+TP_RETINEX_GAINTRANSMISSION_TOOLTIP;增大或减小透射图以获得想要的亮度。x 轴为透射，y 轴为增益。
 TP_RETINEX_GAMMA;伽马
 TP_RETINEX_GAMMA_FREE;自由
 TP_RETINEX_GAMMA_HIGH;高
 TP_RETINEX_GAMMA_LOW;低
 TP_RETINEX_GAMMA_MID;中
 TP_RETINEX_GAMMA_NONE;无
-!TP_RETINEX_GAMMA_TOOLTIP;Restore tones by applying gamma before and after Retinex. Different from Retinex curves or others curves (Lab, Exposure, etc.).
+TP_RETINEX_GAMMA_TOOLTIP;在 Retinex 前后应用伽马来恢复影调。与 Retinex 曲线或其他曲线（Lab、曝光等）不同。
 TP_RETINEX_GRAD;透射渐变
 TP_RETINEX_GRADS;强度渐变
-!TP_RETINEX_GRADS_TOOLTIP;If slider at 0, all iterations are identical.\nIf > 0 Strength is reduced when iterations increase, and conversely.
-!TP_RETINEX_GRAD_TOOLTIP;If slider at 0, all iterations are identical.\nIf > 0 Variance and Threshold are reduced when iterations increase, and conversely.
+TP_RETINEX_GRADS_TOOLTIP;滑条为 0 时，所有迭代相同。\n> 0 时，强度随迭代次数增加而减小，反之亦然。
+TP_RETINEX_GRAD_TOOLTIP;滑条为 0 时，所有迭代相同。\n> 0 时，方差和阈值随迭代次数增加而减小，反之亦然。
 TP_RETINEX_HIGH;高
-!TP_RETINEX_HIGHLIGHT_TOOLTIP;Increase action of High algorithm.\nMay require you to re-adjust 'Neighboring pixels' and to increase the 'White-point correction' in the Raw tab -> Raw White Points tool.
+TP_RETINEX_HIGHLIGHT_TOOLTIP;增强“高”算法的作用。\n可能需要重新调整“相邻像素”，并在 Raw 选项卡 -> Raw 白点工具中提高“白点校正”。
 TP_RETINEX_HSLSPACE_LIN;HSL-线性
 TP_RETINEX_HSLSPACE_LOG;HSL-对数
 TP_RETINEX_ITER;迭代次数（色调映射）
-!TP_RETINEX_ITER_TOOLTIP;Simulate a tone-mapping operator.\nHigh values increase the processing time.
+TP_RETINEX_ITER_TOOLTIP;模拟色调映射算子。\n高数值会增加处理时间。
 !TP_RETINEX_LABEL;Retinex
 TP_RETINEX_LABEL_MASK;蒙版
 !TP_RETINEX_LABSPACE;L*a*b*
@@ -4745,41 +4745,41 @@ TP_RETINEX_MAP;方法
 TP_RETINEX_MAP_GAUS;高斯蒙版
 TP_RETINEX_MAP_MAPP;锐化蒙版（部分小波）
 TP_RETINEX_MAP_MAPT;锐化蒙版（全部小波）
-!TP_RETINEX_MAP_METHOD_TOOLTIP;Use the mask generated by the Gaussian function above (Radius, Method) to reduce halos and artifacts.\n\nCurve only: apply a diagonal contrast curve on the mask.\nBeware of artifacts!\n\nGaussian mask: generate and use a Gaussian blur of the original mask.\nQuick.\n\nSharp mask: generate and use a wavelet on the original mask.\nSlow.
+TP_RETINEX_MAP_METHOD_TOOLTIP;使用上面的高斯函数（半径、方法）生成的蒙版来减少光晕和伪影。\n\n仅曲线：在蒙版上应用一条对角反差曲线。\n小心伪影！\n\n高斯蒙版：生成并使用原始蒙版的高斯模糊。\n快。\n\n锐化蒙版：在原始蒙版上生成并使用小波。\n慢。
 TP_RETINEX_MAP_NONE;无
 TP_RETINEX_MEDIAN;透射中值滤波
 TP_RETINEX_METHOD;方法
-!TP_RETINEX_METHOD_TOOLTIP;Low = Reinforce low light.\nUniform = Equalize action.\nHigh = Reinforce high light.\nHighlights = Remove magenta in highlights.
+TP_RETINEX_METHOD_TOOLTIP;低 = 加强弱光。\n均匀 = 均衡作用。\n高 = 加强强光。\n高光 = 去除高光中的品红。
 TP_RETINEX_MLABEL;还原数据 最小=%1 最大=%2
-!TP_RETINEX_MLABEL_TOOLTIP;The values should be close to Min=0 Max=32768 (log mode) but other values are possible.You can adjust 'Clip restored data (gain)' and 'Offset' to normalize.\nRecovers image data without blending.
-!TP_RETINEX_NEUTRAL_TOOLTIP;Reset all sliders and curves to their default values.
+TP_RETINEX_MLABEL_TOOLTIP;数值应接近 最小=0 最大=32768（对数模式），但其他数值也可以。可以调整“裁切还原数据（增益）”和“偏移”来归一化。\n不经混合恢复图像数据。
+TP_RETINEX_NEUTRAL_TOOLTIP;把所有滑条和曲线重置为默认值。
 TP_RETINEX_OFFSET;偏移（亮度）
 TP_RETINEX_SCALES;高斯渐变
-!TP_RETINEX_SCALES_TOOLTIP;If slider at 0, all iterations are identical.\nIf > 0 Scale and radius are reduced when iterations increase, and conversely.
+TP_RETINEX_SCALES_TOOLTIP;滑条为 0 时，所有迭代相同。\n> 0 时，缩放和半径随迭代次数增加而减小，反之亦然。
 TP_RETINEX_SKAL;缩放
 TP_RETINEX_SLOPE;自由伽马斜率
-!TP_RETINEX_THRESHOLD_TOOLTIP;Limits in/out.\nIn = image source,\nOut = image gauss.
+TP_RETINEX_THRESHOLD_TOOLTIP;输入/输出界限。\n输入 = 源图像，\n输出 = 高斯图像。
 TP_RETINEX_TLABEL;TM 数据 最小=%1 最大=%2 平均=%3 Sigma=%4
 TP_RETINEX_TLABEL2;TM 有效值 Tm=%1 TM=%2
-!TP_RETINEX_TLABEL_TOOLTIP;ransmission map result.\nMin and Max are used by Variance.\nTm=Min TM=Max of Transmission Map.\nYou can normalize the results with the threshold slider.
+TP_RETINEX_TLABEL_TOOLTIP;透射图结果。\n最小和最大值被方差使用。\nTm=透射图的最小值 TM=透射图的最大值。\n可以用阈值滑条对结果归一化。
 TP_RETINEX_TRANF;透射
 TP_RETINEX_TRANSMISSION;透射图
-!TP_RETINEX_TRANSMISSION_TOOLTIP;Transmission according to transmission.\nAbscissa: transmission from negative values (min), mean, and positives values (max).\nOrdinate: amplification or reduction.
+TP_RETINEX_TRANSMISSION_TOOLTIP;透射随透射的变化。\n横坐标：透射，从负值（最小）、均值到正值（最大）。\n纵坐标：放大或减弱。
 TP_RETINEX_UNIFORM;均匀
 TP_RETINEX_VARIANCE;对比度
-!TP_RETINEX_VARIANCE_TOOLTIP;Low variance increase local contrast and saturation, but can lead to artifacts.
+TP_RETINEX_VARIANCE_TOOLTIP;低方差会提高局部反差和饱和度，但可能导致伪影。
 TP_RETINEX_VIEW;处理
 TP_RETINEX_VIEW_MASK;蒙版
-!TP_RETINEX_VIEW_METHOD_TOOLTIP;Standard - Normal display.\nMask - Displays the mask.\nUnsharp mask - Displays the image with a high radius unsharp mask.\nTransmission - Auto/Fixed - Displays the file transmission-map, before any action on contrast and brightness.\n\nAttention: the mask does not correspond to reality, but is amplified to make it more visible.
+TP_RETINEX_VIEW_METHOD_TOOLTIP;标准 - 正常显示。\n蒙版 - 显示蒙版。\nUSM 锐化 - 以大半径 USM 锐化显示图像。\n透射 - 自动/固定 - 显示文件的透射图，在对反差和亮度做任何处理之前。\n\n注意：蒙版并不对应实际情况，而是经过放大以便看得更清楚。
 TP_RETINEX_VIEW_NONE;标准
 TP_RETINEX_VIEW_TRAN;透射 - 自动
 TP_RETINEX_VIEW_TRAN2;透射 - 固定
 TP_SHARPENING_CAP;捕获反卷积
 TP_SHARPENING_CAPFRAME;边角增强
-!TP_SHARPENING_CONTRASTAUTO_TOOLTIP;Auto contrast level estimation.\nValue subject to variation depending on position in preview.\nBe careful, disable auto after estimation.
-!TP_SHARPENING_EDRADIUS_TOOLTIP;Auto-calculation based on raw data
+TP_SHARPENING_CONTRASTAUTO_TOOLTIP;自动估计反差水平。\n数值会随预览中的位置而变化。\n注意，估计完成后请停用自动。
+TP_SHARPENING_EDRADIUS_TOOLTIP;基于 raw 数据自动计算
 TP_SHARPENING_RADIUS_PROT;中心保护区域 %
-!TP_SHARPENING_RADIUS_PROTSE_TOOLTIP;Defines the central protection area % (Full image or geographical RT-spot center) that will not be affected by 'Corner radius boost'.\nThe results in the TIF/JPG outputs correspond to those of 'fit to screen'.
+TP_SHARPENING_RADIUS_PROTSE_TOOLTIP;定义不受“边角半径增强”影响的中心保护区域百分比（整幅图像或 RT 调整点的几何中心）。\nTIF/JPG 输出的结果与“适应屏幕”的一致。
 TP_SHARPENING_RLN;RL 反卷积
 TP_SPOT_ENTRYCHANGED;点已更改
 TP_TONE_EQUALIZER_BANDS;频段
@@ -4787,16 +4787,16 @@ TP_TONE_EQUALIZER_BANDS;频段
 !TP_WAVELET_CURVEEDITOR_CL;L
 !TP_WAVELET_CURVEEDITOR_HH;HH
 TP_WAVELET_DENL;修正结构
-!TP_WAVELET_DENLOCAL_TOOLTIP;Use a curve in order to guide the denoising according to the local contrast.\nThe areas are denoised, the structures are maintained.
-!TP_WAVELET_DENMIX_TOOLTIP;The local-contrast reference value used by the guided filter.\nDepending on the image, results can vary depending on whether the noise is measured before or after the noise reduction. These four choices allow you to take into account various combinations of the original and modified (denoised) images to find the best compromise.
+TP_WAVELET_DENLOCAL_TOOLTIP;使用曲线根据局部反差引导降噪。\n平坦区域被降噪，结构得以保留。
+TP_WAVELET_DENMIX_TOOLTIP;引导滤波使用的局部反差参考值。\n视图像而定，在降噪之前还是之后测量噪点，结果可能不同。这四个选项可以让你考虑原图与修改后（降噪后）图像的各种组合，以找到最佳折中。
 TP_WAVELET_DENOISE;基于局部反差的引导曲线
 TP_WAVELET_DENOISEH;高层级局部反差曲线
-!TP_WAVELET_DENSIGMA_TOOLTIP;Adapts the shape of the guide.
-!TP_WAVELET_DENWAVGUID_TOOLTIP;Uses hue to reduce or increase the action of the guided filter.
-!TP_WAVELET_EDGCONT_TOOLTIP;Adjusting the points to the left decreases contrast, and to the right increases it.\nBottom-left, top-left, top-right and bottom-right represent respectively local contrast for low values, mean, mean+std. dev. and maxima.
-!TP_WAVELET_HUESKIN_TOOLTIP;The bottom points set the beginning of the transition zone, and the upper points the end of it, where the effect is at its maximum.\n\nIf you need to move the area significantly, or if there are artifacts, then the <b>white balance is incorrect</b>.
-!TP_WAVELET_HUESKY_TOOLTIP;The bottom points set the beginning of the transition zone, and the upper points the end of it, where the effect is at its maximum.\n\nIf you need to move the area significantly, or if there are artifacts, then the <b>white balance is incorrect</b>.
-!TP_WAVELET_ITER_TOOLTIP;Left: increase low levels and reduce high levels,\nRight: reduce low levels and increase high levels.
+TP_WAVELET_DENSIGMA_TOOLTIP;调整引导的形状。
+TP_WAVELET_DENWAVGUID_TOOLTIP;使用色相减弱或增强引导滤波的作用。
+TP_WAVELET_EDGCONT_TOOLTIP;把点向左调整会降低反差，向右调整会提高反差。\n左下、左上、右上和右下分别代表低值、均值、均值+标准差和最大值处的局部反差。
+TP_WAVELET_HUESKIN_TOOLTIP;下方的点设定过渡区的起点，上方的点设定其终点，即效果达到最大的位置。\n\n如果需要大幅移动该区域，或者出现了伪影，说明<b>白平衡不正确</b>。
+TP_WAVELET_HUESKY_TOOLTIP;下方的点设定过渡区的起点，上方的点设定其终点，即效果达到最大的位置。\n\n如果需要大幅移动该区域，或者出现了伪影，说明<b>白平衡不正确</b>。
+TP_WAVELET_ITER_TOOLTIP;左：增强低层级、减弱高层级，\n右：减弱低层级、增强高层级。
 TP_WAVELET_LABGRID_VALUES;高(a)=%1 高(b)=%2\n低(a)=%3 低(b)=%4
 TP_WAVELET_LEVELHIGH;半径 5-6
 TP_WAVELET_LEVELLOW;半径 1-4
@@ -4806,16 +4806,16 @@ TP_WAVELET_LIMDEN;层级 5-6 对层级 1-4 的相互作用
 TP_WAVELET_MIXCONTRAST;参考
 TP_WAVELET_MIXMIX;混合 50% 噪点 - 50% 降噪
 TP_WAVELET_MIXMIX70;混合 30% 噪点 - 70% 降噪
-!TP_WAVELET_NPTYPE_TOOLTIP;This algorithm uses the proximity of a pixel and eight of its neighbors. If less difference, edges are reinforced.
-!TP_WAVELET_OFFSET_TOOLTIP;Offset modifies the balance between low contrast and high contrast details.\nHigh values will amplify contrast changes to the higher contrast details, whereas low values will amplify contrast changes to low contrast details.\nBy using a low Attenuation response value you can select which contrast values will be enhanced.
+TP_WAVELET_NPTYPE_TOOLTIP;此算法利用一个像素与其八个相邻像素的接近程度。差异较小时，边缘会被加强。
+TP_WAVELET_OFFSET_TOOLTIP;偏移改变低反差细节与高反差细节之间的平衡。\n高数值会放大较高反差细节的反差变化，低数值会放大低反差细节的反差变化。\n使用较低的衰减响应值，可以选择哪些反差值会被增强。
 TP_WAVELET_OLDSH;使用负值的算法
 TP_WAVELET_PYRWAVTRC;反差配置
-!TP_WAVELET_PYRWAVTRC_CURVE_TOOLTIP;The left end of the horizontal axis corresponds to close to zero contrast, while the right end corresponds to the strongest contrast in the image. The midpoint of the horizontal axis corresponds to the predominant contrast strength across all detail levels.\n\nThe effect of this curve is reduced for higher Contrast profile presets.\n\nTo avoid harsh contrast and halos, refrain from increasing the right half of the curve.
-!TP_WAVELET_PYRWAVTRC_RESID_TOOLTIP;Adjusts the contrast for all detail levels larger than those covered by the selected Contrast profile.
-!TP_WAVELET_PYRWAVTRC_SIGMA_TOOLTIP;Stretches the width of the "Variable contrast" curve. A value of 1 means no stretching.
-!TP_WAVELET_PYRWAVTRC_TOOLTIP;A series of presets defining the strength of the contrast adjustment at different detail levels. Lower presets only affect fine details while higher presets affect both fine and coarse details.\n\nNote: The effect on coarse details may not be visible in the preview if the preview is too small.
-!TP_WAVELET_SIGMA_TOOLTIP;The effect of the contrast sliders is stronger in medium contrast details, and weaker in high and low contrast details.\n With this slider you can control how quickly the effect dampens towards the extreme contrasts.\n The higher the slider is set, the wider the range of contrasts which will get a strong change, and the higher the risk to generate artifacts.\n .The lower it is, the more the effect will be pinpointed towards a narrow range of contrast values.
-!TP_WAVELET_THRDEN_TOOLTIP;Generates a stepped curve used to guide the noise reduction as a function of local contrast. The denoise will be applied to uniform low local-contrast areas. Areas with detail (higher local contrast) will be preserved.
+TP_WAVELET_PYRWAVTRC_CURVE_TOOLTIP;横轴左端对应接近零的反差，右端对应图像中最强的反差。横轴中点对应所有细节层级中占主导的反差强度。\n\n反差配置预设越高，此曲线的效果越弱。\n\n为避免生硬的反差和光晕，请不要抬高曲线的右半部分。
+TP_WAVELET_PYRWAVTRC_RESID_TOOLTIP;调整所有大于所选反差配置所覆盖范围的细节层级的反差。
+TP_WAVELET_PYRWAVTRC_SIGMA_TOOLTIP;拉伸“可变反差”曲线的宽度。数值为 1 表示不拉伸。
+TP_WAVELET_PYRWAVTRC_TOOLTIP;一系列预设，定义不同细节层级上反差调整的强度。较低的预设只影响精细细节，较高的预设同时影响精细和粗糙细节。\n\n注意：如果预览太小，对粗糙细节的效果在预览中可能看不出来。
+TP_WAVELET_SIGMA_TOOLTIP;对比度滑条对中等反差细节的效果较强，对高反差和低反差细节的效果较弱。\n 用此滑条可以控制效果向极端反差衰减的速度。\n 滑条设得越高，发生明显变化的反差范围越宽，产生伪影的风险也越高。\n 滑条越低，效果越集中在较窄的反差范围内。
+TP_WAVELET_THRDEN_TOOLTIP;生成一条阶梯曲线，用来根据局部反差引导降噪。降噪会施加在均匀、局部反差低的区域。有细节（局部反差较高）的区域会被保留。
 TP_WBALANCE_AUTOITCGREEN;色温相关性
 TP_WBALANCE_AUTOOLD;RGB 灰
 TP_WBALANCE_FLUO6;F6 - 淡白色
@@ -4827,23 +4827,23 @@ TP_WBALANCE_FLUO9;F9 - 高显色冷白
 !TP_WBALANCE_FLUO12;F12 - Philips TL83
 !TP_WBALANCE_GTI;GTI
 !TP_WBALANCE_HMI;HMI
-!TP_WBALANCE_ITCWALG_TOOLTIP;Allows you to switch to the other Alternative temperature (Alt_temp), when possible.\nInactive in the "single choice" case.
-!TP_WBALANCE_ITCWBDELTA_TOOLTIP;Fixed for each "green" iteration tried, the temperature difference to be taken into account.
-!TP_WBALANCE_ITCWBFGREEN_TOOLTIP;Find the best compromise between Student and green.
-!TP_WBALANCE_ITCWBMINSIZEPATCH_TOOLTIP;Allows you to set the minimum patch value. values that are too low can lead to a lack of correlation.
-!TP_WBALANCE_ITCWBNOPURPLE_TOOLTIP;Allows you to filter magenta/purple data from the image. If the box is checked a filter limiting the value of Y is applied. By default this value is 0.4. You can change it in 'options' Itcwb_Ypurple (Maximum 1)
-!TP_WBALANCE_ITCWBPRECIS_TOOLTIP;The lower the value, the more relevant the data, but increases the processing time. Since the processing time is low, this parameter should generally be able to remain at the default value
-!TP_WBALANCE_ITCWBRGREEN_TOOLTIP;Sets the green value review amplitude in iterations, from low amplitude 0.82 to 1.25 to maximum amplitude 0.4 to 4.
-!TP_WBALANCE_ITCWBSIZEPATCH_TOOLTIP;This setting sets the size of color datas used by algorithm.
-!TP_WBALANCE_ITCWBSIZE_TOOLTIP;This setting sets the number of iterations to find the best correspondence between the reference spectral colors and those in xyY value of the image. A value of 3 seams a good compromise.
-!TP_WBALANCE_ITCWBTHRES_TOOLTIP;Limits comparison sampling between spectral data and image data.
+TP_WBALANCE_ITCWALG_TOOLTIP;可以在可能的情况下切换到另一个备选色温（Alt_temp）。\n在“单一选择”的情况下不起作用。
+TP_WBALANCE_ITCWBDELTA_TOOLTIP;对于每次尝试的“绿色”迭代，固定要考虑的色温差。
+TP_WBALANCE_ITCWBFGREEN_TOOLTIP;在 Student 与绿色之间寻找最佳折中。
+TP_WBALANCE_ITCWBMINSIZEPATCH_TOOLTIP;可以设置色块的最小值。数值过低可能导致缺乏相关性。
+TP_WBALANCE_ITCWBNOPURPLE_TOOLTIP;可以从图像中过滤品红/紫色数据。勾选后会应用一个限制 Y 值的滤镜。默认值为 0.4。可以在“options”文件的 Itcwb_Ypurple 中更改（最大 1）
+TP_WBALANCE_ITCWBPRECIS_TOOLTIP;数值越低，数据越相关，但处理时间越长。由于处理时间本来就短，此参数一般保持默认值即可
+TP_WBALANCE_ITCWBRGREEN_TOOLTIP;设置迭代中绿色值检查的幅度，从低幅度 0.82 到 1.25，到最大幅度 0.4 到 4。
+TP_WBALANCE_ITCWBSIZEPATCH_TOOLTIP;此设置决定算法使用的颜色数据的大小。
+TP_WBALANCE_ITCWBSIZE_TOOLTIP;此设置决定迭代次数，用于在参考光谱色与图像的 xyY 值之间寻找最佳对应。数值 3 看来是不错的折中。
+TP_WBALANCE_ITCWBTHRES_TOOLTIP;限制光谱数据与图像数据之间的比较采样。
 TP_WBALANCE_ITCWB_ALG;移除两遍算法
 TP_WBALANCE_ITCWB_CUSTOM;使用自定义色温与色调
 TP_WBALANCE_ITCWB_DELTA;绿色循环中的色温差
 TP_WBALANCE_ITCWB_FGREEN;查找绿色 student
 TP_WBALANCE_ITCWB_FORCED;接近完整 CIE 色度图
 TP_WBALANCE_ITCWB_FRA;自动色温相关性设置
-!TP_WBALANCE_ITCWB_FRA_TOOLTIP;These settings allow, depending on the images (type of raw, colorimetry, etc.), an adaptation of the 'Temperature correlation' algorithm. There is no absolute rule linking these parameters to the results obtained.
+TP_WBALANCE_ITCWB_FRA_TOOLTIP;这些设置可以根据图像（raw 类型、色度学特性等）调整“色温相关性”算法。这些参数与所得结果之间没有绝对的规律。
 TP_WBALANCE_ITCWB_MINSIZEPATCH;色块最小尺寸
 TP_WBALANCE_ITCWB_NOPURPLE;过滤紫色
 TP_WBALANCE_ITCWB_PRECIS;精确算法 - 使用的尺度
@@ -4860,23 +4860,23 @@ TP_WBALANCE_ITCWB_SAMPLING;低采样 5.9
 TP_WBALANCE_ITCWB_SIZE;参考色大小与直方图之比
 TP_WBALANCE_ITCWB_SIZEPATCH;色块大小
 TP_WBALANCE_ITCWB_THRES;图像中使用的颜色（预设）
-!TP_WBALANCE_ITCWCUSTOM_TOOLTIP;Allows you to use Custom settings Temperature and Green (tint).\n\nUsage tips:\n1) start Itcwb , enable 'Use Custom temperature and tint'.\n2) Set 'Temperature and tint' to your liking :free, Pick,...(Custom)\n3) go back to 'Temperature correlation'.\n\nYou cannot use : 2 passes, AWB temperature bias, Green refinement.
-!TP_WBALANCE_ITCWFORCED_TOOLTIP;By default (box not checked) the data scanned during sampling is brought back to the sRGB profile, which is the most widespread, both for calibrating DCP or ICC profiles with the Colorchecker24, or used on the web.\n If you have very high gamut images (some flowers, artificial colors), then it may be necessary to use the entire CIExy diagram, the profile used will be ACESP0. In this second case, the number of colors that can be used in internal to the algorithm will be more important.
-!TP_WBALANCE_ITCWGREEN_TOOLTIP;Allows you to change the "tint" (green) which will serve as a reference when starting the algorithm. It has substantially the same role for greens as "AWB temperature bias" for temperature.\nThe whole algorithm is recalculated.
-!TP_WBALANCE_ITCWPRIM_TOOLTIP;Allows you to select the image sampling.\n'Close to full CIE diagram' almost uses the data present on the sensor, possibly including the imaginary colors.\n'Camera XYZ matrix' - uses the matrix directly derived from Color Matrix.\n'Medium sampling' (default) - near Pointer's gamut: corresponds substantially to the most common cases of human vision.\nThe other choice 'Low sampling and Ignore camera settings' allow you to isolate high gamut parts of the image and forces the algorithm in some cases (tint > 0.8,...) to ignore camera settings. This will obviously have an impact on the result.\n\nThis sampling only has an influence on the channel multipliers, it has nothing to do with the "working profile" and does not modify the gamut of the image.
+TP_WBALANCE_ITCWCUSTOM_TOOLTIP;可以使用自定义的色温和绿色（色调）设置。\n\n使用提示：\n1) 启动 Itcwb，启用“使用自定义色温与色调”。\n2) 按喜好设置“色温和色调”：自由、取色等（自定义）\n3) 回到“色温相关性”。\n\n以下功能不可用：两遍、自动白平衡色温偏移、绿色精修。
+TP_WBALANCE_ITCWFORCED_TOOLTIP;默认情况下（未勾选），采样时扫描到的数据会被带回 sRGB 配置文件。sRGB 最为普及，无论是用 Colorchecker24 校准 DCP 或 ICC 配置文件，还是用于网络。\n 如果图像色域非常宽（某些花朵、人造色彩），可能需要使用整个 CIExy 色度图，此时使用的配置文件为 ACESP0。在第二种情况下，算法内部可用的颜色数量会更多。
+TP_WBALANCE_ITCWGREEN_TOOLTIP;可以更改算法启动时作为参考的“色调”（绿色）。它对绿色的作用与“自动白平衡色温偏移”对色温的作用大致相同。\n整个算法会重新计算。
+TP_WBALANCE_ITCWPRIM_TOOLTIP;可以选择图像采样方式。\n“接近完整 CIE 色度图”几乎使用传感器上的全部数据，可能包含虚色。\n“相机 XYZ 矩阵” - 使用直接由色彩矩阵得出的矩阵。\n“中等采样”（默认）- 接近 Pointer 色域：大致对应人眼视觉最常见的情况。\n另一个选项“低采样并忽略相机设置”可以隔离图像中色域较宽的部分，并在某些情况下（色调 > 0.8 等）强制算法忽略相机设置。这显然会影响结果。\n\n此采样只影响通道乘数，与“工作配置文件”无关，也不改变图像的色域。
 !TP_WBALANCE_JUDGEIII;JudgeIII
 TP_WBALANCE_LAMP_HEADER;灯
 !TP_WBALANCE_LED_CRS;CRS SP12 WWMR16
 !TP_WBALANCE_LED_LSI;LSI Lumelex 2040
 TP_WBALANCE_PATCHLABEL;读取颜色：%1 色块：色度：%2 大小=%3
-!TP_WBALANCE_PATCHLABEL_TOOLTIP;Display number of read colors (max=237).\nDisplay calculated Patch Chroma.\nAWB temperature bias, lets try to reduce this value, a minimum may seem to optimize the algorithm.\n\nPatch size matching chroma optimization.
+TP_WBALANCE_PATCHLABEL_TOOLTIP;显示读取到的颜色数量（最大=237）。\n显示计算出的色块色度。\n自动白平衡色温偏移：可以尝试降低此数值，取最小值似乎能优化算法。\n\n色块大小与色度优化相匹配。
 TP_WBALANCE_PATCHLEVELLABEL;色块：ΔE=%1 - 数据 x 9 最小：%2 最大=%3
-!TP_WBALANCE_PATCHLEVELLABEL_TOOLTIP;Display ΔE patch (this assumes there is enough spectral data), between image and spectral datas.\n Display read datas found. The 2 values correspond to the minimum and maximum data values taken into account. The coefficient x9 must be taken into account to obtain the number of pixels concerned in the image.
+TP_WBALANCE_PATCHLEVELLABEL_TOOLTIP;显示图像与光谱数据之间的色块 ΔE（前提是有足够的光谱数据）。\n 显示找到的读取数据。两个数值对应所考虑数据的最小值和最大值。要得到图像中涉及的像素数，需乘以系数 9。
 TP_WBALANCE_SOLUX47;Solux 4700K（厂商）
 TP_WBALANCE_SOLUX47_NG;Solux 4700K（国家美术馆）
 TP_WBALANCE_STUDLABEL;相关系数：%1 遍数：%2 最差备选=%3
 TP_WBALANCE_STUDLABEL0;相关系数：%1 遍数：%2 备选=%3
 TP_WBALANCE_STUDLABEL1;相关系数：%1 遍数：%2 最佳备选=%3
-!TP_WBALANCE_STUDLABEL_TOOLTIP;Display calculated Student correlation.\nLower values are better, where <0.005 is excellent,\n<0.01 is good, and >0.5 is poor.\nLow values do not mean that the white balance is good:\nif the illuminant is non-standard the results can be erratic.\nA value of 1000 means previous calculations are used and\nthe resultsare probably good.\n\nPasses : number of passes made.\nAlt_temp : Alternative temperature.
+TP_WBALANCE_STUDLABEL_TOOLTIP;显示计算出的 Student 相关系数。\n数值越低越好，<0.005 为优秀，\n<0.01 为良好，>0.5 为差。\n数值低并不代表白平衡正确：\n如果光源不标准，结果可能不稳定。\n数值 1000 表示使用了之前的计算结果，\n结果很可能是好的。\n\n遍数：执行的遍数。\nAlt_temp：备选色温。
 !//TP_WBALANCE_ITCWBNOPURPLE_TOOLTIP;By default when "Inpaint opposed" is activated, purple colors are not taken into account. However, if the image does not need highlight reconstruction, or if this image naturally contains purple tints (flowers, etc.), it may be necessary to deactivate, to take into account all the colors.
 !//TP_WBALANCE_ITCWB_FORCED;Forces use of the entire CIE diagram
