@@ -239,8 +239,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: [release, debug]
-        arch: [x86_64, arm64]
+        build_type: [release]
+        arch: [x86_64]
     env:
       ARTIFACT_NAME: ${{ format('{0}_{1}_{2}', needs.build.outputs.ARTIFACT_NAME_PREFIX, matrix.arch, matrix.build_type) }}
       REF_NAME_FILTERED: ${{needs.build.outputs.REF_NAME_FILTERED}}
@@ -364,8 +364,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: [release, debug]
-        arch: [x86_64, arm64]
+        build_type: [release]
+        arch: [x86_64]
     env:
       ARTIFACT_NAME: ${{ format('{0}_{1}_{2}', needs.build.outputs.ARTIFACT_NAME_PREFIX, matrix.arch, matrix.build_type) }}
     steps:
