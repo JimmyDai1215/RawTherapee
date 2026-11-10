@@ -307,6 +307,7 @@ private:
     time_t processingStartedTime;
 
     sigc::connection ShowHideSidePanelsconn;
+    sigc::connection autosaveConn;  // pending delayed save of the processing profile
 
     bool isProcessing;
 

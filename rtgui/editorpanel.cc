@@ -1111,6 +1111,7 @@ EditorPanel::EditorPanel (FilePanel* filePanel)
 
 EditorPanel::~EditorPanel ()
 {
+    autosaveConn.disconnect();
     idle_register.destroy();
 
     history->setHistoryBeforeLineListener (nullptr);
@@ -1321,6 +1322,7 @@ void EditorPanel::open (Thumbnail* tmb, rtengine::InitialImage* isrc)
 
 void EditorPanel::close ()
 {
+    autosaveConn.disconnect();
     if (ipc) {
         saveProfile ();
         // close image processor and the current thumbnail
@@ -1415,6 +1417,18 @@ void EditorPanel::procParamsChanged(
     selectedFrame = rtengine::LIM<int>(selectedFrame, 0, isrc->getImageSource()->getMetaData()->getFrameCount() - 1);
 
     info_toggled();
+
+    // Auto-save: write the processing profile a few seconds after the last
+    // edit, so that changes survive a crash or power loss.
+    if (ev != rtengine::EvPhotoLoaded) {
+        autosaveConn.disconnect();
+        autosaveConn = Glib::signal_timeout().connect_seconds(
+            [this]() -> bool {
+                saveProfile();
+                return false;
+            },
+            3);
+    }
 }
 
 void EditorPanel::clearParamChanges()
