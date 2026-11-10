@@ -1496,6 +1496,8 @@ TOOLBAR_TOOLTIP_CROP;裁切选择\n快捷键：<b>c</b>\n使用<b>Shift</b>+<b>�
 TOOLBAR_TOOLTIP_HAND;手形工具\n快捷键：<b>n</b>
 TOOLBAR_TOOLTIP_STRAIGHTEN;基准线选择\n快捷键：<b>s</b>
 TOOLBAR_TOOLTIP_WB;白平衡采样\n快捷键：<b>w</b>
+TOOLSEARCH_PLACEHOLDER;搜索工具…
+TOOLSEARCH_TOOLTIP;输入工具名称的一部分即可跳转到该工具。\n<b>回车</b>：下一个匹配项\n快捷键：<b>Ctrl+f</b>
 TP_BWMIX_ALGO_LI;线性
 TP_BWMIX_ALGO_SP;特定效果
 TP_BWMIX_AUTOCH;自动

@@ -464,8 +464,14 @@ void Options::setDefaults()
     autoSaveTpOpen = true;
     //crvOpen.clear ();
     parseExtensions.clear();
-    favorites.clear();
-    cloneFavoriteTools = false;
+    // Default Favorites tab: the everyday tools, in a Capture One like order.
+    favorites = {
+        "whitebalance", "tonecurve", "shadowshighlights", "toneequalizer",
+        "localcontrast", "vibrance", "hsvequalizer", "colortoning", "rgbcurves",
+        "sharpening", "dirpyrdenoise", "dehaze", "filmsimulation",
+        "crop", "rotate", "lensprof", "vignetting"
+    };
+    cloneFavoriteTools = true;
     parseExtensionsEnabled.clear();
     parsedExtensions.clear();
     parsedExtensionsSet.clear();

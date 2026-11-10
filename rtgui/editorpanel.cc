@@ -882,6 +882,7 @@ EditorPanel::EditorPanel (FilePanel* filePanel)
 
     vsubboxright->pack_start (*ppframe, Gtk::PACK_SHRINK, 2);
     // main notebook
+    vsubboxright->pack_start (*tpc->toolSearch, Gtk::PACK_SHRINK, 2);
     vsubboxright->pack_start (*tpc->toolPanelNotebook);
 
     vboxright->pack2 (*vsubboxright, true, true);
@@ -1950,7 +1951,8 @@ bool EditorPanel::handleShortcutKey (GdkEventKey* event)
 
                 case GDK_KEY_f:
                 case GDK_KEY_F:
-                    // No action is performed to avoid Gtk-CRITICAL due to Locallab treeview when treeview isn't focused
+                    // Focus the tool search box (this also keeps the key away from the Locallab treeview).
+                    tpc->toolSearch->grab_focus();
                     return true;
             }
         } //if (!ctrl)

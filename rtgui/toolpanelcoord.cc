@@ -16,6 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with RawTherapee.  If not, see <https://www.gnu.org/licenses/>.
  */
+#include <algorithm>
 #include <iostream>
 
 #include "multilangmgr.h"
@@ -459,6 +460,12 @@ ToolPanelCoordinator::ToolPanelCoordinator (bool batch) : ipc (nullptr), favorit
 
     toolPanelNotebook = new Gtk::Notebook();
     toolPanelNotebook->set_name("ToolPanelNotebook");
+
+    toolSearch = new Gtk::SearchEntry();
+    toolSearch->set_placeholder_text(M("TOOLSEARCH_PLACEHOLDER"));
+    toolSearch->set_tooltip_markup(M("TOOLSEARCH_TOOLTIP"));
+    toolSearch->signal_search_changed().connect(sigc::mem_fun(*this, &ToolPanelCoordinator::toolSearchChanged));
+    toolSearch->signal_activate().connect(sigc::mem_fun(*this, &ToolPanelCoordinator::toolSearchActivated));
     favoritePanelSW.reset(new MyScrolledWindow());
     exposurePanelSW    = Gtk::manage (new MyScrolledWindow ());
     detailsPanelSW     = Gtk::manage (new MyScrolledWindow ());
@@ -990,8 +997,86 @@ ToolPanelCoordinator::~ToolPanelCoordinator ()
         }
     }
 
+    delete toolSearch;
     delete toolPanelNotebook;
     delete toolBar;
+}
+
+bool ToolPanelCoordinator::jumpToTool(const Glib::ustring& query, std::size_t start)
+{
+    const Glib::ustring q = query.casefold();
+    const std::size_t count = toolPanels.size();
+
+    if (q.empty() || !count) {
+        return false;
+    }
+
+    for (std::size_t k = 0; k < count; ++k) {
+        const std::size_t i = (start + k) % count;
+        MyExpander* const expander = toolPanels[i]->getExpander();
+
+        if (!expander || !expander->get_visible()) {
+            continue;
+        }
+
+        if (expander->getLabelText().casefold().find(q) == Glib::ustring::npos
+                && toolPanels[i]->getToolName().casefold().find(q) == Glib::ustring::npos) {
+            continue;
+        }
+
+        // The notebook page holding this tool (tools may be moved to Favorites).
+        Gtk::Widget* page = expander;
+
+        while (page && page->get_parent() != toolPanelNotebook) {
+            page = page->get_parent();
+        }
+
+        if (!page) {
+            continue;
+        }
+
+        toolPanelNotebook->set_current_page(toolPanelNotebook->page_num(*page));
+
+        // Open enclosing tools first, then the tool itself.
+        for (Gtk::Widget* w = expander->get_parent(); w && w != page; w = w->get_parent()) {
+            if (MyExpander* const outer = dynamic_cast<MyExpander*>(w)) {
+                outer->set_expanded(true);
+            }
+        }
+
+        toolPanels[i]->setExpanded(true);
+
+        if (Gtk::ScrolledWindow* const sw = dynamic_cast<Gtk::ScrolledWindow*>(page)) {
+            // Scroll once the layout has been updated.
+            Glib::signal_idle().connect_once([sw, expander]() {
+                Gtk::Widget* const viewport = sw->get_child();
+                int x = 0;
+                int y = 0;
+
+                if (viewport && expander->translate_coordinates(*viewport, 0, 0, x, y)) {
+                    const Glib::RefPtr<Gtk::Adjustment> adj = sw->get_vadjustment();
+                    const double max = std::max(adj->get_lower(), adj->get_upper() - adj->get_page_size());
+                    adj->set_value(std::min(adj->get_value() + y, max));
+                }
+            });
+        }
+
+        toolSearchIndex = i;
+        return true;
+    }
+
+    return false;
+}
+
+void ToolPanelCoordinator::toolSearchChanged()
+{
+    jumpToTool(toolSearch->get_text(), 0);
+}
+
+void ToolPanelCoordinator::toolSearchActivated()
+{
+    // Enter cycles through the remaining matches.
+    jumpToTool(toolSearch->get_text(), toolSearchIndex + 1);
 }
 
 void ToolPanelCoordinator::imageTypeChanged(bool isRaw, bool isBayer, bool isXtrans, bool isMono, bool isGainMapSupported)

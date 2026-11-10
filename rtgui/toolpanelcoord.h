@@ -323,6 +323,13 @@ public:
 
     CoarsePanel* coarse;
     Gtk::Notebook* toolPanelNotebook;
+    /// Search box shown above the tool tabs: jumps to the tool whose name matches.
+    Gtk::SearchEntry* toolSearch;
+    /// Opens the tab of the next tool matching the query, starting at index start.
+    bool jumpToTool(const Glib::ustring& query, std::size_t start);
+    void toolSearchChanged();
+    void toolSearchActivated();
+    std::size_t toolSearchIndex = 0;
 
     ToolPanelCoordinator(bool batch = false);
     ~ToolPanelCoordinator () override;

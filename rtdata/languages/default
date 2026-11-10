@@ -2432,6 +2432,8 @@ TOOLBAR_TOOLTIP_HAND;Hand tool.\nShortcut: <b>h</b>
 TOOLBAR_TOOLTIP_PERSPECTIVE;<b>Perspective Correction</b>\n\nEdit control lines to correct perspective distortion. Click this button again to apply correction.
 TOOLBAR_TOOLTIP_STRAIGHTEN;<b>Straighten</b> / <b>fine rotation</b>.\nShortcut: <b>s</b>\n\nIndicate the vertical or horizontal by drawing a guide line over the image. Angle of rotation will be shown next to the guide line. Center of rotation is the geometrical center of the image.
 TOOLBAR_TOOLTIP_WB;Spot white balance.\nShortcut: <b>w</b>
+TOOLSEARCH_PLACEHOLDER;Search tools…
+TOOLSEARCH_TOOLTIP;Type part of a tool name to jump to it.\n<b>Enter</b>: next match\nShortcut: <b>Ctrl+f</b>
 TP_BWMIX_ALGO;Algorithm OYCPM
 TP_BWMIX_ALGO_LI;Linear
 TP_BWMIX_ALGO_SP;Special effects

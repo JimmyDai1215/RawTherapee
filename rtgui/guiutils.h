@@ -311,6 +311,12 @@ public:
     }
 
     /// Set the collapsed/expanded state of the expander
+    /// Text of the header label, or an empty string for widget headers.
+    Glib::ustring getLabelText() const
+    {
+        return label ? label->get_text() : Glib::ustring();
+    }
+
     void set_expanded( bool expanded );
 
     /// Get the collapsed/expanded state of the expander
