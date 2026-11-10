@@ -4,6 +4,7 @@ on:
     branches:
       - dev
       - c1-custom
+      - c1-stable
       - releases
       - 'release-[0-9]+.*'
     tags:
