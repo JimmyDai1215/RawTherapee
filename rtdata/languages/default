@@ -2432,6 +2432,85 @@ TOOLBAR_TOOLTIP_HAND;Hand tool.\nShortcut: <b>h</b>
 TOOLBAR_TOOLTIP_PERSPECTIVE;<b>Perspective Correction</b>\n\nEdit control lines to correct perspective distortion. Click this button again to apply correction.
 TOOLBAR_TOOLTIP_STRAIGHTEN;<b>Straighten</b> / <b>fine rotation</b>.\nShortcut: <b>s</b>\n\nIndicate the vertical or horizontal by drawing a guide line over the image. Angle of rotation will be shown next to the guide line. Center of rotation is the geometrical center of the image.
 TOOLBAR_TOOLTIP_WB;Spot white balance.\nShortcut: <b>w</b>
+TOOLDESC_BAYERPREPROCESS;Fixes sensor line noise, green channel imbalance and PDAF banding before demosaicing.
+TOOLDESC_BAYERPROCESS;Chooses how the Bayer sensor data is turned into a full-color image (demosaicing), including pixel shift.
+TOOLDESC_BAYERRAWEXPOSURE;Sets the black level of each raw channel of a Bayer sensor.
+TOOLDESC_BLACKWHITE;Converts to black and white with control over how bright each color becomes.
+TOOLDESC_CACORRECTION;Removes colored fringes along edges by shifting the red and blue channels (manual chromatic aberration correction).
+TOOLDESC_CAPTURESHARPENING;Recovers detail lost to lens blur and diffraction; best applied to raw files.
+TOOLDESC_CHMIXER;Mixes the red, green and blue channels into each other for color correction or special effects.
+TOOLDESC_COLORAPPEARANCE;Adjusts color and contrast with a model of human vision (CIECAM), taking scene and viewing conditions into account.
+TOOLDESC_COLORTONING;Tints shadows, midtones and highlights separately (split toning, color grading).
+TOOLDESC_COMPRESSGAMUT;Brings overly saturated colors back inside the color gamut without clipping them.
+TOOLDESC_CROP;Cuts the image to a chosen frame and aspect ratio.
+TOOLDESC_CROPGUIDE;Shows composition guide lines for the crop, such as rule of thirds.
+TOOLDESC_DARKFRAME;Subtracts a dark frame to remove hot pixels and thermal noise from long exposures.
+TOOLDESC_DEFRINGE;Removes purple and green fringes around high-contrast edges.
+TOOLDESC_DEHAZE;Cuts through haze and fog to restore contrast and color.
+TOOLDESC_DIRPYRDENOISE;The main noise reduction tool: reduces luminance and color noise.
+TOOLDESC_DIRPYREQUALIZER;Raises or lowers contrast separately for fine, medium and coarse details.
+TOOLDESC_DISTORTION;Corrects barrel and pincushion distortion manually.
+TOOLDESC_EPD;Tone mapping that brightens shadows and tames highlights while preserving edges.
+TOOLDESC_FATTAL;Compresses a high dynamic range so that both shadows and highlights fit, keeping local contrast.
+TOOLDESC_FILMNEGATIVE;Turns a photographed film negative into a positive image.
+TOOLDESC_FILMSIMULATION;Applies a film or style look from a LUT file (HaldCLUT or .cube).
+TOOLDESC_FLATFIELD;Uses a flat-field frame to remove vignetting, dust shadows and color casts of the lens.
+TOOLDESC_FRAMING;Adds a border or frame around the exported image.
+TOOLDESC_GRADIENT;Simulates a graduated neutral density filter, for example to darken the sky.
+TOOLDESC_HSVEQUALIZER;Changes hue, saturation and brightness of individual colors, similar to a color editor.
+TOOLDESC_ICM;Selects the input, working and output color profiles.
+TOOLDESC_IMPULSEDENOISE;Removes isolated bright or dark pixels (salt and pepper noise).
+TOOLDESC_LABCURVES;Lightness, contrast and chroma adjustments and curves in the Lab color space.
+TOOLDESC_LENSGEOM;Groups the lens and geometry corrections; can auto-fill the frame after rotating or correcting.
+TOOLDESC_LENSPROF;Corrects distortion, vignetting and chromatic aberration automatically from a lens profile.
+TOOLDESC_LOCALCONTRAST;Adds punch and clarity by enhancing mid-size details.
+TOOLDESC_LOCALLAB;Local adjustments: apply almost any correction to a selected area only.
+TOOLDESC_PCVIGNETTE;Adds a creative vignette that follows the crop.
+TOOLDESC_PERSPECTIVE;Straightens converging lines, for example of buildings.
+TOOLDESC_PREPROCESS;Filters hot and dead pixels in the raw data.
+TOOLDESC_PREPROCESSWB;Chooses whether the camera or automatic white balance is used during raw preprocessing.
+TOOLDESC_PRSHARPENING;Sharpens the image again after it has been resized.
+TOOLDESC_RAWCACORRECTION;Corrects chromatic aberration on the raw data, before demosaicing.
+TOOLDESC_RAWEXPOSURE;Corrects the raw white point when highlights are clipped too early or too late.
+TOOLDESC_RESIZE;Changes the pixel dimensions of the exported image.
+TOOLDESC_RETINEX;Recovers detail in hazy, foggy or very uneven lighting.
+TOOLDESC_RGBCURVES;Separate tone curves for the red, green and blue channels.
+TOOLDESC_ROTATE;Rotates the image and levels the horizon.
+TOOLDESC_SENSORBAYER;Settings for cameras with a Bayer sensor (most cameras).
+TOOLDESC_SENSORXTRANS;Settings for cameras with an X-Trans sensor (Fujifilm).
+TOOLDESC_SHADOWSHIGHLIGHTS;Brightens shadows and recovers highlights.
+TOOLDESC_SHARPENEDGE;Sharpens only the edges, leaving flat areas untouched.
+TOOLDESC_SHARPENING;Output sharpening with unsharp mask or RL deconvolution.
+TOOLDESC_SHARPENMICRO;Enhances the finest texture (microcontrast).
+TOOLDESC_SOFTLIGHT;Adds contrast and saturation with a soft-light blend.
+TOOLDESC_SPOT;Removes dust spots and small blemishes by copying from nearby areas.
+TOOLDESC_TONECURVE;The main exposure tool: exposure compensation, contrast, saturation, black point and tone curves.
+TOOLDESC_TONEEQUALIZER;Brightens or darkens five tonal ranges from shadows to highlights independently.
+TOOLDESC_VIBRANCE;Boosts muted colors more than saturated ones and protects skin tones.
+TOOLDESC_VIGNETTING;Removes the darkening of the image corners caused by the lens.
+TOOLDESC_WAVELET;Advanced multi-scale editing of contrast, color, noise and sharpness by detail level.
+TOOLDESC_WHITEBALANCE;Sets the color temperature and tint so that neutral tones look neutral.
+TOOLDESC_XTRANSPROCESS;Chooses the demosaicing method for X-Trans sensors.
+TOOLDESC_XTRANSRAWEXPOSURE;Sets the black level of each raw channel of an X-Trans sensor.
+TOOLGROUP_COLOR_GRADING;Curves and grading
+TOOLGROUP_COLOR_LOOKS;Looks and film
+TOOLGROUP_COLOR_MANAGEMENT;Color management
+TOOLGROUP_COLOR_SATURATION;Saturation and channels
+TOOLGROUP_COLOR_WB;White balance and gamut
+TOOLGROUP_DETAIL_DENOISE;Noise and defects
+TOOLGROUP_DETAIL_RETOUCH;Retouching
+TOOLGROUP_DETAIL_SHARPEN;Sharpening and clarity
+TOOLGROUP_DETAIL_TEXTURE;Texture and haze
+TOOLGROUP_EXPOSURE_BASIC;Basic exposure
+TOOLGROUP_EXPOSURE_EFFECTS;Creative filters
+TOOLGROUP_EXPOSURE_LAB;Lab adjustments
+TOOLGROUP_EXPOSURE_TONE;Tone and dynamic range
+TOOLGROUP_RAW_CALIBRATION;Calibration frames
+TOOLGROUP_RAW_DEMOSAIC;Sensor and demosaicing
+TOOLGROUP_RAW_PREPROCESS;Raw levels and preprocessing
+TOOLGROUP_RAW_SHARPEN;Capture sharpening
+TOOLGROUP_TRANSFORM_FRAMING;Framing and size
+TOOLGROUP_TRANSFORM_LENS;Lens and geometry
 TOOLSEARCH_PLACEHOLDER;Search tools…
 TOOLSEARCH_TOOLTIP;Type part of a tool name to jump to it.\n<b>Enter</b>: next match\nShortcut: <b>Ctrl+f</b>
 TP_BWMIX_ALGO;Algorithm OYCPM

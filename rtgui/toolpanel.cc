@@ -76,6 +76,14 @@ FoldableToolPanel::FoldableToolPanel(Gtk::Box* content, Glib::ustring toolName, 
         exp = Gtk::manage (new MyExpander (useEnabled, UILabel));
     }
 
+    // Short description of what the tool does, shown when hovering its title.
+    const Glib::ustring descKey = "TOOLDESC_" + toolName.uppercase();
+    const Glib::ustring desc = M(descKey);
+
+    if (desc != descKey) {
+        exp->setHeaderTooltip("<b>" + escapeHtmlChars(UILabel) + "</b>\n" + desc);
+    }
+
     exp->signal_button_release_event().connect_notify( sigc::mem_fun(this, &FoldableToolPanel::foldThemAll) );
     enaConn = signal_enabled_toggled().connect( sigc::mem_fun(*this, &FoldableToolPanel::enabled_toggled) );
 

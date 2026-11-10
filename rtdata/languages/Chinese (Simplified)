@@ -1496,6 +1496,85 @@ TOOLBAR_TOOLTIP_CROP;裁切选择\n快捷键：<b>c</b>\n使用<b>Shift</b>+<b>�
 TOOLBAR_TOOLTIP_HAND;手形工具\n快捷键：<b>n</b>
 TOOLBAR_TOOLTIP_STRAIGHTEN;基准线选择\n快捷键：<b>s</b>
 TOOLBAR_TOOLTIP_WB;白平衡采样\n快捷键：<b>w</b>
+TOOLDESC_BAYERPREPROCESS;在去马赛克之前修正传感器的线状噪点、绿色通道不平衡和相位对焦条纹。
+TOOLDESC_BAYERPROCESS;选择把拜耳传感器数据还原成全彩图像的方式（去马赛克），包括像素位移合成。
+TOOLDESC_BAYERRAWEXPOSURE;设置拜耳传感器各 raw 通道的黑电平。
+TOOLDESC_BLACKWHITE;转换为黑白，并控制每种颜色转成多亮的灰。
+TOOLDESC_CACORRECTION;通过平移红、蓝通道去除边缘的彩色镶边（手动色差校正）。
+TOOLDESC_CAPTURESHARPENING;恢复因镜头模糊和衍射损失的细节；最适合用于 raw 文件。
+TOOLDESC_CHMIXER;把红、绿、蓝通道相互混合，用于校色或特殊效果。
+TOOLDESC_COLORAPPEARANCE;用人眼视觉模型（CIECAM）调整色彩和反差，并考虑拍摄场景和观看条件。
+TOOLDESC_COLORTONING;分别给阴影、中间调和高光着色（色调分离、调色）。
+TOOLDESC_COMPRESSGAMUT;把过于饱和的颜色收回色域之内，避免被截断。
+TOOLDESC_CROP;按选定的画框和宽高比裁剪图像。
+TOOLDESC_CROPGUIDE;为裁剪显示构图参考线，例如三分法。
+TOOLDESC_DARKFRAME;减去暗场，去除长曝光产生的热像素和热噪点。
+TOOLDESC_DEFRINGE;去除高反差边缘周围的紫边和绿边。
+TOOLDESC_DEHAZE;去除雾霾，恢复反差和色彩。
+TOOLDESC_DIRPYRDENOISE;主要的降噪工具：降低亮度噪点和彩色噪点。
+TOOLDESC_DIRPYREQUALIZER;分别提高或降低精细、中等和粗糙细节的反差。
+TOOLDESC_DISTORTION;手动校正桶形和枕形畸变。
+TOOLDESC_EPD;在保留边缘的前提下提亮阴影、压低高光的色调映射。
+TOOLDESC_FATTAL;压缩高动态范围，让阴影和高光都能容纳，同时保持局部反差。
+TOOLDESC_FILMNEGATIVE;把翻拍的胶片负片转换成正像。
+TOOLDESC_FILMSIMULATION;通过 LUT 文件（HaldCLUT 或 .cube）套用胶片或风格效果。
+TOOLDESC_FLATFIELD;利用平场图像去除镜头的暗角、灰尘阴影和偏色。
+TOOLDESC_FRAMING;给导出的图像加上边框或画框。
+TOOLDESC_GRADIENT;模拟渐变中灰滤镜，例如压暗天空。
+TOOLDESC_HSVEQUALIZER;单独改变某种颜色的色相、饱和度和明度，类似色彩编辑器。
+TOOLDESC_ICM;选择输入、工作和输出色彩配置文件。
+TOOLDESC_IMPULSEDENOISE;去除孤立的亮点或暗点（椒盐噪点）。
+TOOLDESC_LABCURVES;在 Lab 色彩空间中调整明度、对比度、色度及相关曲线。
+TOOLDESC_LENSGEOM;镜头与几何校正的集合；旋转或校正后可自动填满画面。
+TOOLDESC_LENSPROF;根据镜头配置文件自动校正畸变、暗角和色差。
+TOOLDESC_LOCALCONTRAST;通过增强中等尺寸的细节来增加通透感和清晰度。
+TOOLDESC_LOCALLAB;局部调整：把几乎任何修正只施加到选定的区域。
+TOOLDESC_PCVIGNETTE;添加随裁剪变化的创意暗角。
+TOOLDESC_PERSPECTIVE;校正汇聚的线条，例如建筑物的透视变形。
+TOOLDESC_PREPROCESS;过滤 raw 数据中的热像素和坏点。
+TOOLDESC_PREPROCESSWB;选择 raw 预处理时使用相机白平衡还是自动白平衡。
+TOOLDESC_PRSHARPENING;在调整尺寸之后再次锐化图像。
+TOOLDESC_RAWCACORRECTION;在去马赛克之前，直接在 raw 数据上校正色差。
+TOOLDESC_RAWEXPOSURE;当高光过早或过晚溢出时校正 raw 白点。
+TOOLDESC_RESIZE;改变导出图像的像素尺寸。
+TOOLDESC_RETINEX;在朦胧、有雾或光照很不均匀的情况下恢复细节。
+TOOLDESC_RGBCURVES;红、绿、蓝通道各自的色调曲线。
+TOOLDESC_ROTATE;旋转图像、校正水平。
+TOOLDESC_SENSORBAYER;适用于拜耳阵列传感器相机（大多数相机）的设置。
+TOOLDESC_SENSORXTRANS;适用于 X-Trans 传感器相机（富士）的设置。
+TOOLDESC_SHADOWSHIGHLIGHTS;提亮阴影、恢复高光。
+TOOLDESC_SHARPENEDGE;只锐化边缘，不影响平坦区域。
+TOOLDESC_SHARPENING;使用 USM 锐化或 RL 反卷积进行输出锐化。
+TOOLDESC_SHARPENMICRO;增强最细微的纹理（微反差）。
+TOOLDESC_SOFTLIGHT;通过柔光混合增加反差和饱和度。
+TOOLDESC_SPOT;通过复制邻近区域去除灰尘斑点和小瑕疵。
+TOOLDESC_TONECURVE;主要的曝光工具：曝光补偿、对比度、饱和度、黑点和色调曲线。
+TOOLDESC_TONEEQUALIZER;分别提亮或压暗从阴影到高光的五个影调区间。
+TOOLDESC_VIBRANCE;对不饱和的颜色增强得更多，并保护肤色。
+TOOLDESC_VIGNETTING;去除镜头造成的画面四角变暗。
+TOOLDESC_WAVELET;按细节层级对反差、色彩、噪点和锐度进行高级的多尺度编辑。
+TOOLDESC_WHITEBALANCE;设置色温和色调，让中性色看起来不偏色。
+TOOLDESC_XTRANSPROCESS;选择 X-Trans 传感器的去马赛克方法。
+TOOLDESC_XTRANSRAWEXPOSURE;设置 X-Trans 传感器各 raw 通道的黑电平。
+TOOLGROUP_COLOR_GRADING;曲线与调色
+TOOLGROUP_COLOR_LOOKS;风格与胶片
+TOOLGROUP_COLOR_MANAGEMENT;色彩管理
+TOOLGROUP_COLOR_SATURATION;饱和度与通道
+TOOLGROUP_COLOR_WB;白平衡与色域
+TOOLGROUP_DETAIL_DENOISE;降噪与去瑕疵
+TOOLGROUP_DETAIL_RETOUCH;修复
+TOOLGROUP_DETAIL_SHARPEN;锐化与清晰度
+TOOLGROUP_DETAIL_TEXTURE;质感与去雾
+TOOLGROUP_EXPOSURE_BASIC;基础曝光
+TOOLGROUP_EXPOSURE_EFFECTS;创意滤镜
+TOOLGROUP_EXPOSURE_LAB;Lab 调整
+TOOLGROUP_EXPOSURE_TONE;影调与动态范围
+TOOLGROUP_RAW_CALIBRATION;校准帧
+TOOLGROUP_RAW_DEMOSAIC;传感器与去马赛克
+TOOLGROUP_RAW_PREPROCESS;Raw 电平与预处理
+TOOLGROUP_RAW_SHARPEN;捕获锐化
+TOOLGROUP_TRANSFORM_FRAMING;构图与尺寸
+TOOLGROUP_TRANSFORM_LENS;镜头与几何
 TOOLSEARCH_PLACEHOLDER;搜索工具…
 TOOLSEARCH_TOOLTIP;输入工具名称的一部分即可跳转到该工具。\n<b>回车</b>：下一个匹配项\n快捷键：<b>Ctrl+f</b>
 TP_BWMIX_ALGO_LI;线性

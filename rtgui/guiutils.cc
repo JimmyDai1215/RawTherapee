@@ -547,6 +547,40 @@ void MyExpander::setEnabledTooltipText(const Glib::ustring& tooltipText)
     headerHBox->set_tooltip_text(tooltipText);
 }
 
+void MyExpander::setCaption(const Glib::ustring& text)
+{
+    if (text.empty()) {
+        if (caption) {
+            caption->hide();
+        }
+
+        return;
+    }
+
+    if (!caption) {
+        caption = Gtk::manage(new Gtk::Label());
+        caption->set_name("MyExpanderCaption");
+        caption->set_can_focus(false);
+        setExpandAlignProperties(caption, true, false, Gtk::ALIGN_START, Gtk::ALIGN_CENTER);
+        caption->set_margin_top(10);
+        caption->set_margin_bottom(2);
+        caption->set_margin_start(2);
+        caption->set_no_show_all(true);
+        pack_start(*caption, Gtk::PACK_SHRINK, 0);
+        reorder_child(*caption, 0);
+    }
+
+    caption->set_markup("<small><b>" + escapeHtmlChars(text) + "</b></small>");
+    caption->show();
+}
+
+void MyExpander::setHeaderTooltip(const Glib::ustring& markup)
+{
+    if (titleEvBox) {
+        titleEvBox->set_tooltip_markup(markup);
+    }
+}
+
 void MyExpander::set_expanded( bool expanded )
 {
     if (!expBox) {

@@ -257,6 +257,7 @@ protected:
     Gtk::Container* child;      /// Gtk::Contained to display below the expander's title
     Gtk::Widget* headerWidget;  /// Widget to display in the header, next to the arrow image ; can be NULL if the "string" version of the ctor has been used
     RTImage* statusImage;       /// Image to display the opened/closed status (if useEnabled is false) of the enabled/disabled status (if useEnabled is true)
+    Gtk::Label* caption = nullptr; /// Optional group heading displayed above the header
     Gtk::Label* label;          /// Text to display in the header, next to the arrow image ; can be NULL if the "widget" version of the ctor has been used
     bool useEnabled;            /// Set whether to handle an enabled/disabled feature and display the appropriate images
 
@@ -316,6 +317,11 @@ public:
     {
         return label ? label->get_text() : Glib::ustring();
     }
+
+    /// Shows a small group heading above the header; an empty string removes it.
+    void setCaption(const Glib::ustring& text);
+    /// Tooltip shown only when hovering the header, not the tool's content.
+    void setHeaderTooltip(const Glib::ustring& markup);
 
     void set_expanded( bool expanded );
 

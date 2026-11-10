@@ -971,6 +971,35 @@ ToolPanelCoordinator::updateToolPanel(
 void ToolPanelCoordinator::addPanel(Gtk::Box* where, FoldableToolPanel* panel, int level)
 {
 
+    // Sub-group headings inside each tab; the tool named here starts the group.
+    static const std::unordered_map<std::string, const char*> groupHeadings = {
+        {"tonecurve", "TOOLGROUP_EXPOSURE_BASIC"},
+        {"shadowshighlights", "TOOLGROUP_EXPOSURE_TONE"},
+        {"pcvignette", "TOOLGROUP_EXPOSURE_EFFECTS"},
+        {"labcurves", "TOOLGROUP_EXPOSURE_LAB"},
+        {"spot", "TOOLGROUP_DETAIL_RETOUCH"},
+        {"sharpening", "TOOLGROUP_DETAIL_SHARPEN"},
+        {"impulsedenoise", "TOOLGROUP_DETAIL_DENOISE"},
+        {"dirpyrequalizer", "TOOLGROUP_DETAIL_TEXTURE"},
+        {"whitebalance", "TOOLGROUP_COLOR_WB"},
+        {"vibrance", "TOOLGROUP_COLOR_SATURATION"},
+        {"filmsimulation", "TOOLGROUP_COLOR_LOOKS"},
+        {"rgbcurves", "TOOLGROUP_COLOR_GRADING"},
+        {"icm", "TOOLGROUP_COLOR_MANAGEMENT"},
+        {"crop", "TOOLGROUP_TRANSFORM_FRAMING"},
+        {"lensgeom", "TOOLGROUP_TRANSFORM_LENS"},
+        {"capturesharpening", "TOOLGROUP_RAW_SHARPEN"},
+        {"sensorbayer", "TOOLGROUP_RAW_DEMOSAIC"},
+        {"sensorxtrans", "TOOLGROUP_RAW_DEMOSAIC"},
+        {"rawexposure", "TOOLGROUP_RAW_PREPROCESS"},
+        {"darkframe", "TOOLGROUP_RAW_CALIBRATION"},
+    };
+    const auto heading = groupHeadings.find(panel->getToolName());
+    panel->getExpander()->setCaption(
+        heading != groupHeadings.end() && level == 1 && where != favoritePanel
+            ? M(heading->second)
+            : Glib::ustring());
+
     panel->setParent(where);
     panel->setLevel(level);
     where->pack_start(*panel->getExpander(), false, false);
@@ -1019,8 +1048,12 @@ bool ToolPanelCoordinator::jumpToTool(const Glib::ustring& query, std::size_t st
             continue;
         }
 
+        const Glib::ustring descKey = "TOOLDESC_" + toolPanels[i]->getToolName().uppercase();
+        const Glib::ustring desc = M(descKey);
+
         if (expander->getLabelText().casefold().find(q) == Glib::ustring::npos
-                && toolPanels[i]->getToolName().casefold().find(q) == Glib::ustring::npos) {
+                && toolPanels[i]->getToolName().casefold().find(q) == Glib::ustring::npos
+                && (desc == descKey || desc.casefold().find(q) == Glib::ustring::npos)) {
             continue;
         }
 
