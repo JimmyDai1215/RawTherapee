@@ -39,4 +39,5 @@ void drawCrop(const Cairo::RefPtr<Cairo::Context>& cr,
               const rtengine::procparams::CropGuideParams& cropGuideParams,
               CropGuideOverride cropGuideOverride,
               bool useBgColor = true,
-              bool fullImageVisible = true);
+              bool fullImageVisible = true,
+              bool opaqueMask = false);

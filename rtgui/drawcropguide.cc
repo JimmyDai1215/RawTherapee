@@ -779,7 +779,7 @@ void drawCrop(const Cairo::RefPtr<Cairo::Context>& cr,
               const CropParams& cropParams,
               const CropGuideParams& cropGuideParams,
               CropGuideOverride cropGuideOverride,
-              bool useBgColor, bool fullImageVisible)
+              bool useBgColor, bool fullImageVisible, bool opaqueMask)
 {
     cr->save();
 
@@ -794,7 +794,10 @@ void drawCrop(const Cairo::RefPtr<Cairo::Context>& cr,
 
     // crop overlay color, linked with crop windows background
     const auto& options = App::get().options();
-    if (options.bgcolor == 0 || !useBgColor) {
+    if (opaqueMask && useBgColor && options.bgcolor == 0) {
+        // Hide the cropped-away area completely so the view shows the final framing.
+        cr->set_source_rgb (options.cutOverlayBrush[0], options.cutOverlayBrush[1], options.cutOverlayBrush[2]);
+    } else if (options.bgcolor == 0 || !useBgColor) {
         cr->set_source_rgba (options.cutOverlayBrush[0], options.cutOverlayBrush[1], options.cutOverlayBrush[2], options.cutOverlayBrush[3]);
     } else if (options.bgcolor == 1) {
         cr->set_source_rgb (0, 0, 0);

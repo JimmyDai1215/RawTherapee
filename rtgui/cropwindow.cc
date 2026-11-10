@@ -512,7 +512,7 @@ void CropWindow::buttonPress (int button, int type, int bstate, int x, int y)
                         state = SResizeW2;
                         press_x = x;
                         action_x = cropHandler.cropParams->w;
-                    } else if ((bstate & GDK_SHIFT_MASK) && onArea (CropInside, x, y)) {
+                    } else if (((bstate & GDK_SHIFT_MASK) || iarea->getToolMode () == TMCropSelect) && onArea (CropInside, x, y)) {
                         state = SCropMove;
                         press_x = x;
                         press_y = y;
@@ -839,7 +839,12 @@ void CropWindow::buttonRelease (int button, int num, int bstate, int x, int y)
 
     if (cropgl && (state == SCropSelecting || state == SResizeH1 || state == SResizeH2 || state == SResizeW1 || state == SResizeW2 || state == SResizeTL || state == SResizeTR || state == SResizeBL || state == SResizeBR || state == SCropMove)) {
         cropgl->cropManipReady ();
-        iarea->setToolHand ();
+
+        // Keep the crop tool active so the frame can be moved and resized again.
+        if (iarea->getToolMode () != TMCropSelect) {
+            iarea->setToolHand ();
+        }
+
         needRedraw = true;
 
         if (fitZoom && options.cropAutoFit) {
@@ -1370,17 +1375,17 @@ void CropWindow::updateCursor (int x, int y)
             newType = CSResizeDiagonal;
         } else if (tm == TMColorPicker && hoveredPicker) {
             newType = CSMove;
-        } else if (tm == TMHand && (onArea (CropTopLeft, x, y))) {
+        } else if ((tm == TMHand || tm == TMCropSelect) && (onArea (CropTopLeft, x, y))) {
             newType = CSResizeTopLeft;
-        } else if (tm == TMHand && (onArea (CropTopRight, x, y))) {
+        } else if ((tm == TMHand || tm == TMCropSelect) && (onArea (CropTopRight, x, y))) {
             newType = CSResizeTopRight;
-        } else if (tm == TMHand && (onArea (CropBottomLeft, x, y))) {
+        } else if ((tm == TMHand || tm == TMCropSelect) && (onArea (CropBottomLeft, x, y))) {
             newType = CSResizeBottomLeft;
-        } else if (tm == TMHand && (onArea (CropBottomRight, x, y))) {
+        } else if ((tm == TMHand || tm == TMCropSelect) && (onArea (CropBottomRight, x, y))) {
             newType = CSResizeBottomRight;
-        } else if (tm == TMHand && (onArea (CropTop, x, y) || onArea (CropBottom, x, y))) {
+        } else if ((tm == TMHand || tm == TMCropSelect) && (onArea (CropTop, x, y) || onArea (CropBottom, x, y))) {
             newType = CSResizeHeight;
-        } else if (tm == TMHand && (onArea (CropLeft, x, y) || onArea (CropRight, x, y))) {
+        } else if ((tm == TMHand || tm == TMCropSelect) && (onArea (CropLeft, x, y) || onArea (CropRight, x, y))) {
             newType = CSResizeWidth;
         } else if (onArea (CropImage, x, y)) {
             int objectID = -1;
@@ -1405,7 +1410,7 @@ void CropWindow::updateCursor (int x, int y)
             } else if (tm == TMSpotWB) {
                 newType = CSSpotWB;
             } else if (tm == TMCropSelect) {
-                newType = CSCropSelect;
+                newType = onArea (CropInside, x, y) ? CSMove : CSCropSelect;
             } else if (tm == TMStraighten) {
                 newType = CSStraighten;
             } else if (tm == TMColorPicker) {
@@ -1552,7 +1557,7 @@ void CropWindow::expose (Cairo::RefPtr<Cairo::Context> cr)
                 ? CropGuideOverride::DONT_TOUCH : CropGuideOverride::NO_GUIDES;
         }();
 
-        bool useBgColor = (state == SNormal || state == SDragPicker || state == SDeletePicker || state == SEditDrag1);
+        bool useBgColor = iarea->getToolMode() != TMCropSelect && (state == SNormal || state == SDragPicker || state == SDeletePicker || state == SEditDrag1);
 
         if (cropHandler.cropPixbuf) {
             imgSize.width = cropHandler.cropPixbuf->get_width();
@@ -2005,7 +2010,8 @@ void CropWindow::expose (Cairo::RefPtr<Cairo::Context> cr)
                          *cropHandler.cropGuideParams,
                          cropGuideOverride,
                          useBgColor,
-                         cropHandler.isFullDisplay());
+                         cropHandler.isFullDisplay(),
+                         true);
             }
 
             if (observedCropWin) {
@@ -2114,7 +2120,8 @@ void CropWindow::expose (Cairo::RefPtr<Cairo::Context> cr)
                              *cropHandler.cropGuideParams,
                              cropGuideOverride,
                              useBgColor,
-                             cropHandler.isFullDisplay());
+                             cropHandler.isFullDisplay(),
+                             true);
                 }
 
                 if (observedCropWin) {
