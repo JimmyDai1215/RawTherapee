@@ -191,6 +191,22 @@ jobs:
           mkdir -p "$BUILD_DIR/share/gtk-3.0/"
           echo -e '[Settings]\ngtk-button-images=1' > "$BUILD_DIR/share/gtk-3.0/settings.ini"
 
+          echo "Checking that both executables start without the MSYS2 folder on PATH."
+          UCRT_BIN="/C/msys2/msys64/${{env.MSYS2_ENV_PREFIX}}/bin"
+          cd "$BUILD_DIR"
+          for EXE in rawtherapee.exe rawtherapee-cli.exe; do
+            for PASS in 1 2 3 4 5 6; do
+              MISSING=$(PATH="/usr/bin:/c/Windows/System32:/c/Windows" ldd "./$EXE" | grep 'not found' | awk '{print $1}' | grep -v -i -E '^(api|ext)-ms-' | sort -u || true)
+              [ -z "$MISSING" ] && break
+              echo "$EXE is missing: $MISSING"
+              for D in $MISSING; do cp "$UCRT_BIN/$D" .; done
+            done
+            echo "DLLs of $EXE that come from outside the package and Windows:"
+            PATH="/usr/bin:/c/Windows/System32:/c/Windows" ldd "./$EXE" | grep -v -i -E '/c/windows|/build/|not found' || true
+          done
+          PATH="/usr/bin:/c/Windows/System32:/c/Windows" ./rawtherapee-cli.exe || { echo "CLI exit code $?"; exit 1; }
+          cd -
+
       - name: Create installer
         if: ${{matrix.build_type == 'release'}}
         working-directory: build/${{matrix.build_type}}
