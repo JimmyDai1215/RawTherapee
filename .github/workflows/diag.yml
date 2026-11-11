@@ -6,20 +6,13 @@ jobs:
   diag:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v8
-        with:
-          name: RawTherapee_c1-stable_687e65452_win64_x86_64_release
-          run-id: 42992878157
-          github-token: ${{ github.token }}
-          path: app
-      - shell: pwsh
+      - shell: bash
         run: |
-          pip install pefile | Out-Null
-          Get-ChildItem app | Select-Object -First 5
-          python .github/diag/check.py "$PWD\app" rawtherapee-cli.exe rawtherapee.exe
-          cd app
-          $p = Start-Process -FilePath .\rawtherapee.exe -PassThru
-          if ($p.WaitForExit(20000)) { "GUI exit code: {0} (0x{0:X8})" -f $p.ExitCode } else { "GUI still running after 20 s (good)"; $p.Kill() }
-          $log = Join-Path $env:USERPROFILE "Downloads\RawTherapee-crash-log.txt"
-          if (Test-Path $log) { Get-Content $log } else { "no crash log" }
+          curl -fsSL -o dml.zip 'https://www.nuget.org/api/v2/package/Microsoft.AI.DirectML/1.15.4'
+          sha256sum dml.zip
+          ls -la dml.zip
+          unzip -q dml.zip -d dml
+          find dml -type f | grep -v "arm\|x86-\|xbox" | xargs ls -la | awk '{print $5, $9}'
+          sha256sum dml/bin/x64-win/DirectML.dll
+          head -c 1500 dml/LICENSE.txt || true
+          cat dml/*.nuspec | head -40
