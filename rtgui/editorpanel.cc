@@ -2276,28 +2276,25 @@ void EditorPanel::sendToExternal()
 
 namespace
 {
-// Runs in a worker thread: develop the image, denoise it and save it as a 16 bit TIFF.
-// Returns a heap-allocated message (empty on success); ProgressConnector needs a type that can be initialised with 0.
-Glib::ustring* aiDenoiseJob(rtengine::ProcessingJob* job, rtengine::ProgressListener* pl, Glib::ustring outFile)
+// Runs in a worker thread. Returns a heap-allocated message (empty on success);
+// ProgressConnector needs a type that can be initialised with 0.
+Glib::ustring* aiDenoiseJob(Glib::ustring rawFile, Glib::ustring outFile, double strength, rtengine::ProgressListener* pl)
 {
-    int errcode = 0;
-    rtengine::IImagefloat* img = rtengine::processImage(job, errcode, pl, false);
-    if (!img) {
-        return new Glib::ustring("显影失败");
+    if (pl) {
+        pl->setProgress(0.0);
     }
-    Glib::ustring msg = AIDenoise::run(img, [pl](double p) {
+    const Glib::ustring msg = AIDenoise::rawToDng(rawFile, outFile, static_cast<float>(strength), [pl](double p) {
         if (pl) {
             pl->setProgress(p);
         }
     });
-    if (msg.empty()) {
-        if (img->saveAsTIFF(outFile, 16, false, true)) {
-            msg = "保存文件失败：" + outFile;
-        }
+    if (pl) {
+        pl->setProgress(0.0);
     }
-    delete img;
     return new Glib::ustring(msg);
 }
+
+double aiDenoiseStrength = 100.0;
 }
 
 void EditorPanel::aiDenoisePressed()
@@ -2305,31 +2302,50 @@ void EditorPanel::aiDenoisePressed()
     if (!ipc || !openThm) {
         return;
     }
-    if (!AIDenoise::compiledIn() || !Glib::file_test(AIDenoise::modelPath(), Glib::FILE_TEST_IS_REGULAR) || !Glib::file_test(AIDenoise::runtimePath(), Glib::FILE_TEST_IS_REGULAR)) {
+    if (!AIDenoise::available()) {
         Gtk::MessageDialog msgd(*parent, M("MAIN_MSG_AIDENOISE_MISSING"), false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
         msgd.run();
         return;
     }
 
-    rtengine::procparams::ProcParams pparams;
-    ipc->getParams(&pparams);
+    {
+        Gtk::Dialog dlg(M("MAIN_BUTTON_AIDENOISE"), *parent, true);
+        Gtk::Label lbl(M("MAIN_MSG_AIDENOISE_STRENGTH"));
+        lbl.set_line_wrap(true);
+        lbl.set_max_width_chars(50);
+        Gtk::Scale scale(Gtk::ORIENTATION_HORIZONTAL);
+        scale.set_range(10.0, 100.0);
+        scale.set_increments(5.0, 10.0);
+        scale.set_digits(0);
+        scale.set_value(aiDenoiseStrength);
+        scale.set_size_request(320, -1);
+        dlg.get_content_area()->set_spacing(8);
+        dlg.get_content_area()->set_border_width(12);
+        dlg.get_content_area()->pack_start(lbl, Gtk::PACK_SHRINK);
+        dlg.get_content_area()->pack_start(scale, Gtk::PACK_SHRINK);
+        dlg.add_button(M("GENERAL_CANCEL"), Gtk::RESPONSE_CANCEL);
+        dlg.add_button(M("GENERAL_OK"), Gtk::RESPONSE_OK);
+        dlg.set_default_response(Gtk::RESPONSE_OK);
+        dlg.show_all();
+        if (dlg.run() != Gtk::RESPONSE_OK) {
+            return;
+        }
+        aiDenoiseStrength = scale.get_value();
+    }
 
     const Glib::ustring orig = openThm->getFileName();
     const Glib::ustring base = Glib::build_filename(Glib::path_get_dirname(orig), removeExtension(Glib::path_get_basename(orig)));
-    Glib::ustring outFile = base + "_AI降噪.tif";
+    Glib::ustring outFile = base + "_AI.dng";
     for (int i = 1; i < 1000 && Glib::file_test(outFile, Glib::FILE_TEST_EXISTS); ++i) {
-        outFile = Glib::ustring::compose("%1_AI降噪-%2.tif", base, i);
+        outFile = Glib::ustring::compose("%1_AI-%2.dng", base, i);
     }
 
-    rtengine::ProcessingJob* job = rtengine::ProcessingJob::create(ipc->getInitialImage(), pparams);
     auto* ld = new ProgressConnector<Glib::ustring*>();
     rtengine::ProgressListener* pl = parent->getProgressListener();
     aiDenoiseOutFile = outFile;
-    ld->startFunc(sigc::bind(sigc::ptr_fun(&aiDenoiseJob), job, pl, outFile),
+    ld->startFunc(sigc::bind(sigc::ptr_fun(&aiDenoiseJob), orig, outFile, aiDenoiseStrength / 100.0, pl),
                   sigc::bind(sigc::mem_fun(*this, &EditorPanel::idle_aiDenoiseDone), ld));
     aiDenoiseBtn->set_sensitive(false);
-    saveimgas->set_sensitive(false);
-    send_to_external->set_sensitive(false);
 }
 
 bool EditorPanel::idle_aiDenoiseDone(ProgressConnector<Glib::ustring*> *pc)
@@ -2339,8 +2355,14 @@ bool EditorPanel::idle_aiDenoiseDone(ProgressConnector<Glib::ustring*> *pc)
     const Glib::ustring msg = res ? *res : Glib::ustring("AI 降噪没有返回结果");
     delete res;
     aiDenoiseBtn->set_sensitive(true);
-    saveimgas->set_sensitive(true);
-    send_to_external->set_sensitive(send_to_external->getEntryCount());
+
+    if (msg.empty() && ipc) {
+        // carry the current edits over to the new raw file
+        rtengine::procparams::ProcParams pparams;
+        ipc->getParams(&pparams);
+        pparams.save(aiDenoiseOutFile + ".pp3");
+    }
+
     Gtk::MessageDialog msgd(*parent,
                             msg.empty() ? Glib::ustring::compose(M("MAIN_MSG_AIDENOISE_DONE"), aiDenoiseOutFile) : msg,
                             false, msg.empty() ? Gtk::MESSAGE_INFO : Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);

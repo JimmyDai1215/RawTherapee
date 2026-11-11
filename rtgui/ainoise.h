@@ -1,5 +1,6 @@
 /*
- *  AI denoise: runs a neural-network denoiser (ONNX Runtime) on a developed image.
+ *  AI denoise: denoises a Bayer raw file with a neural network (ONNX Runtime) and
+ *  writes the result as a new DNG raw file.
  *  Part of the personal Capture-One-like fork; GPL-3.0-or-later like the rest of RawTherapee.
  */
 #pragma once
@@ -7,26 +8,22 @@
 #include <functional>
 #include <glibmm/ustring.h>
 
-namespace rtengine
-{
-class IImagefloat;
-}
-
 namespace AIDenoise
 {
 
 // True when this build contains ONNX Runtime support.
 bool compiledIn();
 
-// Full path of the model file that is expected next to the program.
+// Full paths of the model and of the runtime library expected in the program folder.
 Glib::ustring modelPath();
-
-// Full path of the ONNX Runtime library that is loaded on demand.
 Glib::ustring runtimePath();
 
-// Denoises the image in place (values 0..65535 as produced by the RawTherapee pipeline).
+// True when the model and the runtime are both installed.
+bool available();
+
+// Loads rawFile, denoises its mosaic (strength 0..1) and writes dngFile.
 // Returns an empty string on success, otherwise a human readable error message.
-// progress is called from the worker thread with a value in 0..1.
-Glib::ustring run(rtengine::IImagefloat* img, const std::function<void(double)>& progress);
+// progress is called from the calling thread with a value in 0..1.
+Glib::ustring rawToDng(const Glib::ustring& rawFile, const Glib::ustring& dngFile, float strength, const std::function<void(double)>& progress);
 
 }

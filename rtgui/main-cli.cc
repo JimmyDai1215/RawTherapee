@@ -34,6 +34,7 @@
 #include "rtengine/procparams.h"
 #include "rtengine/profilestore.h"
 #include "rtengine/rtengine.h"
+#include "ainoise.h"
 #include "options.h"
 #include "soundman.h"
 #include "rtimage.h"
@@ -188,6 +189,18 @@ int main (int argc, char **argv)
 
     // printing RT's version in all case, particularly useful for the 'verbose' mode, but also for the batch processing
     std::cout << "RawTherapee, version " << RTVERSION << ", command line." << std::endl;
+
+    if (argc >= 4 && std::string(argv[1]) == "--ai-denoise") {
+        // --ai-denoise <raw file> <output.dng> [strength 0..1]
+        const float strength = argc >= 5 ? static_cast<float>(atof(argv[4])) : 1.f;
+        const Glib::ustring msg = AIDenoise::rawToDng(argv[2], argv[3], strength, [](double) {});
+        if (!msg.empty()) {
+            std::cerr << "AI denoise failed: " << msg.raw() << std::endl;
+            return 1;
+        }
+        std::cout << "AI denoise: wrote " << argv[3] << std::endl;
+        return 0;
+    }
 
     if (argc > 1) {
         ret = processLineParams (argc, argv);

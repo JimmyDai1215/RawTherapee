@@ -135,14 +135,13 @@ jobs:
       - name: Include AI denoise model
         run: |
           export BUILD_DIR="$(pwd)/build/${{matrix.build_type}}"
-          mkdir -p "$BUILD_DIR/models"
-          curl -fsSL -o nafnet.dtmodel 'https://github.com/darktable-org/darktable-ai/releases/download/release-5.6.0/denoise-nafnet.dtmodel'
-          echo "4b5c0b9c2650956eaab9a3fc6ffe3e11d4dc4f55b246b7f3a0d2d72161b6980c  nafnet.dtmodel" | sha256sum -c -
-          unzip -o -q nafnet.dtmodel -d nafnet_x
-          cp nafnet_x/denoise-nafnet/model.onnx "$BUILD_DIR/models/denoise-nafnet.onnx"
-          cp nafnet_x/denoise-nafnet/config.json "$BUILD_DIR/models/denoise-nafnet.json"
+          mkdir -p "$BUILD_DIR/models" "$BUILD_DIR/licenses"
+          curl -fsSL -o rawnind.dtmodel 'https://github.com/darktable-org/darktable-ai/releases/download/release-5.6.0/rawdenoise-nind.dtmodel'
+          echo "d71b5f1e727c85a359e6f74dca9e2016c9d8fc3e2f7ac3e9b347d80ceca969af  rawnind.dtmodel" | sha256sum -c -
+          unzip -o -q rawnind.dtmodel -d rawnind_x
+          cp rawnind_x/rawdenoise-nind/model_bayer.onnx "$BUILD_DIR/models/rawdenoise-nind-bayer.onnx"
+          cp rawnind_x/rawdenoise-nind/config.json "$BUILD_DIR/models/rawdenoise-nind.json"
           cp ort/lib/onnxruntime.dll ort/lib/onnxruntime_providers_shared.dll "$BUILD_DIR"
-          mkdir -p "$BUILD_DIR/licenses"
           cp ort/LICENSE "$BUILD_DIR/licenses/onnxruntime-LICENSE.txt"
           cp ort/ThirdPartyNotices.txt "$BUILD_DIR/licenses/onnxruntime-ThirdPartyNotices.txt"
           ls -la "$BUILD_DIR/models"
@@ -218,6 +217,26 @@ jobs:
           echo "Starting the CLI without the MSYS2 folder on PATH."
           PATH="/usr/bin:/c/Windows/System32:/c/Windows" ./rawtherapee-cli.exe || { echo "CLI exit code $?"; exit 1; }
           cd -
+
+      - name: Test AI denoise end to end
+        run: |
+          export BUILD_DIR="$(pwd)/build/${{matrix.build_type}}"
+          mkdir -p aitest
+          curl -fsSL -o aitest/sample.NEF 'https://github.com/letmaik/rawpy/raw/main/test/iss030e122639.NEF'
+          echo "5922721d13f11795557d97fdeb0a60b900086c402bc82a848ff280d15b99ffd4  aitest/sample.NEF" | sha256sum -c -
+          export PATH="/usr/bin:/c/Windows/System32:/c/Windows"
+          cd aitest
+          time "$BUILD_DIR/rawtherapee-cli.exe" --ai-denoise sample.NEF sample_AI.dng 1.0
+          ls -la
+          "$BUILD_DIR/rawtherapee-cli.exe" -q -Y -t -b8 -o dev_nef.tif -c sample.NEF
+          "$BUILD_DIR/rawtherapee-cli.exe" -q -Y -t -b8 -o dev_dng.tif -c sample_AI.dng
+          ls -la
+
+      - name: Compare AI denoise result with the original
+        shell: pwsh
+        run: |
+          pip install numpy pillow | Out-Null
+          python .github/aitest_compare.py aitest/dev_nef.tif aitest/dev_dng.tif
 
       - name: Create installer
         if: ${{matrix.build_type == 'release'}}

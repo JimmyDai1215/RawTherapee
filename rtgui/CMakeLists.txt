@@ -1,5 +1,7 @@
 # Common source files for both CLI and non-CLI execautables
 set(CLISOURCEFILES
+    ainoise.cc
+    airawcore.cc
     alignedmalloc.cc
     editcallbacks.cc
     main-cli.cc
@@ -162,6 +164,7 @@ set(NONCLISOURCEFILES
     lockablecolorpicker.cc
     crashlog.cc
     ainoise.cc
+    airawcore.cc
     keyremap.cc
     main.cc
     metadatapanel.cc
@@ -310,7 +313,9 @@ set(ONNXRT_INCLUDE_DIR "" CACHE PATH "Folder with the ONNX Runtime headers (enab
 if(WIN32 AND ONNXRT_INCLUDE_DIR AND EXISTS "${ONNXRT_INCLUDE_DIR}/onnxruntime_cxx_api.h")
     message(STATUS "ONNX Runtime headers found: AI denoise enabled")
     target_compile_definitions(rth PRIVATE HAVE_ONNXRT)
-    set_source_files_properties(ainoise.cc PROPERTIES
+    target_compile_definitions(rth-cli PRIVATE HAVE_ONNXRT)
+    # only this file includes the ONNX Runtime headers, which need C++17
+    set_source_files_properties(airawcore.cc PROPERTIES
         COMPILE_OPTIONS "-std=gnu++17"
         INCLUDE_DIRECTORIES "${ONNXRT_INCLUDE_DIR}")
 else()
