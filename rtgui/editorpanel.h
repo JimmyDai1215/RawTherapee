@@ -172,7 +172,7 @@ public:
     void sendToExternalChanged(int);
     void sendToExternalPressed();
     void aiDenoisePressed();
-    bool idle_aiDenoiseDone(ProgressConnector<Glib::ustring> *pc);
+    bool idle_aiDenoiseDone(ProgressConnector<Glib::ustring*> *pc);
     void openNextEditorImage ();
     void openPreviousEditorImage ();
     void syncFileBrowser ();

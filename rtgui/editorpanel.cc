@@ -2277,12 +2277,13 @@ void EditorPanel::sendToExternal()
 namespace
 {
 // Runs in a worker thread: develop the image, denoise it and save it as a 16 bit TIFF.
-Glib::ustring aiDenoiseJob(rtengine::ProcessingJob* job, rtengine::ProgressListener* pl, const Glib::ustring& outFile)
+// Returns a heap-allocated message (empty on success); ProgressConnector needs a type that can be initialised with 0.
+Glib::ustring* aiDenoiseJob(rtengine::ProcessingJob* job, rtengine::ProgressListener* pl, Glib::ustring outFile)
 {
     int errcode = 0;
     rtengine::IImagefloat* img = rtengine::processImage(job, errcode, pl, false);
     if (!img) {
-        return "显影失败";
+        return new Glib::ustring("显影失败");
     }
     Glib::ustring msg = AIDenoise::run(img, [pl](double p) {
         if (pl) {
@@ -2295,7 +2296,7 @@ Glib::ustring aiDenoiseJob(rtengine::ProcessingJob* job, rtengine::ProgressListe
         }
     }
     delete img;
-    return msg;
+    return new Glib::ustring(msg);
 }
 }
 
@@ -2321,7 +2322,7 @@ void EditorPanel::aiDenoisePressed()
     }
 
     rtengine::ProcessingJob* job = rtengine::ProcessingJob::create(ipc->getInitialImage(), pparams);
-    auto* ld = new ProgressConnector<Glib::ustring>();
+    auto* ld = new ProgressConnector<Glib::ustring*>();
     rtengine::ProgressListener* pl = parent->getProgressListener();
     aiDenoiseOutFile = outFile;
     ld->startFunc(sigc::bind(sigc::ptr_fun(&aiDenoiseJob), job, pl, outFile),
@@ -2331,10 +2332,12 @@ void EditorPanel::aiDenoisePressed()
     send_to_external->set_sensitive(false);
 }
 
-bool EditorPanel::idle_aiDenoiseDone(ProgressConnector<Glib::ustring> *pc)
+bool EditorPanel::idle_aiDenoiseDone(ProgressConnector<Glib::ustring*> *pc)
 {
-    const Glib::ustring msg = pc->returnValue();
+    Glib::ustring* const res = pc->returnValue();
     delete pc;
+    const Glib::ustring msg = res ? *res : Glib::ustring("AI 降噪没有返回结果");
+    delete res;
     aiDenoiseBtn->set_sensitive(true);
     saveimgas->set_sensitive(true);
     send_to_external->set_sensitive(send_to_external->getEntryCount());

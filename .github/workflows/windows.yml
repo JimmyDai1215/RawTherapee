@@ -52,6 +52,7 @@ jobs:
           install: |
             git
             intltool
+            unzip
           pacboy: |
             cc:p
             pkgconf:p
