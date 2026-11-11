@@ -925,6 +925,12 @@ EditorPanel::EditorPanel (FilePanel* filePanel)
     setExpandAlignProperties (aiDenoiseBtn, false, false, Gtk::ALIGN_CENTER, Gtk::ALIGN_FILL);
     aiDenoiseBtn->show();
 
+    aiUpscaleBtn = Gtk::manage (new Gtk::Button (M ("MAIN_BUTTON_AIUPSCALE")));
+    aiUpscaleBtn->set_relief (Gtk::RELIEF_NONE);
+    aiUpscaleBtn->set_tooltip_text (M ("MAIN_BUTTON_AIUPSCALE_TOOLTIP"));
+    setExpandAlignProperties (aiUpscaleBtn, false, false, Gtk::ALIGN_CENTER, Gtk::ALIGN_FILL);
+    aiUpscaleBtn->show();
+
     // Status box
     progressLabel = Gtk::manage (new MyProgressBar (300));
     progressLabel->set_show_text (true);
@@ -998,6 +1004,7 @@ EditorPanel::EditorPanel (FilePanel* filePanel)
     if (!App::get().isGimpPlugin()) {
         iops->attach_next_to (*saveimgas, Gtk::POS_LEFT, 1, 1);
         iops->attach_next_to (*aiDenoiseBtn, Gtk::POS_LEFT, 1, 1);
+        iops->attach_next_to (*aiUpscaleBtn, Gtk::POS_LEFT, 1, 1);
     }
 
 
@@ -1093,6 +1100,7 @@ EditorPanel::EditorPanel (FilePanel* filePanel)
     tbRightPanel_1->signal_toggled().connect ( sigc::mem_fun (*this, &EditorPanel::tbRightPanel_1_toggled) );
     saveimgas->signal_pressed().connect ( sigc::mem_fun (*this, &EditorPanel::saveAsPressed) );
     aiDenoiseBtn->signal_clicked().connect ( sigc::mem_fun (*this, &EditorPanel::aiDenoisePressed) );
+    aiUpscaleBtn->signal_clicked().connect ( sigc::mem_fun (*this, &EditorPanel::aiUpscalePressed) );
     queueimg->signal_pressed().connect ( sigc::mem_fun (*this, &EditorPanel::queueImgPressed) );
     send_to_external->signal_changed().connect(sigc::mem_fun(*this, &EditorPanel::sendToExternalChanged));
     send_to_external->signal_pressed().connect(sigc::mem_fun(*this, &EditorPanel::sendToExternalPressed));
@@ -2365,6 +2373,79 @@ bool EditorPanel::idle_aiDenoiseDone(ProgressConnector<Glib::ustring*> *pc)
 
     Gtk::MessageDialog msgd(*parent,
                             msg.empty() ? Glib::ustring::compose(M("MAIN_MSG_AIDENOISE_DONE"), aiDenoiseOutFile) : msg,
+                            false, msg.empty() ? Gtk::MESSAGE_INFO : Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+    msgd.run();
+    return false;
+}
+
+namespace
+{
+// Runs in a worker thread: develop the image with the current edits, then upscale it.
+Glib::ustring* aiUpscaleJob(rtengine::ProcessingJob* job, Glib::ustring outFile, rtengine::ProgressListener* pl)
+{
+    int errcode = 0;
+    rtengine::IImagefloat* img = rtengine::processImage(job, errcode, pl, false);
+    if (!img) {
+        return new Glib::ustring("显影失败");
+    }
+    const Glib::ustring msg = AIDenoise::upscaleToTiff(img, outFile, [pl](double p) {
+        if (pl) {
+            pl->setProgress(p);
+        }
+    });
+    delete img;
+    if (pl) {
+        pl->setProgress(0.0);
+    }
+    return new Glib::ustring(msg);
+}
+}
+
+void EditorPanel::aiUpscalePressed()
+{
+    if (!ipc || !openThm) {
+        return;
+    }
+    if (!AIDenoise::upscaleAvailable()) {
+        Gtk::MessageDialog msgd(*parent, M("MAIN_MSG_AIDENOISE_MISSING"), false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+        msgd.run();
+        return;
+    }
+    {
+        Gtk::MessageDialog ask(*parent, M("MAIN_MSG_AIUPSCALE_CONFIRM"), false, Gtk::MESSAGE_QUESTION, Gtk::BUTTONS_OK_CANCEL, true);
+        if (ask.run() != Gtk::RESPONSE_OK) {
+            return;
+        }
+    }
+
+    rtengine::procparams::ProcParams pparams;
+    ipc->getParams(&pparams);
+
+    const Glib::ustring orig = openThm->getFileName();
+    const Glib::ustring base = Glib::build_filename(Glib::path_get_dirname(orig), removeExtension(Glib::path_get_basename(orig)));
+    Glib::ustring outFile = base + "_2x.tif";
+    for (int i = 1; i < 1000 && Glib::file_test(outFile, Glib::FILE_TEST_EXISTS); ++i) {
+        outFile = Glib::ustring::compose("%1_2x-%2.tif", base, i);
+    }
+
+    rtengine::ProcessingJob* job = rtengine::ProcessingJob::create(ipc->getInitialImage(), pparams);
+    auto* ld = new ProgressConnector<Glib::ustring*>();
+    rtengine::ProgressListener* pl = parent->getProgressListener();
+    aiUpscaleOutFile = outFile;
+    ld->startFunc(sigc::bind(sigc::ptr_fun(&aiUpscaleJob), job, outFile, pl),
+                  sigc::bind(sigc::mem_fun(*this, &EditorPanel::idle_aiUpscaleDone), ld));
+    aiUpscaleBtn->set_sensitive(false);
+}
+
+bool EditorPanel::idle_aiUpscaleDone(ProgressConnector<Glib::ustring*> *pc)
+{
+    Glib::ustring* const res = pc->returnValue();
+    delete pc;
+    const Glib::ustring msg = res ? *res : Glib::ustring("AI 放大没有返回结果");
+    delete res;
+    aiUpscaleBtn->set_sensitive(true);
+    Gtk::MessageDialog msgd(*parent,
+                            msg.empty() ? Glib::ustring::compose(M("MAIN_MSG_AIUPSCALE_DONE"), aiUpscaleOutFile) : msg,
                             false, msg.empty() ? Gtk::MESSAGE_INFO : Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     msgd.run();
     return false;

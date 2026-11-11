@@ -202,6 +202,41 @@ int main (int argc, char **argv)
         return 0;
     }
 
+    if (argc >= 4 && std::string(argv[1]) == "--ai-upscale") {
+        // --ai-upscale <raw file> <output.tif> [crop x y w h]   (neutral development, for testing)
+        int errorCode = 0;
+        rtengine::InitialImage* ii = rtengine::InitialImage::load(argv[2], true, &errorCode, nullptr);
+        if (!ii) {
+            std::cerr << "AI upscale: cannot load " << argv[2] << std::endl;
+            return 1;
+        }
+        rtengine::procparams::ProcParams params;
+        if (argc >= 8) {
+            params.crop.enabled = true;
+            params.crop.x = atoi(argv[4]);
+            params.crop.y = atoi(argv[5]);
+            params.crop.w = atoi(argv[6]);
+            params.crop.h = atoi(argv[7]);
+        }
+        rtengine::ProcessingJob* job = rtengine::ProcessingJob::create(ii, params);
+        rtengine::IImagefloat* img = rtengine::processImage(job, errorCode, nullptr);
+        if (!img) {
+            std::cerr << "AI upscale: developing failed" << std::endl;
+            ii->decreaseRef();
+            return 1;
+        }
+        std::cout << "AI upscale: input " << img->getWidth() << "x" << img->getHeight() << std::endl;
+        const Glib::ustring msg = AIDenoise::upscaleToTiff(img, argv[3], [](double) {});
+        delete img;
+        ii->decreaseRef();
+        if (!msg.empty()) {
+            std::cerr << "AI upscale failed: " << msg.raw() << std::endl;
+            return 1;
+        }
+        std::cout << "AI upscale: wrote " << argv[3] << std::endl;
+        return 0;
+    }
+
     if (argc > 1) {
         ret = processLineParams (argc, argv);
     } else {

@@ -1872,6 +1872,8 @@ IPTCPANEL_TRANSREFERENCE;Job ID
 IPTCPANEL_TRANSREFERENCEHINT;Enter a number or identifier needed for workflow control or tracking.
 MAIN_BUTTON_AIDENOISE;AI denoise
 MAIN_BUTTON_AIDENOISE_TOOLTIP;Denoise the raw data of the current photo with a neural network and save it as a new raw file (DNG) next to the original.\nYour current edits are copied to the new file.
+MAIN_BUTTON_AIUPSCALE;AI upscale 2x
+MAIN_BUTTON_AIUPSCALE_TOOLTIP;Develop the current photo with your edits and enlarge it to twice the width and height with a neural network. The result is saved as a 16-bit TIFF next to the original.
 MAIN_BUTTON_FULLSCREEN;Fullscreen
 MAIN_BUTTON_ICCPROFCREATOR;ICC Profile Creator
 MAIN_BUTTON_NAVNEXT_TOOLTIP;Navigate to the next image relative to image opened in the Editor.\nShortcut: <b>Shift-F4</b>\n\nTo navigate to the next image relative to the currently selected thumbnail in the File Browser or Filmstrip:\nShortcut: <b>F4</b>
@@ -1897,6 +1899,8 @@ MAIN_FRAME_RECENT;Recent Folders
 MAIN_MSG_AIDENOISE_DONE;AI denoise finished. Saved as a new raw file:\n%1\n\nYour current edits were copied to it. Open it from the file browser to continue editing.
 MAIN_MSG_AIDENOISE_MISSING;The AI denoise component or its model file is missing from this installation.
 MAIN_MSG_AIDENOISE_STRENGTH;Denoise strength (%). 100 removes the most noise; lower values keep some of the original grain.
+MAIN_MSG_AIUPSCALE_CONFIRM;AI upscale develops the photo with the current edits (including the crop) and enlarges it to 2x.\n\nIt runs on the CPU and is slow: expect roughly 10 to 20 minutes for a 24 megapixel photo. Crop first if you only need a part of the picture.\n\nStart now?
+MAIN_MSG_AIUPSCALE_DONE;AI upscale finished. Saved as:\n%1
 MAIN_MSG_ALREADYEXISTS;File already exists.
 MAIN_MSG_CANNOTLOAD;Cannot load image
 MAIN_MSG_CANNOTSAVE;File saving error

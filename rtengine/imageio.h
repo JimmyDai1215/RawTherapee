@@ -118,6 +118,7 @@ public:
 
     void setMetadata(Exiv2Metadata info);
     void setOutputProfile(const std::string& pdata);
+    const std::string& getOutputProfile() const { return profileData; }
 
     bool saveMetadata(const Glib::ustring &fname) const;
 

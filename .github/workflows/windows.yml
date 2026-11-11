@@ -141,6 +141,11 @@ jobs:
           unzip -o -q rawnind.dtmodel -d rawnind_x
           cp rawnind_x/rawdenoise-nind/model_bayer.onnx "$BUILD_DIR/models/rawdenoise-nind-bayer.onnx"
           cp rawnind_x/rawdenoise-nind/config.json "$BUILD_DIR/models/rawdenoise-nind.json"
+          curl -fsSL -o plksr.dtmodel 'https://github.com/darktable-org/darktable-ai/releases/download/release-5.6.0/upscale-realplksr.dtmodel'
+          echo "7f7b4942b2363691628f10c52bce66ff3ac67d07d4d55c3804d3f89fc9cd6ba7  plksr.dtmodel" | sha256sum -c -
+          unzip -o -q plksr.dtmodel -d plksr_x
+          cp plksr_x/upscale-realplksr/model_x2.onnx "$BUILD_DIR/models/upscale-realplksr-x2.onnx"
+          cp plksr_x/upscale-realplksr/config.json "$BUILD_DIR/models/upscale-realplksr.json"
           cp ort/lib/onnxruntime.dll ort/lib/onnxruntime_providers_shared.dll "$BUILD_DIR"
           cp ort/LICENSE "$BUILD_DIR/licenses/onnxruntime-LICENSE.txt"
           cp ort/ThirdPartyNotices.txt "$BUILD_DIR/licenses/onnxruntime-ThirdPartyNotices.txt"
@@ -230,13 +235,15 @@ jobs:
           ls -la
           "$BUILD_DIR/rawtherapee-cli.exe" -q -Y -t -b8 -o dev_nef.tif -c sample.NEF
           "$BUILD_DIR/rawtherapee-cli.exe" -q -Y -t -b8 -o dev_dng.tif -c sample_AI.dng
+          time "$BUILD_DIR/rawtherapee-cli.exe" --ai-upscale sample.NEF up2x.tif 1800 1100 700 600
           ls -la
 
       - name: Compare AI denoise result with the original
         shell: pwsh
         run: |
-          pip install numpy pillow | Out-Null
+          pip install numpy pillow tifffile | Out-Null
           python .github/aitest_compare.py aitest/dev_nef.tif aitest/dev_dng.tif
+          python .github/aitest_upscale.py aitest/up2x.tif 700 600
 
       - name: Create installer
         if: ${{matrix.build_type == 'release'}}

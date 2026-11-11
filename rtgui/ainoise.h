@@ -8,6 +8,11 @@
 #include <functional>
 #include <glibmm/ustring.h>
 
+namespace rtengine
+{
+class IImagefloat;
+}
+
 namespace AIDenoise
 {
 
@@ -25,5 +30,14 @@ bool available();
 // Returns an empty string on success, otherwise a human readable error message.
 // progress is called from the calling thread with a value in 0..1.
 Glib::ustring rawToDng(const Glib::ustring& rawFile, const Glib::ustring& dngFile, float strength, const std::function<void(double)>& progress);
+
+// --- 2x upscaling of a developed image
+
+Glib::ustring upscaleModelPath();
+bool upscaleAvailable();
+
+// Upscales the developed image (values 0..65535) to twice its size and writes a 16 bit TIFF.
+// Returns an empty string on success, otherwise a human readable error message.
+Glib::ustring upscaleToTiff(rtengine::IImagefloat* img, const Glib::ustring& tifFile, const std::function<void(double)>& progress);
 
 }

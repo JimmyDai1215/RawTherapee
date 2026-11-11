@@ -53,6 +53,18 @@ std::string denoiseBayer(const wchar_t* modelPath, float** rows, const BayerInfo
 std::string denoiseBayer(const char* modelPath, float** rows, const BayerInfo& info, float strength, const std::function<void(double)>& progress);
 #endif
 
+// Upscales an RGB image to twice its size and streams the result to `out` as an
+// uncompressed 16 bit RGB TIFF. r/g/b[row] point to `width` samples in 0..65535, already
+// encoded with the output profile's tone curve. icc may be empty.
+// Returns an empty string on success, an error text otherwise.
+#ifdef _WIN32
+std::string upscale2x(const wchar_t* modelPath, const float* const* r, const float* const* g, const float* const* b,
+                      int width, int height, FILE* out, const std::string& icc, const std::function<void(double)>& progress);
+#else
+std::string upscale2x(const char* modelPath, const float* const* r, const float* const* g, const float* const* b,
+                      int width, int height, FILE* out, const std::string& icc, const std::function<void(double)>& progress);
+#endif
+
 // Writes an uncompressed 16 bit CFA DNG. Returns false on a write error.
 bool writeDng(FILE* f, float** rows, const BayerInfo& info, const DngMeta& meta);
 

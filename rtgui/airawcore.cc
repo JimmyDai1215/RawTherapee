@@ -542,4 +542,247 @@ bool writeDng(FILE* f, float** rows, const BayerInfo& info, const DngMeta& meta)
     return fflush(f) == 0;
 }
 
+// ---------------------------------------------------------------------------------------
+// 2x upscaling of a developed RGB image
+
+#ifdef HAVE_ONNXRT
+
+namespace
+{
+constexpr int UT = 512;            // model input size
+constexpr int UPAD = 32;           // context around the part of a tile that is used
+constexpr int UFADE = 8;           // half width of the cross-fade between tiles (input pixels)
+constexpr int USTEP = UT - 2 * UPAD;
+constexpr int UTO = 2 * UT;        // tile output size
+
+inline int mirror0(int i, int n)
+{
+    if (n <= 1) {
+        return 0;
+    }
+    const int period = 2 * (n - 1);
+    i %= period;
+    if (i < 0) {
+        i += period;
+    }
+    return i < n ? i : period - i;
+}
+
+// weight of output position q of a tile along one axis
+inline float upWeight(int q, bool first, bool last)
+{
+    const float q0 = 2.f * (UPAD - UFADE);
+    const float span = 4.f * UFADE;
+    float w = 1.f;
+    if (!first) {
+        w = std::min(w, std::max(0.f, (q + 0.5f - q0) / span));
+    }
+    if (!last) {
+        w = std::min(w, std::max(0.f, (UTO - q - 0.5f - q0) / span));
+    }
+    return w;
+}
+}
+
+#ifdef _WIN32
+std::string upscale2x(const wchar_t* modelPath, const float* const* r, const float* const* g, const float* const* b,
+                      int width, int height, FILE* out, const std::string& icc, const std::function<void(double)>& progress)
+#else
+std::string upscale2x(const char* modelPath, const float* const* r, const float* const* g, const float* const* b,
+                      int width, int height, FILE* out, const std::string& icc, const std::function<void(double)>& progress)
+#endif
+{
+    const int W = width, H = height;
+    if (!out || W < 16 || H < 16) {
+        return "image too small";
+    }
+    const uint64_t OW = 2ull * W, OH = 2ull * H;
+    const uint64_t imageBytes64 = OW * OH * 6ull;
+    if (imageBytes64 > 0xE0000000ull) {
+        return "the upscaled image would be too large for a TIFF file";
+    }
+
+    try {
+        // ---- TIFF header and directory, image data follows
+        std::vector<Entry> ifd;
+        ifd.push_back(eLongs(256, { static_cast<uint32_t>(OW) }));
+        ifd.push_back(eLongs(257, { static_cast<uint32_t>(OH) }));
+        ifd.push_back(eShorts(258, { 16, 16, 16 }));
+        ifd.push_back(eShorts(259, { 1 }));
+        ifd.push_back(eShorts(262, { 2 }));
+        ifd.push_back(eLongs(273, { 0 }));   // patched below
+        ifd.push_back(eShorts(277, { 3 }));
+        ifd.push_back(eLongs(278, { static_cast<uint32_t>(OH) }));
+        ifd.push_back(eLongs(279, { static_cast<uint32_t>(imageBytes64) }));
+        ifd.push_back(eShorts(284, { 1 }));
+        ifd.push_back(eAscii(305, "RawTherapee AI upscale"));
+        if (!icc.empty()) {
+            Entry e{ 34675, 7, static_cast<uint32_t>(icc.size()), {} };
+            e.data.assign(icc.begin(), icc.end());
+            ifd.push_back(e);
+        }
+        std::vector<uint8_t> ifdBytes = buildIfd(ifd, 8);
+        uint32_t imageOffset = 8 + static_cast<uint32_t>(ifdBytes.size());
+        if (imageOffset & 1) {
+            ++imageOffset;
+        }
+        for (Entry& e : ifd) {
+            if (e.tag == 273) {
+                e = eLongs(273, { imageOffset });
+            }
+        }
+        ifdBytes = buildIfd(ifd, 8);
+        std::vector<uint8_t> head = { 'I', 'I', 42, 0 };
+        put32(head, 8);
+        head.insert(head.end(), ifdBytes.begin(), ifdBytes.end());
+        head.resize(imageOffset, 0);
+        if (fwrite(head.data(), 1, head.size(), out) != head.size()) {
+            return "cannot write the file";
+        }
+
+        // ---- network
+        Ort::Env env(ORT_LOGGING_LEVEL_ERROR, "rawtherapee");
+        Ort::SessionOptions so;
+        so.SetIntraOpNumThreads(static_cast<int>(std::max(1u, std::thread::hardware_concurrency())));
+        so.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_ALL);
+        Ort::Session session(env, modelPath, so);
+        Ort::AllocatorWithDefaultOptions alloc;
+        auto inName = session.GetInputNameAllocated(0, alloc);
+        auto outName = session.GetOutputNameAllocated(0, alloc);
+        const char* inNames[] = { inName.get() };
+        const char* outNames[] = { outName.get() };
+        Ort::MemoryInfo mem = Ort::MemoryInfo::CreateCpu(OrtArenaAllocator, OrtMemTypeDefault);
+        const int64_t shape[4] = { 1, 3, UT, UT };
+        const size_t inPlane = static_cast<size_t>(UT) * UT;
+        const size_t outPlane = static_cast<size_t>(UTO) * UTO;
+        std::vector<float> in(inPlane * 3);
+
+        const int ny = (H + USTEP - 1) / USTEP;
+        const int nx = (W + USTEP - 1) / USTEP;
+
+        // rows of the result that are still being blended; a band is at most UTO rows high
+        const size_t rowLen = static_cast<size_t>(OW) * 3;
+        std::vector<float> band(rowLen * UTO, 0.f);
+        std::vector<uint8_t> line(rowLen * 2);
+        int64_t bandStart = 0;   // output row stored in band row 0
+
+        std::vector<float> wxs(UTO), wys(UTO);
+        int done = 0;
+
+        for (int ty = 0; ty < ny; ++ty) {
+            const int iy0 = ty * USTEP - UPAD;
+            for (int q = 0; q < UTO; ++q) {
+                wys[q] = upWeight(q, ty == 0, ty == ny - 1);
+            }
+            for (int tx = 0; tx < nx; ++tx) {
+                const int ix0 = tx * USTEP - UPAD;
+                for (int q = 0; q < UTO; ++q) {
+                    wxs[q] = upWeight(q, tx == 0, tx == nx - 1);
+                }
+
+                for (int i = 0; i < UT; ++i) {
+                    const int sy = mirror0(iy0 + i, H);
+                    const float* rr = r[sy];
+                    const float* gg = g[sy];
+                    const float* bb = b[sy];
+                    for (int j = 0; j < UT; ++j) {
+                        const int sx = mirror0(ix0 + j, W);
+                        const size_t o = static_cast<size_t>(i) * UT + j;
+                        in[o] = std::min(1.f, std::max(0.f, rr[sx] / 65535.f));
+                        in[inPlane + o] = std::min(1.f, std::max(0.f, gg[sx] / 65535.f));
+                        in[2 * inPlane + o] = std::min(1.f, std::max(0.f, bb[sx] / 65535.f));
+                    }
+                }
+
+                Ort::Value input = Ort::Value::CreateTensor<float>(mem, in.data(), in.size(), shape, 4);
+                auto outs = session.Run(Ort::RunOptions{nullptr}, inNames, &input, 1, outNames, 1);
+                const float* o = outs[0].GetTensorData<float>();
+
+                for (int qy = 0; qy < UTO; ++qy) {
+                    const float wy = wys[qy];
+                    const int64_t oy = 2ll * iy0 + qy;
+                    if (wy <= 0.f || oy < 0 || oy >= static_cast<int64_t>(OH)) {
+                        continue;
+                    }
+                    const int64_t br = oy - bandStart;
+                    if (br < 0 || br >= UTO) {
+                        return "internal error: band overflow";
+                    }
+                    float* dst = band.data() + static_cast<size_t>(br) * rowLen;
+                    const size_t orow = static_cast<size_t>(qy) * UTO;
+                    for (int qx = 0; qx < UTO; ++qx) {
+                        const float w = wy * wxs[qx];
+                        const int64_t ox = 2ll * ix0 + qx;
+                        if (w <= 0.f || ox < 0 || ox >= static_cast<int64_t>(OW)) {
+                            continue;
+                        }
+                        float* d = dst + static_cast<size_t>(ox) * 3;
+                        d[0] += o[orow + qx] * w;
+                        d[1] += o[outPlane + orow + qx] * w;
+                        d[2] += o[2 * outPlane + orow + qx] * w;
+                    }
+                }
+
+                ++done;
+                if (progress) {
+                    progress(static_cast<double>(done) / (static_cast<double>(ny) * nx));
+                }
+            }
+
+            // rows that the next row of tiles no longer touches are final
+            const int64_t flushEnd = ty == ny - 1
+                ? static_cast<int64_t>(OH)
+                : std::min<int64_t>(OH, 2ll * ((ty + 1) * USTEP - UPAD) + 2 * (UPAD - UFADE));
+            const int64_t nrows = flushEnd - bandStart;
+            if (nrows < 0 || nrows > UTO) {
+                return "internal error: band range";
+            }
+            for (int64_t rIdx = 0; rIdx < nrows; ++rIdx) {
+                const float* src = band.data() + static_cast<size_t>(rIdx) * rowLen;
+                for (size_t k = 0; k < rowLen; ++k) {
+                    const float v = src[k];
+                    const uint16_t u = static_cast<uint16_t>(std::lround(std::min(1.f, std::max(0.f, std::isfinite(v) ? v : 0.f)) * 65535.f));
+                    line[2 * k] = u & 0xff;
+                    line[2 * k + 1] = u >> 8;
+                }
+                if (fwrite(line.data(), 1, line.size(), out) != line.size()) {
+                    return "cannot write the file (disk full?)";
+                }
+            }
+            // keep the rows that are still being blended
+            const size_t keep = static_cast<size_t>(UTO - nrows) * rowLen;
+            if (nrows > 0) {
+                std::copy(band.begin() + static_cast<size_t>(nrows) * rowLen, band.end(), band.begin());
+                std::fill(band.begin() + keep, band.end(), 0.f);
+            }
+            bandStart = flushEnd;
+        }
+
+        if (fflush(out) != 0) {
+            return "cannot write the file (disk full?)";
+        }
+    } catch (const Ort::Exception& e) {
+        return std::string("ONNX Runtime: ") + e.what();
+    } catch (const std::bad_alloc&) {
+        return "out of memory";
+    } catch (const std::exception& e) {
+        return e.what();
+    }
+
+    return {};
+}
+
+#else
+
+#ifdef _WIN32
+std::string upscale2x(const wchar_t*, const float* const*, const float* const*, const float* const*, int, int, FILE*, const std::string&, const std::function<void(double)>&)
+#else
+std::string upscale2x(const char*, const float* const*, const float* const*, const float* const*, int, int, FILE*, const std::string&, const std::function<void(double)>&)
+#endif
+{
+    return "built without ONNX Runtime";
+}
+
+#endif
+
 }

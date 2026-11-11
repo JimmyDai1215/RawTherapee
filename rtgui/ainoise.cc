@@ -4,12 +4,14 @@
 #include <cstdio>
 #include <memory>
 #include <string>
+#include <vector>
 #include <glib/gstdio.h>
 #include <glibmm/fileutils.h>
 #include <glibmm/miscutils.h>
 
 #include "airawcore.h"
 #include "options.h"
+#include "rtengine/imagefloat.h"
 #include "rtengine/rawimage.h"
 #include "rtengine/rtengine.h"
 
@@ -231,6 +233,63 @@ Glib::ustring rawToDng(const Glib::ustring& rawFile, const Glib::ustring& dngFil
     if (fclose(f) != 0 || !ok) {
         g_remove(dngFile.c_str());
         return "写入文件失败：" + dngFile;
+    }
+
+    return Glib::ustring();
+}
+
+Glib::ustring upscaleModelPath()
+{
+    return Glib::build_filename(App::get().argv0(), "models", "upscale-realplksr-x2.onnx");
+}
+
+bool upscaleAvailable()
+{
+    return compiledIn()
+           && Glib::file_test(upscaleModelPath(), Glib::FILE_TEST_IS_REGULAR)
+           && Glib::file_test(runtimePath(), Glib::FILE_TEST_IS_REGULAR);
+}
+
+Glib::ustring upscaleToTiff(rtengine::IImagefloat* img, const Glib::ustring& tifFile, const std::function<void(double)>& progress)
+{
+    if (!img) {
+        return "没有可放大的图像";
+    }
+    if (!upscaleAvailable()) {
+        return "此安装中缺少 AI 放大组件或模型文件";
+    }
+
+    const std::string initErr = AIRawCore::initRuntime(nativePath(runtimePath()).c_str());
+    if (!initErr.empty()) {
+        return Glib::ustring("无法加载 AI 运行库：") + initErr + "\n如果文件存在，请安装 Microsoft Visual C++ 运行库。";
+    }
+
+    const int W = img->getWidth();
+    const int H = img->getHeight();
+    std::vector<const float*> r(H), g(H), b(H);
+    for (int y = 0; y < H; ++y) {
+        r[y] = img->r(y);
+        g[y] = img->g(y);
+        b[y] = img->b(y);
+    }
+
+    std::string icc;
+    if (const rtengine::Imagefloat* imf = dynamic_cast<const rtengine::Imagefloat*>(img)) {
+        icc = imf->getOutputProfile();
+    }
+
+    FILE* f = g_fopen(tifFile.c_str(), "wb");
+    if (!f) {
+        return "无法创建文件：" + tifFile;
+    }
+    const std::string err = AIRawCore::upscale2x(nativePath(upscaleModelPath()).c_str(), r.data(), g.data(), b.data(), W, H, f, icc, progress);
+    const bool closed = fclose(f) == 0;
+    if (!err.empty() || !closed) {
+        g_remove(tifFile.c_str());
+        if (err == "out of memory") {
+            return "内存不足，无法完成 AI 放大（请确认已开启系统页面文件）";
+        }
+        return Glib::ustring("AI 放大失败：") + (err.empty() ? std::string("cannot write the file") : err);
     }
 
     return Glib::ustring();

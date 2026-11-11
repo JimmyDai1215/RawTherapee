@@ -1016,6 +1016,8 @@ IPTCPANEL_SOURCE;来源
 IPTCPANEL_TITLE;标题
 MAIN_BUTTON_AIDENOISE;AI降噪
 MAIN_BUTTON_AIDENOISE_TOOLTIP;用神经网络对当前照片的 RAW 数据降噪，并在原图旁保存为新的 RAW 文件（DNG）。\n当前的调整会复制到新文件。
+MAIN_BUTTON_AIUPSCALE;AI放大2x
+MAIN_BUTTON_AIUPSCALE_TOOLTIP;按当前的调整显影照片，再用神经网络把宽和高各放大到 2 倍，在原图旁保存为 16 位 TIFF。
 MAIN_BUTTON_FULLSCREEN;全屏
 MAIN_BUTTON_NAVNEXT_TOOLTIP;跳转到当前编辑图片的下一张图像。\n快捷键：<b>Shift-F4</b>\n\n若要跳转到当前选中图片的下一张图像：\n快捷键： <b>F4</b>
 MAIN_BUTTON_NAVPREV_TOOLTIP;跳转到当前编辑图片的上一张图像。\n快捷键：<b>Shift-F3</b>\n\n若要跳转到当前选中图片的上一张图像：\nShortcut: <b>F3</b>
@@ -1039,6 +1041,8 @@ MAIN_FRAME_RECENT;最近使用的文件夹
 MAIN_MSG_AIDENOISE_DONE;AI 降噪完成，已保存为新的 RAW 文件：\n%1\n\n当前的调整已复制过去。请在文件浏览器中打开它继续编辑。
 MAIN_MSG_AIDENOISE_MISSING;此安装中缺少 AI 降噪组件或模型文件。
 MAIN_MSG_AIDENOISE_STRENGTH;降噪强度（%）。100 去噪最彻底；调低可保留一部分原始颗粒。
+MAIN_MSG_AIUPSCALE_CONFIRM;AI 放大会按当前的调整（包括裁切）显影照片，再放大到 2 倍。\n\n它用 CPU 运算，速度较慢：2400 万像素的照片大约需要 10 到 20 分钟。如果只需要画面的一部分，请先裁切。\n\n现在开始吗？
+MAIN_MSG_AIUPSCALE_DONE;AI 放大完成，已保存为：\n%1
 MAIN_MSG_ALREADYEXISTS;该文件已存在
 MAIN_MSG_CANNOTLOAD;无法加载图片
 MAIN_MSG_CANNOTSAVE;文件保存中出错
