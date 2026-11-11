@@ -9,8 +9,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v8
         with:
-          name: RawTherapee_c1-stable_c83e96766_win64_x86_64_release
-          run-id: 42988152227
+          name: RawTherapee_c1-stable_687e65452_win64_x86_64_release
+          run-id: 42992878157
           github-token: ${{ github.token }}
           path: app
       - shell: pwsh
@@ -19,5 +19,7 @@ jobs:
           Get-ChildItem app | Select-Object -First 5
           python .github/diag/check.py "$PWD\app" rawtherapee-cli.exe rawtherapee.exe
           cd app
-          $p = Start-Process -FilePath .\rawtherapee-cli.exe -Wait -PassThru -NoNewWindow
-          "CLI exit code: {0} (0x{0:X8})" -f $p.ExitCode
+          $p = Start-Process -FilePath .\rawtherapee.exe -PassThru
+          if ($p.WaitForExit(20000)) { "GUI exit code: {0} (0x{0:X8})" -f $p.ExitCode } else { "GUI still running after 20 s (good)"; $p.Kill() }
+          $log = Join-Path $env:USERPROFILE "Downloads\RawTherapee-crash-log.txt"
+          if (Test-Path $log) { Get-Content $log } else { "no crash log" }
