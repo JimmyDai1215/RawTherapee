@@ -1,0 +1,23 @@
+name: Diagnose bundle
+on:
+  push:
+    branches: [diag]
+jobs:
+  diag:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v8
+        with:
+          name: RawTherapee_c1-stable_c83e96766_win64_x86_64_release
+          run-id: 42988152227
+          github-token: ${{ github.token }}
+          path: app
+      - shell: pwsh
+        run: |
+          pip install pefile | Out-Null
+          Get-ChildItem app | Select-Object -First 5
+          python .github/diag/check.py "$PWD\app" rawtherapee-cli.exe rawtherapee.exe
+          cd app
+          $p = Start-Process -FilePath .\rawtherapee-cli.exe -Wait -PassThru -NoNewWindow
+          "CLI exit code: {0} (0x{0:X8})" -f $p.ExitCode
