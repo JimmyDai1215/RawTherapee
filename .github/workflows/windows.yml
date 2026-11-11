@@ -191,19 +191,25 @@ jobs:
           mkdir -p "$BUILD_DIR/share/gtk-3.0/"
           echo -e '[Settings]\ngtk-button-images=1' > "$BUILD_DIR/share/gtk-3.0/settings.ini"
 
-          echo "Checking that both executables start without the MSYS2 folder on PATH."
+          echo "Resolving DLL imports statically (ldd runs the program and can return an incomplete list)."
           UCRT_BIN="/C/msys2/msys64/${{env.MSYS2_ENV_PREFIX}}/bin"
           cd "$BUILD_DIR"
-          for EXE in rawtherapee.exe rawtherapee-cli.exe; do
-            for PASS in 1 2 3 4 5 6; do
-              MISSING=$(PATH="/usr/bin:/c/Windows/System32:/c/Windows" ldd "./$EXE" | grep 'not found' | awk '{print $1}' | grep -v -i -E '^(api|ext)-ms-' | sort -u || true)
-              [ -z "$MISSING" ] && break
-              echo "$EXE is missing: $MISSING"
-              for D in $MISSING; do cp "$UCRT_BIN/$D" .; done
+          cp "$UCRT_BIN/onnxruntime_providers_shared.dll" . || true
+          QUEUE=(rawtherapee.exe rawtherapee-cli.exe gdbus.exe gspawn-win64-helper.exe gspawn-win64-helper-console.exe *.dll $(find lib -name '*.dll'))
+          declare -A SEEN
+          while [ ${#QUEUE[@]} -gt 0 ]; do
+            F="${QUEUE[0]}"; QUEUE=("${QUEUE[@]:1}")
+            [ -n "${SEEN[$F]}" ] && continue
+            SEEN[$F]=1
+            for D in $(objdump -p "$F" | grep 'DLL Name:' | awk '{print $3}'); do
+              if [ ! -f "$D" ] && [ -f "$UCRT_BIN/$D" ]; then
+                echo "Adding $D (needed by $F)"
+                cp "$UCRT_BIN/$D" .
+              fi
+              [ -f "$D" ] && QUEUE+=("$D")
             done
-            echo "DLLs of $EXE that come from outside the package and Windows:"
-            PATH="/usr/bin:/c/Windows/System32:/c/Windows" ldd "./$EXE" | grep -v -i -E '/c/windows|/build/|not found' || true
           done
+          echo "Starting the CLI without the MSYS2 folder on PATH."
           PATH="/usr/bin:/c/Windows/System32:/c/Windows" ./rawtherapee-cli.exe || { echo "CLI exit code $?"; exit 1; }
           cd -
 
