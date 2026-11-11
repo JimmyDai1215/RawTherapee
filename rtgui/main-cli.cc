@@ -198,7 +198,7 @@ int main (int argc, char **argv)
             std::cerr << "AI denoise failed: " << msg.raw() << std::endl;
             return 1;
         }
-        std::cout << "AI denoise: wrote " << argv[3] << std::endl;
+        std::cout << "AI denoise: wrote " << argv[3] << " using the " << AIDenoise::lastDevice().raw() << std::endl;
         return 0;
     }
 
@@ -233,7 +233,7 @@ int main (int argc, char **argv)
             std::cerr << "AI upscale failed: " << msg.raw() << std::endl;
             return 1;
         }
-        std::cout << "AI upscale: wrote " << argv[3] << std::endl;
+        std::cout << "AI upscale: wrote " << argv[3] << " using the " << AIDenoise::lastDevice().raw() << std::endl;
         return 0;
     }
 

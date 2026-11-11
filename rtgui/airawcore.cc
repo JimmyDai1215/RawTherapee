@@ -4,6 +4,10 @@
 #include <cmath>
 #include <cstdint>
 #include <cstring>
+#include <cstdlib>
+#include <map>
+#include <stdexcept>
+#include <memory>
 #include <thread>
 #include <vector>
 
@@ -55,6 +59,195 @@ inline float tileRamp(int i)
 }
 
 #ifdef HAVE_ONNXRT
+
+namespace
+{
+
+std::string g_lastDevice = "CPU";
+bool g_gpuAllowed = true;
+
+// Mirror of OrtDmlApi from dml_provider_factory.h (only the layout matters here).
+struct DmlDeviceOptions {
+    int preference;   // 1 = high performance
+    int filter;       // 1 = GPU
+};
+struct DmlApi {
+    void* appendDml;
+    void* appendDml1;
+    void* createGpuAllocation;
+    void* freeGpuAllocation;
+    void* getD3D12Resource;
+    OrtStatus* (ORT_API_CALL* appendDml2)(OrtSessionOptions* options, DmlDeviceOptions* deviceOptions);
+};
+
+// 0 = not tested yet, 1 = the GPU gives correct results, 2 = do not use the GPU
+std::map<std::string, int>& gpuState()
+{
+    static std::map<std::string, int> state;
+    return state;
+}
+
+// One network with a fixed NCHW float input. Uses the graphics card through DirectML when
+// that works and gives the same numbers as the CPU, otherwise the CPU.
+class Net
+{
+public:
+#ifdef _WIN32
+    typedef std::wstring PathString;
+#else
+    typedef std::string PathString;
+#endif
+
+    Net(const PathString& path, int channels, int size, const std::string& key) :
+        env_(ORT_LOGGING_LEVEL_ERROR, "rawtherapee"),
+        path_(path),
+        key_(key),
+        mem_(Ort::MemoryInfo::CreateCpu(OrtArenaAllocator, OrtMemTypeDefault))
+    {
+        shape_[0] = 1;
+        shape_[1] = channels;
+        shape_[2] = size;
+        shape_[3] = size;
+
+        const char* dev = std::getenv("RT_AI_DEVICE");
+        const bool cpuOnly = dev && std::string(dev) == "cpu";
+        if (!cpuOnly && g_gpuAllowed && gpuState()[key_] != 2) {
+            try {
+                session_ = create(true);
+                gpu_ = true;
+            } catch (...) {
+                session_.reset();
+            }
+        }
+        if (!session_) {
+            session_ = create(false);
+            gpu_ = false;
+        }
+        readNames();
+        g_lastDevice = gpu_ ? "GPU" : "CPU";
+    }
+
+    // Runs the network. The returned data stays valid until the next call.
+    const float* run(std::vector<float>& in)
+    {
+        if (gpu_) {
+            bool ok = true;
+            try {
+                outs_ = runOn(*session_, in);
+            } catch (const Ort::Exception&) {
+                ok = false;
+            }
+            if (ok && gpuState()[key_] == 0) {
+                // first use of this network on the GPU: compare with the CPU once
+                std::unique_ptr<Ort::Session> cpu = create(false);
+                std::vector<Ort::Value> ref = runOn(*cpu, in);
+                if (sameResult(outs_[0], ref[0])) {
+                    gpuState()[key_] = 1;
+                } else {
+                    ok = false;
+                    session_ = std::move(cpu);
+                    outs_ = std::move(ref);
+                    gpuState()[key_] = 2;
+                    gpu_ = false;
+                    g_lastDevice = "CPU";
+                    return outs_[0].GetTensorData<float>();
+                }
+            }
+            if (!ok) {
+                gpuState()[key_] = 2;
+                gpu_ = false;
+                g_lastDevice = "CPU";
+                session_ = create(false);
+                outs_ = runOn(*session_, in);
+            }
+        } else {
+            outs_ = runOn(*session_, in);
+        }
+        return outs_[0].GetTensorData<float>();
+    }
+
+private:
+    std::unique_ptr<Ort::Session> create(bool gpu)
+    {
+        Ort::SessionOptions so;
+        so.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_ALL);
+        if (gpu) {
+            so.DisableMemPattern();
+            so.SetExecutionMode(ExecutionMode::ORT_SEQUENTIAL);
+            const void* api = nullptr;
+            if (OrtStatus* st = Ort::GetApi().GetExecutionProviderApi("DML", ORT_API_VERSION, &api)) {
+                Ort::GetApi().ReleaseStatus(st);
+                throw std::runtime_error("DirectML is not available");
+            }
+            const DmlApi* dml = static_cast<const DmlApi*>(api);
+            if (!dml || !dml->appendDml2) {
+                throw std::runtime_error("DirectML is not available");
+            }
+            DmlDeviceOptions opts = { 1, 1 };
+            if (OrtStatus* st = dml->appendDml2(so, &opts)) {
+                Ort::GetApi().ReleaseStatus(st);
+                throw std::runtime_error("no usable graphics card");
+            }
+        } else {
+            so.SetIntraOpNumThreads(static_cast<int>(std::max(1u, std::thread::hardware_concurrency())));
+        }
+        return std::unique_ptr<Ort::Session>(new Ort::Session(env_, path_.c_str(), so));
+    }
+
+    void readNames()
+    {
+        Ort::AllocatorWithDefaultOptions alloc;
+        inName_ = session_->GetInputNameAllocated(0, alloc).get();
+        outName_ = session_->GetOutputNameAllocated(0, alloc).get();
+    }
+
+    std::vector<Ort::Value> runOn(Ort::Session& session, std::vector<float>& in)
+    {
+        const char* inNames[] = { inName_.c_str() };
+        const char* outNames[] = { outName_.c_str() };
+        Ort::Value input = Ort::Value::CreateTensor<float>(mem_, in.data(), in.size(), shape_, 4);
+        return session.Run(Ort::RunOptions{nullptr}, inNames, &input, 1, outNames, 1);
+    }
+
+    static bool sameResult(Ort::Value& a, Ort::Value& b)
+    {
+        const size_t n = a.GetTensorTypeAndShapeInfo().GetElementCount();
+        if (n == 0 || n != b.GetTensorTypeAndShapeInfo().GetElementCount()) {
+            return false;
+        }
+        const float* x = a.GetTensorData<float>();
+        const float* y = b.GetTensorData<float>();
+        double diff = 0.0, ref = 0.0;
+        for (size_t i = 0; i < n; ++i) {
+            diff += std::fabs(static_cast<double>(x[i]) - y[i]);
+            ref += std::fabs(static_cast<double>(y[i]));
+        }
+        // NaN on either side makes this comparison false
+        return diff <= 0.02 * ref + 1e-12 * n;
+    }
+
+    Ort::Env env_;
+    PathString path_;
+    std::string key_;
+    Ort::MemoryInfo mem_;
+    std::unique_ptr<Ort::Session> session_;
+    std::vector<Ort::Value> outs_;
+    std::string inName_, outName_;
+    int64_t shape_[4];
+    bool gpu_ = false;
+};
+
+}
+
+std::string lastDevice()
+{
+    return g_lastDevice;
+}
+
+void setGpuAllowed(bool allowed)
+{
+    g_gpuAllowed = allowed;
+}
 
 #ifdef _WIN32
 // onnxruntime.dll is loaded by its full path: Windows has an older copy of its own in
@@ -134,18 +327,7 @@ std::string denoiseBayer(const char* modelPath, float** rows, const BayerInfo& i
     strength = std::min(1.f, std::max(0.f, strength));
 
     try {
-        Ort::Env env(ORT_LOGGING_LEVEL_ERROR, "rawtherapee");
-        Ort::SessionOptions so;
-        so.SetIntraOpNumThreads(static_cast<int>(std::max(1u, std::thread::hardware_concurrency())));
-        so.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_ALL);
-        Ort::Session session(env, modelPath, so);
-        Ort::AllocatorWithDefaultOptions alloc;
-        auto inName = session.GetInputNameAllocated(0, alloc);
-        auto outName = session.GetOutputNameAllocated(0, alloc);
-        const char* inNames[] = { inName.get() };
-        const char* outNames[] = { outName.get() };
-        Ort::MemoryInfo mem = Ort::MemoryInfo::CreateCpu(OrtArenaAllocator, OrtMemTypeDefault);
-        const int64_t shape[4] = { 1, 4, T, T };
+        Net net(modelPath, 4, T, "rawdenoise-bayer");
         const size_t inPlane = static_cast<size_t>(T) * T;
         const size_t outPlane = static_cast<size_t>(TS) * TS;
 
@@ -196,9 +378,7 @@ std::string denoiseBayer(const char* modelPath, float** rows, const BayerInfo& i
                     }
                 }
 
-                Ort::Value input = Ort::Value::CreateTensor<float>(mem, in.data(), in.size(), shape, 4);
-                auto outs = session.Run(Ort::RunOptions{nullptr}, inNames, &input, 1, outNames, 1);
-                const float* out = outs[0].GetTensorData<float>();
+                const float* out = net.run(in);
 
                 for (int i = 0; i < TS; ++i) {
                     const int r = sy + i;
@@ -288,6 +468,15 @@ std::string initRuntime(const char*)
 #endif
 {
     return "built without ONNX Runtime";
+}
+
+std::string lastDevice()
+{
+    return "CPU";
+}
+
+void setGpuAllowed(bool)
+{
 }
 
 #ifdef _WIN32
@@ -641,18 +830,7 @@ std::string upscale2x(const char* modelPath, const float* const* r, const float*
         }
 
         // ---- network
-        Ort::Env env(ORT_LOGGING_LEVEL_ERROR, "rawtherapee");
-        Ort::SessionOptions so;
-        so.SetIntraOpNumThreads(static_cast<int>(std::max(1u, std::thread::hardware_concurrency())));
-        so.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_ALL);
-        Ort::Session session(env, modelPath, so);
-        Ort::AllocatorWithDefaultOptions alloc;
-        auto inName = session.GetInputNameAllocated(0, alloc);
-        auto outName = session.GetOutputNameAllocated(0, alloc);
-        const char* inNames[] = { inName.get() };
-        const char* outNames[] = { outName.get() };
-        Ort::MemoryInfo mem = Ort::MemoryInfo::CreateCpu(OrtArenaAllocator, OrtMemTypeDefault);
-        const int64_t shape[4] = { 1, 3, UT, UT };
+        Net net(modelPath, 3, UT, "upscale-x2");
         const size_t inPlane = static_cast<size_t>(UT) * UT;
         const size_t outPlane = static_cast<size_t>(UTO) * UTO;
         std::vector<float> in(inPlane * 3);
@@ -694,9 +872,7 @@ std::string upscale2x(const char* modelPath, const float* const* r, const float*
                     }
                 }
 
-                Ort::Value input = Ort::Value::CreateTensor<float>(mem, in.data(), in.size(), shape, 4);
-                auto outs = session.Run(Ort::RunOptions{nullptr}, inNames, &input, 1, outNames, 1);
-                const float* o = outs[0].GetTensorData<float>();
+                const float* o = net.run(in);
 
                 for (int qy = 0; qy < UTO; ++qy) {
                     const float wy = wys[qy];

@@ -2303,6 +2303,12 @@ Glib::ustring* aiDenoiseJob(Glib::ustring rawFile, Glib::ustring outFile, double
 }
 
 double aiDenoiseStrength = 100.0;
+bool aiUseGpu = true;
+
+Glib::ustring aiDeviceLine()
+{
+    return Glib::ustring("\n\n") + Glib::ustring::compose(M("MAIN_MSG_AI_DEVICE"), AIDenoise::lastDevice() == "GPU" ? M("MAIN_MSG_AI_DEVICE_GPU") : M("MAIN_MSG_AI_DEVICE_CPU"));
+}
 }
 
 void EditorPanel::aiDenoisePressed()
@@ -2331,6 +2337,9 @@ void EditorPanel::aiDenoisePressed()
         dlg.get_content_area()->set_border_width(12);
         dlg.get_content_area()->pack_start(lbl, Gtk::PACK_SHRINK);
         dlg.get_content_area()->pack_start(scale, Gtk::PACK_SHRINK);
+        Gtk::CheckButton gpuChk(M("MAIN_MSG_AI_USEGPU"));
+        gpuChk.set_active(aiUseGpu);
+        dlg.get_content_area()->pack_start(gpuChk, Gtk::PACK_SHRINK);
         dlg.add_button(M("GENERAL_CANCEL"), Gtk::RESPONSE_CANCEL);
         dlg.add_button(M("GENERAL_OK"), Gtk::RESPONSE_OK);
         dlg.set_default_response(Gtk::RESPONSE_OK);
@@ -2339,6 +2348,8 @@ void EditorPanel::aiDenoisePressed()
             return;
         }
         aiDenoiseStrength = scale.get_value();
+        aiUseGpu = gpuChk.get_active();
+        AIDenoise::setGpuAllowed(aiUseGpu);
     }
 
     const Glib::ustring orig = openThm->getFileName();
@@ -2372,7 +2383,7 @@ bool EditorPanel::idle_aiDenoiseDone(ProgressConnector<Glib::ustring*> *pc)
     }
 
     Gtk::MessageDialog msgd(*parent,
-                            msg.empty() ? Glib::ustring::compose(M("MAIN_MSG_AIDENOISE_DONE"), aiDenoiseOutFile) : msg,
+                            msg.empty() ? Glib::ustring::compose(M("MAIN_MSG_AIDENOISE_DONE"), aiDenoiseOutFile) + aiDeviceLine() : msg,
                             false, msg.empty() ? Gtk::MESSAGE_INFO : Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     msgd.run();
     return false;
@@ -2413,9 +2424,15 @@ void EditorPanel::aiUpscalePressed()
     }
     {
         Gtk::MessageDialog ask(*parent, M("MAIN_MSG_AIUPSCALE_CONFIRM"), false, Gtk::MESSAGE_QUESTION, Gtk::BUTTONS_OK_CANCEL, true);
+        Gtk::CheckButton gpuChk(M("MAIN_MSG_AI_USEGPU"));
+        gpuChk.set_active(aiUseGpu);
+        ask.get_message_area()->pack_start(gpuChk, Gtk::PACK_SHRINK);
+        gpuChk.show();
         if (ask.run() != Gtk::RESPONSE_OK) {
             return;
         }
+        aiUseGpu = gpuChk.get_active();
+        AIDenoise::setGpuAllowed(aiUseGpu);
     }
 
     rtengine::procparams::ProcParams pparams;
@@ -2445,7 +2462,7 @@ bool EditorPanel::idle_aiUpscaleDone(ProgressConnector<Glib::ustring*> *pc)
     delete res;
     aiUpscaleBtn->set_sensitive(true);
     Gtk::MessageDialog msgd(*parent,
-                            msg.empty() ? Glib::ustring::compose(M("MAIN_MSG_AIUPSCALE_DONE"), aiUpscaleOutFile) : msg,
+                            msg.empty() ? Glib::ustring::compose(M("MAIN_MSG_AIUPSCALE_DONE"), aiUpscaleOutFile) + aiDeviceLine() : msg,
                             false, msg.empty() ? Gtk::MESSAGE_INFO : Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
     msgd.run();
     return false;

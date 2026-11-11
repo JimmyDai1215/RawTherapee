@@ -26,6 +26,10 @@ Glib::ustring runtimePath();
 // True when the model and the runtime are both installed.
 bool available();
 
+// Whether the graphics card may be used, and what the last run actually used ("GPU"/"CPU").
+void setGpuAllowed(bool allowed);
+Glib::ustring lastDevice();
+
 // Loads rawFile, denoises its mosaic (strength 0..1) and writes dngFile.
 // Returns an empty string on success, otherwise a human readable error message.
 // progress is called from the calling thread with a value in 0..1.

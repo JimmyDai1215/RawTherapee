@@ -86,10 +86,15 @@ jobs:
 
       - name: Get ONNX Runtime
         run: |
-          curl -fsSL -o ort.zip 'https://github.com/microsoft/onnxruntime/releases/download/v1.29.0/onnxruntime-win-x64-1.29.0.zip'
-          echo "c9b4b7086b529ad814f428c1bad028e20a25d7dc0699836775faace4ab5b78b2  ort.zip" | sha256sum -c -
-          unzip -o -q ort.zip -d ort_x
-          mv ort_x/onnxruntime-win-x64-1.29.0 ort
+          # official ONNX Runtime build with DirectML (graphics card) support
+          curl -fsSL -o ort.zip 'https://github.com/microsoft/onnxruntime/releases/download/v1.22.1/Microsoft.ML.OnnxRuntime.DirectML.1.22.1.nupkg'
+          echo "9fe1d91a697fb8a68abd29fdc2a88dea8f864ee74e758a055ce63c9e023c6908  ort.zip" | sha256sum -c -
+          unzip -o -q ort.zip -d ort
+          # DirectML itself, the version this ONNX Runtime was built for
+          curl -fsSL -o dml.zip 'https://www.nuget.org/api/v2/package/Microsoft.AI.DirectML/1.15.4'
+          echo "4e7cb7ddce8cf837a7a75dc029209b520ca0101470fcdf275c1f49736a3615b9  dml.zip" | sha256sum -c -
+          unzip -o -q dml.zip -d dml
+          echo "9c9e6d822561c6c41b90e6994b3e8857cf1d66dbfb1e0c4c799c7c89b4e92da1  dml/bin/x64-win/DirectML.dll" | sha256sum -c -
           echo "ORT_DIR=$(cygpath -m "$(pwd)/ort")" >> "$(cygpath -u $GITHUB_ENV)"
 
       - name: Configure build
@@ -111,7 +116,7 @@ jobs:
             -DCACHE_NAME_SUFFIX="$CACHE_SUFFIX" \
             -DPROC_TARGET_NUMBER="1" \
             -DLENSFUNDBDIR="share/lensfun" \
-            -DONNXRT_INCLUDE_DIR="$ORT_DIR/include" \
+            -DONNXRT_INCLUDE_DIR="$ORT_DIR/build/native/include" \
             -DWITH_SIMDE="${{matrix.arch == 'x86_64' && 'OFF' || 'ON'}}" \
             -S . -B build
 
@@ -146,9 +151,12 @@ jobs:
           unzip -o -q plksr.dtmodel -d plksr_x
           cp plksr_x/upscale-realplksr/model_x2.onnx "$BUILD_DIR/models/upscale-realplksr-x2.onnx"
           cp plksr_x/upscale-realplksr/config.json "$BUILD_DIR/models/upscale-realplksr.json"
-          cp ort/lib/onnxruntime.dll ort/lib/onnxruntime_providers_shared.dll "$BUILD_DIR"
+          cp ort/runtimes/win-x64/native/onnxruntime.dll ort/runtimes/win-x64/native/onnxruntime_providers_shared.dll "$BUILD_DIR"
+          cp dml/bin/x64-win/DirectML.dll "$BUILD_DIR"
           cp ort/LICENSE "$BUILD_DIR/licenses/onnxruntime-LICENSE.txt"
           cp ort/ThirdPartyNotices.txt "$BUILD_DIR/licenses/onnxruntime-ThirdPartyNotices.txt"
+          cp dml/LICENSE.txt "$BUILD_DIR/licenses/DirectML-LICENSE.txt"
+          cp dml/ThirdPartyNotices.txt "$BUILD_DIR/licenses/DirectML-ThirdPartyNotices.txt"
           ls -la "$BUILD_DIR/models"
 
       - name: Bundle dependencies
@@ -231,10 +239,14 @@ jobs:
           echo "5922721d13f11795557d97fdeb0a60b900086c402bc82a848ff280d15b99ffd4  aitest/sample.NEF" | sha256sum -c -
           export PATH="/usr/bin:/c/Windows/System32:/c/Windows"
           cd aitest
+          # first with the graphics card allowed (the runner may only have a software adapter), then CPU only
+          time "$BUILD_DIR/rawtherapee-cli.exe" --ai-denoise sample.NEF sample_AI_auto.dng 1.0
+          export RT_AI_DEVICE=cpu
           time "$BUILD_DIR/rawtherapee-cli.exe" --ai-denoise sample.NEF sample_AI.dng 1.0
           ls -la
           "$BUILD_DIR/rawtherapee-cli.exe" -q -Y -t -b8 -o dev_nef.tif -c sample.NEF
           "$BUILD_DIR/rawtherapee-cli.exe" -q -Y -t -b8 -o dev_dng.tif -c sample_AI.dng
+          "$BUILD_DIR/rawtherapee-cli.exe" -q -Y -t -b8 -o dev_dng_auto.tif -c sample_AI_auto.dng
           time "$BUILD_DIR/rawtherapee-cli.exe" --ai-upscale sample.NEF up2x.tif 1800 1100 700 600
           ls -la
 
@@ -243,6 +255,7 @@ jobs:
         run: |
           pip install numpy pillow tifffile | Out-Null
           python .github/aitest_compare.py aitest/dev_nef.tif aitest/dev_dng.tif
+          python .github/aitest_compare.py aitest/dev_nef.tif aitest/dev_dng_auto.tif
           python .github/aitest_upscale.py aitest/up2x.tif 700 600
 
       - name: Create installer

@@ -44,6 +44,14 @@ std::string initRuntime(const wchar_t* libraryPath);
 std::string initRuntime(const char* libraryPath);
 #endif
 
+// "GPU" or "CPU": what the most recent denoise or upscale run actually used. The graphics
+// card (DirectML) is used when it works and its results match the CPU; setting the
+// environment variable RT_AI_DEVICE=cpu forces the CPU.
+std::string lastDevice();
+
+// Allows or forbids the graphics card for the following runs (default: allowed).
+void setGpuAllowed(bool allowed);
+
 // Denoises the mosaic in place. rows[r] points to `width` samples in raw sensor units.
 // strength is 0..1 (blend between the original and the denoised data).
 // Returns an empty string on success, an error text otherwise.

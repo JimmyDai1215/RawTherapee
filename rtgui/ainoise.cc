@@ -44,6 +44,16 @@ bool available()
            && Glib::file_test(runtimePath(), Glib::FILE_TEST_IS_REGULAR);
 }
 
+void setGpuAllowed(bool allowed)
+{
+    AIRawCore::setGpuAllowed(allowed);
+}
+
+Glib::ustring lastDevice()
+{
+    return AIRawCore::lastDevice();
+}
+
 namespace
 {
 
