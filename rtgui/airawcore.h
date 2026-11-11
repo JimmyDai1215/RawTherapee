@@ -49,6 +49,10 @@ std::string initRuntime(const char* libraryPath);
 // environment variable RT_AI_DEVICE=cpu forces the CPU.
 std::string lastDevice();
 
+// Relative difference (in percent) between the graphics card and the CPU measured when the
+// network of the last run was checked, or a negative value when no check has been made.
+double lastGpuDeviation();
+
 // Allows or forbids the graphics card for the following runs (default: allowed).
 void setGpuAllowed(bool allowed);
 
@@ -63,14 +67,15 @@ std::string denoiseBayer(const char* modelPath, float** rows, const BayerInfo& i
 
 // Upscales an RGB image to twice its size and streams the result to `out` as an
 // uncompressed 16 bit RGB TIFF. r/g/b[row] point to `width` samples in 0..65535, already
-// encoded with the output profile's tone curve. icc may be empty.
+// encoded with the output profile's tone curve. icc may be empty. modelKey names the
+// network (used to remember whether the graphics card works for it).
 // Returns an empty string on success, an error text otherwise.
 #ifdef _WIN32
 std::string upscale2x(const wchar_t* modelPath, const float* const* r, const float* const* g, const float* const* b,
-                      int width, int height, FILE* out, const std::string& icc, const std::function<void(double)>& progress);
+                      int width, int height, FILE* out, const std::string& icc, const std::string& modelKey, const std::function<void(double)>& progress);
 #else
 std::string upscale2x(const char* modelPath, const float* const* r, const float* const* g, const float* const* b,
-                      int width, int height, FILE* out, const std::string& icc, const std::function<void(double)>& progress);
+                      int width, int height, FILE* out, const std::string& icc, const std::string& modelKey, const std::function<void(double)>& progress);
 #endif
 
 // Writes an uncompressed 16 bit CFA DNG. Returns false on a write error.

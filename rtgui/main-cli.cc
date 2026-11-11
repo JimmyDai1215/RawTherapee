@@ -226,7 +226,9 @@ int main (int argc, char **argv)
             return 1;
         }
         std::cout << "AI upscale: input " << img->getWidth() << "x" << img->getHeight() << std::endl;
-        const Glib::ustring msg = AIDenoise::upscaleToTiff(img, argv[3], [](double) {});
+        const char* modelEnv = getenv("RT_AI_UPSCALE_MODEL");
+        const int model = modelEnv && std::string(modelEnv) == "bsrgan" ? 1 : 0;
+        const Glib::ustring msg = AIDenoise::upscaleToTiff(img, argv[3], model, [](double) {});
         delete img;
         ii->decreaseRef();
         if (!msg.empty()) {

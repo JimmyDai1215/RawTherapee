@@ -54,6 +54,11 @@ Glib::ustring lastDevice()
     return AIRawCore::lastDevice();
 }
 
+double lastGpuDeviation()
+{
+    return AIRawCore::lastGpuDeviation();
+}
+
 namespace
 {
 
@@ -248,24 +253,24 @@ Glib::ustring rawToDng(const Glib::ustring& rawFile, const Glib::ustring& dngFil
     return Glib::ustring();
 }
 
-Glib::ustring upscaleModelPath()
+Glib::ustring upscaleModelPath(int model)
 {
-    return Glib::build_filename(App::get().argv0(), "models", "upscale-realplksr-x2.onnx");
+    return Glib::build_filename(App::get().argv0(), "models", model == 1 ? "upscale-bsrgan-x2.onnx" : "upscale-realplksr-x2.onnx");
 }
 
-bool upscaleAvailable()
+bool upscaleAvailable(int model)
 {
     return compiledIn()
-           && Glib::file_test(upscaleModelPath(), Glib::FILE_TEST_IS_REGULAR)
+           && Glib::file_test(upscaleModelPath(model), Glib::FILE_TEST_IS_REGULAR)
            && Glib::file_test(runtimePath(), Glib::FILE_TEST_IS_REGULAR);
 }
 
-Glib::ustring upscaleToTiff(rtengine::IImagefloat* img, const Glib::ustring& tifFile, const std::function<void(double)>& progress)
+Glib::ustring upscaleToTiff(rtengine::IImagefloat* img, const Glib::ustring& tifFile, int model, const std::function<void(double)>& progress)
 {
     if (!img) {
         return "没有可放大的图像";
     }
-    if (!upscaleAvailable()) {
+    if (!upscaleAvailable(model)) {
         return "此安装中缺少 AI 放大组件或模型文件";
     }
 
@@ -292,7 +297,7 @@ Glib::ustring upscaleToTiff(rtengine::IImagefloat* img, const Glib::ustring& tif
     if (!f) {
         return "无法创建文件：" + tifFile;
     }
-    const std::string err = AIRawCore::upscale2x(nativePath(upscaleModelPath()).c_str(), r.data(), g.data(), b.data(), W, H, f, icc, progress);
+    const std::string err = AIRawCore::upscale2x(nativePath(upscaleModelPath(model)).c_str(), r.data(), g.data(), b.data(), W, H, f, icc, model == 1 ? "upscale-bsrgan-x2" : "upscale-realplksr-x2", progress);
     const bool closed = fclose(f) == 0;
     if (!err.empty() || !closed) {
         g_remove(tifFile.c_str());

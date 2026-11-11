@@ -65,6 +65,7 @@ namespace
 
 std::string g_lastDevice = "CPU";
 bool g_gpuAllowed = true;
+double g_lastDeviation = -1.0;
 
 // Mirror of OrtDmlApi from dml_provider_factory.h (only the layout matters here).
 struct DmlDeviceOptions {
@@ -85,6 +86,12 @@ std::map<std::string, int>& gpuState()
 {
     static std::map<std::string, int> state;
     return state;
+}
+
+std::map<std::string, double>& gpuDeviation()
+{
+    static std::map<std::string, double> dev;
+    return dev;
 }
 
 // One network with a fixed NCHW float input. Uses the graphics card through DirectML when
@@ -125,6 +132,7 @@ public:
         }
         readNames();
         g_lastDevice = gpu_ ? "GPU" : "CPU";
+        g_lastDeviation = gpuDeviation().count(key_) ? gpuDeviation()[key_] : -1.0;
     }
 
     // Runs the network. The returned data stays valid until the next call.
@@ -141,7 +149,10 @@ public:
                 // first use of this network on the GPU: compare with the CPU once
                 std::unique_ptr<Ort::Session> cpu = create(false);
                 std::vector<Ort::Value> ref = runOn(*cpu, in);
-                if (sameResult(outs_[0], ref[0])) {
+                const double dev = deviation(outs_[0], ref[0]);
+                gpuDeviation()[key_] = dev;
+                g_lastDeviation = dev;
+                if (dev >= 0.0 && dev <= 1.0) {
                     gpuState()[key_] = 1;
                 } else {
                     ok = false;
@@ -209,11 +220,12 @@ private:
         return session.Run(Ort::RunOptions{nullptr}, inNames, &input, 1, outNames, 1);
     }
 
-    static bool sameResult(Ort::Value& a, Ort::Value& b)
+    // Mean absolute difference relative to the mean magnitude, in percent; negative if unusable.
+    static double deviation(Ort::Value& a, Ort::Value& b)
     {
         const size_t n = a.GetTensorTypeAndShapeInfo().GetElementCount();
         if (n == 0 || n != b.GetTensorTypeAndShapeInfo().GetElementCount()) {
-            return false;
+            return -1.0;
         }
         const float* x = a.GetTensorData<float>();
         const float* y = b.GetTensorData<float>();
@@ -222,8 +234,10 @@ private:
             diff += std::fabs(static_cast<double>(x[i]) - y[i]);
             ref += std::fabs(static_cast<double>(y[i]));
         }
-        // NaN on either side makes this comparison false
-        return diff <= 0.02 * ref + 1e-12 * n;
+        if (!std::isfinite(diff) || !std::isfinite(ref) || !(ref > 0.0)) {
+            return -1.0;
+        }
+        return 100.0 * diff / ref;
     }
 
     Ort::Env env_;
@@ -247,6 +261,11 @@ std::string lastDevice()
 void setGpuAllowed(bool allowed)
 {
     g_gpuAllowed = allowed;
+}
+
+double lastGpuDeviation()
+{
+    return g_lastDeviation;
 }
 
 #ifdef _WIN32
@@ -477,6 +496,11 @@ std::string lastDevice()
 
 void setGpuAllowed(bool)
 {
+}
+
+double lastGpuDeviation()
+{
+    return -1.0;
 }
 
 #ifdef _WIN32
@@ -775,10 +799,10 @@ inline float upWeight(int q, bool first, bool last)
 
 #ifdef _WIN32
 std::string upscale2x(const wchar_t* modelPath, const float* const* r, const float* const* g, const float* const* b,
-                      int width, int height, FILE* out, const std::string& icc, const std::function<void(double)>& progress)
+                      int width, int height, FILE* out, const std::string& icc, const std::string& modelKey, const std::function<void(double)>& progress)
 #else
 std::string upscale2x(const char* modelPath, const float* const* r, const float* const* g, const float* const* b,
-                      int width, int height, FILE* out, const std::string& icc, const std::function<void(double)>& progress)
+                      int width, int height, FILE* out, const std::string& icc, const std::string& modelKey, const std::function<void(double)>& progress)
 #endif
 {
     const int W = width, H = height;
@@ -830,7 +854,7 @@ std::string upscale2x(const char* modelPath, const float* const* r, const float*
         }
 
         // ---- network
-        Net net(modelPath, 3, UT, "upscale-x2");
+        Net net(modelPath, 3, UT, modelKey);
         const size_t inPlane = static_cast<size_t>(UT) * UT;
         const size_t outPlane = static_cast<size_t>(UTO) * UTO;
         std::vector<float> in(inPlane * 3);
@@ -951,9 +975,9 @@ std::string upscale2x(const char* modelPath, const float* const* r, const float*
 #else
 
 #ifdef _WIN32
-std::string upscale2x(const wchar_t*, const float* const*, const float* const*, const float* const*, int, int, FILE*, const std::string&, const std::function<void(double)>&)
+std::string upscale2x(const wchar_t*, const float* const*, const float* const*, const float* const*, int, int, FILE*, const std::string&, const std::string&, const std::function<void(double)>&)
 #else
-std::string upscale2x(const char*, const float* const*, const float* const*, const float* const*, int, int, FILE*, const std::string&, const std::function<void(double)>&)
+std::string upscale2x(const char*, const float* const*, const float* const*, const float* const*, int, int, FILE*, const std::string&, const std::string&, const std::function<void(double)>&)
 #endif
 {
     return "built without ONNX Runtime";

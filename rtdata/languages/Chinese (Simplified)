@@ -1041,8 +1041,12 @@ MAIN_FRAME_RECENT;最近使用的文件夹
 MAIN_MSG_AIDENOISE_DONE;AI 降噪完成，已保存为新的 RAW 文件：\n%1\n\n当前的调整已复制过去。请在文件浏览器中打开它继续编辑。
 MAIN_MSG_AIDENOISE_MISSING;此安装中缺少 AI 降噪组件或模型文件。
 MAIN_MSG_AIDENOISE_STRENGTH;降噪强度（%）。100 去噪最彻底；调低可保留一部分原始颗粒。
-MAIN_MSG_AIUPSCALE_CONFIRM;AI 放大会按当前的调整（包括裁切）显影照片，再放大到 2 倍。\n\n用显卡运算应该最多几分钟。用 CPU 则较慢：2400 万像素的照片大约需要 15 到 30 分钟，如果只需要画面的一部分，请先裁切。\n\n现在开始吗？
+MAIN_MSG_AIUPSCALE_CONFIRM;AI 放大会按当前的调整（包括裁切）显影照片，再放大到 2 倍。\n\n用显卡运算最多几分钟；用 CPU 的话，2400 万像素的照片需要 15 分钟以上。
 MAIN_MSG_AIUPSCALE_DONE;AI 放大完成，已保存为：\n%1
+MAIN_MSG_AIUPSCALE_MODEL_CLEAN;纯净锐利（BSRGAN）：平面干净、边缘锐，可能脑补细节
+MAIN_MSG_AIUPSCALE_MODEL_FAITHFUL;忠实（RealPLKSR）：保留细微纹理和颗粒
+MAIN_MSG_AIUPSCALE_NOSHARPEN;放大前关闭锐化（推荐；放大后再对结果锐化）
+MAIN_MSG_AI_DEVIATION;显卡与 CPU 的校验偏差：%1 %
 MAIN_MSG_AI_DEVICE;运算设备：%1
 MAIN_MSG_AI_DEVICE_CPU;CPU
 MAIN_MSG_AI_DEVICE_GPU;显卡

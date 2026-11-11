@@ -1899,8 +1899,12 @@ MAIN_FRAME_RECENT;Recent Folders
 MAIN_MSG_AIDENOISE_DONE;AI denoise finished. Saved as a new raw file:\n%1\n\nYour current edits were copied to it. Open it from the file browser to continue editing.
 MAIN_MSG_AIDENOISE_MISSING;The AI denoise component or its model file is missing from this installation.
 MAIN_MSG_AIDENOISE_STRENGTH;Denoise strength (%). 100 removes the most noise; lower values keep some of the original grain.
-MAIN_MSG_AIUPSCALE_CONFIRM;AI upscale develops the photo with the current edits (including the crop) and enlarges it to 2x.\n\nWith the graphics card this should take a few minutes at most. On the CPU it is slow: roughly 15 to 30 minutes for a 24 megapixel photo, so crop first if you only need a part of the picture.\n\nStart now?
+MAIN_MSG_AIUPSCALE_CONFIRM;AI upscale develops the photo with the current edits (including the crop) and enlarges it to 2x.\n\nWith the graphics card this should take a few minutes at most; on the CPU a 24 megapixel photo takes 15 minutes or more.
 MAIN_MSG_AIUPSCALE_DONE;AI upscale finished. Saved as:\n%1
+MAIN_MSG_AIUPSCALE_MODEL_CLEAN;Clean and crisp (BSRGAN): smooth surfaces, sharp edges, may invent detail
+MAIN_MSG_AIUPSCALE_MODEL_FAITHFUL;Faithful (RealPLKSR): keeps fine texture and grain
+MAIN_MSG_AIUPSCALE_NOSHARPEN;Turn off sharpening before enlarging (recommended; sharpen the result afterwards)
+MAIN_MSG_AI_DEVIATION;Graphics card vs. CPU check: %1 % difference
 MAIN_MSG_AI_DEVICE;Computed on: %1
 MAIN_MSG_AI_DEVICE_CPU;CPU
 MAIN_MSG_AI_DEVICE_GPU;graphics card

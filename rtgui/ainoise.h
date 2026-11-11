@@ -29,6 +29,7 @@ bool available();
 // Whether the graphics card may be used, and what the last run actually used ("GPU"/"CPU").
 void setGpuAllowed(bool allowed);
 Glib::ustring lastDevice();
+double lastGpuDeviation();   // percent, negative when not measured
 
 // Loads rawFile, denoises its mosaic (strength 0..1) and writes dngFile.
 // Returns an empty string on success, otherwise a human readable error message.
@@ -37,11 +38,12 @@ Glib::ustring rawToDng(const Glib::ustring& rawFile, const Glib::ustring& dngFil
 
 // --- 2x upscaling of a developed image
 
-Glib::ustring upscaleModelPath();
-bool upscaleAvailable();
+// model: 0 = RealPLKSR (faithful, keeps fine texture), 1 = BSRGAN (clean and crisp)
+Glib::ustring upscaleModelPath(int model);
+bool upscaleAvailable(int model);
 
 // Upscales the developed image (values 0..65535) to twice its size and writes a 16 bit TIFF.
 // Returns an empty string on success, otherwise a human readable error message.
-Glib::ustring upscaleToTiff(rtengine::IImagefloat* img, const Glib::ustring& tifFile, const std::function<void(double)>& progress);
+Glib::ustring upscaleToTiff(rtengine::IImagefloat* img, const Glib::ustring& tifFile, int model, const std::function<void(double)>& progress);
 
 }

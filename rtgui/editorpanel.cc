@@ -24,6 +24,8 @@
 #include "rtengine/array2D.h"
 #include "rtengine/imagesource.h"
 #include "rtengine/iccstore.h"
+#include <iomanip>
+
 #include "ainoise.h"
 #include "batchqueue.h"
 #include "batchqueueentry.h"
@@ -2307,7 +2309,12 @@ bool aiUseGpu = true;
 
 Glib::ustring aiDeviceLine()
 {
-    return Glib::ustring("\n\n") + Glib::ustring::compose(M("MAIN_MSG_AI_DEVICE"), AIDenoise::lastDevice() == "GPU" ? M("MAIN_MSG_AI_DEVICE_GPU") : M("MAIN_MSG_AI_DEVICE_CPU"));
+    Glib::ustring line = Glib::ustring("\n\n") + Glib::ustring::compose(M("MAIN_MSG_AI_DEVICE"), AIDenoise::lastDevice() == "GPU" ? M("MAIN_MSG_AI_DEVICE_GPU") : M("MAIN_MSG_AI_DEVICE_CPU"));
+    const double dev = AIDenoise::lastGpuDeviation();
+    if (dev >= 0.0) {
+        line += Glib::ustring("\n") + Glib::ustring::compose(M("MAIN_MSG_AI_DEVIATION"), Glib::ustring::format(std::fixed, std::setprecision(3), dev));
+    }
+    return line;
 }
 }
 
@@ -2392,14 +2399,14 @@ bool EditorPanel::idle_aiDenoiseDone(ProgressConnector<Glib::ustring*> *pc)
 namespace
 {
 // Runs in a worker thread: develop the image with the current edits, then upscale it.
-Glib::ustring* aiUpscaleJob(rtengine::ProcessingJob* job, Glib::ustring outFile, rtengine::ProgressListener* pl)
+Glib::ustring* aiUpscaleJob(rtengine::ProcessingJob* job, Glib::ustring outFile, int model, rtengine::ProgressListener* pl)
 {
     int errcode = 0;
     rtengine::IImagefloat* img = rtengine::processImage(job, errcode, pl, false);
     if (!img) {
         return new Glib::ustring("显影失败");
     }
-    const Glib::ustring msg = AIDenoise::upscaleToTiff(img, outFile, [pl](double p) {
+    const Glib::ustring msg = AIDenoise::upscaleToTiff(img, outFile, model, [pl](double p) {
         if (pl) {
             pl->setProgress(p);
         }
@@ -2410,6 +2417,9 @@ Glib::ustring* aiUpscaleJob(rtengine::ProcessingJob* job, Glib::ustring outFile,
     }
     return new Glib::ustring(msg);
 }
+
+int aiUpscaleModel = 1;
+bool aiUpscaleNoSharpen = true;
 }
 
 void EditorPanel::aiUpscalePressed()
@@ -2417,26 +2427,59 @@ void EditorPanel::aiUpscalePressed()
     if (!ipc || !openThm) {
         return;
     }
-    if (!AIDenoise::upscaleAvailable()) {
+    if (!AIDenoise::upscaleAvailable(0) && !AIDenoise::upscaleAvailable(1)) {
         Gtk::MessageDialog msgd(*parent, M("MAIN_MSG_AIDENOISE_MISSING"), false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
         msgd.run();
         return;
     }
     {
-        Gtk::MessageDialog ask(*parent, M("MAIN_MSG_AIUPSCALE_CONFIRM"), false, Gtk::MESSAGE_QUESTION, Gtk::BUTTONS_OK_CANCEL, true);
+        Gtk::Dialog dlg(M("MAIN_BUTTON_AIUPSCALE"), *parent, true);
+        Gtk::Label lbl(M("MAIN_MSG_AIUPSCALE_CONFIRM"));
+        lbl.set_line_wrap(true);
+        lbl.set_max_width_chars(60);
+        lbl.set_xalign(0.0);
+        Gtk::ComboBoxText modelBox;
+        modelBox.append(M("MAIN_MSG_AIUPSCALE_MODEL_FAITHFUL"));
+        modelBox.append(M("MAIN_MSG_AIUPSCALE_MODEL_CLEAN"));
+        modelBox.set_active(aiUpscaleModel);
+        Gtk::CheckButton sharpChk(M("MAIN_MSG_AIUPSCALE_NOSHARPEN"));
+        sharpChk.set_active(aiUpscaleNoSharpen);
         Gtk::CheckButton gpuChk(M("MAIN_MSG_AI_USEGPU"));
         gpuChk.set_active(aiUseGpu);
-        ask.get_message_area()->pack_start(gpuChk, Gtk::PACK_SHRINK);
-        gpuChk.show();
-        if (ask.run() != Gtk::RESPONSE_OK) {
+        dlg.get_content_area()->set_spacing(8);
+        dlg.get_content_area()->set_border_width(12);
+        dlg.get_content_area()->pack_start(lbl, Gtk::PACK_SHRINK);
+        dlg.get_content_area()->pack_start(modelBox, Gtk::PACK_SHRINK);
+        dlg.get_content_area()->pack_start(sharpChk, Gtk::PACK_SHRINK);
+        dlg.get_content_area()->pack_start(gpuChk, Gtk::PACK_SHRINK);
+        dlg.add_button(M("GENERAL_CANCEL"), Gtk::RESPONSE_CANCEL);
+        dlg.add_button(M("GENERAL_OK"), Gtk::RESPONSE_OK);
+        dlg.set_default_response(Gtk::RESPONSE_OK);
+        dlg.show_all();
+        if (dlg.run() != Gtk::RESPONSE_OK) {
             return;
         }
+        aiUpscaleModel = modelBox.get_active_row_number() == 0 ? 0 : 1;
+        aiUpscaleNoSharpen = sharpChk.get_active();
         aiUseGpu = gpuChk.get_active();
         AIDenoise::setGpuAllowed(aiUseGpu);
+    }
+    if (!AIDenoise::upscaleAvailable(aiUpscaleModel)) {
+        Gtk::MessageDialog msgd(*parent, M("MAIN_MSG_AIDENOISE_MISSING"), false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+        msgd.run();
+        return;
     }
 
     rtengine::procparams::ProcParams pparams;
     ipc->getParams(&pparams);
+    if (aiUpscaleNoSharpen) {
+        // sharpening before enlarging turns into combing and halos; sharpen the result instead
+        pparams.sharpening.enabled = false;
+        pparams.prsharpening.enabled = false;
+        pparams.pdsharpening.enabled = false;
+        pparams.sharpenEdge.enabled = false;
+        pparams.sharpenMicro.enabled = false;
+    }
 
     const Glib::ustring orig = openThm->getFileName();
     const Glib::ustring base = Glib::build_filename(Glib::path_get_dirname(orig), removeExtension(Glib::path_get_basename(orig)));
@@ -2449,7 +2492,7 @@ void EditorPanel::aiUpscalePressed()
     auto* ld = new ProgressConnector<Glib::ustring*>();
     rtengine::ProgressListener* pl = parent->getProgressListener();
     aiUpscaleOutFile = outFile;
-    ld->startFunc(sigc::bind(sigc::ptr_fun(&aiUpscaleJob), job, outFile, pl),
+    ld->startFunc(sigc::bind(sigc::ptr_fun(&aiUpscaleJob), job, outFile, aiUpscaleModel, pl),
                   sigc::bind(sigc::mem_fun(*this, &EditorPanel::idle_aiUpscaleDone), ld));
     aiUpscaleBtn->set_sensitive(false);
 }
