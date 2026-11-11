@@ -171,6 +171,8 @@ public:
     void sendToExternal();
     void sendToExternalChanged(int);
     void sendToExternalPressed();
+    void aiDenoisePressed();
+    bool idle_aiDenoiseDone(ProgressConnector<Glib::ustring> *pc);
     void openNextEditorImage ();
     void openPreviousEditorImage ();
     void syncFileBrowser ();
@@ -307,7 +309,9 @@ private:
     time_t processingStartedTime;
 
     sigc::connection ShowHideSidePanelsconn;
-    sigc::connection autosaveConn;  // pending delayed save of the processing profile
+    sigc::connection autosaveConn;
+    Gtk::Button* aiDenoiseBtn;
+    Glib::ustring aiDenoiseOutFile;
 
     bool isProcessing;
 

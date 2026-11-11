@@ -1014,6 +1014,8 @@ IPTCPANEL_RESET;重置
 IPTCPANEL_RESETHINT;重置为默认配置
 IPTCPANEL_SOURCE;来源
 IPTCPANEL_TITLE;标题
+MAIN_BUTTON_AIDENOISE;AI降噪
+MAIN_BUTTON_AIDENOISE_TOOLTIP;对当前图像显影后用神经网络降噪，并在原图旁保存为 16 位 TIFF。\n可能需要几分钟。
 MAIN_BUTTON_FULLSCREEN;全屏
 MAIN_BUTTON_NAVNEXT_TOOLTIP;跳转到当前编辑图片的下一张图像。\n快捷键：<b>Shift-F4</b>\n\n若要跳转到当前选中图片的下一张图像：\n快捷键： <b>F4</b>
 MAIN_BUTTON_NAVPREV_TOOLTIP;跳转到当前编辑图片的上一张图像。\n快捷键：<b>Shift-F3</b>\n\n若要跳转到当前选中图片的上一张图像：\nShortcut: <b>F3</b>
@@ -1034,6 +1036,8 @@ MAIN_FRAME_PLACES_DEL;移除
 MAIN_FRAME_QUEUE;批处理队列
 MAIN_FRAME_QUEUE_TOOLTIP;处理队列\n快捷键：<b>Ctrl-F3</b>
 MAIN_FRAME_RECENT;最近使用的文件夹
+MAIN_MSG_AIDENOISE_DONE;AI 降噪完成，已保存为：\n%1
+MAIN_MSG_AIDENOISE_MISSING;此安装中缺少 AI 降噪组件或模型文件。
 MAIN_MSG_ALREADYEXISTS;该文件已存在
 MAIN_MSG_CANNOTLOAD;无法加载图片
 MAIN_MSG_CANNOTSAVE;文件保存中出错

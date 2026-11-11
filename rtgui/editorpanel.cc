@@ -24,6 +24,7 @@
 #include "rtengine/array2D.h"
 #include "rtengine/imagesource.h"
 #include "rtengine/iccstore.h"
+#include "ainoise.h"
 #include "batchqueue.h"
 #include "batchqueueentry.h"
 #include "soundman.h"
@@ -918,6 +919,12 @@ EditorPanel::EditorPanel (FilePanel* filePanel)
     );
     send_to_external->show();
 
+    aiDenoiseBtn = Gtk::manage (new Gtk::Button (M ("MAIN_BUTTON_AIDENOISE")));
+    aiDenoiseBtn->set_relief (Gtk::RELIEF_NONE);
+    aiDenoiseBtn->set_tooltip_text (M ("MAIN_BUTTON_AIDENOISE_TOOLTIP"));
+    setExpandAlignProperties (aiDenoiseBtn, false, false, Gtk::ALIGN_CENTER, Gtk::ALIGN_FILL);
+    aiDenoiseBtn->show();
+
     // Status box
     progressLabel = Gtk::manage (new MyProgressBar (300));
     progressLabel->set_show_text (true);
@@ -990,6 +997,7 @@ EditorPanel::EditorPanel (FilePanel* filePanel)
 
     if (!App::get().isGimpPlugin()) {
         iops->attach_next_to (*saveimgas, Gtk::POS_LEFT, 1, 1);
+        iops->attach_next_to (*aiDenoiseBtn, Gtk::POS_LEFT, 1, 1);
     }
 
 
@@ -1084,6 +1092,7 @@ EditorPanel::EditorPanel (FilePanel* filePanel)
     hidehp->signal_toggled().connect ( sigc::mem_fun (*this, &EditorPanel::hideHistoryActivated) );
     tbRightPanel_1->signal_toggled().connect ( sigc::mem_fun (*this, &EditorPanel::tbRightPanel_1_toggled) );
     saveimgas->signal_pressed().connect ( sigc::mem_fun (*this, &EditorPanel::saveAsPressed) );
+    aiDenoiseBtn->signal_clicked().connect ( sigc::mem_fun (*this, &EditorPanel::aiDenoisePressed) );
     queueimg->signal_pressed().connect ( sigc::mem_fun (*this, &EditorPanel::queueImgPressed) );
     send_to_external->signal_changed().connect(sigc::mem_fun(*this, &EditorPanel::sendToExternalChanged));
     send_to_external->signal_pressed().connect(sigc::mem_fun(*this, &EditorPanel::sendToExternalPressed));
@@ -2263,6 +2272,77 @@ void EditorPanel::sendToExternal()
                    sigc::bind (sigc::mem_fun ( *this, &EditorPanel::idle_sendToGimp ), ld, openThm->getFileName() ));
     saveimgas->set_sensitive (false);
     send_to_external->set_sensitive(false);
+}
+
+namespace
+{
+// Runs in a worker thread: develop the image, denoise it and save it as a 16 bit TIFF.
+Glib::ustring aiDenoiseJob(rtengine::ProcessingJob* job, rtengine::ProgressListener* pl, const Glib::ustring& outFile)
+{
+    int errcode = 0;
+    rtengine::IImagefloat* img = rtengine::processImage(job, errcode, pl, false);
+    if (!img) {
+        return "显影失败";
+    }
+    Glib::ustring msg = AIDenoise::run(img, [pl](double p) {
+        if (pl) {
+            pl->setProgress(p);
+        }
+    });
+    if (msg.empty()) {
+        if (img->saveAsTIFF(outFile, 16, false, true)) {
+            msg = "保存文件失败：" + outFile;
+        }
+    }
+    delete img;
+    return msg;
+}
+}
+
+void EditorPanel::aiDenoisePressed()
+{
+    if (!ipc || !openThm) {
+        return;
+    }
+    if (!AIDenoise::compiledIn() || !Glib::file_test(AIDenoise::modelPath(), Glib::FILE_TEST_IS_REGULAR)) {
+        Gtk::MessageDialog msgd(*parent, M("MAIN_MSG_AIDENOISE_MISSING"), false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+        msgd.run();
+        return;
+    }
+
+    rtengine::procparams::ProcParams pparams;
+    ipc->getParams(&pparams);
+
+    const Glib::ustring orig = openThm->getFileName();
+    const Glib::ustring base = Glib::build_filename(Glib::path_get_dirname(orig), removeExtension(Glib::path_get_basename(orig)));
+    Glib::ustring outFile = base + "_AI降噪.tif";
+    for (int i = 1; i < 1000 && Glib::file_test(outFile, Glib::FILE_TEST_EXISTS); ++i) {
+        outFile = Glib::ustring::compose("%1_AI降噪-%2.tif", base, i);
+    }
+
+    rtengine::ProcessingJob* job = rtengine::ProcessingJob::create(ipc->getInitialImage(), pparams);
+    auto* ld = new ProgressConnector<Glib::ustring>();
+    rtengine::ProgressListener* pl = parent->getProgressListener();
+    aiDenoiseOutFile = outFile;
+    ld->startFunc(sigc::bind(sigc::ptr_fun(&aiDenoiseJob), job, pl, outFile),
+                  sigc::bind(sigc::mem_fun(*this, &EditorPanel::idle_aiDenoiseDone), ld));
+    aiDenoiseBtn->set_sensitive(false);
+    saveimgas->set_sensitive(false);
+    send_to_external->set_sensitive(false);
+}
+
+bool EditorPanel::idle_aiDenoiseDone(ProgressConnector<Glib::ustring> *pc)
+{
+    const Glib::ustring msg = pc->returnValue();
+    delete pc;
+    aiDenoiseBtn->set_sensitive(true);
+    saveimgas->set_sensitive(true);
+    send_to_external->set_sensitive(send_to_external->getEntryCount());
+    Gtk::MessageDialog msgd(*parent,
+                            msg.empty() ? Glib::ustring::compose(M("MAIN_MSG_AIDENOISE_DONE"), aiDenoiseOutFile) : msg,
+                            false, msg.empty() ? Gtk::MESSAGE_INFO : Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
+    msgd.run();
+    return false;
 }
 
 void EditorPanel::sendToExternalChanged(int)

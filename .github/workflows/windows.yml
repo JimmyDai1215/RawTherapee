@@ -65,6 +65,7 @@ jobs:
             libiptcdata:p
             libjxl:p
             exiv2:p
+            onnxruntime:p
             ${{matrix.arch == 'x86_64' && '' || 'meson:p'}}
 
       - name: Install SIMDe
@@ -121,6 +122,18 @@ jobs:
           mkdir -p 'build/${{matrix.build_type}}/share'
           echo "Copying Lensfun database to the build directory."
           cp -R "/C/msys2/msys64/${{env.MSYS2_ENV_PREFIX}}/var/lib/lensfun-updates/version_1" 'build/${{matrix.build_type}}/share/lensfun'
+
+      - name: Include AI denoise model
+        run: |
+          export BUILD_DIR="$(pwd)/build/${{matrix.build_type}}"
+          mkdir -p "$BUILD_DIR/models"
+          curl -fsSL -o nafnet.dtmodel 'https://github.com/darktable-org/darktable-ai/releases/download/release-5.6.0/denoise-nafnet.dtmodel'
+          echo "4b5c0b9c2650956eaab9a3fc6ffe3e11d4dc4f55b246b7f3a0d2d72161b6980c  nafnet.dtmodel" | sha256sum -c -
+          unzip -o -q nafnet.dtmodel -d nafnet_x
+          cp nafnet_x/denoise-nafnet/model.onnx "$BUILD_DIR/models/denoise-nafnet.onnx"
+          cp nafnet_x/denoise-nafnet/config.json "$BUILD_DIR/models/denoise-nafnet.json"
+          cp "/C/msys2/msys64/${{env.MSYS2_ENV_PREFIX}}/bin/onnxruntime_providers_shared.dll" "$BUILD_DIR" || true
+          ls -la "$BUILD_DIR/models"
 
       - name: Bundle dependencies
         run: |

@@ -161,6 +161,7 @@ set(NONCLISOURCEFILES
     labgrid.cc
     lockablecolorpicker.cc
     crashlog.cc
+    ainoise.cc
     keyremap.cc
     main.cc
     metadatapanel.cc
@@ -302,6 +303,19 @@ target_link_libraries(rth-cli PRIVATE
     PkgConfig::GTKMM
     ${EXTRA_LIB_RTGUI}
 )
+
+# Optional AI denoise (ONNX Runtime)
+find_package(PkgConfig QUIET)
+if(PkgConfig_FOUND)
+    pkg_check_modules(ONNXRT IMPORTED_TARGET libonnxruntime)
+endif()
+if(ONNXRT_FOUND)
+    message(STATUS "ONNX Runtime found: AI denoise enabled")
+    target_link_libraries(rth PRIVATE PkgConfig::ONNXRT)
+    target_compile_definitions(rth PRIVATE HAVE_ONNXRT)
+else()
+    message(STATUS "ONNX Runtime not found: AI denoise disabled")
+endif()
 
 if(TCMALLOC_FOUND)
     target_link_libraries(rth PRIVATE TCMALLOC::TCMALLOC)
