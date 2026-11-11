@@ -133,6 +133,9 @@ jobs:
           unzip -o -q nafnet.dtmodel -d nafnet_x
           cp nafnet_x/denoise-nafnet/model.onnx "$BUILD_DIR/models/denoise-nafnet.onnx"
           cp nafnet_x/denoise-nafnet/config.json "$BUILD_DIR/models/denoise-nafnet.json"
+          # Windows ships its own, older onnxruntime.dll in System32, which wins over PATH.
+          # Put the MSYS2 one next to the executable (searched first) before ldd runs.
+          cp "/C/msys2/msys64/${{env.MSYS2_ENV_PREFIX}}/bin/onnxruntime.dll" "$BUILD_DIR"
           cp "/C/msys2/msys64/${{env.MSYS2_ENV_PREFIX}}/bin/onnxruntime_providers_shared.dll" "$BUILD_DIR" || true
           ls -la "$BUILD_DIR/models"
 
@@ -143,6 +146,7 @@ jobs:
           echo "Finding DLLs to include."
           DLLS=($(ldd "./build/${{matrix.build_type}}/rawtherapee.exe" | grep "/${{env.MSYS2_ENV_PREFIX}}/bin/" | awk '{print($1)'}))
           echo "Required DLLs are: ${DLLS[*]}"
+          if ldd "./build/${{matrix.build_type}}/rawtherapee.exe" | grep -i 'onnxruntime.dll' | grep -qi '/windows/'; then echo "onnxruntime.dll resolves to the Windows copy"; exit 1; fi
 
           echo "Getting workspace path."
           export BUILD_DIR="$(pwd)/build/${{matrix.build_type}}"
