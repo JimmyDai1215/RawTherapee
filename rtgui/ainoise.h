@@ -21,6 +21,9 @@ bool compiledIn();
 // Full path of the model file that is expected next to the program.
 Glib::ustring modelPath();
 
+// Full path of the ONNX Runtime library that is loaded on demand.
+Glib::ustring runtimePath();
+
 // Denoises the image in place (values 0..65535 as produced by the RawTherapee pipeline).
 // Returns an empty string on success, otherwise a human readable error message.
 // progress is called from the worker thread with a value in 0..1.

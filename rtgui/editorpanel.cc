@@ -2305,7 +2305,7 @@ void EditorPanel::aiDenoisePressed()
     if (!ipc || !openThm) {
         return;
     }
-    if (!AIDenoise::compiledIn() || !Glib::file_test(AIDenoise::modelPath(), Glib::FILE_TEST_IS_REGULAR)) {
+    if (!AIDenoise::compiledIn() || !Glib::file_test(AIDenoise::modelPath(), Glib::FILE_TEST_IS_REGULAR) || !Glib::file_test(AIDenoise::runtimePath(), Glib::FILE_TEST_IS_REGULAR)) {
         Gtk::MessageDialog msgd(*parent, M("MAIN_MSG_AIDENOISE_MISSING"), false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
         msgd.run();
         return;

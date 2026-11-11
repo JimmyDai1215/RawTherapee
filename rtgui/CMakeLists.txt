@@ -304,19 +304,17 @@ target_link_libraries(rth-cli PRIVATE
     ${EXTRA_LIB_RTGUI}
 )
 
-# Optional AI denoise (ONNX Runtime)
-find_package(PkgConfig QUIET)
-if(PkgConfig_FOUND)
-    pkg_check_modules(ONNXRT IMPORTED_TARGET libonnxruntime)
-endif()
-if(ONNXRT_FOUND)
-    message(STATUS "ONNX Runtime found: AI denoise enabled")
-    target_link_libraries(rth PRIVATE PkgConfig::ONNXRT)
+# Optional AI denoise. Only the ONNX Runtime headers are needed at build time;
+# onnxruntime.dll is loaded on demand at run time (Windows only).
+set(ONNXRT_INCLUDE_DIR "" CACHE PATH "Folder with the ONNX Runtime headers (enables AI denoise)")
+if(WIN32 AND ONNXRT_INCLUDE_DIR AND EXISTS "${ONNXRT_INCLUDE_DIR}/onnxruntime_cxx_api.h")
+    message(STATUS "ONNX Runtime headers found: AI denoise enabled")
     target_compile_definitions(rth PRIVATE HAVE_ONNXRT)
-    # The ONNX Runtime headers need C++17 (noexcept in function pointer typedefs)
-    set_source_files_properties(ainoise.cc PROPERTIES COMPILE_OPTIONS "-std=gnu++17")
+    set_source_files_properties(ainoise.cc PROPERTIES
+        COMPILE_OPTIONS "-std=gnu++17"
+        INCLUDE_DIRECTORIES "${ONNXRT_INCLUDE_DIR}")
 else()
-    message(STATUS "ONNX Runtime not found: AI denoise disabled")
+    message(STATUS "ONNX Runtime headers not given: AI denoise disabled")
 endif()
 
 if(TCMALLOC_FOUND)

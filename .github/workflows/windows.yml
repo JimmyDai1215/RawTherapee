@@ -66,7 +66,6 @@ jobs:
             libiptcdata:p
             libjxl:p
             exiv2:p
-            onnxruntime:p
             ${{matrix.arch == 'x86_64' && '' || 'meson:p'}}
 
       - name: Install SIMDe
@@ -84,6 +83,14 @@ jobs:
           meson compile
           echo "Installing SIMDe."
           meson install
+
+      - name: Get ONNX Runtime
+        run: |
+          curl -fsSL -o ort.zip 'https://github.com/microsoft/onnxruntime/releases/download/v1.29.0/onnxruntime-win-x64-1.29.0.zip'
+          echo "c9b4b7086b529ad814f428c1bad028e20a25d7dc0699836775faace4ab5b78b2  ort.zip" | sha256sum -c -
+          unzip -o -q ort.zip -d ort_x
+          mv ort_x/onnxruntime-win-x64-1.29.0 ort
+          echo "ORT_DIR=$(cygpath -m "$(pwd)/ort")" >> "$(cygpath -u $GITHUB_ENV)"
 
       - name: Configure build
         run: |
@@ -104,6 +111,7 @@ jobs:
             -DCACHE_NAME_SUFFIX="$CACHE_SUFFIX" \
             -DPROC_TARGET_NUMBER="1" \
             -DLENSFUNDBDIR="share/lensfun" \
+            -DONNXRT_INCLUDE_DIR="$ORT_DIR/include" \
             -DWITH_SIMDE="${{matrix.arch == 'x86_64' && 'OFF' || 'ON'}}" \
             -S . -B build
 
@@ -133,10 +141,10 @@ jobs:
           unzip -o -q nafnet.dtmodel -d nafnet_x
           cp nafnet_x/denoise-nafnet/model.onnx "$BUILD_DIR/models/denoise-nafnet.onnx"
           cp nafnet_x/denoise-nafnet/config.json "$BUILD_DIR/models/denoise-nafnet.json"
-          # Windows ships its own, older onnxruntime.dll in System32, which wins over PATH.
-          # Put the MSYS2 one next to the executable (searched first) before ldd runs.
-          cp "/C/msys2/msys64/${{env.MSYS2_ENV_PREFIX}}/bin/onnxruntime.dll" "$BUILD_DIR"
-          cp "/C/msys2/msys64/${{env.MSYS2_ENV_PREFIX}}/bin/onnxruntime_providers_shared.dll" "$BUILD_DIR" || true
+          cp ort/lib/onnxruntime.dll ort/lib/onnxruntime_providers_shared.dll "$BUILD_DIR"
+          mkdir -p "$BUILD_DIR/licenses"
+          cp ort/LICENSE "$BUILD_DIR/licenses/onnxruntime-LICENSE.txt"
+          cp ort/ThirdPartyNotices.txt "$BUILD_DIR/licenses/onnxruntime-ThirdPartyNotices.txt"
           ls -la "$BUILD_DIR/models"
 
       - name: Bundle dependencies
@@ -146,7 +154,6 @@ jobs:
           echo "Finding DLLs to include."
           DLLS=($(ldd "./build/${{matrix.build_type}}/rawtherapee.exe" | grep "/${{env.MSYS2_ENV_PREFIX}}/bin/" | awk '{print($1)'}))
           echo "Required DLLs are: ${DLLS[*]}"
-          if ldd "./build/${{matrix.build_type}}/rawtherapee.exe" | grep -i 'onnxruntime.dll' | grep -qi '/windows/'; then echo "onnxruntime.dll resolves to the Windows copy"; exit 1; fi
 
           echo "Getting workspace path."
           export BUILD_DIR="$(pwd)/build/${{matrix.build_type}}"
@@ -194,7 +201,6 @@ jobs:
           echo "Resolving DLL imports statically (ldd runs the program and can return an incomplete list)."
           UCRT_BIN="/C/msys2/msys64/${{env.MSYS2_ENV_PREFIX}}/bin"
           cd "$BUILD_DIR"
-          cp "$UCRT_BIN/onnxruntime_providers_shared.dll" . || true
           QUEUE=(rawtherapee.exe rawtherapee-cli.exe gdbus.exe gspawn-win64-helper.exe gspawn-win64-helper-console.exe *.dll $(find lib -name '*.dll'))
           declare -A SEEN
           while [ ${#QUEUE[@]} -gt 0 ]; do

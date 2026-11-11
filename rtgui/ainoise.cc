@@ -12,7 +12,13 @@
 #include "rtengine/iimage.h"
 
 #ifdef HAVE_ONNXRT
+// The runtime is loaded on demand from the program folder, so RawTherapee itself
+// never depends on it at start-up.
+#define NOMINMAX
+#include <windows.h>
+#define ORT_API_MANUAL_INIT
 #include <onnxruntime_cxx_api.h>
+#undef ORT_API_MANUAL_INIT
 #endif
 
 namespace AIDenoise
@@ -32,6 +38,11 @@ Glib::ustring modelPath()
     return Glib::build_filename(App::get().argv0(), "models", "denoise-nafnet.onnx");
 }
 
+Glib::ustring runtimePath()
+{
+    return Glib::build_filename(App::get().argv0(), "onnxruntime.dll");
+}
+
 #ifdef HAVE_ONNXRT
 
 namespace
@@ -39,6 +50,45 @@ namespace
 constexpr int TILE = 768;      // fixed input size of the model
 constexpr int OVERLAP = 64;    // overlap between neighbouring tiles
 constexpr int STEP = TILE - OVERLAP;
+
+std::wstring toWide(const Glib::ustring& s)
+{
+    gunichar2* w = g_utf8_to_utf16(s.c_str(), -1, nullptr, nullptr, nullptr);
+    if (!w) {
+        return {};
+    }
+    std::wstring res(reinterpret_cast<wchar_t*>(w));
+    g_free(w);
+    return res;
+}
+
+// Loads onnxruntime.dll by its full path (Windows has an older copy of its own in System32
+// that must not be picked up) and initialises the C++ wrapper. Returns an error text or "".
+Glib::ustring loadRuntime()
+{
+    static bool loaded = false;
+    if (loaded) {
+        return {};
+    }
+    const Glib::ustring path = runtimePath();
+    const std::wstring wpath = toWide(path);
+    HMODULE h = wpath.empty() ? nullptr : LoadLibraryExW(wpath.c_str(), nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
+    if (!h) {
+        return Glib::ustring::compose("无法加载 AI 运行库（错误 %1）：%2\n如果文件存在，请安装 Microsoft Visual C++ 运行库。", static_cast<unsigned long>(GetLastError()), path);
+    }
+    typedef const OrtApiBase* (ORT_API_CALL * GetBaseFn)(void);
+    GetBaseFn getBase = reinterpret_cast<GetBaseFn>(reinterpret_cast<void*>(GetProcAddress(h, "OrtGetApiBase")));
+    if (!getBase) {
+        return "AI 运行库文件不正确：" + path;
+    }
+    const OrtApi* api = getBase()->GetApi(ORT_API_VERSION);
+    if (!api) {
+        return "AI 运行库版本不匹配：" + path;
+    }
+    Ort::InitApi(api);
+    loaded = true;
+    return {};
+}
 
 inline int mirror(int v, int n)
 {
@@ -64,23 +114,19 @@ Glib::ustring run(rtengine::IImagefloat* img, const std::function<void(double)>&
         return "找不到降噪模型文件：" + path;
     }
 
+    const Glib::ustring loadErr = loadRuntime();
+    if (!loadErr.empty()) {
+        return loadErr;
+    }
+
     try {
         Ort::Env env(ORT_LOGGING_LEVEL_ERROR, "rawtherapee");
         Ort::SessionOptions so;
         so.SetIntraOpNumThreads(std::max(1u, std::thread::hardware_concurrency()));
         so.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_ALL);
         so.DisableMemPattern();
-#ifdef _WIN32
-        gunichar2* w = g_utf8_to_utf16(path.c_str(), -1, nullptr, nullptr, nullptr);
-        if (!w) {
-            return "模型路径无法转换：" + path;
-        }
-        std::wstring wpath(reinterpret_cast<wchar_t*>(w));
-        g_free(w);
-        Ort::Session session(env, wpath.c_str(), so);
-#else
-        Ort::Session session(env, path.c_str(), so);
-#endif
+        const std::wstring wmodel = toWide(path);
+        Ort::Session session(env, wmodel.c_str(), so);
         Ort::AllocatorWithDefaultOptions alloc;
         auto inName = session.GetInputNameAllocated(0, alloc);
         auto outName = session.GetOutputNameAllocated(0, alloc);
