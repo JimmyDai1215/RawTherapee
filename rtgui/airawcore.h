@@ -84,26 +84,38 @@ bool writeDng(FILE* f, float** rows, const BayerInfo& info, const DngMeta& meta)
 
 // --- object selection (Segment Anything 2.1) -------------------------------------------
 
-struct SegPrompt {
-    float px = 0.f;      // a point on the object, in pixels of the given image
-    float py = 0.f;
-    bool useBox = false; // optional box around the object
-    float bx0 = 0.f, by0 = 0.f, bx1 = 0.f, by1 = 0.f;
+struct SelectRequest {
+    double cx = 0.5, cy = 0.5;     // a point on the object, 0..1 of the full image
+    bool useBox = false;           // optional box around the object, 0..1
+    double bx0 = 0.0, by0 = 0.0, bx1 = 1.0, by1 = 1.0;
 };
 
-// Selects the object under the prompt. rgb is interleaved 8 bit, w x h. prob receives w*h
-// probabilities (0..1). Returns "" or an error text. The networks stay loaded until
-// samRelease() is called.
-#ifdef _WIN32
-std::string samSegment(const wchar_t* encoderPath, const wchar_t* decoderPath, const unsigned char* rgb, int w, int h,
-                       const SegPrompt& prompt, std::vector<float>& prob, float& quality);
-#else
-std::string samSegment(const char* encoderPath, const char* decoderPath, const unsigned char* rgb, int w, int h,
-                       const SegPrompt& prompt, std::vector<float>& prob, float& quality);
-#endif
-void samRelease();
+struct SelectResult {
+    int w = 0, h = 0;                      // mask size (covers the full image)
+    std::vector<unsigned char> mask;       // 0..255
+    double x0 = 0.0, y0 = 0.0, x1 = 1.0, y1 = 1.0;   // bounding box of the selection, 0..1
+    double area = 0.0;                     // selected fraction of the image
+    float quality = 0.f;                   // the network's own estimate, 0..1
+    bool zoomed = false;                   // a zoomed-in pass on a small object was made
+    int tiles = 0;                         // number of tiles refined at higher resolution
+    std::vector<unsigned char> preview;    // RGB preview with the selection in red
+    int previewW = 0, previewH = 0;
+};
 
-// Snaps a soft mask to the edges of the image (guided filter). radius in pixels.
-void guidedRefine(const unsigned char* rgb, int w, int h, std::vector<float>& prob, int radius, float eps);
+// Develops the full frame (w <= 0) or a region of it (in full-image pixels), scaled down so
+// that its longest side is at most maxSide. nativeW/H receive the size before scaling.
+typedef std::function<bool(int x, int y, int w, int h, int maxSide, std::vector<unsigned char>& rgb, int& outW, int& outH, int& nativeW, int& nativeH)> RenderFn;
+
+// Selects the object at the requested point: a first pass over the whole frame, then either
+// a zoomed-in pass (small objects) or a tile-by-tile pass at higher resolution (large
+// regions), edge snapping and removal of specks and pinholes.
+// Returns "" or an error text ("nothing" when no object was found at the point).
+#ifdef _WIN32
+std::string selectObject(const wchar_t* encoderPath, const wchar_t* decoderPath, const RenderFn& render,
+                         const SelectRequest& request, SelectResult& result, const std::function<void(double)>& progress);
+#else
+std::string selectObject(const char* encoderPath, const char* decoderPath, const RenderFn& render,
+                         const SelectRequest& request, SelectResult& result, const std::function<void(double)>& progress);
+#endif
 
 }
