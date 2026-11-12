@@ -361,8 +361,6 @@ void toRgb8(rtengine::IImagefloat* img, int maxSide, std::vector<unsigned char>&
 
 }
 
-}
-
 MaskRender makeRenderer(rtengine::InitialImage* image, const rtengine::procparams::ProcParams& params)
 {
     const rtengine::procparams::ProcParams base = params;
