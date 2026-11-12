@@ -41,6 +41,7 @@ struct LocallabParams {
         bool isvisible;
         Glib::ustring prevMethod; // show, hide
         Glib::ustring shape; // ELI, RECT
+        Glib::ustring aiMask; // file with an AI mask that is multiplied into the shape (empty: none)
         Glib::ustring spotMethod; // norm, exc
         Glib::ustring wavMethod; // D2, D4, D6, D10, D14
         int sensiexclu;

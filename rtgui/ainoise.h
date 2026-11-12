@@ -6,11 +6,17 @@
 #pragma once
 
 #include <functional>
+#include <vector>
 #include <glibmm/ustring.h>
 
 namespace rtengine
 {
 class IImagefloat;
+class InitialImage;
+namespace procparams
+{
+class ProcParams;
+}
 }
 
 namespace AIDenoise
@@ -45,5 +51,38 @@ bool upscaleAvailable(int model);
 // Upscales the developed image (values 0..65535) to twice its size and writes a 16 bit TIFF.
 // Returns an empty string on success, otherwise a human readable error message.
 Glib::ustring upscaleToTiff(rtengine::IImagefloat* img, const Glib::ustring& tifFile, int model, const std::function<void(double)>& progress);
+
+// --- AI mask (object selection) for local adjustments
+
+struct MaskRequest {
+    double centerX = 0.5;   // a point on the object, 0..1 of the full (uncropped) image
+    double centerY = 0.5;
+    bool useBox = false;    // optional box around the object, 0..1
+    double boxX0 = 0.0, boxY0 = 0.0, boxX1 = 1.0, boxY1 = 1.0;
+};
+
+struct MaskResult {
+    double x0 = 0.0, y0 = 0.0, x1 = 1.0, y1 = 1.0;   // bounding box of the selection, 0..1
+    double area = 0.0;                               // selected fraction of the image
+    float quality = 0.f;                             // the network's own estimate, 0..1
+    bool refined = false;                            // a second, zoomed-in pass was made
+    std::vector<unsigned char> preview;              // RGB preview with the selection in red
+    int previewW = 0;
+    int previewH = 0;
+};
+
+// Develops the full frame (w <= 0) or a region of it (in full-image pixels), scaled down so
+// that its longest side is at most maxSide. nativeW/H receive the size before scaling.
+typedef std::function<bool(int x, int y, int w, int h, int maxSide, std::vector<unsigned char>& rgb, int& outW, int& outH, int& nativeW, int& nativeH)> MaskRender;
+
+// A renderer that develops the given image with the given edits (crop, resize, sharpening and
+// local adjustments are switched off).
+MaskRender makeRenderer(rtengine::InitialImage* image, const rtengine::procparams::ProcParams& params);
+
+bool maskAvailable();
+
+// Selects the object at the requested point and writes the mask file.
+// Returns an empty string on success, otherwise a human readable error message.
+Glib::ustring makeMask(const MaskRender& render, const MaskRequest& request, const Glib::ustring& maskFile, MaskResult& result, const std::function<void(double)>& progress);
 
 }

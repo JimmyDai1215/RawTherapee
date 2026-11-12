@@ -156,6 +156,12 @@ jobs:
           unzip -o -q bsrgan.dtmodel -d bsrgan_x
           cp bsrgan_x/upscale-bsrgan/model_x2.onnx "$BUILD_DIR/models/upscale-bsrgan-x2.onnx"
           cp bsrgan_x/upscale-bsrgan/config.json "$BUILD_DIR/models/upscale-bsrgan.json"
+          curl -fsSL -o sam.dtmodel 'https://github.com/darktable-org/darktable-ai/releases/download/release-5.6.0/mask-object-sam21-base-plus.dtmodel'
+          echo "ee9a5d3c86cbc0ef4e4c550070c25af224a44ec80c8bade4419383b7aab890cb  sam.dtmodel" | sha256sum -c -
+          unzip -o -q sam.dtmodel -d sam_x
+          cp sam_x/mask-object-sam21-base-plus/encoder.onnx "$BUILD_DIR/models/sam21-base-plus-encoder.onnx"
+          cp sam_x/mask-object-sam21-base-plus/decoder.onnx "$BUILD_DIR/models/sam21-base-plus-decoder.onnx"
+          cp sam_x/mask-object-sam21-base-plus/config.json "$BUILD_DIR/models/sam21-base-plus.json"
           cp ort/runtimes/win-x64/native/onnxruntime.dll ort/runtimes/win-x64/native/onnxruntime_providers_shared.dll "$BUILD_DIR"
           cp dml/bin/x64-win/DirectML.dll "$BUILD_DIR"
           cp ort/LICENSE "$BUILD_DIR/licenses/onnxruntime-LICENSE.txt"
@@ -254,6 +260,10 @@ jobs:
           "$BUILD_DIR/rawtherapee-cli.exe" -q -Y -t -b8 -o dev_dng_auto.tif -c sample_AI_auto.dng
           time "$BUILD_DIR/rawtherapee-cli.exe" --ai-upscale sample.NEF up2x.tif 1800 1100 700 600
           RT_AI_UPSCALE_MODEL=bsrgan "$BUILD_DIR/rawtherapee-cli.exe" --ai-upscale sample.NEF up2x_bsrgan.tif 1800 1100 700 600
+          # AI mask: select the Earth in the upper half, then develop with and without a spot that uses the mask
+          time "$BUILD_DIR/rawtherapee-cli.exe" --ai-mask sample.NEF 0.5 0.22 "$(cygpath -m "$(pwd)")/earth.rtmask"
+          "$BUILD_DIR/rawtherapee-cli.exe" -q -Y -t -b8 -p earth.rtmask.off.pp3 -o mask_off.tif -c sample.NEF
+          "$BUILD_DIR/rawtherapee-cli.exe" -q -Y -t -b8 -p earth.rtmask.pp3 -o mask_on.tif -c sample.NEF
           ls -la
 
       - name: Compare AI denoise result with the original
@@ -264,6 +274,7 @@ jobs:
           python .github/aitest_compare.py aitest/dev_nef.tif aitest/dev_dng_auto.tif
           python .github/aitest_upscale.py aitest/up2x.tif 700 600
           python .github/aitest_upscale.py aitest/up2x_bsrgan.tif 700 600
+          python .github/aitest_mask.py aitest/mask_off.tif aitest/mask_on.tif aitest/earth.rtmask.pgm
 
       - name: Create installer
         if: ${{matrix.build_type == 'release'}}

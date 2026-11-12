@@ -173,6 +173,8 @@ public:
     void sendToExternalPressed();
     void aiDenoisePressed();
     void aiUpscalePressed();
+    void aiMaskPressed();
+    bool idle_aiMaskDone(ProgressConnector<void*> *pc);
     bool idle_aiUpscaleDone(ProgressConnector<Glib::ustring*> *pc);
     bool idle_aiDenoiseDone(ProgressConnector<Glib::ustring*> *pc);
     void openNextEditorImage ();
@@ -314,6 +316,7 @@ private:
     sigc::connection autosaveConn;
     Gtk::Button* aiDenoiseBtn;
     Gtk::Button* aiUpscaleBtn;
+    Gtk::Button* aiMaskBtn;
     Glib::ustring aiUpscaleOutFile;
     Glib::ustring aiDenoiseOutFile;
 

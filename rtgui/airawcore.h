@@ -10,6 +10,7 @@
 #include <cstdio>
 #include <functional>
 #include <string>
+#include <vector>
 
 namespace AIRawCore
 {
@@ -80,5 +81,29 @@ std::string upscale2x(const char* modelPath, const float* const* r, const float*
 
 // Writes an uncompressed 16 bit CFA DNG. Returns false on a write error.
 bool writeDng(FILE* f, float** rows, const BayerInfo& info, const DngMeta& meta);
+
+// --- object selection (Segment Anything 2.1) -------------------------------------------
+
+struct SegPrompt {
+    float px = 0.f;      // a point on the object, in pixels of the given image
+    float py = 0.f;
+    bool useBox = false; // optional box around the object
+    float bx0 = 0.f, by0 = 0.f, bx1 = 0.f, by1 = 0.f;
+};
+
+// Selects the object under the prompt. rgb is interleaved 8 bit, w x h. prob receives w*h
+// probabilities (0..1). Returns "" or an error text. The networks stay loaded until
+// samRelease() is called.
+#ifdef _WIN32
+std::string samSegment(const wchar_t* encoderPath, const wchar_t* decoderPath, const unsigned char* rgb, int w, int h,
+                       const SegPrompt& prompt, std::vector<float>& prob, float& quality);
+#else
+std::string samSegment(const char* encoderPath, const char* decoderPath, const unsigned char* rgb, int w, int h,
+                       const SegPrompt& prompt, std::vector<float>& prob, float& quality);
+#endif
+void samRelease();
+
+// Snaps a soft mask to the edges of the image (guided filter). radius in pixels.
+void guidedRefine(const unsigned char* rgb, int w, int h, std::vector<float>& prob, int radius, float eps);
 
 }

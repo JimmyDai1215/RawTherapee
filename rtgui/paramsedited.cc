@@ -4126,6 +4126,7 @@ void ParamsEdited::combine(rtengine::procparams::ProcParams& toEdit, const rteng
 
         if (locallab.spots.at(i).shape) {
             toEdit.locallab.spots.at(i).shape = mods.locallab.spots.at(i).shape;
+            toEdit.locallab.spots.at(i).aiMask = mods.locallab.spots.at(i).aiMask;
         }
 
         if (locallab.spots.at(i).spotMethod) {

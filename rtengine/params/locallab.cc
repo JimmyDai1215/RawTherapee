@@ -122,6 +122,7 @@ LocallabParams::LocallabSpot::LocallabSpot() :
     isvisible(true),
     prevMethod("hide"),
     shape("ELI"),
+    aiMask(""),
     spotMethod("norm"),
     wavMethod("D6"),
     sensiexclu(12),
@@ -2104,6 +2105,7 @@ bool LocallabParams::LocallabSpot::operator ==(const LocallabSpot& other) const
         && isvisible == other.isvisible
         && prevMethod == other.prevMethod
         && shape == other.shape
+        && aiMask == other.aiMask
         && spotMethod == other.spotMethod
         && wavMethod == other.wavMethod
         && sensiexclu == other.sensiexclu
@@ -3036,6 +3038,10 @@ void LoadUtil::controlSpotSettings()
     assignFromKeyfile(keyFile, "Locallab", "Isvisible_" + index_str, spot.isvisible, spotEdited.isvisible);
     assignFromKeyfile(keyFile, "Locallab", "PrevMethod_" + index_str, spot.prevMethod, spotEdited.prevMethod);
     assignFromKeyfile(keyFile, "Locallab", "Shape_" + index_str, spot.shape, spotEdited.shape);
+    {
+        bool aiMaskEdited = false;
+        assignFromKeyfile(keyFile, "Locallab", "AiMask_" + index_str, spot.aiMask, aiMaskEdited);
+    }
     assignFromKeyfile(keyFile, "Locallab", "SpotMethod_" + index_str, spot.spotMethod, spotEdited.spotMethod);
     assignFromKeyfile(keyFile, "Locallab", "wavMethod_" + index_str, spot.wavMethod, spotEdited.wavMethod);
     assignFromKeyfile(keyFile, "Locallab", "SensiExclu_" + index_str, spot.sensiexclu, spotEdited.sensiexclu);
@@ -4277,6 +4283,9 @@ void SaveUtil::controlSpotSettings()
     saveToKeyfile(!pedited || spot_edited->isvisible, "Locallab", "Isvisible_" + index_str, spot.isvisible, keyFile);
     saveToKeyfile(!pedited || spot_edited->prevMethod, "Locallab", "PrevMethod_" + index_str, spot.prevMethod, keyFile);
     saveToKeyfile(!pedited || spot_edited->shape, "Locallab", "Shape_" + index_str, spot.shape, keyFile);
+    if (!spot.aiMask.empty()) {
+        saveToKeyfile(!pedited || spot_edited->shape, "Locallab", "AiMask_" + index_str, spot.aiMask, keyFile);
+    }
     saveToKeyfile(!pedited || spot_edited->spotMethod, "Locallab", "SpotMethod_" + index_str, spot.spotMethod, keyFile);
     saveToKeyfile(!pedited || spot_edited->wavMethod, "Locallab", "WavMethod_" + index_str, spot.wavMethod, keyFile);
     saveToKeyfile(!pedited || spot_edited->sensiexclu, "Locallab", "SensiExclu_" + index_str, spot.sensiexclu, keyFile);

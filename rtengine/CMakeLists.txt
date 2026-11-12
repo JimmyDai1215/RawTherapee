@@ -61,6 +61,7 @@ set(RTENGINESOURCEFILES
     imageio.cc
     imagesource.cc
     improccoordinator.cc
+    aimask.cc
     improcfun.cc
     impulse_denoise.cc
     init.cc

@@ -135,6 +135,17 @@ public:
         g_lastDeviation = gpuDeviation().count(key_) ? gpuDeviation()[key_] : -1.0;
     }
 
+    // Outputs of the last run (valid until the next call).
+    Ort::Value& output(size_t i)
+    {
+        return outs_[i];
+    }
+
+    Ort::Env& env()
+    {
+        return env_;
+    }
+
     // Runs the network. The returned data stays valid until the next call.
     const float* run(std::vector<float>& in)
     {
@@ -209,15 +220,21 @@ private:
     {
         Ort::AllocatorWithDefaultOptions alloc;
         inName_ = session_->GetInputNameAllocated(0, alloc).get();
-        outName_ = session_->GetOutputNameAllocated(0, alloc).get();
+        outNames_.clear();
+        for (size_t i = 0; i < session_->GetOutputCount(); ++i) {
+            outNames_.push_back(session_->GetOutputNameAllocated(i, alloc).get());
+        }
     }
 
     std::vector<Ort::Value> runOn(Ort::Session& session, std::vector<float>& in)
     {
         const char* inNames[] = { inName_.c_str() };
-        const char* outNames[] = { outName_.c_str() };
+        std::vector<const char*> outNames;
+        for (const std::string& n : outNames_) {
+            outNames.push_back(n.c_str());
+        }
         Ort::Value input = Ort::Value::CreateTensor<float>(mem_, in.data(), in.size(), shape_, 4);
-        return session.Run(Ort::RunOptions{nullptr}, inNames, &input, 1, outNames, 1);
+        return session.Run(Ort::RunOptions{nullptr}, inNames, &input, 1, outNames.data(), outNames.size());
     }
 
     // Mean absolute difference relative to the mean magnitude, in percent; negative if unusable.
@@ -246,7 +263,8 @@ private:
     Ort::MemoryInfo mem_;
     std::unique_ptr<Ort::Session> session_;
     std::vector<Ort::Value> outs_;
-    std::string inName_, outName_;
+    std::string inName_;
+    std::vector<std::string> outNames_;
     int64_t shape_[4];
     bool gpu_ = false;
 };
@@ -978,6 +996,344 @@ std::string upscale2x(const char* modelPath, const float* const* r, const float*
 std::string upscale2x(const wchar_t*, const float* const*, const float* const*, const float* const*, int, int, FILE*, const std::string&, const std::string&, const std::function<void(double)>&)
 #else
 std::string upscale2x(const char*, const float* const*, const float* const*, const float* const*, int, int, FILE*, const std::string&, const std::string&, const std::function<void(double)>&)
+#endif
+{
+    return "built without ONNX Runtime";
+}
+
+#endif
+
+
+// ---------------------------------------------------------------------------------------
+// Object selection with Segment Anything 2.1
+
+namespace
+{
+
+void boxBlur(std::vector<float>& a, int w, int h, int r)
+{
+    if (r < 1) {
+        return;
+    }
+    std::vector<float> tmp(a.size());
+    // horizontal
+    for (int y = 0; y < h; ++y) {
+        const float* src = a.data() + static_cast<size_t>(y) * w;
+        float* dst = tmp.data() + static_cast<size_t>(y) * w;
+        double sum = 0.0;
+        int count = 0;
+        for (int x = 0; x <= std::min(r, w - 1); ++x) {
+            sum += src[x];
+            ++count;
+        }
+        for (int x = 0; x < w; ++x) {
+            dst[x] = static_cast<float>(sum / count);
+            const int add = x + r + 1;
+            const int rem = x - r;
+            if (add < w) {
+                sum += src[add];
+                ++count;
+            }
+            if (rem >= 0) {
+                sum -= src[rem];
+                --count;
+            }
+        }
+    }
+    // vertical
+    std::vector<double> sum(w);
+    std::vector<int> count(w);
+    std::fill(sum.begin(), sum.end(), 0.0);
+    std::fill(count.begin(), count.end(), 0);
+    for (int y = 0; y <= std::min(r, h - 1); ++y) {
+        const float* src = tmp.data() + static_cast<size_t>(y) * w;
+        for (int x = 0; x < w; ++x) {
+            sum[x] += src[x];
+            ++count[x];
+        }
+    }
+    for (int y = 0; y < h; ++y) {
+        float* dst = a.data() + static_cast<size_t>(y) * w;
+        for (int x = 0; x < w; ++x) {
+            dst[x] = static_cast<float>(sum[x] / count[x]);
+        }
+        const int add = y + r + 1;
+        const int rem = y - r;
+        if (add < h) {
+            const float* src = tmp.data() + static_cast<size_t>(add) * w;
+            for (int x = 0; x < w; ++x) {
+                sum[x] += src[x];
+                ++count[x];
+            }
+        }
+        if (rem >= 0) {
+            const float* src = tmp.data() + static_cast<size_t>(rem) * w;
+            for (int x = 0; x < w; ++x) {
+                sum[x] -= src[x];
+                --count[x];
+            }
+        }
+    }
+}
+
+}
+
+void guidedRefine(const unsigned char* rgb, int w, int h, std::vector<float>& prob, int radius, float eps)
+{
+    const size_t n = static_cast<size_t>(w) * h;
+    if (prob.size() != n || radius < 1) {
+        return;
+    }
+    std::vector<float> I(n), mI, mp, mIp(n), mII(n);
+    for (size_t i = 0; i < n; ++i) {
+        I[i] = (0.299f * rgb[3 * i] + 0.587f * rgb[3 * i + 1] + 0.114f * rgb[3 * i + 2]) * (1.f / 255.f);
+        mIp[i] = I[i] * prob[i];
+        mII[i] = I[i] * I[i];
+    }
+    mI = I;
+    mp = prob;
+    boxBlur(mI, w, h, radius);
+    boxBlur(mp, w, h, radius);
+    boxBlur(mIp, w, h, radius);
+    boxBlur(mII, w, h, radius);
+    // a and b of the local linear model; reuse mIp for a and mII for b
+    for (size_t i = 0; i < n; ++i) {
+        const float cov = mIp[i] - mI[i] * mp[i];
+        const float var = mII[i] - mI[i] * mI[i];
+        const float a = cov / (var + eps);
+        mIp[i] = a;
+        mII[i] = mp[i] - a * mI[i];
+    }
+    boxBlur(mIp, w, h, radius);
+    boxBlur(mII, w, h, radius);
+    for (size_t i = 0; i < n; ++i) {
+        prob[i] = std::min(1.f, std::max(0.f, mIp[i] * I[i] + mII[i]));
+    }
+}
+
+#ifdef HAVE_ONNXRT
+
+namespace
+{
+
+constexpr int SAM_SIZE = 1024;
+constexpr int SAM_MASK = 256;
+
+std::unique_ptr<Net> g_samEncoder;
+std::unique_ptr<Ort::Session> g_samDecoder;
+Net::PathString g_samEncoderPath, g_samDecoderPath;
+
+}
+
+void samRelease()
+{
+    g_samDecoder.reset();
+    g_samEncoder.reset();
+}
+
+#ifdef _WIN32
+std::string samSegment(const wchar_t* encoderPath, const wchar_t* decoderPath, const unsigned char* rgb, int w, int h,
+                       const SegPrompt& prompt, std::vector<float>& prob, float& quality)
+#else
+std::string samSegment(const char* encoderPath, const char* decoderPath, const unsigned char* rgb, int w, int h,
+                       const SegPrompt& prompt, std::vector<float>& prob, float& quality)
+#endif
+{
+    quality = 0.f;
+    if (!rgb || w < 16 || h < 16) {
+        return "image too small";
+    }
+
+    try {
+        if (!g_samEncoder || g_samEncoderPath != encoderPath || g_samDecoderPath != decoderPath) {
+            samRelease();
+            g_samEncoder.reset(new Net(encoderPath, 3, SAM_SIZE, "sam21-encoder"));
+            Ort::SessionOptions so;
+            so.SetGraphOptimizationLevel(GraphOptimizationLevel::ORT_ENABLE_ALL);
+            so.SetIntraOpNumThreads(static_cast<int>(std::max(1u, std::thread::hardware_concurrency())));
+            g_samDecoder.reset(new Ort::Session(g_samEncoder->env(), decoderPath, so));
+            g_samEncoderPath = encoderPath;
+            g_samDecoderPath = decoderPath;
+        }
+
+        // ---- image -> 1024x1024, longest side fitted, rest padded with zeros
+        const float scale = static_cast<float>(SAM_SIZE) / std::max(w, h);
+        const int nw = std::min(SAM_SIZE, static_cast<int>(w * scale + 0.5f));
+        const int nh = std::min(SAM_SIZE, static_cast<int>(h * scale + 0.5f));
+        const size_t plane = static_cast<size_t>(SAM_SIZE) * SAM_SIZE;
+        std::vector<float> in(plane * 3, 0.f);
+        static const float mean[3] = { 123.675f, 116.28f, 103.53f };
+        static const float stdv[3] = { 58.395f, 57.12f, 57.375f };
+        const float inv = 1.f / scale;   // source pixels per target pixel (>= 1 when shrinking)
+        for (int y = 0; y < nh; ++y) {
+            // area average over the source footprint of this target pixel
+            const int sy0 = std::min(h - 1, static_cast<int>(y * inv));
+            const int sy1 = std::min(h, std::max(sy0 + 1, static_cast<int>((y + 1) * inv)));
+            for (int x = 0; x < nw; ++x) {
+                const int sx0 = std::min(w - 1, static_cast<int>(x * inv));
+                const int sx1 = std::min(w, std::max(sx0 + 1, static_cast<int>((x + 1) * inv)));
+                unsigned sum[3] = { 0, 0, 0 };
+                for (int sy = sy0; sy < sy1; ++sy) {
+                    const unsigned char* p = rgb + (static_cast<size_t>(sy) * w + sx0) * 3;
+                    for (int sx = sx0; sx < sx1; ++sx, p += 3) {
+                        sum[0] += p[0];
+                        sum[1] += p[1];
+                        sum[2] += p[2];
+                    }
+                }
+                const float cnt = static_cast<float>((sy1 - sy0) * (sx1 - sx0));
+                const size_t o = static_cast<size_t>(y) * SAM_SIZE + x;
+                for (int c = 0; c < 3; ++c) {
+                    in[c * plane + o] = (sum[c] / cnt - mean[c]) / stdv[c];
+                }
+            }
+        }
+
+        g_samEncoder->run(in);
+
+        // ---- decoder
+        std::vector<float> coords, labels;
+        coords.push_back(prompt.px * scale);
+        coords.push_back(prompt.py * scale);
+        labels.push_back(1.f);
+        if (prompt.useBox) {
+            coords.push_back(prompt.bx0 * scale);
+            coords.push_back(prompt.by0 * scale);
+            labels.push_back(2.f);
+            coords.push_back(prompt.bx1 * scale);
+            coords.push_back(prompt.by1 * scale);
+            labels.push_back(3.f);
+        } else {
+            coords.push_back(0.f);
+            coords.push_back(0.f);
+            labels.push_back(-1.f);
+        }
+        const int64_t npts = static_cast<int64_t>(labels.size());
+        std::vector<float> maskIn(static_cast<size_t>(SAM_MASK) * SAM_MASK, 0.f);
+        float hasMask = 0.f;
+
+        Ort::MemoryInfo mem = Ort::MemoryInfo::CreateCpu(OrtArenaAllocator, OrtMemTypeDefault);
+        Ort::AllocatorWithDefaultOptions alloc;
+        const int64_t coordShape[3] = { 1, npts, 2 };
+        const int64_t labelShape[2] = { 1, npts };
+        const int64_t maskShape[4] = { 1, 1, SAM_MASK, SAM_MASK };
+        const int64_t oneShape[1] = { 1 };
+
+        // the decoder inputs are matched by name; the encoder outputs carry the same names
+        std::vector<std::string> inNames;
+        std::vector<Ort::Value> inValues;
+        const size_t nIn = g_samDecoder->GetInputCount();
+        Ort::AllocatorWithDefaultOptions alloc2;
+        std::vector<std::string> encNames;
+        // encoder output order: high_res_feats_0, high_res_feats_1, image_embed (looked up by shape below)
+        for (size_t i = 0; i < nIn; ++i) {
+            const std::string name = g_samDecoder->GetInputNameAllocated(i, alloc2).get();
+            inNames.push_back(name);
+            if (name == "point_coords") {
+                inValues.push_back(Ort::Value::CreateTensor<float>(mem, coords.data(), coords.size(), coordShape, 3));
+            } else if (name == "point_labels") {
+                inValues.push_back(Ort::Value::CreateTensor<float>(mem, labels.data(), labels.size(), labelShape, 2));
+            } else if (name == "mask_input") {
+                inValues.push_back(Ort::Value::CreateTensor<float>(mem, maskIn.data(), maskIn.size(), maskShape, 4));
+            } else if (name == "has_mask_input") {
+                inValues.push_back(Ort::Value::CreateTensor<float>(mem, &hasMask, 1, oneShape, 1));
+            } else {
+                // a feature map: take the encoder output with the same channel count
+                const std::vector<int64_t> want = g_samDecoder->GetInputTypeInfo(i).GetTensorTypeAndShapeInfo().GetShape();
+                bool found = false;
+                for (size_t k = 0; k < 3 && !found; ++k) {
+                    Ort::Value& ev = g_samEncoder->output(k);
+                    const std::vector<int64_t> have = ev.GetTensorTypeAndShapeInfo().GetShape();
+                    if (have.size() == 4 && want.size() == 4 && have[1] == want[1] && have[2] == want[2]) {
+                        size_t count = 1;
+                        for (int64_t d : have) {
+                            count *= static_cast<size_t>(d);
+                        }
+                        inValues.push_back(Ort::Value::CreateTensor<float>(mem, ev.GetTensorMutableData<float>(), count, have.data(), have.size()));
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    return "the selection networks do not fit together";
+                }
+            }
+        }
+        std::vector<const char*> inPtrs;
+        for (const std::string& n : inNames) {
+            inPtrs.push_back(n.c_str());
+        }
+        std::vector<std::string> outNames;
+        for (size_t i = 0; i < g_samDecoder->GetOutputCount(); ++i) {
+            outNames.push_back(g_samDecoder->GetOutputNameAllocated(i, alloc2).get());
+        }
+        std::vector<const char*> outPtrs;
+        for (const std::string& n : outNames) {
+            outPtrs.push_back(n.c_str());
+        }
+        std::vector<Ort::Value> outs = g_samDecoder->Run(Ort::RunOptions{nullptr}, inPtrs.data(), inValues.data(), inValues.size(), outPtrs.data(), outPtrs.size());
+        if (outs.size() < 2) {
+            return "unexpected output of the selection network";
+        }
+        const std::vector<int64_t> ms = outs[0].GetTensorTypeAndShapeInfo().GetShape();
+        const size_t nIou = outs[1].GetTensorTypeAndShapeInfo().GetElementCount();
+        if (ms.size() != 4 || ms[2] != SAM_MASK || ms[3] != SAM_MASK || ms[1] < 1 || nIou < static_cast<size_t>(ms[1])) {
+            return "unexpected output of the selection network";
+        }
+        const float* iou = outs[1].GetTensorData<float>();
+        int best = 0;
+        for (int m = 1; m < ms[1]; ++m) {
+            if (iou[m] > iou[best]) {
+                best = m;
+            }
+        }
+        quality = iou[best];
+        const float* logit = outs[0].GetTensorData<float>() + static_cast<size_t>(best) * SAM_MASK * SAM_MASK;
+
+        // ---- 256x256 logits (covering the padded 1024 square) -> probabilities at w x h
+        prob.assign(static_cast<size_t>(w) * h, 0.f);
+        const float toMask = scale * SAM_MASK / SAM_SIZE;
+        for (int y = 0; y < h; ++y) {
+            float fy = (y + 0.5f) * toMask - 0.5f;
+            fy = std::min(static_cast<float>(SAM_MASK) - 1.001f, std::max(0.f, fy));
+            const int y0 = static_cast<int>(fy);
+            const float wy = fy - y0;
+            float* dst = prob.data() + static_cast<size_t>(y) * w;
+            for (int x = 0; x < w; ++x) {
+                float fx = (x + 0.5f) * toMask - 0.5f;
+                fx = std::min(static_cast<float>(SAM_MASK) - 1.001f, std::max(0.f, fx));
+                const int x0 = static_cast<int>(fx);
+                const float wx = fx - x0;
+                const float* p = logit + static_cast<size_t>(y0) * SAM_MASK + x0;
+                const float top = p[0] + (p[1] - p[0]) * wx;
+                const float bottom = p[SAM_MASK] + (p[SAM_MASK + 1] - p[SAM_MASK]) * wx;
+                const float v = top + (bottom - top) * wy;
+                dst[x] = 1.f / (1.f + std::exp(-std::min(30.f, std::max(-30.f, v))));
+            }
+        }
+    } catch (const Ort::Exception& e) {
+        samRelease();
+        return std::string("ONNX Runtime: ") + e.what();
+    } catch (const std::bad_alloc&) {
+        samRelease();
+        return "out of memory";
+    } catch (const std::exception& e) {
+        samRelease();
+        return e.what();
+    }
+
+    return {};
+}
+
+#else
+
+void samRelease()
+{
+}
+
+#ifdef _WIN32
+std::string samSegment(const wchar_t*, const wchar_t*, const unsigned char*, int, int, const SegPrompt&, std::vector<float>&, float&)
+#else
+std::string samSegment(const char*, const char*, const unsigned char*, int, int, const SegPrompt&, std::vector<float>&, float&)
 #endif
 {
     return "built without ONNX Runtime";

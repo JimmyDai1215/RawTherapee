@@ -24,6 +24,8 @@
 #include <fftw3.h>
 
 #include "improcfun.h"
+#include "aimask.h"
+#include <memory>
 #include "colortemp.h"
 #include "curves.h"
 #include "gauss.h"
@@ -808,6 +810,9 @@ struct local_params {
     int war;
     float adjch;
     int shapmet;
+    std::shared_ptr<const rtengine::AiMask> aiMask;
+    float aiW;
+    float aiH;
     int edgwmet;
     int neiwmet;
     bool enaColorMask;
@@ -1980,9 +1985,20 @@ static void calcLocalParams(int sp, int oW, int oH,  const LocallabParams& local
     lp.mCjz = locallab.spots.at(sp).claricresjz / 100.0;
     lp.softrjz = locallab.spots.at(sp).clarisoftjz;
 
+
+    // AI mask: the mask decides what is selected, so the colour-difference scope is opened fully
+    lp.aiMask = locallab.spots.at(sp).aiMask.empty() ? std::shared_ptr<const rtengine::AiMask>() : rtengine::loadAiMask(locallab.spots.at(sp).aiMask);
+    lp.aiW = std::max(1, w);
+    lp.aiH = std::max(1, h);
+
+    if (lp.aiMask) {
+        lp.sens = lp.sensh = lp.senscb = lp.sensbn = lp.senstm = lp.sensex = lp.sensden = 100;
+        lp.senscolor = lp.senshs = lp.senslc = lp.senssf = lp.senssha = lp.sensv = 100;
+        lp.sensilog = lp.sensicie = lp.sensimas = 100;
+    }
 }
 
-static void calcTransitionrect(const float lox, const float loy, const float ach, const local_params& lp, int &zone, float &localFactor)
+static void calcTransitionrectBase(const float lox, const float loy, const float ach, const local_params& lp, int &zone, float &localFactor)
 {
     zone = 0;
 
@@ -2021,7 +2037,7 @@ static void calcTransitionrect(const float lox, const float loy, const float ach
     }
 }
 
-static void calcTransition(const float lox, const float loy, const float ach, const local_params& lp, int &zone, float &localFactor)
+static void calcTransitionBase(const float lox, const float loy, const float ach, const local_params& lp, int &zone, float &localFactor)
 {
     // returns the zone (0 = outside selection, 1 = transition zone between outside and inside selection, 2 = inside selection)
     // and a factor to calculate the transition in case zone == 1
@@ -2078,6 +2094,39 @@ static void calcTransition(const float lox, const float loy, const float ach, co
         }
     }
 }
+
+// --- AI mask: an optional raster mask multiplied into the spot shape -------------------
+static inline void applyAiMask(const float lox, const float loy, const local_params& lp, int &zone, float &localFactor)
+{
+    if (zone == 0 || !lp.aiMask) {
+        return;
+    }
+
+    const float m = lp.aiMask->sample((lox + 0.5f) / lp.aiW, (loy + 0.5f) / lp.aiH);
+    const float f = (zone == 2 ? 1.f : localFactor) * m;
+
+    if (f < 0.004f) {
+        zone = 0;
+    } else if (f > 0.996f) {
+        zone = 2;
+    } else {
+        zone = 1;
+        localFactor = f;
+    }
+}
+
+static void calcTransitionrect(const float lox, const float loy, const float ach, const local_params& lp, int &zone, float &localFactor)
+{
+    calcTransitionrectBase(lox, loy, ach, lp, zone, localFactor);
+    applyAiMask(lox, loy, lp, zone, localFactor);
+}
+
+static void calcTransition(const float lox, const float loy, const float ach, const local_params& lp, int &zone, float &localFactor)
+{
+    calcTransitionBase(lox, loy, ach, lp, zone, localFactor);
+    applyAiMask(lox, loy, lp, zone, localFactor);
+}
+
 //sigmoid
 /* C -*
  * 

@@ -1872,6 +1872,8 @@ IPTCPANEL_TRANSREFERENCE;Job ID
 IPTCPANEL_TRANSREFERENCEHINT;Enter a number or identifier needed for workflow control or tracking.
 MAIN_BUTTON_AIDENOISE;AI denoise
 MAIN_BUTTON_AIDENOISE_TOOLTIP;Denoise the raw data of the current photo with a neural network and save it as a new raw file (DNG) next to the original.\nYour current edits are copied to the new file.
+MAIN_BUTTON_AIMASK;AI mask
+MAIN_BUTTON_AIMASK_TOOLTIP;Select the object under the centre of the current local adjustment spot with a neural network and use that selection as the shape of the spot.
 MAIN_BUTTON_AIUPSCALE;AI upscale 2x
 MAIN_BUTTON_AIUPSCALE_TOOLTIP;Develop the current photo with your edits and enlarge it to twice the width and height with a neural network. The result is saved as a 16-bit TIFF next to the original.
 MAIN_BUTTON_FULLSCREEN;Fullscreen
@@ -1899,6 +1901,14 @@ MAIN_FRAME_RECENT;Recent Folders
 MAIN_MSG_AIDENOISE_DONE;AI denoise finished. Saved as a new raw file:\n%1\n\nYour current edits were copied to it. Open it from the file browser to continue editing.
 MAIN_MSG_AIDENOISE_MISSING;The AI denoise component or its model file is missing from this installation.
 MAIN_MSG_AIDENOISE_STRENGTH;Denoise strength (%). 100 removes the most noise; lower values keep some of the original grain.
+MAIN_MSG_AIMASK_APPLY;Use this selection
+MAIN_MSG_AIMASK_CHANGED;The spots were changed in the meantime; the mask was not applied.
+MAIN_MSG_AIMASK_CLEAR;Remove the mask
+MAIN_MSG_AIMASK_INTRO;The object under the centre of the spot "%1" will be selected, and the selection replaces the shape of the spot. All local adjustment tools of that spot then act on the selection only.
+MAIN_MSG_AIMASK_NOSPOT;Add a spot in Local Adjustments first and drag its centre onto the object you want to select. Then press this button again.
+MAIN_MSG_AIMASK_OUTSIDE;The centre of the spot is outside the image.
+MAIN_MSG_AIMASK_RESULT;Selected: %1 % of the image. Confidence of the network: %2 %.\nIf this is not what you wanted, cancel, move the centre of the spot and try again.
+MAIN_MSG_AIMASK_USEBOX;Also use the frame of the spot as a hint (drag the frame roughly around the object first)
 MAIN_MSG_AIUPSCALE_CONFIRM;AI upscale develops the photo with the current edits (including the crop) and enlarges it to 2x.\n\nWith the graphics card this should take a few minutes at most; on the CPU a 24 megapixel photo takes 15 minutes or more.
 MAIN_MSG_AIUPSCALE_DONE;AI upscale finished. Saved as:\n%1
 MAIN_MSG_AIUPSCALE_MODEL_CLEAN;Clean and crisp (BSRGAN): smooth surfaces, sharp edges, may invent detail

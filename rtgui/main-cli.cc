@@ -34,7 +34,9 @@
 #include "rtengine/procparams.h"
 #include "rtengine/profilestore.h"
 #include "rtengine/rtengine.h"
+#include <memory>
 #include "ainoise.h"
+#include "rtengine/aimask.h"
 #include "options.h"
 #include "soundman.h"
 #include "rtimage.h"
@@ -199,6 +201,75 @@ int main (int argc, char **argv)
             return 1;
         }
         std::cout << "AI denoise: wrote " << argv[3] << " using the " << AIDenoise::lastDevice().raw() << std::endl;
+        return 0;
+    }
+
+    if (argc >= 6 && std::string(argv[1]) == "--ai-mask") {
+        // --ai-mask <raw file> <x 0..1> <y 0..1> <output.rtmask>   (for testing)
+        // also writes <output>.pgm (the mask as an image) and <output>.pp3 (a profile that
+        // brightens the selection through a local adjustment spot)
+        int errorCode = 0;
+        rtengine::InitialImage* ii = rtengine::InitialImage::load(argv[2], true, &errorCode, nullptr);
+        if (!ii) {
+            std::cerr << "AI mask: cannot load " << argv[2] << std::endl;
+            return 1;
+        }
+        rtengine::procparams::ProcParams params;
+        AIDenoise::MaskRequest req;
+        req.centerX = atof(argv[3]);
+        req.centerY = atof(argv[4]);
+        AIDenoise::MaskResult res;
+        const Glib::ustring maskFile = argv[5];
+        const Glib::ustring msg = AIDenoise::makeMask(AIDenoise::makeRenderer(ii, params), req, maskFile, res, [](double) {});
+        ii->decreaseRef();
+        if (!msg.empty()) {
+            std::cerr << "AI mask failed: " << msg.raw() << std::endl;
+            return 1;
+        }
+        std::cout << "AI mask: area " << res.area << " quality " << res.quality << " refined " << res.refined
+                  << " box " << res.x0 << " " << res.y0 << " " << res.x1 << " " << res.y1
+                  << " using the " << AIDenoise::lastDevice().raw() << std::endl;
+
+        const std::shared_ptr<const rtengine::AiMask> mask = rtengine::loadAiMask(maskFile);
+        if (!mask) {
+            std::cerr << "AI mask: the mask file cannot be read back" << std::endl;
+            return 1;
+        }
+        {
+            FILE* f = g_fopen((maskFile + ".pgm").c_str(), "wb");
+            if (f) {
+                fprintf(f, "P5\n%d %d\n255\n", mask->w, mask->h);
+                fwrite(mask->data.data(), 1, mask->data.size(), f);
+                fclose(f);
+            }
+        }
+
+        if (params.save(maskFile + ".off.pp3") != 0) {
+            std::cerr << "AI mask: cannot write the reference profile" << std::endl;
+            return 1;
+        }
+        rtengine::procparams::LocallabParams::LocallabSpot spot;
+        spot.name = "AI mask test";
+        spot.shape = "RECT";
+        spot.shapeMethod = "IND";
+        spot.transit = 100.0;
+        spot.centerX = static_cast<int>((req.centerX - 0.5) * 2000.0);
+        spot.centerY = static_cast<int>((req.centerY - 0.5) * 2000.0);
+        spot.loc.at(0) = std::max(2, static_cast<int>((res.x1 - req.centerX) * 2000.0) + 20);
+        spot.loc.at(1) = std::max(2, static_cast<int>((req.centerX - res.x0) * 2000.0) + 20);
+        spot.loc.at(2) = std::max(2, static_cast<int>((res.y1 - req.centerY) * 2000.0) + 20);
+        spot.loc.at(3) = std::max(2, static_cast<int>((req.centerY - res.y0) * 2000.0) + 20);
+        spot.aiMask = maskFile;
+        spot.visicolor = true;
+        spot.expcolor = true;
+        spot.lightness = 60;
+        params.locallab.enabled = true;
+        params.locallab.selspot = 0;
+        params.locallab.spots.push_back(spot);
+        if (params.save(maskFile + ".pp3") != 0) {
+            std::cerr << "AI mask: cannot write the test profile" << std::endl;
+            return 1;
+        }
         return 0;
     }
 
