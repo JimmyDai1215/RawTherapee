@@ -35,6 +35,7 @@
 #include "rtengine/profilestore.h"
 #include "rtengine/rtengine.h"
 #include <memory>
+#include <glib/gstdio.h>
 #include "ainoise.h"
 #include "rtengine/aimask.h"
 #include "options.h"
