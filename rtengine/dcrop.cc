@@ -21,6 +21,7 @@
 #include <glibmm/ustring.h>
 #include <glibmm/timer.h>
 
+#include "aimask.h"
 #include "cieimage.h"
 #include "color.h"
 #include "curves.h"
@@ -1188,6 +1189,9 @@ void Crop::update(int todo)
                         parent->localllogMask, parent->locall_Mask, parent->locallcieMask, minCD, maxCD, mini, maxi, Tmean, Tsigma, Tmin, Tmax,
                         meantme, stdtme, meanretie, stdretie, fab, maxicam,rdx, rdy, grx, gry, blx, bly, meanx, meany, meanxe, meanye, maxdat, prim, ill, contsig, lightsig, slopeg, linkrgb,
                         resi, sharc, denocont, ghsbpwp, ghsbpwpvalue, savmadl, ghsbwslider, ghssym, ghsautsp, ghscolor, ghsmid, ghsmaxrgb, ghs3sig, michbwslider);
+                if (sp == params.locallab.selspot) {
+                    rtengine::aiMaskOverlay(params.locallab.spots.at(sp).aiMask, labnCrop, cropx / skip, cropy / skip, skips(parent->fw, skip), skips(parent->fh, skip));
+                }
 
                         if (parent->previewDeltaE || parent->locallColorMask == 5 || parent->locallvibMask == 4 || parent->locallExpMask == 5 || parent->locallSHMask == 4 || parent->localllcMask == 4 || parent->localltmMask == 4 || parent->localllogMask == 4 || parent->locallsoftMask == 6 || parent->localllcMask == 4 || parent->locallcieMask == 4) {
                             params.blackwhite.enabled = false;
@@ -1276,6 +1280,9 @@ void Crop::update(int todo)
                         minCD, maxCD, mini, maxi, Tmean, Tsigma, Tmin, Tmax,
                         meantme, stdtme, meanretie, stdretie, fab, maxicam, rdx, rdy, grx, gry, blx, bly, meanx, meany, meanxe, meanye, maxdat, prim, ill, contsig, lightsig, slopeg, linkrgb,
                         resi, sharc, denocont, ghsbpwp, ghsbpwpvalue, savmadl, ghsbwslider, ghssym, ghsautsp, ghscolor, ghsmid, ghsmaxrgb, ghs3sig, michbwslider);
+                if (sp == params.locallab.selspot) {
+                    rtengine::aiMaskOverlay(params.locallab.spots.at(sp).aiMask, labnCrop, cropx / skip, cropy / skip, skips(parent->fw, skip), skips(parent->fh, skip));
+                }
             }
 
                        // for (int l = 0; l < 21; l++) {

@@ -6,6 +6,8 @@
 #include <mutex>
 #include <glib/gstdio.h>
 
+#include "labimage.h"
+
 namespace rtengine
 {
 
@@ -156,6 +158,43 @@ bool saveAiMask(const Glib::ustring& path, int w, int h, const unsigned char* da
         g_remove(path.c_str());
     }
     return ok;
+}
+
+std::atomic<bool> aiMaskOverlayEnabled(false);
+
+void aiMaskOverlay(const Glib::ustring& maskFile, LabImage* img, int cx, int cy, int oW, int oH)
+{
+    if (!aiMaskOverlayEnabled.load() || maskFile.empty() || !img || oW < 1 || oH < 1) {
+        return;
+    }
+    const std::shared_ptr<const AiMask> mask = loadAiMask(maskFile);
+    if (!mask) {
+        return;
+    }
+    const float invW = 1.f / oW;
+    const float invH = 1.f / oH;
+#ifdef _OPENMP
+    #pragma omp parallel for
+#endif
+    for (int y = 0; y < img->H; ++y) {
+        const float v = (cy + y + 0.5f) * invH;
+        if (v < 0.f || v > 1.f) {
+            continue;
+        }
+        for (int x = 0; x < img->W; ++x) {
+            const float u = (cx + x + 0.5f) * invW;
+            if (u < 0.f || u > 1.f) {
+                continue;
+            }
+            const float m = mask->sample(u, v);
+            if (m > 0.004f) {
+                // towards a bright red: lift dark areas a little, push a and b
+                img->L[y][x] += m * 0.35f * (20000.f - img->L[y][x]);
+                img->a[y][x] += m * (16000.f - img->a[y][x]) * 0.6f;
+                img->b[y][x] += m * (8000.f - img->b[y][x]) * 0.6f;
+            }
+        }
+    }
 }
 
 }

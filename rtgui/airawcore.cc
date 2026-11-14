@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <cstring>
 #include <cstdlib>
+#include <exception>
 #include <map>
 #include <stdexcept>
 #include <memory>
@@ -1162,9 +1163,14 @@ std::vector<size_t> labelComponents(const std::vector<unsigned char>& bin, int w
     return sizes;
 }
 
+struct PointPx {
+    int x, y;
+    bool add;
+};
+
 // Removes specks (small separate pieces) and fills pinholes of a binary selection.
-// The piece under (cx, cy) is always kept.
-void cleanupSelection(std::vector<unsigned char>& bin, int w, int h, int cx, int cy)
+// Pieces under an "add" point are always kept; holes under a "subtract" point stay open.
+void cleanupSelection(std::vector<unsigned char>& bin, int w, int h, const std::vector<PointPx>& points)
 {
     std::vector<int> labels;
     std::vector<size_t> sizes = labelComponents(bin, w, h, 1, labels);
@@ -1175,21 +1181,34 @@ void cleanupSelection(std::vector<unsigned char>& bin, int w, int h, int cx, int
     for (size_t i = 1; i < sizes.size(); ++i) {
         biggest = std::max(biggest, sizes[i]);
     }
-    cx = std::min(w - 1, std::max(0, cx));
-    cy = std::min(h - 1, std::max(0, cy));
-    const int mainId = labels[static_cast<size_t>(cy) * w + cx];
+    std::vector<char> protect(sizes.size(), 0);
+    for (const PointPx& p : points) {
+        if (p.add) {
+            const int x = std::min(w - 1, std::max(0, p.x));
+            const int y = std::min(h - 1, std::max(0, p.y));
+            protect[labels[static_cast<size_t>(y) * w + x]] = 1;
+        }
+    }
     size_t total = 0;
     for (size_t i = 0; i < bin.size(); ++i) {
         const int id = labels[i];
-        if (id && id != mainId && sizes[id] < biggest / 50) {
+        if (id && !protect[id] && sizes[id] < biggest / 50) {
             bin[i] = 0;
         }
         total += bin[i];
     }
     sizes = labelComponents(bin, w, h, 0, labels);
+    protect.assign(sizes.size(), 0);
+    for (const PointPx& p : points) {
+        if (!p.add) {
+            const int x = std::min(w - 1, std::max(0, p.x));
+            const int y = std::min(h - 1, std::max(0, p.y));
+            protect[labels[static_cast<size_t>(y) * w + x]] = 1;
+        }
+    }
     for (size_t i = 0; i < bin.size(); ++i) {
         const int id = labels[i];
-        if (id && sizes[id] < total / 500) {
+        if (id && !protect[id] && sizes[id] < total / 500) {
             bin[i] = 1;
         }
     }
@@ -1200,7 +1219,6 @@ void cleanupSelection(std::vector<unsigned char>& bin, int w, int h, int cx, int
 bool farthestInside(const unsigned char* bin, int stride, int w, int h, unsigned char value, int& bx, int& by)
 {
     std::vector<int> d(static_cast<size_t>(w) * h);
-    const int big = w + h;
     for (int y = 0; y < h; ++y) {
         for (int x = 0; x < w; ++x) {
             const size_t i = static_cast<size_t>(y) * w + x;
@@ -1209,7 +1227,6 @@ bool farthestInside(const unsigned char* bin, int stride, int w, int h, unsigned
             } else {
                 // the tile border counts as "outside" so that points stay away from it
                 int v = std::min(std::min(x, y), std::min(w - 1 - x, h - 1 - y)) + 1;
-                v = std::min(v, big);
                 if (x > 0) {
                     v = std::min(v, d[i - 1] + 1);
                 }
@@ -1257,6 +1274,31 @@ inline float bilinear(const std::vector<float>& p, int w, int h, float x, float 
     return top + (bottom - top) * fy;
 }
 
+// Image -> image averaged down by an integer factor
+void shrinkRgb(const std::vector<unsigned char>& src, int w, int h, int f, std::vector<unsigned char>& dst, int& dw, int& dh)
+{
+    dw = std::max(1, w / f);
+    dh = std::max(1, h / f);
+    dst.resize(static_cast<size_t>(dw) * dh * 3);
+    for (int y = 0; y < dh; ++y) {
+        for (int x = 0; x < dw; ++x) {
+            unsigned sum[3] = { 0, 0, 0 };
+            for (int j = 0; j < f; ++j) {
+                const unsigned char* p = src.data() + (static_cast<size_t>(y * f + j) * w + static_cast<size_t>(x) * f) * 3;
+                for (int i = 0; i < f; ++i, p += 3) {
+                    sum[0] += p[0];
+                    sum[1] += p[1];
+                    sum[2] += p[2];
+                }
+            }
+            unsigned char* d = dst.data() + (static_cast<size_t>(y) * dw + x) * 3;
+            d[0] = static_cast<unsigned char>(sum[0] / (f * f));
+            d[1] = static_cast<unsigned char>(sum[1] / (f * f));
+            d[2] = static_cast<unsigned char>(sum[2] / (f * f));
+        }
+    }
+}
+
 }
 
 #ifdef HAVE_ONNXRT
@@ -1268,7 +1310,7 @@ constexpr int SAM_SIZE = 1024;
 constexpr int SAM_MASK = 256;
 
 struct SamPoint {
-    float x, y;   // pixels of the given image
+    float x, y;   // pixels of the encoded image
     int label;    // 1 = on the object, 0 = not on the object
 };
 
@@ -1276,32 +1318,30 @@ struct SamQuery {
     std::vector<SamPoint> points;
     bool useBox = false;
     float bx0 = 0.f, by0 = 0.f, bx1 = 0.f, by1 = 0.f;
-    const std::vector<float>* prevLogits = nullptr;        // w*h logits of an earlier selection (optional)
-    const unsigned char* reference = nullptr;              // w*h binary: prefer the candidate closest to it (optional)
+    const std::vector<float>* prevLogits = nullptr;   // outW*outH logits of an earlier selection (optional)
+    const unsigned char* reference = nullptr;         // outW x outH binary: prefer the candidate closest to it (optional)
     int referenceStride = 0;
 };
 
 std::unique_ptr<Net> g_samEncoder;
 std::unique_ptr<Ort::Session> g_samDecoder;
 Net::PathString g_samEncoderPath, g_samDecoderPath;
+int g_samW = 0, g_samH = 0;      // size of the image whose features are loaded
+float g_samScale = 1.f;
 
 void samRelease()
 {
     g_samDecoder.reset();
     g_samEncoder.reset();
+    g_samW = g_samH = 0;
 }
 
-// Runs the networks on one image. logits receives w*h values (> 0: selected).
-// agreement receives the overlap (IoU) with the reference, or -1 without a reference.
-std::string samRun(const Net::PathString& encoderPath, const Net::PathString& decoderPath, const unsigned char* rgb, int w, int h,
-                   const SamQuery& query, std::vector<float>& logits, float& quality, float& agreement)
+// Computes the features of one image; they stay loaded for samDecode.
+std::string samEncode(const Net::PathString& encoderPath, const Net::PathString& decoderPath, const unsigned char* rgb, int w, int h)
 {
-    quality = 0.f;
-    agreement = -1.f;
     if (!rgb || w < 16 || h < 16) {
         return "image too small";
     }
-
     if (!g_samEncoder || g_samEncoderPath != encoderPath || g_samDecoderPath != decoderPath) {
         samRelease();
         g_samEncoder.reset(new Net(encoderPath, 3, SAM_SIZE, "sam21-encoder"));
@@ -1312,8 +1352,9 @@ std::string samRun(const Net::PathString& encoderPath, const Net::PathString& de
         g_samEncoderPath = encoderPath;
         g_samDecoderPath = decoderPath;
     }
+    g_samW = g_samH = 0;
 
-    // ---- image -> 1024x1024, longest side fitted, rest padded with zeros
+    // image -> 1024x1024, longest side fitted, rest padded with zeros
     const float scale = static_cast<float>(SAM_SIZE) / std::max(w, h);
     const int nw = std::min(SAM_SIZE, static_cast<int>(w * scale + 0.5f));
     const int nh = std::min(SAM_SIZE, static_cast<int>(h * scale + 0.5f));
@@ -1346,8 +1387,24 @@ std::string samRun(const Net::PathString& encoderPath, const Net::PathString& de
     }
 
     g_samEncoder->run(in);
+    g_samW = w;
+    g_samH = h;
+    g_samScale = scale;
+    return {};
+}
 
-    // ---- decoder inputs
+// Selects on the encoded image. logits receives outW*outH values covering the whole
+// image (> 0: selected). agreement receives the overlap (IoU) with the reference, or -1.
+std::string samDecode(const SamQuery& query, int outW, int outH, std::vector<float>& logits, float& quality, float& agreement)
+{
+    quality = 0.f;
+    agreement = -1.f;
+    if (!g_samEncoder || !g_samDecoder || g_samW <= 0 || outW < 2 || outH < 2) {
+        return "no image is loaded for selection";
+    }
+    const int w = g_samW, h = g_samH;
+    const float scale = g_samScale;
+
     std::vector<float> coords, labels;
     for (const SamPoint& pt : query.points) {
         coords.push_back(pt.x * scale);
@@ -1370,17 +1427,19 @@ std::string samRun(const Net::PathString& encoderPath, const Net::PathString& de
 
     // 256x256 grid over the padded 1024 square
     const float toMask = scale * SAM_MASK / SAM_SIZE;   // mask cells per image pixel
+    const float sxOut = static_cast<float>(outW) / w;   // output samples per image pixel
+    const float syOut = static_cast<float>(outH) / h;
     std::vector<float> maskIn(static_cast<size_t>(SAM_MASK) * SAM_MASK, 0.f);
     float hasMask = 0.f;
-    if (query.prevLogits && query.prevLogits->size() == static_cast<size_t>(w) * h) {
+    if (query.prevLogits && query.prevLogits->size() == static_cast<size_t>(outW) * outH) {
         hasMask = 1.f;
         for (int my = 0; my < SAM_MASK; ++my) {
-            const float fy = (my + 0.5f) / toMask - 0.5f;
+            const float fy = (my + 0.5f) / toMask;   // image pixels
             for (int mx = 0; mx < SAM_MASK; ++mx) {
-                const float fx = (mx + 0.5f) / toMask - 0.5f;
+                const float fx = (mx + 0.5f) / toMask;
                 float v = -8.f;   // padding: not selected
                 if (fx < w && fy < h) {
-                    v = std::min(8.f, std::max(-8.f, bilinear(*query.prevLogits, w, h, fx, fy)));
+                    v = std::min(8.f, std::max(-8.f, bilinear(*query.prevLogits, outW, outH, fx * sxOut - 0.5f, fy * syOut - 0.5f)));
                 }
                 maskIn[static_cast<size_t>(my) * SAM_MASK + mx] = v;
             }
@@ -1454,18 +1513,18 @@ std::string samRun(const Net::PathString& encoderPath, const Net::PathString& de
     const float* all = outs[0].GetTensorData<float>();
     const int ncand = static_cast<int>(ms[1]);
 
-    // ---- 256x256 logits -> w x h, for one candidate
+    // 256x256 logits -> outW x outH, for one candidate
     const auto expand = [&](int cand, std::vector<float>& dstv) {
         const float* logit = all + static_cast<size_t>(cand) * SAM_MASK * SAM_MASK;
-        dstv.resize(static_cast<size_t>(w) * h);
-        for (int y = 0; y < h; ++y) {
-            float fy = (y + 0.5f) * toMask - 0.5f;
+        dstv.resize(static_cast<size_t>(outW) * outH);
+        for (int y = 0; y < outH; ++y) {
+            float fy = (y + 0.5f) / syOut * toMask - 0.5f;
             fy = std::min(static_cast<float>(SAM_MASK) - 1.001f, std::max(0.f, fy));
             const int y0 = static_cast<int>(fy);
             const float wy = fy - y0;
-            float* dst = dstv.data() + static_cast<size_t>(y) * w;
-            for (int x = 0; x < w; ++x) {
-                float fx = (x + 0.5f) * toMask - 0.5f;
+            float* dst = dstv.data() + static_cast<size_t>(y) * outW;
+            for (int x = 0; x < outW; ++x) {
+                float fx = (x + 0.5f) / sxOut * toMask - 0.5f;
                 fx = std::min(static_cast<float>(SAM_MASK) - 1.001f, std::max(0.f, fx));
                 const int x0 = static_cast<int>(fx);
                 const float wx = fx - x0;
@@ -1484,10 +1543,10 @@ std::string samRun(const Net::PathString& encoderPath, const Net::PathString& de
         for (int c = 0; c < ncand; ++c) {
             expand(c, tmp);
             size_t inter = 0, uni = 0;
-            for (int y = 0; y < h; ++y) {
+            for (int y = 0; y < outH; ++y) {
                 const unsigned char* ref = query.reference + static_cast<size_t>(y) * query.referenceStride;
-                const float* row = tmp.data() + static_cast<size_t>(y) * w;
-                for (int x = 0; x < w; ++x) {
+                const float* row = tmp.data() + static_cast<size_t>(y) * outW;
+                for (int x = 0; x < outW; ++x) {
                     const bool a = row[x] > 0.f;
                     const bool b = ref[x] != 0;
                     inter += a && b;
@@ -1518,53 +1577,244 @@ inline float sigmoid(float v)
     return 1.f / (1.f + std::exp(-std::min(30.f, std::max(-30.f, v))));
 }
 
+// ---- one selection session: the developed frame stays loaded while points are edited
+
+struct Session {
+    Net::PathString enc, dec;
+    RenderFn render;
+    std::vector<unsigned char> rgb;   // the frame, longest side <= 4200
+    int rw = 0, rh = 0;               // its size
+    int W = 0, H = 0;                 // full image size
+    bool encoded = false;             // the loaded features belong to the frame
+    std::vector<unsigned char> small; // cached preview-size copy
+    int sf = 0, sw = 0, sh = 0;
+};
+
+std::unique_ptr<Session> g_session;
+
+std::string encodeFrame()
+{
+    if (!g_session->encoded) {
+        const std::string err = samEncode(g_session->enc, g_session->dec, g_session->rgb.data(), g_session->rw, g_session->rh);
+        if (!err.empty()) {
+            return err;
+        }
+        g_session->encoded = true;
+    }
+    return {};
+}
+
+void toQuery(const std::vector<SelectPoint>& points, float sx, float sy, SamQuery& q, std::vector<PointPx>& px, int w, int h)
+{
+    for (const SelectPoint& p : points) {
+        const float x = static_cast<float>(p.x) * sx;
+        const float y = static_cast<float>(p.y) * sy;
+        q.points.push_back({ x, y, p.add ? 1 : 0 });
+        px.push_back({ std::min(w - 1, std::max(0, static_cast<int>(static_cast<float>(p.x) * w))), std::min(h - 1, std::max(0, static_cast<int>(static_cast<float>(p.y) * h))), p.add });
+    }
+}
+
+std::string describe(const std::exception_ptr& e)
+{
+    try {
+        std::rethrow_exception(e);
+    } catch (const Ort::Exception& ex) {
+        return std::string("ONNX Runtime: ") + ex.what();
+    } catch (const std::bad_alloc&) {
+        return "out of memory";
+    } catch (const std::exception& ex) {
+        return ex.what();
+    } catch (...) {
+        return "unknown error";
+    }
+}
+
+}
+
+void selectEnd()
+{
+    g_session.reset();
+    samRelease();
 }
 
 #ifdef _WIN32
-std::string selectObject(const wchar_t* encoderPath, const wchar_t* decoderPath, const RenderFn& render,
-                         const SelectRequest& request, SelectResult& result, const std::function<void(double)>& progress)
+std::string selectBegin(const wchar_t* encoderPath, const wchar_t* decoderPath, const RenderFn& render, const std::function<void(double)>& progress)
 #else
-std::string selectObject(const char* encoderPath, const char* decoderPath, const RenderFn& render,
-                         const SelectRequest& request, SelectResult& result, const std::function<void(double)>& progress)
+std::string selectBegin(const char* encoderPath, const char* decoderPath, const RenderFn& render, const std::function<void(double)>& progress)
 #endif
 {
+    try {
+        g_session.reset(new Session());
+        g_session->enc = encoderPath;
+        g_session->dec = decoderPath;
+        g_session->render = render;
+        if (progress) {
+            progress(0.05);
+        }
+        int W = 0, H = 0;
+        if (!render(0, 0, 0, 0, 4200, g_session->rgb, g_session->rw, g_session->rh, W, H) || W < 16 || H < 16 || g_session->rw < 16 || g_session->rh < 16) {
+            selectEnd();
+            return "cannot develop the image";
+        }
+        g_session->W = W;
+        g_session->H = H;
+        if (progress) {
+            progress(0.5);
+        }
+        const std::string err = encodeFrame();
+        if (!err.empty()) {
+            selectEnd();
+            return err;
+        }
+        if (progress) {
+            progress(1.0);
+        }
+    } catch (...) {
+        const std::string err = describe(std::current_exception());
+        selectEnd();
+        return err;
+    }
+    return {};
+}
+
+std::string selectPreview(const std::vector<SelectPoint>& points, int maxW, int maxH, std::vector<unsigned char>& rgbOut, int& outW, int& outH, double& area)
+{
+    area = 0.0;
+    if (!g_session) {
+        return "no selection is in progress";
+    }
+    try {
+        std::string err = encodeFrame();
+        if (!err.empty()) {
+            return err;
+        }
+        Session& s = *g_session;
+        const int f = std::max(1, std::max((s.rw + std::max(1, maxW) - 1) / std::max(1, maxW), (s.rh + std::max(1, maxH) - 1) / std::max(1, maxH)));
+        if (s.sf != f) {
+            shrinkRgb(s.rgb, s.rw, s.rh, f, s.small, s.sw, s.sh);
+            s.sf = f;
+        }
+        const int pw = s.sw, ph = s.sh;
+        const size_t n = static_cast<size_t>(pw) * ph;
+        std::vector<unsigned char> bin(n, 0);
+        std::vector<PointPx> px;
+        SamQuery q;
+        toQuery(points, static_cast<float>(s.rw), static_cast<float>(s.rh), q, px, pw, ph);
+
+        bool anyAdd = false;
+        for (const SelectPoint& p : points) {
+            anyAdd = anyAdd || p.add;
+        }
+        if (anyAdd) {
+            std::vector<float> logits;
+            float quality = 0.f, agree = 0.f;
+            err = samDecode(q, pw, ph, logits, quality, agree);
+            if (!err.empty()) {
+                return err;
+            }
+            for (float& v : logits) {
+                v = std::min(8.f, std::max(-8.f, v));
+            }
+            guidedFilter(s.small.data(), pw, ph, logits, std::max(2, std::max(pw, ph) / 85), 1e-3f, false);
+            for (size_t i = 0; i < n; ++i) {
+                bin[i] = logits[i] > 0.f;
+            }
+            cleanupSelection(bin, pw, ph, px);
+        }
+
+        rgbOut.resize(n * 3);
+        size_t selected = 0;
+        for (size_t i = 0; i < n; ++i) {
+            const unsigned char* src = s.small.data() + i * 3;
+            const float a = bin[i] ? 0.55f : 0.f;
+            selected += bin[i];
+            // brightened a little so that dark photos remain readable
+            rgbOut[i * 3] = static_cast<unsigned char>(std::min(255.f, src[0] * 1.3f) * (1.f - a) + 255.f * a);
+            rgbOut[i * 3 + 1] = static_cast<unsigned char>(std::min(255.f, src[1] * 1.3f) * (1.f - a) + 40.f * a);
+            rgbOut[i * 3 + 2] = static_cast<unsigned char>(std::min(255.f, src[2] * 1.3f) * (1.f - a) + 40.f * a);
+        }
+        // markers: green = add, blue = subtract, with a white ring
+        for (const PointPx& p : px) {
+            for (int dy = -8; dy <= 8; ++dy) {
+                for (int dx = -8; dx <= 8; ++dx) {
+                    const int d2 = dx * dx + dy * dy;
+                    const int x = p.x + dx, y = p.y + dy;
+                    if (d2 > 64 || x < 0 || y < 0 || x >= pw || y >= ph) {
+                        continue;
+                    }
+                    unsigned char* d = rgbOut.data() + (static_cast<size_t>(y) * pw + x) * 3;
+                    if (d2 > 30) {
+                        d[0] = d[1] = d[2] = 255;
+                    } else if (p.add) {
+                        d[0] = 40;
+                        d[1] = 220;
+                        d[2] = 60;
+                    } else {
+                        d[0] = 40;
+                        d[1] = 110;
+                        d[2] = 255;
+                    }
+                }
+            }
+        }
+        outW = pw;
+        outH = ph;
+        area = static_cast<double>(selected) / n;
+    } catch (...) {
+        return describe(std::current_exception());
+    }
+    return {};
+}
+
+std::string selectFinish(const std::vector<SelectPoint>& points, const SelectRequest* box, SelectResult& result, const std::function<void(double)>& progress)
+{
+    if (!g_session) {
+        return "no selection is in progress";
+    }
     const auto report = [&progress](double v) {
         if (progress) {
             progress(v);
         }
     };
-    const Net::PathString enc(encoderPath), dec(decoderPath);
 
     try {
+        Session& s = *g_session;
+        const std::vector<unsigned char>& rgb = s.rgb;
+        const int rw = s.rw, rh = s.rh, W = s.W, H = s.H;
+        const float k = static_cast<float>(rw) / W;   // frame pixels per full-image pixel
+
+        bool anyAdd = false;
+        for (const SelectPoint& p : points) {
+            anyAdd = anyAdd || p.add;
+        }
+        if (!anyAdd) {
+            return "nothing";
+        }
+
         // ---- pass 1: the whole frame
         report(0.03);
-        std::vector<unsigned char> rgb;
-        int rw = 0, rh = 0, W = 0, H = 0;
-        if (!render(0, 0, 0, 0, 4200, rgb, rw, rh, W, H) || W < 16 || H < 16 || rw < 16 || rh < 16) {
-            return "cannot develop the image";
+        std::string err = encodeFrame();
+        if (!err.empty()) {
+            return err;
         }
         report(0.20);
-        const float k = static_cast<float>(rw) / W;   // render pixels per full-image pixel
-        const float px = static_cast<float>(request.cx * W) * k;
-        const float py = static_cast<float>(request.cy * H) * k;
-
         SamQuery q1;
-        q1.points.push_back({ px, py, 1 });
-        if (request.useBox) {
+        std::vector<PointPx> px;
+        toQuery(points, static_cast<float>(rw), static_cast<float>(rh), q1, px, rw, rh);
+        if (box && box->useBox) {
             q1.useBox = true;
-            q1.bx0 = static_cast<float>(request.bx0 * W) * k;
-            q1.by0 = static_cast<float>(request.by0 * H) * k;
-            q1.bx1 = static_cast<float>(request.bx1 * W) * k;
-            q1.by1 = static_cast<float>(request.by1 * H) * k;
+            q1.bx0 = static_cast<float>(box->bx0 * rw);
+            q1.by0 = static_cast<float>(box->by0 * rh);
+            q1.bx1 = static_cast<float>(box->bx1 * rw);
+            q1.by1 = static_cast<float>(box->by1 * rh);
         }
         std::vector<float> L1;
         float quality = 0.f, agree = 0.f;
-        std::string err = samRun(enc, dec, rgb.data(), rw, rh, q1, L1, quality, agree);
+        err = samDecode(q1, rw, rh, L1, quality, agree);
         if (!err.empty()) {
-            samRelease();
             return err;
         }
-        report(0.35);
+        report(0.30);
 
         // Decide uncertain areas as a whole: smooth the logits along the image structure,
         // then drop specks and fill pinholes.
@@ -1580,7 +1830,7 @@ std::string selectObject(const char* encoderPath, const char* decoderPath, const
         }
         S1.clear();
         S1.shrink_to_fit();
-        cleanupSelection(M1, rw, rh, static_cast<int>(px), static_cast<int>(py));
+        cleanupSelection(M1, rw, rh, px);
 
         int bx0 = rw, by0 = rh, bx1 = -1, by1 = -1;
         for (int y = 0; y < rh; ++y) {
@@ -1595,13 +1845,12 @@ std::string selectObject(const char* encoderPath, const char* decoderPath, const
             }
         }
         if (bx1 < bx0 || by1 < by0) {
-            samRelease();
             return "nothing";
         }
         ++bx1;
         ++by1;
 
-        std::vector<float> P(rn, 0.f);   // final probabilities at render size
+        std::vector<float> P(rn, 0.f);   // final probabilities at frame size
         result.zoomed = false;
         result.tiles = 0;
 
@@ -1617,39 +1866,53 @@ std::string selectObject(const char* encoderPath, const char* decoderPath, const
             const int cropY = std::max(0, std::min(H - cropH, static_cast<int>(ccy - cropH / 2.0)));
             std::vector<unsigned char> rgb2;
             int w2 = 0, h2 = 0, nW = 0, nH = 0;
-            if (render(cropX, cropY, cropW, cropH, 2048, rgb2, w2, h2, nW, nH) && nW > 0 && w2 >= 16 && h2 >= 16) {
-                report(0.60);
+            if (s.render(cropX, cropY, cropW, cropH, 2048, rgb2, w2, h2, nW, nH) && nW > 0 && w2 >= 16 && h2 >= 16) {
+                report(0.55);
                 const float k2 = static_cast<float>(w2) / nW;
                 SamQuery q2;
-                q2.points.push_back({ static_cast<float>(request.cx * W - cropX) * k2, static_cast<float>(request.cy * H - cropY) * k2, 1 });
-                q2.useBox = true;
-                q2.bx0 = static_cast<float>(std::max(0.0, fbx0 - cropX)) * k2;
-                q2.by0 = static_cast<float>(std::max(0.0, fby0 - cropY)) * k2;
-                q2.bx1 = static_cast<float>(std::min<double>(cropW, fbx1 - cropX)) * k2;
-                q2.by1 = static_cast<float>(std::min<double>(cropH, fby1 - cropY)) * k2;
-                std::vector<float> L2;
-                float q = 0.f;
-                err = samRun(enc, dec, rgb2.data(), w2, h2, q2, L2, q, agree);
-                if (err.empty()) {
-                    for (float& v : L2) {
-                        v = sigmoid(v);
+                bool addInside = false;
+                for (const SelectPoint& p : points) {
+                    const float x = static_cast<float>(p.x * W - cropX) * k2;
+                    const float y = static_cast<float>(p.y * H - cropY) * k2;
+                    if (x >= 0.f && y >= 0.f && x < w2 && y < h2) {
+                        q2.points.push_back({ x, y, p.add ? 1 : 0 });
+                        addInside = addInside || p.add;
                     }
-                    guidedFilter(rgb2.data(), w2, h2, L2, std::max(2, w2 / 256), 1e-4f, true);
-                    for (int y = 0; y < rh; ++y) {
-                        const float fy = (y + 0.5f) / k;
-                        if (fy < cropY || fy >= cropY + cropH) {
-                            continue;
+                }
+                if (addInside) {
+                    q2.useBox = true;
+                    q2.bx0 = static_cast<float>(std::max(0.0, fbx0 - cropX)) * k2;
+                    q2.by0 = static_cast<float>(std::max(0.0, fby0 - cropY)) * k2;
+                    q2.bx1 = static_cast<float>(std::min<double>(cropW, fbx1 - cropX)) * k2;
+                    q2.by1 = static_cast<float>(std::min<double>(cropH, fby1 - cropY)) * k2;
+                    std::vector<float> L2;
+                    float q = 0.f;
+                    s.encoded = false;
+                    err = samEncode(s.enc, s.dec, rgb2.data(), w2, h2);
+                    if (err.empty()) {
+                        err = samDecode(q2, w2, h2, L2, q, agree);
+                    }
+                    if (err.empty()) {
+                        for (float& v : L2) {
+                            v = sigmoid(v);
                         }
-                        float* row = P.data() + static_cast<size_t>(y) * rw;
-                        for (int x = 0; x < rw; ++x) {
-                            const float fx = (x + 0.5f) / k;
-                            if (fx >= cropX && fx < cropX + cropW) {
-                                row[x] = bilinear(L2, w2, h2, (fx - cropX) * k2 - 0.5f, (fy - cropY) * k2 - 0.5f);
+                        guidedFilter(rgb2.data(), w2, h2, L2, std::max(2, w2 / 256), 1e-4f, true);
+                        for (int y = 0; y < rh; ++y) {
+                            const float fy = (y + 0.5f) / k;
+                            if (fy < cropY || fy >= cropY + cropH) {
+                                continue;
+                            }
+                            float* row = P.data() + static_cast<size_t>(y) * rw;
+                            for (int x = 0; x < rw; ++x) {
+                                const float fx = (x + 0.5f) / k;
+                                if (fx >= cropX && fx < cropX + cropW) {
+                                    row[x] = bilinear(L2, w2, h2, (fx - cropX) * k2 - 0.5f, (fy - cropY) * k2 - 0.5f);
+                                }
                             }
                         }
+                        quality = q;
+                        result.zoomed = true;
                     }
-                    quality = q;
-                    result.zoomed = true;
                 }
             }
         }
@@ -1693,11 +1956,18 @@ std::string selectObject(const char* encoderPath, const char* decoderPath, const
                             SamQuery qt;
                             qt.points.push_back({ static_cast<float>(ix), static_cast<float>(iy), 1 });
                             qt.points.push_back({ static_cast<float>(ox), static_cast<float>(oy), 0 });
+                            // the user's own points inside this tile
+                            for (const PointPx& p : px) {
+                                if (p.x >= sx && p.y >= sy && p.x < sx + tw && p.y < sy + th && static_cast<bool>(M1[static_cast<size_t>(p.y) * rw + p.x]) == p.add) {
+                                    qt.points.push_back({ static_cast<float>(p.x - sx), static_cast<float>(p.y - sy), p.add ? 1 : 0 });
+                                }
+                            }
                             qt.prevLogits = &tilePrev;
                             qt.reference = sub;
                             qt.referenceStride = rw;
                             float q = 0.f, a = 0.f;
-                            if (samRun(enc, dec, tile.data(), tw, th, qt, tileLogits, q, a).empty() && a >= 0.6f) {
+                            s.encoded = false;
+                            if (samEncode(s.enc, s.dec, tile.data(), tw, th).empty() && samDecode(qt, tw, th, tileLogits, q, a).empty() && a >= 0.6f) {
                                 useTile = true;
                                 ++result.tiles;
                             }
@@ -1714,7 +1984,7 @@ std::string selectObject(const char* encoderPath, const char* decoderPath, const
                         }
                     }
                     ++done;
-                    report(0.35 + 0.50 * done / std::max(1, total));
+                    report(0.30 + 0.55 * done / std::max(1, total));
                 }
             }
             for (size_t i = 0; i < rn; ++i) {
@@ -1722,7 +1992,6 @@ std::string selectObject(const char* encoderPath, const char* decoderPath, const
             }
             guidedFilter(rgb.data(), rw, rh, P, 3, 1e-4f, true);
         }
-        samRelease();
         L1.clear();
         L1.shrink_to_fit();
         report(0.88);
@@ -1732,7 +2001,7 @@ std::string selectObject(const char* encoderPath, const char* decoderPath, const
             M1[i] = P[i] > 0.5f;
         }
         std::vector<unsigned char> before = M1;
-        cleanupSelection(M1, rw, rh, static_cast<int>(px), static_cast<int>(py));
+        cleanupSelection(M1, rw, rh, px);
         for (size_t i = 0; i < rn; ++i) {
             if (before[i] && !M1[i]) {
                 P[i] = 0.f;
@@ -1779,31 +2048,67 @@ std::string selectObject(const char* encoderPath, const char* decoderPath, const
         for (int y = 0; y < result.previewH; ++y) {
             for (int x = 0; x < result.previewW; ++x) {
                 const size_t si = static_cast<size_t>(y) * pf * rw + static_cast<size_t>(x) * pf;
-                const unsigned char* s = rgb.data() + si * 3;
+                const unsigned char* src = rgb.data() + si * 3;
                 const float a = result.mask[si] * (0.6f / 255.f);
                 unsigned char* d = result.preview.data() + (static_cast<size_t>(y) * result.previewW + x) * 3;
-                // brightened a little so that dark photos remain readable
-                d[0] = static_cast<unsigned char>(std::min(255.f, s[0] * 1.3f) * (1.f - a) + 255.f * a);
-                d[1] = static_cast<unsigned char>(std::min(255.f, s[1] * 1.3f) * (1.f - a) + 40.f * a);
-                d[2] = static_cast<unsigned char>(std::min(255.f, s[2] * 1.3f) * (1.f - a) + 40.f * a);
+                d[0] = static_cast<unsigned char>(std::min(255.f, src[0] * 1.3f) * (1.f - a) + 255.f * a);
+                d[1] = static_cast<unsigned char>(std::min(255.f, src[1] * 1.3f) * (1.f - a) + 40.f * a);
+                d[2] = static_cast<unsigned char>(std::min(255.f, src[2] * 1.3f) * (1.f - a) + 40.f * a);
             }
         }
         report(1.0);
-    } catch (const Ort::Exception& e) {
-        samRelease();
-        return std::string("ONNX Runtime: ") + e.what();
-    } catch (const std::bad_alloc&) {
-        samRelease();
-        return "out of memory";
-    } catch (const std::exception& e) {
-        samRelease();
-        return e.what();
+    } catch (...) {
+        return describe(std::current_exception());
     }
 
     return {};
 }
 
+#ifdef _WIN32
+std::string selectObject(const wchar_t* encoderPath, const wchar_t* decoderPath, const RenderFn& render,
+                         const SelectRequest& request, SelectResult& result, const std::function<void(double)>& progress)
 #else
+std::string selectObject(const char* encoderPath, const char* decoderPath, const RenderFn& render,
+                         const SelectRequest& request, SelectResult& result, const std::function<void(double)>& progress)
+#endif
+{
+    std::string err = selectBegin(encoderPath, decoderPath, render, nullptr);
+    if (err.empty()) {
+        std::vector<SelectPoint> points;
+        points.push_back({ request.cx, request.cy, true });
+        for (const SelectPoint& p : request.more) {
+            points.push_back(p);
+        }
+        err = selectFinish(points, &request, result, progress);
+    }
+    selectEnd();
+    return err;
+}
+
+#else
+
+void selectEnd()
+{
+}
+
+#ifdef _WIN32
+std::string selectBegin(const wchar_t*, const wchar_t*, const RenderFn&, const std::function<void(double)>&)
+#else
+std::string selectBegin(const char*, const char*, const RenderFn&, const std::function<void(double)>&)
+#endif
+{
+    return "built without ONNX Runtime";
+}
+
+std::string selectPreview(const std::vector<SelectPoint>&, int, int, std::vector<unsigned char>&, int&, int&, double&)
+{
+    return "built without ONNX Runtime";
+}
+
+std::string selectFinish(const std::vector<SelectPoint>&, const SelectRequest*, SelectResult&, const std::function<void(double)>&)
+{
+    return "built without ONNX Runtime";
+}
 
 #ifdef _WIN32
 std::string selectObject(const wchar_t*, const wchar_t*, const RenderFn&, const SelectRequest&, SelectResult&, const std::function<void(double)>&)

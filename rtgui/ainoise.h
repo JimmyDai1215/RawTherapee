@@ -54,11 +54,17 @@ Glib::ustring upscaleToTiff(rtengine::IImagefloat* img, const Glib::ustring& tif
 
 // --- AI mask (object selection) for local adjustments
 
+struct MaskPoint {
+    double x, y;   // 0..1 of the full (uncropped) image
+    bool add;      // true: belongs to the selection; false: does not
+};
+
 struct MaskRequest {
     double centerX = 0.5;   // a point on the object, 0..1 of the full (uncropped) image
     double centerY = 0.5;
     bool useBox = false;    // optional box around the object, 0..1
     double boxX0 = 0.0, boxY0 = 0.0, boxX1 = 1.0, boxY1 = 1.0;
+    std::vector<MaskPoint> more;   // further points
 };
 
 struct MaskResult {
@@ -84,5 +90,21 @@ bool maskAvailable();
 // Selects the object at the requested point and writes the mask file.
 // Returns an empty string on success, otherwise a human readable error message.
 Glib::ustring makeMask(const MaskRender& render, const MaskRequest& request, const Glib::ustring& maskFile, MaskResult& result, const std::function<void(double)>& progress);
+
+// The same in steps, for the interactive dialog. maskBegin develops the photo and loads it
+// into the network; maskPreview then answers quickly for any set of points and returns the
+// photo with the rough selection in red; maskFinish writes the final mask file (and the
+// points next to it); maskEnd frees everything.
+Glib::ustring maskBegin(const MaskRender& render, const std::function<void(double)>& progress);
+Glib::ustring maskPreview(const std::vector<MaskPoint>& points, int maxW, int maxH, std::vector<unsigned char>& rgb, int& w, int& h, double& area);
+Glib::ustring maskFinish(const std::vector<MaskPoint>& points, const Glib::ustring& maskFile, MaskResult& result, const std::function<void(double)>& progress);
+void maskEnd();
+
+// The points a mask was made from (empty if unknown).
+std::vector<MaskPoint> loadMaskPoints(const Glib::ustring& maskFile);
+
+// Shows or hides the mask of the selected spot in the previews.
+void setMaskOverlay(bool show);
+bool maskOverlay();
 
 }

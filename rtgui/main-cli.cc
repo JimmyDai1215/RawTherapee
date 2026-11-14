@@ -206,7 +206,7 @@ int main (int argc, char **argv)
     }
 
     if (argc >= 6 && std::string(argv[1]) == "--ai-mask") {
-        // --ai-mask <raw file> <x 0..1> <y 0..1> <output.rtmask>   (for testing)
+        // --ai-mask <raw file> <x 0..1> <y 0..1> <output.rtmask> [x y add ...]   (for testing)
         // also writes <output>.pgm (the mask as an image) and <output>.pp3 (a profile that
         // brightens the selection through a local adjustment spot)
         int errorCode = 0;
@@ -219,6 +219,10 @@ int main (int argc, char **argv)
         AIDenoise::MaskRequest req;
         req.centerX = atof(argv[3]);
         req.centerY = atof(argv[4]);
+        // further points: x y add(1)/subtract(0), ...
+        for (int i = 6; i + 2 < argc; i += 3) {
+            req.more.push_back({ atof(argv[i]), atof(argv[i + 1]), atoi(argv[i + 2]) != 0 });
+        }
         AIDenoise::MaskResult res;
         const Glib::ustring maskFile = argv[5];
         const Glib::ustring msg = AIDenoise::makeMask(AIDenoise::makeRenderer(ii, params), req, maskFile, res, [](double) {});

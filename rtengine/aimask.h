@@ -5,6 +5,7 @@
  */
 #pragma once
 
+#include <atomic>
 #include <memory>
 #include <vector>
 #include <glibmm/ustring.h>
@@ -48,5 +49,14 @@ std::shared_ptr<const AiMask> loadAiMask(const Glib::ustring& path);
 
 // Writes a mask file (w and h must be at least 2). Returns false on error.
 bool saveAiMask(const Glib::ustring& path, int w, int h, const unsigned char* data);
+
+class LabImage;
+
+// When set, the previews tint the AI mask of the selected spot red (never the saved image).
+extern std::atomic<bool> aiMaskOverlayEnabled;
+
+// Tints the part of img covered by the mask. img shows the region starting at (cx, cy) of
+// an image that is oW x oH pixels in total at the current preview scale.
+void aiMaskOverlay(const Glib::ustring& maskFile, LabImage* img, int cx, int cy, int oW, int oH);
 
 }

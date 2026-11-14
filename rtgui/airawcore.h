@@ -84,10 +84,16 @@ bool writeDng(FILE* f, float** rows, const BayerInfo& info, const DngMeta& meta)
 
 // --- object selection (Segment Anything 2.1) -------------------------------------------
 
+struct SelectPoint {
+    double x, y;   // 0..1 of the full image
+    bool add;      // true: this belongs to the selection; false: this does not
+};
+
 struct SelectRequest {
     double cx = 0.5, cy = 0.5;     // a point on the object, 0..1 of the full image
     bool useBox = false;           // optional box around the object, 0..1
     double bx0 = 0.0, by0 = 0.0, bx1 = 1.0, by1 = 1.0;
+    std::vector<SelectPoint> more; // further points
 };
 
 struct SelectResult {
@@ -117,5 +123,18 @@ std::string selectObject(const wchar_t* encoderPath, const wchar_t* decoderPath,
 std::string selectObject(const char* encoderPath, const char* decoderPath, const RenderFn& render,
                          const SelectRequest& request, SelectResult& result, const std::function<void(double)>& progress);
 #endif
+
+// The same in steps, for interactive use: selectBegin develops the frame and loads it into
+// the network (slow); selectPreview then answers within a fraction of a second for any set
+// of points and returns the frame with the rough selection in red; selectFinish makes the
+// final, refined mask; selectEnd frees everything. One session at a time.
+#ifdef _WIN32
+std::string selectBegin(const wchar_t* encoderPath, const wchar_t* decoderPath, const RenderFn& render, const std::function<void(double)>& progress);
+#else
+std::string selectBegin(const char* encoderPath, const char* decoderPath, const RenderFn& render, const std::function<void(double)>& progress);
+#endif
+std::string selectPreview(const std::vector<SelectPoint>& points, int maxW, int maxH, std::vector<unsigned char>& rgb, int& w, int& h, double& area);
+std::string selectFinish(const std::vector<SelectPoint>& points, const SelectRequest* box, SelectResult& result, const std::function<void(double)>& progress);
+void selectEnd();
 
 }

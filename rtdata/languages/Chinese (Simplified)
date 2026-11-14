@@ -1017,6 +1017,8 @@ IPTCPANEL_TITLE;标题
 MAIN_BUTTON_AIDENOISE;AI降噪
 MAIN_BUTTON_AIDENOISE_TOOLTIP;用神经网络对当前照片的 RAW 数据降噪，并在原图旁保存为新的 RAW 文件（DNG）。\n当前的调整会复制到新文件。
 MAIN_BUTTON_AIMASK;AI蒙版
+MAIN_BUTTON_AIMASKSHOW;显示蒙版
+MAIN_BUTTON_AIMASKSHOW_TOOLTIP;在预览里把当前局部调整点的 AI 蒙版标成红色。只是显示用，不会进入保存的图像。
 MAIN_BUTTON_AIMASK_TOOLTIP;用神经网络选中当前局部调整点中心所在的物体，并把选区作为该点的形状。
 MAIN_BUTTON_AIUPSCALE;AI放大2x
 MAIN_BUTTON_AIUPSCALE_TOOLTIP;按当前的调整显影照片，再用神经网络把宽和高各放大到 2 倍，在原图旁保存为 16 位 TIFF。
@@ -1046,10 +1048,14 @@ MAIN_MSG_AIDENOISE_STRENGTH;降噪强度（%）。100 去噪最彻底；调低�
 MAIN_MSG_AIMASK_APPLY;使用这个选区
 MAIN_MSG_AIMASK_CHANGED;期间局部调整点有变动，蒙版没有应用。
 MAIN_MSG_AIMASK_CLEAR;移除蒙版
-MAIN_MSG_AIMASK_INTRO;将选中点“%1”中心所在的物体，并用选区取代该点原来的形状。之后该点的所有局部调整工具只作用于选区。
+MAIN_MSG_AIMASK_HELP;左键点击：把这一块加进选区。右键点击（或按住 Shift 点击）：从选区里减去这一块。红色是当前的大致选区，确认后还会再精修一遍。
+MAIN_MSG_AIMASK_INFO;已选中画面的 %1 %，共 %2 个点
+MAIN_MSG_AIMASK_INTRO;接下来会打开一个窗口，在照片上选择哪些部分属于点“%1”的蒙版：开始时选中的是点中心所在的物体，你可以点击来加上或减去某一块。\n\n准备照片需要一点时间。
 MAIN_MSG_AIMASK_NOSPOT;请先在“局部调整”里添加一个点，把它的中心拖到要选的物体上，然后再点这个按钮。
 MAIN_MSG_AIMASK_OUTSIDE;点的中心在图像之外。
-MAIN_MSG_AIMASK_RESULT;选中了画面的 %1 %。网络的把握程度：%2 %。\n如果不是你想要的，请取消，移动点的中心后重试。
+MAIN_MSG_AIMASK_RESET;重新开始
+MAIN_MSG_AIMASK_RESULT;蒙版已应用。选中了画面的 %1 %，网络的把握程度：%2 %。\n点“显示蒙版”可以在照片上查看。
+MAIN_MSG_AIMASK_UNDO;撤销上一个点
 MAIN_MSG_AIMASK_USEBOX;同时把点的选区框作为提示（请先把框大致拉到包住物体）
 MAIN_MSG_AIUPSCALE_CONFIRM;AI 放大会按当前的调整（包括裁切）显影照片，再放大到 2 倍。\n\n用显卡运算最多几分钟；用 CPU 的话，2400 万像素的照片需要 15 分钟以上。
 MAIN_MSG_AIUPSCALE_DONE;AI 放大完成，已保存为：\n%1

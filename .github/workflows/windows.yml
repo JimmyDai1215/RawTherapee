@@ -264,6 +264,9 @@ jobs:
           time "$BUILD_DIR/rawtherapee-cli.exe" --ai-mask sample.NEF 0.5 0.22 "$(cygpath -m "$(pwd)")/earth.rtmask"
           "$BUILD_DIR/rawtherapee-cli.exe" -q -Y -t -b8 -p earth.rtmask.off.pp3 -o mask_off.tif -c sample.NEF
           "$BUILD_DIR/rawtherapee-cli.exe" -q -Y -t -b8 -p earth.rtmask.pp3 -o mask_on.tif -c sample.NEF
+          # the same with a second "add" point and a "subtract" point
+          "$BUILD_DIR/rawtherapee-cli.exe" --ai-mask sample.NEF 0.5 0.22 "$(cygpath -m "$(pwd)")/multi.rtmask" 0.5 0.85 1 0.2 0.3 0
+          cat multi.rtmask.pts
           ls -la
 
       - name: Compare AI denoise result with the original

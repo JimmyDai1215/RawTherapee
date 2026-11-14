@@ -32,6 +32,7 @@
 #include "iccstore.h"
 #include "image8.h"
 #include "imagefloat.h"
+#include "aimask.h"
 #include "improcfun.h"
 #include "metadata.h"
 #include "labimage.h"
@@ -1549,6 +1550,9 @@ void ImProcCoordinator::updatePreviewImage(int todo, bool panningRelatedChange)
                               minCD, maxCD, mini, maxi, Tmean, Tsigma, Tmin, Tmax,
                               meantm, stdtm, meanreti, stdreti, fab, maxicam, rdx, rdy, grx, gry, blx, bly, meanx, meany, meanxe, meanye, maxdat, prim, ill, contsig, lightsig, slopeg, linkrgb,
                               resi, sharc, denocont, ghsbpwp, ghsbpwpvalue, savmadl, ghsbwslider, ghssym, ghsautsp, ghscolor, ghsmid, ghsmaxrgb, ghs3sig, michbwslider);
+                if (sp == params->locallab.selspot) {
+                    rtengine::aiMaskOverlay(params->locallab.spots.at(sp).aiMask, nprevl, 0, 0, pW, pH);
+                }
 
                 fabrefp[sp] = fab;
                 //Illuminant

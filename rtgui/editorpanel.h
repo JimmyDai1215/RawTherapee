@@ -174,6 +174,9 @@ public:
     void aiDenoisePressed();
     void aiUpscalePressed();
     void aiMaskPressed();
+    void aiMaskShowToggled();
+    void aiPushParams(const rtengine::procparams::ProcParams& pparams);
+    bool idle_aiMaskReady(ProgressConnector<void*> *pc);
     bool idle_aiMaskDone(ProgressConnector<void*> *pc);
     bool idle_aiUpscaleDone(ProgressConnector<Glib::ustring*> *pc);
     bool idle_aiDenoiseDone(ProgressConnector<Glib::ustring*> *pc);
@@ -317,6 +320,7 @@ private:
     Gtk::Button* aiDenoiseBtn;
     Gtk::Button* aiUpscaleBtn;
     Gtk::Button* aiMaskBtn;
+    Gtk::ToggleButton* aiMaskShowBtn;
     Glib::ustring aiUpscaleOutFile;
     Glib::ustring aiDenoiseOutFile;
 
