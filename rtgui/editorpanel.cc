@@ -28,6 +28,9 @@
 #include <memory>
 #include <glib/gstdio.h>
 
+#include <glib/gstdio.h>
+
+#include "aimaskeditor.h"
 #include "ainoise.h"
 #include "batchqueue.h"
 #include "batchqueueentry.h"
@@ -2418,7 +2421,7 @@ bool EditorPanel::idle_aiDenoiseDone(ProgressConnector<Glib::ustring*> *pc)
 namespace
 {
 // Runs in a worker thread: develop the image with the current edits, then upscale it.
-Glib::ustring* aiUpscaleJob(rtengine::ProcessingJob* job, Glib::ustring outFile, int model, rtengine::ProgressListener* pl)
+Glib::ustring* aiUpscaleJob(rtengine::ProcessingJob* job, Glib::ustring outFile, int model, Glib::ustring srcFile, rtengine::ProgressListener* pl)
 {
     int errcode = 0;
     rtengine::IImagefloat* img = rtengine::processImage(job, errcode, pl, false);
@@ -2429,7 +2432,7 @@ Glib::ustring* aiUpscaleJob(rtengine::ProcessingJob* job, Glib::ustring outFile,
         if (pl) {
             pl->setProgress(p);
         }
-    });
+    }, srcFile);
     delete img;
     if (pl) {
         pl->setProgress(0.0);
@@ -2511,7 +2514,7 @@ void EditorPanel::aiUpscalePressed()
     auto* ld = new ProgressConnector<Glib::ustring*>();
     rtengine::ProgressListener* pl = parent->getProgressListener();
     aiUpscaleOutFile = outFile;
-    ld->startFunc(sigc::bind(sigc::ptr_fun(&aiUpscaleJob), job, outFile, aiUpscaleModel, pl),
+    ld->startFunc(sigc::bind(sigc::ptr_fun(&aiUpscaleJob), job, outFile, aiUpscaleModel, openThm->getFileName(), pl),
                   sigc::bind(sigc::mem_fun(*this, &EditorPanel::idle_aiUpscaleDone), ld));
     aiUpscaleBtn->set_sensitive(false);
 }
@@ -2536,9 +2539,9 @@ namespace
 struct AiMaskState {
     Glib::ustring error;
     Glib::ustring maskFile;
-    std::vector<AIDenoise::MaskPoint> points;
+    AIRawCore::MaskEdit edit;
     AIDenoise::MaskResult result;
-    int spot = 0;
+    int spot = -1;                 // -1: make a new mask (spot)
     size_t spotCount = 0;
 };
 
@@ -2560,7 +2563,7 @@ void* aiMaskBeginJob(AIDenoise::MaskRender render, AiMaskState* st, rtengine::Pr
 // Worker thread, step 2: make the final, refined mask from the chosen points.
 void* aiMaskFinishJob(AiMaskState* st, rtengine::ProgressListener* pl)
 {
-    st->error = AIDenoise::maskFinish(st->points, st->maskFile, st->result, [pl](double p) {
+    st->error = AIDenoise::maskFinish(st->edit, st->maskFile, st->result, [pl](double p) {
         if (pl) {
             pl->setProgress(p);
         }
@@ -2570,116 +2573,6 @@ void* aiMaskFinishJob(AiMaskState* st, rtengine::ProgressListener* pl)
     }
     return st;
 }
-
-// The photo with the current selection in red; clicks add to or subtract from it.
-class AiMaskDialog final : public Gtk::Dialog
-{
-public:
-    AiMaskDialog(Gtk::Window& parent, const std::vector<AIDenoise::MaskPoint>& initial, int maxW, int maxH) :
-        Gtk::Dialog(M("MAIN_BUTTON_AIMASK"), parent, true),
-        points_(initial),
-        first_(initial.empty() ? AIDenoise::MaskPoint{0.5, 0.5, true} : initial.front()),
-        maxW_(maxW),
-        maxH_(maxH),
-        undo_(M("MAIN_MSG_AIMASK_UNDO")),
-        reset_(M("MAIN_MSG_AIMASK_RESET"))
-    {
-        help_.set_text(M("MAIN_MSG_AIMASK_HELP"));
-        help_.set_xalign(0.0);
-        help_.set_line_wrap(true);
-        help_.set_max_width_chars(90);
-        info_.set_xalign(0.0);
-
-        box_.add(image_);
-        box_.set_halign(Gtk::ALIGN_CENTER);
-        box_.set_valign(Gtk::ALIGN_CENTER);
-        box_.add_events(Gdk::BUTTON_PRESS_MASK);
-        box_.signal_button_press_event().connect(sigc::mem_fun(*this, &AiMaskDialog::onPress));
-
-        undo_.signal_clicked().connect(sigc::mem_fun(*this, &AiMaskDialog::onUndo));
-        reset_.signal_clicked().connect(sigc::mem_fun(*this, &AiMaskDialog::onReset));
-        row_.set_spacing(8);
-        row_.pack_start(undo_, Gtk::PACK_SHRINK);
-        row_.pack_start(reset_, Gtk::PACK_SHRINK);
-        row_.pack_start(info_, Gtk::PACK_EXPAND_WIDGET);
-
-        get_content_area()->set_spacing(8);
-        get_content_area()->set_border_width(12);
-        get_content_area()->pack_start(help_, Gtk::PACK_SHRINK);
-        get_content_area()->pack_start(box_, Gtk::PACK_SHRINK);
-        get_content_area()->pack_start(row_, Gtk::PACK_SHRINK);
-        add_button(M("GENERAL_CANCEL"), Gtk::RESPONSE_CANCEL);
-        add_button(M("MAIN_MSG_AIMASK_APPLY"), Gtk::RESPONSE_OK);
-        set_default_response(Gtk::RESPONSE_OK);
-        show_all();
-        refresh();
-    }
-
-    const std::vector<AIDenoise::MaskPoint>& points() const
-    {
-        return points_;
-    }
-
-private:
-    bool onPress(GdkEventButton* ev)
-    {
-        if (w_ <= 0 || h_ <= 0 || !ev) {
-            return true;
-        }
-        const double x = std::min(1.0, std::max(0.0, ev->x / w_));
-        const double y = std::min(1.0, std::max(0.0, ev->y / h_));
-        if (ev->button == 1) {
-            points_.push_back({ x, y, !(ev->state & GDK_SHIFT_MASK) });
-        } else if (ev->button == 3) {
-            points_.push_back({ x, y, false });
-        } else {
-            return true;
-        }
-        refresh();
-        return true;
-    }
-
-    void onUndo()
-    {
-        if (points_.size() > 1) {
-            points_.pop_back();
-            refresh();
-        }
-    }
-
-    void onReset()
-    {
-        points_.clear();
-        points_.push_back(first_);
-        refresh();
-    }
-
-    void refresh()
-    {
-        double area = 0.0;
-        const Glib::ustring err = AIDenoise::maskPreview(points_, maxW_, maxH_, rgb_, w_, h_, area);
-        if (!err.empty()) {
-            info_.set_text(err);
-            return;
-        }
-        // copy(): the pixbuf must not depend on rgb_, which is reused for the next preview
-        image_.set(Gdk::Pixbuf::create_from_data(rgb_.data(), Gdk::COLORSPACE_RGB, false, 8, w_, h_, w_ * 3)->copy());
-        info_.set_text(Glib::ustring::compose(M("MAIN_MSG_AIMASK_INFO"),
-                                              Glib::ustring::format(std::fixed, std::setprecision(1), area * 100.0),
-                                              Glib::ustring::format(points_.size())));
-    }
-
-    std::vector<AIDenoise::MaskPoint> points_;
-    AIDenoise::MaskPoint first_;
-    int maxW_, maxH_;
-    std::vector<unsigned char> rgb_;
-    int w_ = 0, h_ = 0;
-    Gtk::Label help_, info_;
-    Gtk::EventBox box_;
-    Gtk::Image image_;
-    Gtk::Box row_;
-    Gtk::Button undo_, reset_;
-};
 
 }
 
@@ -2696,7 +2589,7 @@ void EditorPanel::aiPushParams(const rtengine::procparams::ProcParams& pparams)
 void EditorPanel::aiMaskShowToggled()
 {
     AIDenoise::setMaskOverlay(aiMaskShowBtn->get_active());
-    if (!ipc) {
+    if (!ipc || aiMaskShowQuiet) {
         return;
     }
     // run the previews again so that the tint appears or disappears
@@ -2710,80 +2603,91 @@ void EditorPanel::aiMaskPressed()
     if (!ipc || !openThm) {
         return;
     }
+    rtengine::procparams::ProcParams pparams;
+    ipc->getParams(&pparams);
+    const int nSpots = pparams.locallab.spots.size();
+    const int sel = nSpots > 0 ? std::max(0, std::min(nSpots - 1, pparams.locallab.selspot)) : -1;
+
+    aiMaskMenu.reset(new Gtk::Menu());
+    Gtk::MenuItem* const newItem = Gtk::manage(new Gtk::MenuItem(M("MAIN_MASK_NEW")));
+    newItem->signal_activate().connect(sigc::bind(sigc::mem_fun(*this, &EditorPanel::aiMaskStart), -1));
+    aiMaskMenu->append(*newItem);
+    if (sel >= 0) {
+        const Glib::ustring name = pparams.locallab.spots.at(sel).name;
+        Gtk::MenuItem* const editItem = Gtk::manage(new Gtk::MenuItem());
+        editItem->set_label(Glib::ustring::compose(M("MAIN_MASK_EDIT"), name));
+        editItem->signal_activate().connect(sigc::bind(sigc::mem_fun(*this, &EditorPanel::aiMaskStart), sel));
+        aiMaskMenu->append(*editItem);
+        Gtk::MenuItem* const delItem = Gtk::manage(new Gtk::MenuItem());
+        delItem->set_label(Glib::ustring::compose(M("MAIN_MASK_DELETE"), name));
+        delItem->signal_activate().connect(sigc::bind(sigc::mem_fun(*this, &EditorPanel::aiMaskRemove), sel));
+        aiMaskMenu->append(*delItem);
+    }
+    aiMaskMenu->append(*Gtk::manage(new Gtk::SeparatorMenuItem()));
+    Gtk::CheckMenuItem* const gpuItem = Gtk::manage(new Gtk::CheckMenuItem(M("MAIN_MSG_AI_USEGPU")));
+    gpuItem->set_active(aiUseGpu);
+    gpuItem->signal_toggled().connect([this, gpuItem]() {
+        aiUseGpu = gpuItem->get_active();
+    });
+    aiMaskMenu->append(*gpuItem);
+    aiMaskMenu->show_all();
+    aiMaskMenu->popup_at_widget(aiMaskBtn, Gdk::GRAVITY_SOUTH_WEST, Gdk::GRAVITY_NORTH_WEST, nullptr);
+}
+
+void EditorPanel::aiMaskRemove(int spot)
+{
+    if (!ipc) {
+        return;
+    }
+    rtengine::procparams::ProcParams pparams;
+    ipc->getParams(&pparams);
+    if (spot < 0 || spot >= static_cast<int>(pparams.locallab.spots.size())) {
+        return;
+    }
+    Gtk::MessageDialog msgd(*parent, Glib::ustring::compose(M("MAIN_MASK_DELETE_CONFIRM"), pparams.locallab.spots.at(spot).name),
+                            false, Gtk::MESSAGE_QUESTION, Gtk::BUTTONS_OK_CANCEL, true);
+    if (msgd.run() != Gtk::RESPONSE_OK) {
+        return;
+    }
+    // (the mask file stays: earlier history steps and snapshots may still use it)
+    pparams.locallab.spots.erase(pparams.locallab.spots.begin() + spot);
+    pparams.locallab.selspot = std::max(0, std::min<int>(pparams.locallab.spots.size() - 1, spot));
+    aiPushParams(pparams);
+}
+
+void EditorPanel::aiMaskStart(int spot)
+{
+    if (!ipc || !openThm) {
+        return;
+    }
     if (!AIDenoise::maskAvailable()) {
         Gtk::MessageDialog msgd(*parent, M("MAIN_MSG_AIDENOISE_MISSING"), false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
         msgd.run();
         return;
     }
+    AIDenoise::setGpuAllowed(aiUseGpu);
 
     rtengine::procparams::ProcParams pparams;
     ipc->getParams(&pparams);
-    const size_t nSpots = pparams.locallab.spots.size();
-    if (!pparams.locallab.enabled || nSpots == 0) {
-        Gtk::MessageDialog msgd(*parent, M("MAIN_MSG_AIMASK_NOSPOT"), false, Gtk::MESSAGE_INFO, Gtk::BUTTONS_OK, true);
-        msgd.run();
+    const int nSpots = pparams.locallab.spots.size();
+    if (spot >= nSpots) {
         return;
-    }
-    const int sel = std::max(0, std::min<int>(nSpots - 1, pparams.locallab.selspot));
-    const auto& spot = pparams.locallab.spots.at(sel);
-    const bool hasMask = !spot.aiMask.empty();
-
-    enum { RESPONSE_CLEAR = 1001 };
-    {
-        Gtk::Dialog dlg(M("MAIN_BUTTON_AIMASK"), *parent, true);
-        Gtk::Label lbl(Glib::ustring::compose(M("MAIN_MSG_AIMASK_INTRO"), spot.name));
-        lbl.set_line_wrap(true);
-        lbl.set_max_width_chars(60);
-        lbl.set_xalign(0.0);
-        Gtk::CheckButton gpuChk(M("MAIN_MSG_AI_USEGPU"));
-        gpuChk.set_active(aiUseGpu);
-        dlg.get_content_area()->set_spacing(8);
-        dlg.get_content_area()->set_border_width(12);
-        dlg.get_content_area()->pack_start(lbl, Gtk::PACK_SHRINK);
-        dlg.get_content_area()->pack_start(gpuChk, Gtk::PACK_SHRINK);
-        if (hasMask) {
-            dlg.add_button(M("MAIN_MSG_AIMASK_CLEAR"), RESPONSE_CLEAR);
-        }
-        dlg.add_button(M("GENERAL_CANCEL"), Gtk::RESPONSE_CANCEL);
-        dlg.add_button(M("GENERAL_OK"), Gtk::RESPONSE_OK);
-        dlg.set_default_response(Gtk::RESPONSE_OK);
-        dlg.show_all();
-        const int resp = dlg.run();
-        if (resp == RESPONSE_CLEAR) {
-            pparams.locallab.spots.at(sel).aiMask = "";
-            aiPushParams(pparams);
-            return;
-        }
-        if (resp != Gtk::RESPONSE_OK) {
-            return;
-        }
-        aiUseGpu = gpuChk.get_active();
-        AIDenoise::setGpuAllowed(aiUseGpu);
     }
 
     auto* st = new AiMaskState();
-    st->spot = sel;
+    st->spot = spot;
     st->spotCount = nSpots;
-    // start from the points of the existing mask, or from the centre of the spot
-    if (hasMask) {
-        st->points = AIDenoise::loadMaskPoints(spot.aiMask);
-    }
-    if (st->points.empty() || !st->points.front().add) {
-        st->points.clear();
-        const double cx = spot.centerX / 2000.0 + 0.5;
-        const double cy = spot.centerY / 2000.0 + 0.5;
-        if (cx < 0.0 || cx > 1.0 || cy < 0.0 || cy > 1.0) {
-            delete st;
-            Gtk::MessageDialog msgd(*parent, M("MAIN_MSG_AIMASK_OUTSIDE"), false, Gtk::MESSAGE_INFO, Gtk::BUTTONS_OK, true);
-            msgd.run();
-            return;
-        }
-        st->points.push_back({ cx, cy, true });
+    if (spot >= 0 && !pparams.locallab.spots.at(spot).aiMask.empty()) {
+        // go on from what the mask was made from
+        AIDenoise::loadMaskEdit(pparams.locallab.spots.at(spot).aiMask, st->edit);
     }
 
     // a new file for every mask, so that earlier history steps keep pointing at their own mask
     const Glib::ustring orig = openThm->getFileName();
     st->maskFile = Glib::ustring::compose("%1.aimask-%2.rtmask", orig, Glib::ustring::format(g_get_real_time() / 1000));
+
+    // the editor shows the photo without the local adjustments
+    pparams.locallab.enabled = false;
 
     auto* ld = new ProgressConnector<void*>();
     rtengine::ProgressListener* pl = parent->getProgressListener();
@@ -2811,11 +2715,12 @@ bool EditorPanel::idle_aiMaskReady(ProgressConnector<void*> *pc)
 
     bool apply = false;
     {
-        const int maxW = std::max(640, parent->get_width() - 120);
-        const int maxH = std::max(400, parent->get_height() - 280);
-        AiMaskDialog dlg(*parent, st->points, maxW, maxH);
+        AiMaskEditor dlg(*parent, st->edit);
         apply = dlg.run() == Gtk::RESPONSE_OK;
-        st->points = dlg.points();
+        st->edit = dlg.edit();
+    }
+    if (apply && st->edit.points.empty() && st->edit.ops.empty() && !st->edit.invert) {
+        apply = false;   // nothing selected
     }
     if (!apply) {
         AIDenoise::maskEnd();
@@ -2846,45 +2751,67 @@ bool EditorPanel::idle_aiMaskDone(ProgressConnector<void*> *pc)
         return false;
     }
     if (!ipc) {
-        g_remove(res->maskFile.c_str());
+        ::g_remove(res->maskFile.c_str());
         return false;
     }
 
     rtengine::procparams::ProcParams pparams;
     ipc->getParams(&pparams);
-    if (pparams.locallab.spots.size() != res->spotCount || res->spot >= static_cast<int>(pparams.locallab.spots.size())) {
-        g_remove(res->maskFile.c_str());
+    if (pparams.locallab.spots.size() != res->spotCount) {
+        ::g_remove(res->maskFile.c_str());
         Gtk::MessageDialog msgd(*parent, M("MAIN_MSG_AIMASK_CHANGED"), false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_OK, true);
         msgd.run();
         return false;
     }
 
-    // the spot becomes a rectangle that just encloses the selection; the mask does the rest
-    auto& spot = pparams.locallab.spots.at(res->spot);
-    const double cx = spot.centerX / 2000.0 + 0.5;
-    const double cy = spot.centerY / 2000.0 + 0.5;
+    int index = res->spot;
+    if (index < 0) {
+        // a new mask is a new spot; number it after the masks that exist
+        int number = 1;
+        for (const auto& sp : pparams.locallab.spots) {
+            if (!sp.aiMask.empty()) {
+                ++number;
+            }
+        }
+        rtengine::procparams::LocallabParams::LocallabSpot spot;
+        spot.name = Glib::ustring::compose(M("MAIN_MASK_NAME"), number);
+        pparams.locallab.spots.push_back(spot);
+        index = pparams.locallab.spots.size() - 1;
+    }
+    pparams.locallab.enabled = true;
+    pparams.locallab.selspot = index;
+
+    // the spot is a rectangle that just encloses the mask; the mask does the rest
+    auto& spot = pparams.locallab.spots.at(index);
     const double mx = 0.02 * (res->result.x1 - res->result.x0) + 0.004;
     const double my = 0.02 * (res->result.y1 - res->result.y0) + 0.004;
+    const double cx = (res->result.x0 + res->result.x1) / 2.0;
+    const double cy = (res->result.y0 + res->result.y1) / 2.0;
     const auto ext = [](double v) {
         return std::max(2, std::min(3000, static_cast<int>(v * 2000.0 + 0.5)));
     };
     spot.aiMask = res->maskFile;
+    spot.isvisible = false;        // no rectangle handles on the photo: the mask is edited in the mask editor
     spot.shape = "RECT";
     spot.shapeMethod = "IND";
     spot.transit = 100.0;
-    spot.loc.at(0) = ext(res->result.x1 + mx - cx);
-    spot.loc.at(1) = ext(cx - (res->result.x0 - mx));
-    spot.loc.at(2) = ext(res->result.y1 + my - cy);
-    spot.loc.at(3) = ext(cy - (res->result.y0 - my));
-    aiPushParams(pparams);
+    spot.centerX = std::max(-1000, std::min(1000, static_cast<int>((cx - 0.5) * 2000.0 + (cx < 0.5 ? -0.5 : 0.5))));
+    spot.centerY = std::max(-1000, std::min(1000, static_cast<int>((cy - 0.5) * 2000.0 + (cy < 0.5 ? -0.5 : 0.5))));
+    const double ccx = spot.centerX / 2000.0 + 0.5;
+    const double ccy = spot.centerY / 2000.0 + 0.5;
+    spot.loc.at(0) = ext(res->result.x1 + mx - ccx);
+    spot.loc.at(1) = ext(ccx - (res->result.x0 - mx));
+    spot.loc.at(2) = ext(res->result.y1 + my - ccy);
+    spot.loc.at(3) = ext(ccy - (res->result.y0 - my));
 
-    Gtk::MessageDialog msgd(*parent,
-                            Glib::ustring::compose(M("MAIN_MSG_AIMASK_RESULT"),
-                                                   Glib::ustring::format(std::fixed, std::setprecision(1), res->result.area * 100.0),
-                                                   Glib::ustring::format(std::fixed, std::setprecision(0), res->result.quality * 100.0))
-                            + aiDeviceLine(),
-                            false, Gtk::MESSAGE_INFO, Gtk::BUTTONS_OK, true);
-    msgd.run();
+    // show the mask on the photo, so that it is clear what the adjustments will act on
+    if (!aiMaskShowBtn->get_active()) {
+        aiMaskShowQuiet = true;
+        aiMaskShowBtn->set_active(true);
+        aiMaskShowQuiet = false;
+    }
+    aiPushParams(pparams);
+    tpc->showLocalAdjustments();
     return false;
 }
 

@@ -11,6 +11,7 @@
 #include <glibmm/miscutils.h>
 
 #include "airawcore.h"
+#include "rtengine/metadata.h"
 #include "options.h"
 #include "rtengine/aimask.h"
 #include "rtengine/imagefloat.h"
@@ -40,11 +41,24 @@ Glib::ustring runtimePath()
     return Glib::build_filename(App::get().argv0(), "onnxruntime.dll");
 }
 
+namespace
+{
+// On Windows the runtime library is a file in the program folder; elsewhere it is linked in.
+bool runtimePresent()
+{
+#ifdef _WIN32
+    return Glib::file_test(runtimePath(), Glib::FILE_TEST_IS_REGULAR);
+#else
+    return true;
+#endif
+}
+}
+
 bool available()
 {
     return compiledIn()
            && Glib::file_test(modelPath(), Glib::FILE_TEST_IS_REGULAR)
-           && Glib::file_test(runtimePath(), Glib::FILE_TEST_IS_REGULAR);
+           && runtimePresent();
 }
 
 void setGpuAllowed(bool allowed)
@@ -265,10 +279,11 @@ bool upscaleAvailable(int model)
 {
     return compiledIn()
            && Glib::file_test(upscaleModelPath(model), Glib::FILE_TEST_IS_REGULAR)
-           && Glib::file_test(runtimePath(), Glib::FILE_TEST_IS_REGULAR);
+           && runtimePresent();
 }
 
-Glib::ustring upscaleToTiff(rtengine::IImagefloat* img, const Glib::ustring& tifFile, int model, const std::function<void(double)>& progress)
+Glib::ustring upscaleToTiff(rtengine::IImagefloat* img, const Glib::ustring& tifFile, int model, const std::function<void(double)>& progress,
+                            const Glib::ustring& metadataFrom)
 {
     if (!img) {
         return "没有可放大的图像";
@@ -308,6 +323,20 @@ Glib::ustring upscaleToTiff(rtengine::IImagefloat* img, const Glib::ustring& tif
             return "内存不足，无法完成 AI 放大（请确认已开启系统页面文件）";
         }
         return Glib::ustring("AI 放大失败：") + (err.empty() ? std::string("cannot write the file") : err);
+    }
+
+    // Camera, lens and exposure data of the original. Not essential: the picture is kept
+    // even if this fails.
+    if (!metadataFrom.empty()) {
+        try {
+            rtengine::Exiv2Metadata md(metadataFrom);
+            md.load();
+            md.saveToImage(tifFile, false);
+        } catch (const std::exception& e) {
+            g_warning("AI upscale: could not copy the metadata: %s", e.what());
+        } catch (...) {
+            g_warning("AI upscale: could not copy the metadata");
+        }
     }
 
     return Glib::ustring();
@@ -396,7 +425,7 @@ bool maskAvailable()
     return compiledIn()
            && Glib::file_test(samEncoderPath(), Glib::FILE_TEST_IS_REGULAR)
            && Glib::file_test(samDecoderPath(), Glib::FILE_TEST_IS_REGULAR)
-           && Glib::file_test(runtimePath(), Glib::FILE_TEST_IS_REGULAR);
+           && runtimePresent();
 }
 
 namespace
@@ -425,19 +454,13 @@ std::vector<AIRawCore::SelectPoint> toCore(const std::vector<MaskPoint>& points)
     return res;
 }
 
-Glib::ustring storeMask(AIRawCore::SelectResult& sel, const std::vector<MaskPoint>& points, const Glib::ustring& maskFile, MaskResult& result)
+Glib::ustring storeMask(AIRawCore::SelectResult& sel, const AIRawCore::MaskEdit& edit, const Glib::ustring& maskFile, MaskResult& result)
 {
     if (!rtengine::saveAiMask(maskFile, sel.w, sel.h, sel.mask.data())) {
         return "无法写入蒙版文件：" + maskFile;
     }
-    // the points, so that the selection can be edited again later
-    std::string text;
-    for (const MaskPoint& p : points) {
-        char bx[G_ASCII_DTOSTR_BUF_SIZE], by[G_ASCII_DTOSTR_BUF_SIZE];
-        g_ascii_formatd(bx, sizeof(bx), "%.6f", p.x);
-        g_ascii_formatd(by, sizeof(by), "%.6f", p.y);
-        text += std::string(bx) + " " + by + " " + (p.add ? "1" : "0") + "\n";
-    }
+    // what the mask was made from, so that it can be edited again later
+    const std::string text = AIRawCore::editToText(edit);
     g_file_set_contents((maskFile + ".pts").c_str(), text.c_str(), text.size(), nullptr);
 
     result.x0 = sel.x0;
@@ -455,40 +478,15 @@ Glib::ustring storeMask(AIRawCore::SelectResult& sel, const std::vector<MaskPoin
 
 }
 
-std::vector<MaskPoint> loadMaskPoints(const Glib::ustring& maskFile)
+bool loadMaskEdit(const Glib::ustring& maskFile, AIRawCore::MaskEdit& edit)
 {
-    std::vector<MaskPoint> res;
     gchar* text = nullptr;
     if (maskFile.empty() || !g_file_get_contents((maskFile + ".pts").c_str(), &text, nullptr, nullptr) || !text) {
-        return res;
+        return false;
     }
-    const char* p = text;
-    while (*p) {
-        char* end = nullptr;
-        const double x = g_ascii_strtod(p, &end);
-        if (end == p) {
-            break;
-        }
-        p = end;
-        const double y = g_ascii_strtod(p, &end);
-        if (end == p) {
-            break;
-        }
-        p = end;
-        const double a = g_ascii_strtod(p, &end);
-        if (end == p) {
-            break;
-        }
-        p = end;
-        if (x >= 0.0 && x <= 1.0 && y >= 0.0 && y <= 1.0) {
-            res.push_back({ x, y, a > 0.5 });
-        }
-        while (*p == ' ' || *p == '\n' || *p == '\r' || *p == '\t') {
-            ++p;
-        }
-    }
+    const bool ok = AIRawCore::editFromText(text, edit);
     g_free(text);
-    return res;
+    return ok;
 }
 
 void setMaskOverlay(bool show)
@@ -517,19 +515,20 @@ Glib::ustring maskBegin(const MaskRender& render, const std::function<void(doubl
     return maskError(err);
 }
 
-Glib::ustring maskPreview(const std::vector<MaskPoint>& points, int maxW, int maxH, std::vector<unsigned char>& rgb, int& w, int& h, double& area)
+Glib::ustring maskView(const AIRawCore::MaskEdit& edit, double cx, double cy, double zoom, int outW, int outH,
+                       std::vector<unsigned char>& rgb, double& scaleX, double& scaleY, double& offX, double& offY)
 {
-    return maskError(AIRawCore::selectPreview(toCore(points), maxW, maxH, rgb, w, h, area));
+    return maskError(AIRawCore::selectView(edit, cx, cy, zoom, outW, outH, rgb, scaleX, scaleY, offX, offY));
 }
 
-Glib::ustring maskFinish(const std::vector<MaskPoint>& points, const Glib::ustring& maskFile, MaskResult& result, const std::function<void(double)>& progress)
+Glib::ustring maskFinish(const AIRawCore::MaskEdit& edit, const Glib::ustring& maskFile, MaskResult& result, const std::function<void(double)>& progress)
 {
     AIRawCore::SelectResult sel;
-    const std::string err = AIRawCore::selectFinish(toCore(points), nullptr, sel, progress);
+    const std::string err = AIRawCore::selectFinish(edit, sel, progress);
     if (!err.empty()) {
         return maskError(err);
     }
-    return storeMask(sel, points, maskFile, result);
+    return storeMask(sel, edit, maskFile, result);
 }
 
 void maskEnd()
@@ -562,10 +561,12 @@ Glib::ustring makeMask(const MaskRender& render, const MaskRequest& request, con
     if (!err.empty()) {
         return maskError(err);
     }
-    std::vector<MaskPoint> points;
-    points.push_back({ request.centerX, request.centerY, true });
-    points.insert(points.end(), request.more.begin(), request.more.end());
-    return storeMask(sel, points, maskFile, result);
+    AIRawCore::MaskEdit edit;
+    edit.points.push_back({ request.centerX, request.centerY, true });
+    for (const MaskPoint& p : request.more) {
+        edit.points.push_back({ p.x, p.y, p.add });
+    }
+    return storeMask(sel, edit, maskFile, result);
 }
 
 }

@@ -484,7 +484,7 @@ void LocallabTone::read(const rtengine::procparams::ProcParams* pp, const Params
     if (index < (int)pp->locallab.spots.size()) {
         const LocallabParams::LocallabSpot& spot = pp->locallab.spots.at(index);
 
-        exp->set_visible(spot.visitonemap);
+        exp->set_visible(true); // every tool is always shown for the selected spot
         exp->setEnabled(spot.exptonemap);
         complexity->set_active(spot.complextonemap);
 
@@ -1362,7 +1362,7 @@ void LocallabRetinex::read(const rtengine::procparams::ProcParams* pp, const Par
     if (index < (int)pp->locallab.spots.size()) {
         const LocallabParams::LocallabSpot& spot = pp->locallab.spots.at(index);
 
-        exp->set_visible(spot.visireti);
+        exp->set_visible(true); // every tool is always shown for the selected spot
         exp->setEnabled(spot.expreti);
         complexity->set_active(spot.complexreti);
 
@@ -2403,7 +2403,7 @@ void LocallabSharp::read(const rtengine::procparams::ProcParams* pp, const Param
     if (index < (int)pp->locallab.spots.size()) {
         const LocallabParams::LocallabSpot& spot = pp->locallab.spots.at(index);
 
-        exp->set_visible(spot.visisharp);
+        exp->set_visible(true); // every tool is always shown for the selected spot
         exp->setEnabled(spot.expsharp);
         complexity->set_active(spot.complexsharp);
         if (spot.methodcap == "cap") {
@@ -3769,7 +3769,7 @@ void LocallabContrast::read(const rtengine::procparams::ProcParams* pp, const Pa
     if (index < (int)pp->locallab.spots.size()) {
         const LocallabParams::LocallabSpot& spot = pp->locallab.spots.at(index);
 
-        exp->set_visible(spot.visicontrast);
+        exp->set_visible(true); // every tool is always shown for the selected spot
         exp->setEnabled(spot.expcontrast);
         complexity->set_active(spot.complexcontrast);
 
@@ -5443,7 +5443,7 @@ void LocallabCBDL::read(const rtengine::procparams::ProcParams* pp, const Params
     if (index < (int)pp->locallab.spots.size()) {
         const LocallabParams::LocallabSpot& spot = pp->locallab.spots.at(index);
 
-        exp->set_visible(spot.visicbdl);
+        exp->set_visible(true); // every tool is always shown for the selected spot
         exp->setEnabled(spot.expcbdl);
         complexity->set_active(spot.complexcbdl);
 
@@ -6503,7 +6503,7 @@ void LocallabLog::read(const rtengine::procparams::ProcParams* pp, const ParamsE
     if (index < (int)pp->locallab.spots.size()) {
         const LocallabParams::LocallabSpot& spot = pp->locallab.spots.at(index);
 
-        exp->set_visible(spot.visilog);
+        exp->set_visible(true); // every tool is always shown for the selected spot
         exp->setEnabled(spot.explog);
         complexity->set_active(spot.complexlog);
 
@@ -7848,7 +7848,7 @@ void LocallabMask::read(const rtengine::procparams::ProcParams* pp, const Params
     if (index < (int)pp->locallab.spots.size()) {
         const LocallabParams::LocallabSpot& spot = pp->locallab.spots.at(index);
 
-        exp->set_visible(spot.visimask);
+        exp->set_visible(true); // every tool is always shown for the selected spot
         exp->setEnabled(spot.expmask);
         complexity->set_active(spot.complexmask);
 
@@ -10283,7 +10283,7 @@ void Locallabcie::read(const rtengine::procparams::ProcParams* pp, const ParamsE
     if (index < (int)pp->locallab.spots.size()) {
         const LocallabParams::LocallabSpot& spot = pp->locallab.spots.at(index);
 
-        exp->set_visible(spot.visicie);
+        exp->set_visible(true); // every tool is always shown for the selected spot
         exp->setEnabled(spot.expcie);
         complexity->set_active(spot.complexcie);
         expprecam->setEnabled(spot.expprecam);

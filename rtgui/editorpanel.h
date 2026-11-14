@@ -31,6 +31,8 @@
 #include "rtengine/noncopyable.h"
 #include "rtengine/rtengine.h"
 
+#include <memory>
+
 #include <gtkmm.h>
 
 namespace rtengine
@@ -174,6 +176,8 @@ public:
     void aiDenoisePressed();
     void aiUpscalePressed();
     void aiMaskPressed();
+    void aiMaskStart(int spot);
+    void aiMaskRemove(int spot);
     void aiMaskShowToggled();
     void aiPushParams(const rtengine::procparams::ProcParams& pparams);
     bool idle_aiMaskReady(ProgressConnector<void*> *pc);
@@ -320,6 +324,8 @@ private:
     Gtk::Button* aiDenoiseBtn;
     Gtk::Button* aiUpscaleBtn;
     Gtk::Button* aiMaskBtn;
+    std::unique_ptr<Gtk::Menu> aiMaskMenu;
+    bool aiMaskShowQuiet = false;
     Gtk::ToggleButton* aiMaskShowBtn;
     Glib::ustring aiUpscaleOutFile;
     Glib::ustring aiDenoiseOutFile;

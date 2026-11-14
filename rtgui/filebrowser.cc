@@ -25,6 +25,8 @@
 
 #include "filebrowser.h"
 
+#include "aibatch.h"
+
 #include "batchqueue.h"
 #include "clipboard.h"
 #include "inspector.h"
@@ -161,6 +163,10 @@ FileBrowser::FileBrowser () :
     pmenu->attach (*Gtk::manage(develop = new MyImageMenuItem (M("FILEBROWSER_POPUPPROCESS"), "gears")), 0, 1, p, p + 1);
     p++;
     pmenu->attach (*Gtk::manage(developfast = new Gtk::MenuItem (M("FILEBROWSER_POPUPPROCESSFAST"))), 0, 1, p, p + 1);
+    p++;
+    pmenu->attach (*Gtk::manage(aiDenoiseItem = new Gtk::MenuItem (M("AIBATCH_MENU_DENOISE"))), 0, 1, p, p + 1);
+    p++;
+    pmenu->attach (*Gtk::manage(aiUpscaleItem = new Gtk::MenuItem (M("AIBATCH_MENU_UPSCALE"))), 0, 1, p, p + 1);
     p++;
 
     pmenu->attach (*Gtk::manage(new Gtk::SeparatorMenuItem ()), 0, 1, p, p + 1);
@@ -493,6 +499,8 @@ FileBrowser::FileBrowser () :
     untrash->signal_activate().connect (sigc::bind(sigc::mem_fun(*this, &FileBrowser::menuItemActivated), untrash));
     develop->signal_activate().connect (sigc::bind(sigc::mem_fun(*this, &FileBrowser::menuItemActivated), develop));
     developfast->signal_activate().connect (sigc::bind(sigc::mem_fun(*this, &FileBrowser::menuItemActivated), developfast));
+    aiDenoiseItem->signal_activate().connect (sigc::bind(sigc::mem_fun(*this, &FileBrowser::menuItemActivated), aiDenoiseItem));
+    aiUpscaleItem->signal_activate().connect (sigc::bind(sigc::mem_fun(*this, &FileBrowser::menuItemActivated), aiUpscaleItem));
     rename->signal_activate().connect (sigc::bind(sigc::mem_fun(*this, &FileBrowser::menuItemActivated), rename));
     remove->signal_activate().connect (sigc::bind(sigc::mem_fun(*this, &FileBrowser::menuItemActivated), remove));
     removeInclProc->signal_activate().connect (sigc::bind(sigc::mem_fun(*this, &FileBrowser::menuItemActivated), removeInclProc));
@@ -745,6 +753,21 @@ void FileBrowser::menuItemActivated (Gtk::MenuItem* m)
 
 
     if (!tbl || (m != selall && mselected.empty()) ) {
+        return;
+    }
+
+    if (m == aiDenoiseItem || m == aiUpscaleItem) {
+        std::vector<AIBatch::Item> items;
+        for (FileBrowserEntry* e : mselected) {
+            AIBatch::Item it;
+            it.file = e->filename;
+            it.hasParams = e->thumbnail->hasProcParams();
+            it.params = e->thumbnail->getProcParams();
+            items.push_back(it);
+        }
+        if (Gtk::Window* const win = dynamic_cast<Gtk::Window*>(get_toplevel())) {
+            AIBatch::run(*win, items, m == aiDenoiseItem ? AIBatch::Mode::DENOISE : AIBatch::Mode::UPSCALE);
+        }
         return;
     }
 

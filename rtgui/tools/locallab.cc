@@ -171,6 +171,9 @@ Locallab::Locallab():
     // Add tool list widget
     toollist->setLocallabToolListListener(this);
     panel->pack_start(*toollist, false, false);
+    // every tool is shown for the selected spot, so there is nothing to add
+    toollist->set_no_show_all(true);
+    toollist->hide();
 
     // Add all the tools' preview delta E buttons to one group.
     for (auto button : {
@@ -388,6 +391,13 @@ void Locallab::read(const rtengine::procparams::ProcParams* pp, const ParamsEdit
     // Update each Locallab tools GUI
     for (auto tool : locallabTools) {
         tool->read(pp, pedited);
+        // all tools are listed: keep the ones that are switched off folded
+        if (tool->getExpander()) {
+            MyExpander* const e = static_cast<MyExpander*>(tool->getExpander());
+            if (!e->getEnabled()) {
+                e->set_expanded(false);
+            }
+        }
     }
 
     // Update tool list widget
@@ -1654,7 +1664,9 @@ void Locallab::openAllTools()
     expsettings->setDefaultExpanderVisibility();
 
     for (auto tool : locallabTools) {
-        tool->setExpanded(true);
+        // all tools are listed: only the ones that are switched on are unfolded
+        MyExpander* const e = static_cast<MyExpander*>(tool->getExpander());
+        tool->setExpanded(e && e->getEnabled());
 
         // Set default visibility for tool sub-expanders
         tool->setDefaultExpanderVisibility();

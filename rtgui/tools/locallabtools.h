@@ -167,6 +167,7 @@ protected:
     // LocallabTool parameters
     bool needMode;
     bool isLocActivated;
+    Glib::RefPtr<Gtk::GestureMultiPress> autoEnable;
     const Glib::ustring *spotNameSource;
     LocallabToolListener* locToolListener;
 

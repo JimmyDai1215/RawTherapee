@@ -1872,10 +1872,10 @@ IPTCPANEL_TRANSREFERENCE;Job ID
 IPTCPANEL_TRANSREFERENCEHINT;Enter a number or identifier needed for workflow control or tracking.
 MAIN_BUTTON_AIDENOISE;AI denoise
 MAIN_BUTTON_AIDENOISE_TOOLTIP;Denoise the raw data of the current photo with a neural network and save it as a new raw file (DNG) next to the original.\nYour current edits are copied to the new file.
-MAIN_BUTTON_AIMASK;AI mask
+MAIN_BUTTON_AIMASK;Masks
 MAIN_BUTTON_AIMASKSHOW;Show mask
 MAIN_BUTTON_AIMASKSHOW_TOOLTIP;Tint the AI mask of the selected local adjustment spot red in the preview. This is only a display aid and never ends up in saved images.
-MAIN_BUTTON_AIMASK_TOOLTIP;Select the object under the centre of the current local adjustment spot with a neural network and use that selection as the shape of the spot.
+MAIN_BUTTON_AIMASK_TOOLTIP;Create, edit or delete masks (AI select, brush, polygon, gradient).\nThe tools under Local Adjustments act inside the selected mask.
 MAIN_BUTTON_AIUPSCALE;AI upscale 2x
 MAIN_BUTTON_AIUPSCALE_TOOLTIP;Develop the current photo with your edits and enlarge it to twice the width and height with a neural network. The result is saved as a 16-bit TIFF next to the original.
 MAIN_BUTTON_FULLSCREEN;Fullscreen
@@ -3985,8 +3985,8 @@ TP_LOCALLAB_RET_TOOLNAME;Dehaze & Retinex
 TP_LOCALLAB_REWEI;Reweighting iterates
 TP_LOCALLAB_RGB;RGB Tone Curve
 TP_LOCALLAB_RGBCURVE_TOOLTIP;In RGB mode you have 4 choices : Standard, Weighted standard, Luminance &amp; Film-like.
-TP_LOCALLAB_ROW_NVIS;Not visible
-TP_LOCALLAB_ROW_VIS;Visible
+TP_LOCALLAB_ROW_NVIS;Handles hidden
+TP_LOCALLAB_ROW_VIS;Handles shown
 TP_LOCALLAB_RSTPROTECT_TOOLTIP;Red and skin-tone protection affects the Saturation, Chroma and Colorfulness sliders.
 TP_LOCALLAB_SATCIE;Saturation control
 TP_LOCALLAB_SATCIE_TOOLTIP;Modifies the image saturation whenever the gamma/slope ratio is different from 2.4/12.92. It aims to compensate for the desaturation caused by significant luminance variations.\nValues between 0.2 and 1.0 are often sufficient.
@@ -4975,3 +4975,41 @@ ZOOMPANEL_ZOOMIN;Zoom In\nShortcut: <b>+</b>
 ZOOMPANEL_ZOOMOUT;Zoom Out\nShortcut: <b>-</b>
 //TP_WBALANCE_ITCWBNOPURPLE_TOOLTIP;By default when "Inpaint opposed" is activated, purple colors are not taken into account. However, if the image does not need highlight reconstruction, or if this image naturally contains purple tints (flowers, etc.), it may be necessary to deactivate, to take into account all the colors.
 //TP_WBALANCE_ITCWB_FORCED;Forces use of the entire CIE diagram
+
+MAIN_MASK_NEW;New mask…
+MAIN_MASK_EDIT;Edit mask "%1"…
+MAIN_MASK_DELETE;Delete mask "%1"
+MAIN_MASK_DELETE_CONFIRM;Delete the mask "%1" and its adjustments?
+MAIN_MASK_NAME;Mask %1
+MASKEDIT_TITLE;Mask editor
+MASKEDIT_TOOL_AI;AI select
+MASKEDIT_TOOL_BRUSH;Brush
+MASKEDIT_TOOL_POLYGON;Polygon
+MASKEDIT_TOOL_GRADIENT;Gradient
+MASKEDIT_TOOL_AI_TOOLTIP;Click an object to select it
+MASKEDIT_TOOL_BRUSH_TOOLTIP;Paint the mask by hand
+MASKEDIT_TOOL_POLYGON_TOOLTIP;Outline an area with straight edges
+MASKEDIT_TOOL_GRADIENT_TOOLTIP;A mask that fades out along the line you drag
+MASKEDIT_BRUSHSIZE;Brush size
+MASKEDIT_FEATHER;Feather
+MASKEDIT_GROW;Shrink/grow
+MASKEDIT_INVERT;Invert
+MASKEDIT_UNDO;Undo
+MASKEDIT_RESET;Clear
+MASKEDIT_FIT;Fit to window
+MASKEDIT_APPLY;Use this mask
+MASKEDIT_INFO;AI points: %1   strokes/shapes: %2   zoom: %3%%
+MASKEDIT_HELP_AI;Left click: add what is there to the mask. Right click (or Shift+click): take it out. Wheel: zoom. Ctrl+drag or middle button: move.
+MASKEDIT_HELP_BRUSH;Left drag: paint. Right drag: erase. Wheel: zoom. Ctrl+drag or middle button: move.
+MASKEDIT_HELP_POLYGON;Left click: place corners; double click: close and add the area. Right click: close and take the area out of the mask.
+MASKEDIT_HELP_GRADIENT;Drag from where the mask is full to where it has faded out. Right drag: take a gradient out of the mask.
+MASKEDIT_LUMA;Brightness range
+MASKEDIT_LUMA_TOOLTIP;Keeps the mask only where the photo is between the two brightness limits (left: darkest, right: brightest). E.g. only the bright parts of a sky, or only the shadows of a selected object.
+AIBATCH_MENU_DENOISE;AI denoise (selected photos)
+AIBATCH_MENU_UPSCALE;AI upscale 2x (selected photos)
+AIBATCH_DENOISE_INTRO;AI denoise for %1 photo(s). Each gets a new raw file (_AI.dng) next to the original, with the same edits.
+AIBATCH_UPSCALE_INTRO;AI upscale 2x for %1 photo(s). Each is developed with its current edits and saved as a 16-bit TIFF (_2x.tif) next to the original.
+AIBATCH_STOP;Stop after this photo
+AIBATCH_STOPPING;(stopping…)
+AIBATCH_DONE;Finished: %1 of %2 photo(s).
+AIBATCH_FOLDER;Saved in: %1

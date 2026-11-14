@@ -2261,3 +2261,14 @@ FoldableToolPanel *ToolPanelCoordinator::getFoldableToolPanel(const ToolTree &to
 {
     return getFoldableToolPanel(toolTree.id);
 }
+
+void ToolPanelCoordinator::showLocalAdjustments()
+{
+    const int page = toolPanelNotebook->page_num(*locallabPanelSW);
+    if (page >= 0) {
+        toolPanelNotebook->set_current_page(page);
+    }
+    if (locallab->getExpander()) {
+        static_cast<MyExpander*>(locallab->getExpander())->set_expanded(true);
+    }
+}

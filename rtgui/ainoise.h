@@ -9,6 +9,8 @@
 #include <vector>
 #include <glibmm/ustring.h>
 
+#include "airawcore.h"
+
 namespace rtengine
 {
 class IImagefloat;
@@ -50,7 +52,9 @@ bool upscaleAvailable(int model);
 
 // Upscales the developed image (values 0..65535) to twice its size and writes a 16 bit TIFF.
 // Returns an empty string on success, otherwise a human readable error message.
-Glib::ustring upscaleToTiff(rtengine::IImagefloat* img, const Glib::ustring& tifFile, int model, const std::function<void(double)>& progress);
+// metadataFrom: the photo whose EXIF/IPTC/XMP data the TIFF gets (may be empty).
+Glib::ustring upscaleToTiff(rtengine::IImagefloat* img, const Glib::ustring& tifFile, int model, const std::function<void(double)>& progress,
+                            const Glib::ustring& metadataFrom = Glib::ustring());
 
 // --- AI mask (object selection) for local adjustments
 
@@ -91,17 +95,18 @@ bool maskAvailable();
 // Returns an empty string on success, otherwise a human readable error message.
 Glib::ustring makeMask(const MaskRender& render, const MaskRequest& request, const Glib::ustring& maskFile, MaskResult& result, const std::function<void(double)>& progress);
 
-// The same in steps, for the interactive dialog. maskBegin develops the photo and loads it
-// into the network; maskPreview then answers quickly for any set of points and returns the
-// photo with the rough selection in red; maskFinish writes the final mask file (and the
-// points next to it); maskEnd frees everything.
+// The same in steps, for the mask editor. maskBegin develops the photo and loads it into the
+// network; maskView then draws any state of the mask over the photo quickly; maskFinish
+// writes the final mask file (and what it was made from next to it); maskEnd frees
+// everything.
 Glib::ustring maskBegin(const MaskRender& render, const std::function<void(double)>& progress);
-Glib::ustring maskPreview(const std::vector<MaskPoint>& points, int maxW, int maxH, std::vector<unsigned char>& rgb, int& w, int& h, double& area);
-Glib::ustring maskFinish(const std::vector<MaskPoint>& points, const Glib::ustring& maskFile, MaskResult& result, const std::function<void(double)>& progress);
+Glib::ustring maskView(const AIRawCore::MaskEdit& edit, double cx, double cy, double zoom, int outW, int outH,
+                       std::vector<unsigned char>& rgb, double& scaleX, double& scaleY, double& offX, double& offY);
+Glib::ustring maskFinish(const AIRawCore::MaskEdit& edit, const Glib::ustring& maskFile, MaskResult& result, const std::function<void(double)>& progress);
 void maskEnd();
 
-// The points a mask was made from (empty if unknown).
-std::vector<MaskPoint> loadMaskPoints(const Glib::ustring& maskFile);
+// What a mask was made from. Returns false if that is not known.
+bool loadMaskEdit(const Glib::ustring& maskFile, AIRawCore::MaskEdit& edit);
 
 // Shows or hides the mask of the selected spot in the previews.
 void setMaskOverlay(bool show);

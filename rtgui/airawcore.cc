@@ -1299,6 +1299,332 @@ void shrinkRgb(const std::vector<unsigned char>& src, int w, int h, int f, std::
     }
 }
 
+// ---- hand-made mask parts, drawn into a float buffer (0..1) of size w x h.
+// An image point (nx, ny in 0..1) lies at pixel (nx * sx + ox, ny * sy + oy).
+
+struct Xform {
+    double sx, sy, ox, oy;
+};
+
+void drawBrush(std::vector<float>& m, int w, int h, const MaskOp& op, const Xform& t)
+{
+    const size_t n = op.xy.size() / 2;
+    if (!n) {
+        return;
+    }
+    const double R = std::max(0.5, op.radius * t.sx);
+    for (size_t i = 0; i < n; ++i) {
+        const double ax = op.xy[2 * i] * t.sx + t.ox, ay = op.xy[2 * i + 1] * t.sy + t.oy;
+        const size_t j = i + 1 < n ? i + 1 : i;
+        const double bx = op.xy[2 * j] * t.sx + t.ox, by = op.xy[2 * j + 1] * t.sy + t.oy;
+        const int x0 = std::max(0, static_cast<int>(std::floor(std::min(ax, bx) - R - 1)));
+        const int x1 = std::min(w - 1, static_cast<int>(std::ceil(std::max(ax, bx) + R + 1)));
+        const int y0 = std::max(0, static_cast<int>(std::floor(std::min(ay, by) - R - 1)));
+        const int y1 = std::min(h - 1, static_cast<int>(std::ceil(std::max(ay, by) + R + 1)));
+        const double dx = bx - ax, dy = by - ay;
+        const double len2 = dx * dx + dy * dy;
+        for (int y = y0; y <= y1; ++y) {
+            float* row = m.data() + static_cast<size_t>(y) * w;
+            for (int x = x0; x <= x1; ++x) {
+                const double px = x + 0.5 - ax, py = y + 0.5 - ay;
+                double u = len2 > 0.0 ? (px * dx + py * dy) / len2 : 0.0;
+                u = std::min(1.0, std::max(0.0, u));
+                const double ex = px - u * dx, ey = py - u * dy;
+                const float cov = static_cast<float>(std::min(1.0, std::max(0.0, R + 0.5 - std::sqrt(ex * ex + ey * ey))));
+                if (cov > 0.f) {
+                    row[x] = op.add ? std::max(row[x], cov) : std::min(row[x], 1.f - cov);
+                }
+            }
+        }
+    }
+}
+
+void drawPolygon(std::vector<float>& m, int w, int h, const MaskOp& op, const Xform& t)
+{
+    const size_t n = op.xy.size() / 2;
+    if (n < 3) {
+        return;
+    }
+    std::vector<double> px(n), py(n);
+    double ymin = 1e30, ymax = -1e30;
+    for (size_t i = 0; i < n; ++i) {
+        px[i] = op.xy[2 * i] * t.sx + t.ox;
+        py[i] = op.xy[2 * i + 1] * t.sy + t.oy;
+        ymin = std::min(ymin, py[i]);
+        ymax = std::max(ymax, py[i]);
+    }
+    const int y0 = std::max(0, static_cast<int>(std::floor(ymin)));
+    const int y1 = std::min(h - 1, static_cast<int>(std::ceil(ymax)));
+    std::vector<double> xs;
+    for (int y = y0; y <= y1; ++y) {
+        const double yc = y + 0.5;
+        xs.clear();
+        for (size_t i = 0; i < n; ++i) {
+            const size_t j = (i + 1) % n;
+            if ((py[i] <= yc && py[j] > yc) || (py[j] <= yc && py[i] > yc)) {
+                xs.push_back(px[i] + (yc - py[i]) * (px[j] - px[i]) / (py[j] - py[i]));
+            }
+        }
+        std::sort(xs.begin(), xs.end());
+        float* row = m.data() + static_cast<size_t>(y) * w;
+        for (size_t k = 0; k + 1 < xs.size(); k += 2) {
+            const int a = std::max(0, static_cast<int>(std::ceil(xs[k] - 0.5)));
+            const int b = std::min(w - 1, static_cast<int>(std::floor(xs[k + 1] - 0.5)));
+            for (int x = a; x <= b; ++x) {
+                row[x] = op.add ? 1.f : 0.f;
+            }
+        }
+    }
+}
+
+void drawGradient(std::vector<float>& m, int w, int h, const MaskOp& op, const Xform& t)
+{
+    if (op.xy.size() < 4) {
+        return;
+    }
+    const double ax = op.xy[0] * t.sx + t.ox, ay = op.xy[1] * t.sy + t.oy;
+    const double bx = op.xy[2] * t.sx + t.ox, by = op.xy[3] * t.sy + t.oy;
+    const double dx = bx - ax, dy = by - ay;
+    const double len2 = dx * dx + dy * dy;
+    if (len2 < 1.0) {
+        return;
+    }
+    for (int y = 0; y < h; ++y) {
+        float* row = m.data() + static_cast<size_t>(y) * w;
+        for (int x = 0; x < w; ++x) {
+            double u = ((x + 0.5 - ax) * dx + (y + 0.5 - ay) * dy) / len2;
+            u = std::min(1.0, std::max(0.0, u));
+            const float ramp = static_cast<float>(1.0 - u * u * (3.0 - 2.0 * u));   // full at the start, none at the end
+            row[x] = op.add ? std::max(row[x], ramp) : row[x] * (1.f - ramp);
+        }
+    }
+}
+
+void drawOps(std::vector<float>& m, int w, int h, const std::vector<MaskOp>& ops, const Xform& t)
+{
+    for (const MaskOp& op : ops) {
+        if (op.type == 0) {
+            drawBrush(m, w, h, op, t);
+        } else if (op.type == 1) {
+            drawPolygon(m, w, h, op, t);
+        } else if (op.type == 2) {
+            drawGradient(m, w, h, op, t);
+        }
+    }
+}
+
+// Running maximum (grow = true) or minimum over a window of radius r along one line.
+void slideLine(const float* src, float* dst, int n, int stride, int r, bool grow, std::vector<int>& dq)
+{
+    dq.resize(n);
+    int head = 0, tail = 0;   // indices into src, kept so that their values are monotonic
+    int next = 0;
+    for (int i = 0; i < n; ++i) {
+        const int hi = std::min(n - 1, i + r);
+        while (next <= hi) {
+            const float v = src[static_cast<size_t>(next) * stride];
+            while (tail > head && (grow ? src[static_cast<size_t>(dq[tail - 1]) * stride] <= v : src[static_cast<size_t>(dq[tail - 1]) * stride] >= v)) {
+                --tail;
+            }
+            dq[tail++] = next++;
+        }
+        while (dq[head] < i - r) {
+            ++head;
+        }
+        dst[static_cast<size_t>(i) * stride] = src[static_cast<size_t>(dq[head]) * stride];
+    }
+}
+
+// Grows (r > 0) or shrinks (r < 0) a soft mask by |r| pixels (square structuring element,
+// two passes for a rounder shape).
+void growMask(std::vector<float>& m, int w, int h, int r)
+{
+    if (r == 0) {
+        return;
+    }
+    const bool grow = r > 0;
+    const int rad = std::abs(r);
+    std::vector<float> tmp(m.size());
+    std::vector<int> dq;
+    for (int y = 0; y < h; ++y) {
+        slideLine(m.data() + static_cast<size_t>(y) * w, tmp.data() + static_cast<size_t>(y) * w, w, 1, rad, grow, dq);
+    }
+    for (int x = 0; x < w; ++x) {
+        slideLine(tmp.data() + x, m.data() + x, h, w, rad, grow, dq);
+    }
+}
+
+// Ops, grow/shrink, feather and invert, in that order. px = pixels per unit of image width.
+// rgb: the photo on the same grid as the mask (8 bit, 3 per pixel), for the brightness range.
+void finishTouches(std::vector<float>& m, int w, int h, const MaskEdit& edit, const Xform& t, const unsigned char* rgb)
+{
+    drawOps(m, w, h, edit.ops, t);
+    growMask(m, w, h, static_cast<int>(std::lround(edit.grow * t.sx)));
+    const int f = static_cast<int>(std::lround(edit.feather * t.sx));
+    if (f > 0) {
+        boxBlur(m, w, h, f);
+        boxBlur(m, w, h, f);
+    }
+    if (edit.invert) {
+        for (float& v : m) {
+            v = 1.f - v;
+        }
+    }
+    if (rgb && (edit.lumaLo > 0.0 || edit.lumaHi < 1.0)) {
+        // soft limits, so that the mask does not get a hard, noisy border
+        const float lo = static_cast<float>(edit.lumaLo), hi = static_cast<float>(edit.lumaHi), soft = 0.06f;
+        float lut[256];
+        for (int i = 0; i < 256; ++i) {
+            const float l = i / 255.f;
+            float f = 1.f;
+            if (lo > 0.f) {
+                f = std::min(f, std::min(1.f, std::max(0.f, (l - lo) / soft + 0.5f)));
+            }
+            if (hi < 1.f) {
+                f = std::min(f, std::min(1.f, std::max(0.f, (hi - l) / soft + 0.5f)));
+            }
+            lut[i] = f;
+        }
+        const size_t n = static_cast<size_t>(w) * h;
+        for (size_t i = 0; i < n; ++i) {
+            const unsigned char* p = rgb + i * 3;
+            m[i] *= lut[(p[0] * 77 + p[1] * 150 + p[2] * 29) >> 8];
+        }
+    }
+}
+
+void putNumber(std::string& s, double v)
+{
+    char buf[48];
+    snprintf(buf, sizeof(buf), "%.6f", v);
+    for (char* c = buf; *c; ++c) {
+        if (*c == ',') {
+            *c = '.';   // some locales print a decimal comma
+        }
+    }
+    s += buf;
+    s += ' ';
+}
+
+// Locale-independent number reader. Returns false at the end of the line or text.
+bool getNumber(const char*& p, double& v)
+{
+    while (*p == ' ' || *p == '\t') {
+        ++p;
+    }
+    const char* start = p;
+    double sign = 1.0, val = 0.0, frac = 0.1;
+    if (*p == '-') {
+        sign = -1.0;
+        ++p;
+    }
+    bool digits = false;
+    while (*p >= '0' && *p <= '9') {
+        val = val * 10.0 + (*p++ - '0');
+        digits = true;
+    }
+    if (*p == '.') {
+        ++p;
+        while (*p >= '0' && *p <= '9') {
+            val += (*p++ - '0') * frac;
+            frac *= 0.1;
+            digits = true;
+        }
+    }
+    if (!digits) {
+        p = start;
+        return false;
+    }
+    v = sign * val;
+    return true;
+}
+
+}
+
+std::string editToText(const MaskEdit& edit)
+{
+    std::string s;
+    for (const SelectPoint& p : edit.points) {
+        s += "P ";
+        putNumber(s, p.x);
+        putNumber(s, p.y);
+        s += p.add ? "1\n" : "0\n";
+    }
+    for (const MaskOp& op : edit.ops) {
+        s += "O ";
+        putNumber(s, op.type);
+        putNumber(s, op.add ? 1 : 0);
+        putNumber(s, op.radius);
+        for (double v : op.xy) {
+            putNumber(s, v);
+        }
+        s += "\n";
+    }
+    s += "F ";
+    putNumber(s, edit.feather);
+    putNumber(s, edit.grow);
+    s += edit.invert ? "1\n" : "0\n";
+    s += "L ";
+    putNumber(s, edit.lumaLo);
+    putNumber(s, edit.lumaHi);
+    s += "\n";
+    return s;
+}
+
+bool editFromText(const std::string& text, MaskEdit& edit)
+{
+    edit = MaskEdit();
+    const char* p = text.c_str();
+    bool any = false;
+    while (*p) {
+        const char kind = *p;
+        if (kind == 'P' || kind == 'O' || kind == 'F' || kind == 'L') {
+            ++p;
+            std::vector<double> v;
+            double d;
+            while (getNumber(p, d)) {
+                v.push_back(d);
+            }
+            if (kind == 'P' && v.size() >= 3 && v[0] >= 0.0 && v[0] <= 1.0 && v[1] >= 0.0 && v[1] <= 1.0) {
+                edit.points.push_back({ v[0], v[1], v[2] > 0.5 });
+                any = true;
+            } else if (kind == 'O' && v.size() >= 5) {
+                MaskOp op;
+                op.type = static_cast<int>(v[0] + 0.5);
+                op.add = v[1] > 0.5;
+                op.radius = v[2];
+                op.xy.assign(v.begin() + 3, v.end());
+                if (op.xy.size() % 2) {
+                    op.xy.pop_back();
+                }
+                if (op.type >= 0 && op.type <= 2) {
+                    edit.ops.push_back(op);
+                    any = true;
+                }
+            } else if (kind == 'F' && v.size() >= 3) {
+                edit.feather = std::min(0.2, std::max(0.0, v[0]));
+                edit.grow = std::min(0.1, std::max(-0.1, v[1]));
+                edit.invert = v[2] > 0.5;
+            } else if (kind == 'L' && v.size() >= 2) {
+                edit.lumaLo = std::min(1.0, std::max(0.0, v[0]));
+                edit.lumaHi = std::min(1.0, std::max(edit.lumaLo, v[1]));
+            }
+        } else if (kind >= '0' && kind <= '9') {
+            // old format: "x y add" per line
+            double x, y, a;
+            if (getNumber(p, x) && getNumber(p, y) && getNumber(p, a) && x >= 0.0 && x <= 1.0 && y >= 0.0 && y <= 1.0) {
+                edit.points.push_back({ x, y, a > 0.5 });
+                any = true;
+            }
+        }
+        while (*p && *p != '\n') {
+            ++p;
+        }
+        if (*p == '\n') {
+            ++p;
+        }
+    }
+    return any;
 }
 
 #ifdef HAVE_ONNXRT
@@ -1588,6 +1914,9 @@ struct Session {
     bool encoded = false;             // the loaded features belong to the frame
     std::vector<unsigned char> small; // cached preview-size copy
     int sf = 0, sw = 0, sh = 0;
+    std::vector<unsigned char> aiBin; // rough AI selection at the size of `small`
+    std::vector<SelectPoint> aiPoints; // the points aiBin was made from
+    bool aiValid = false;
 };
 
 std::unique_ptr<Session> g_session;
@@ -1677,72 +2006,172 @@ std::string selectBegin(const char* encoderPath, const char* decoderPath, const 
     return {};
 }
 
-std::string selectPreview(const std::vector<SelectPoint>& points, int maxW, int maxH, std::vector<unsigned char>& rgbOut, int& outW, int& outH, double& area)
+namespace
 {
-    area = 0.0;
-    if (!g_session) {
-        return "no selection is in progress";
+
+bool samePoints(const std::vector<SelectPoint>& a, const std::vector<SelectPoint>& b)
+{
+    if (a.size() != b.size()) {
+        return false;
     }
-    try {
+    for (size_t i = 0; i < a.size(); ++i) {
+        if (a[i].x != b[i].x || a[i].y != b[i].y || a[i].add != b[i].add) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool anyAddPoint(const std::vector<SelectPoint>& points)
+{
+    for (const SelectPoint& p : points) {
+        if (p.add) {
+            return true;
+        }
+    }
+    return false;
+}
+
+// Brings the rough AI selection (at a third of the frame size) up to date.
+std::string updateRoughSelection(const std::vector<SelectPoint>& points)
+{
+    Session& s = *g_session;
+    if (s.sf != 3) {
+        shrinkRgb(s.rgb, s.rw, s.rh, 3, s.small, s.sw, s.sh);
+        s.sf = 3;
+        s.aiValid = false;
+    }
+    if (s.aiValid && samePoints(points, s.aiPoints)) {
+        return {};
+    }
+    const int pw = s.sw, ph = s.sh;
+    const size_t n = static_cast<size_t>(pw) * ph;
+    s.aiBin.assign(n, 0);
+    if (anyAddPoint(points)) {
         std::string err = encodeFrame();
         if (!err.empty()) {
             return err;
         }
-        Session& s = *g_session;
-        const int f = std::max(1, std::max((s.rw + std::max(1, maxW) - 1) / std::max(1, maxW), (s.rh + std::max(1, maxH) - 1) / std::max(1, maxH)));
-        if (s.sf != f) {
-            shrinkRgb(s.rgb, s.rw, s.rh, f, s.small, s.sw, s.sh);
-            s.sf = f;
-        }
-        const int pw = s.sw, ph = s.sh;
-        const size_t n = static_cast<size_t>(pw) * ph;
-        std::vector<unsigned char> bin(n, 0);
         std::vector<PointPx> px;
         SamQuery q;
         toQuery(points, static_cast<float>(s.rw), static_cast<float>(s.rh), q, px, pw, ph);
-
-        bool anyAdd = false;
-        for (const SelectPoint& p : points) {
-            anyAdd = anyAdd || p.add;
+        std::vector<float> logits;
+        float quality = 0.f, agree = 0.f;
+        err = samDecode(q, pw, ph, logits, quality, agree);
+        if (!err.empty()) {
+            return err;
         }
-        if (anyAdd) {
-            std::vector<float> logits;
-            float quality = 0.f, agree = 0.f;
-            err = samDecode(q, pw, ph, logits, quality, agree);
-            if (!err.empty()) {
-                return err;
-            }
-            for (float& v : logits) {
-                v = std::min(8.f, std::max(-8.f, v));
-            }
-            guidedFilter(s.small.data(), pw, ph, logits, std::max(2, std::max(pw, ph) / 85), 1e-3f, false);
-            for (size_t i = 0; i < n; ++i) {
-                bin[i] = logits[i] > 0.f;
-            }
-            cleanupSelection(bin, pw, ph, px);
+        for (float& v : logits) {
+            v = std::min(8.f, std::max(-8.f, v));
         }
-
-        rgbOut.resize(n * 3);
-        size_t selected = 0;
+        guidedFilter(s.small.data(), pw, ph, logits, std::max(2, std::max(pw, ph) / 85), 1e-3f, false);
         for (size_t i = 0; i < n; ++i) {
-            const unsigned char* src = s.small.data() + i * 3;
-            const float a = bin[i] ? 0.55f : 0.f;
-            selected += bin[i];
-            // brightened a little so that dark photos remain readable
-            rgbOut[i * 3] = static_cast<unsigned char>(std::min(255.f, src[0] * 1.3f) * (1.f - a) + 255.f * a);
-            rgbOut[i * 3 + 1] = static_cast<unsigned char>(std::min(255.f, src[1] * 1.3f) * (1.f - a) + 40.f * a);
-            rgbOut[i * 3 + 2] = static_cast<unsigned char>(std::min(255.f, src[2] * 1.3f) * (1.f - a) + 40.f * a);
+            s.aiBin[i] = logits[i] > 0.f;
         }
-        // markers: green = add, blue = subtract, with a white ring
-        for (const PointPx& p : px) {
+        cleanupSelection(s.aiBin, pw, ph, px);
+    }
+    s.aiPoints = points;
+    s.aiValid = true;
+    return {};
+}
+
+}
+
+std::string selectView(const MaskEdit& edit, double cx, double cy, double zoom, int outW, int outH,
+                       std::vector<unsigned char>& rgbOut, double& scaleX, double& scaleY, double& offX, double& offY)
+{
+    if (!g_session) {
+        return "no selection is in progress";
+    }
+    if (outW < 16 || outH < 16) {
+        return "the view is too small";
+    }
+    try {
+        const std::string err = updateRoughSelection(edit.points);
+        if (!err.empty()) {
+            return err;
+        }
+        Session& s = *g_session;
+        // frame pixels per output pixel
+        const double fit = std::max(static_cast<double>(s.rw) / outW, static_cast<double>(s.rh) / outH);
+        const double z = std::max(0.25, fit / std::max(1.0, zoom));
+        const double vx = cx * s.rw - outW * z / 2.0;   // frame position of the view's left edge
+        const double vy = cy * s.rh - outH * z / 2.0;
+        scaleX = s.rw / z;
+        scaleY = s.rh / z;
+        offX = -vx / z;
+        offY = -vy / z;
+        const Xform t = { s.rw / z, s.rh / z, offX, offY };
+
+        const size_t n = static_cast<size_t>(outW) * outH;
+        std::vector<float> m(n, 0.f);
+        std::vector<unsigned char> inside(n, 0);
+        rgbOut.resize(n * 3);
+        const int step = std::max(1, static_cast<int>(z));
+        for (int y = 0; y < outH; ++y) {
+            const double fy = vy + (y + 0.5) * z;
+            for (int x = 0; x < outW; ++x) {
+                const double fx = vx + (x + 0.5) * z;
+                const size_t i = static_cast<size_t>(y) * outW + x;
+                unsigned char* d = rgbOut.data() + i * 3;
+                if (fx < 0.0 || fy < 0.0 || fx >= s.rw || fy >= s.rh) {
+                    d[0] = d[1] = d[2] = 48;
+                    continue;
+                }
+                inside[i] = 1;
+                const int ix = static_cast<int>(fx), iy = static_cast<int>(fy);
+                if (step <= 1) {
+                    const unsigned char* p = s.rgb.data() + (static_cast<size_t>(iy) * s.rw + ix) * 3;
+                    d[0] = p[0];
+                    d[1] = p[1];
+                    d[2] = p[2];
+                } else {
+                    // average a few samples of the footprint
+                    const int x0 = std::max(0, ix - step / 2), y0 = std::max(0, iy - step / 2);
+                    const int x1 = std::min(s.rw, x0 + step), y1 = std::min(s.rh, y0 + step);
+                    unsigned sum[3] = { 0, 0, 0 }, cnt = 0;
+                    for (int yy = y0; yy < y1; ++yy) {
+                        const unsigned char* p = s.rgb.data() + (static_cast<size_t>(yy) * s.rw + x0) * 3;
+                        for (int xx = x0; xx < x1; ++xx, p += 3) {
+                            sum[0] += p[0];
+                            sum[1] += p[1];
+                            sum[2] += p[2];
+                            ++cnt;
+                        }
+                    }
+                    d[0] = static_cast<unsigned char>(sum[0] / cnt);
+                    d[1] = static_cast<unsigned char>(sum[1] / cnt);
+                    d[2] = static_cast<unsigned char>(sum[2] / cnt);
+                }
+                const int ax = std::min(s.sw - 1, ix / 3), ay = std::min(s.sh - 1, iy / 3);
+                m[i] = s.aiBin[static_cast<size_t>(ay) * s.sw + ax];
+            }
+        }
+
+        finishTouches(m, outW, outH, edit, t, rgbOut.data());
+
+        for (size_t i = 0; i < n; ++i) {
+            if (!inside[i]) {
+                continue;
+            }
+            unsigned char* d = rgbOut.data() + i * 3;
+            const float a = std::min(1.f, std::max(0.f, m[i])) * 0.55f;
+            // brightened a little so that dark photos remain readable
+            d[0] = static_cast<unsigned char>(std::min(255.f, d[0] * 1.3f) * (1.f - a) + 255.f * a);
+            d[1] = static_cast<unsigned char>(std::min(255.f, d[1] * 1.3f) * (1.f - a) + 40.f * a);
+            d[2] = static_cast<unsigned char>(std::min(255.f, d[2] * 1.3f) * (1.f - a) + 40.f * a);
+        }
+        // AI points: green = add, blue = subtract, with a white ring
+        for (const SelectPoint& p : edit.points) {
+            const int px = static_cast<int>(p.x * t.sx + t.ox), py = static_cast<int>(p.y * t.sy + t.oy);
             for (int dy = -8; dy <= 8; ++dy) {
                 for (int dx = -8; dx <= 8; ++dx) {
                     const int d2 = dx * dx + dy * dy;
-                    const int x = p.x + dx, y = p.y + dy;
-                    if (d2 > 64 || x < 0 || y < 0 || x >= pw || y >= ph) {
+                    const int x = px + dx, y = py + dy;
+                    if (d2 > 64 || x < 0 || y < 0 || x >= outW || y >= outH) {
                         continue;
                     }
-                    unsigned char* d = rgbOut.data() + (static_cast<size_t>(y) * pw + x) * 3;
+                    unsigned char* d = rgbOut.data() + (static_cast<size_t>(y) * outW + x) * 3;
                     if (d2 > 30) {
                         d[0] = d[1] = d[2] = 255;
                     } else if (p.add) {
@@ -1757,16 +2186,13 @@ std::string selectPreview(const std::vector<SelectPoint>& points, int maxW, int 
                 }
             }
         }
-        outW = pw;
-        outH = ph;
-        area = static_cast<double>(selected) / n;
     } catch (...) {
         return describe(std::current_exception());
     }
     return {};
 }
 
-std::string selectFinish(const std::vector<SelectPoint>& points, const SelectRequest* box, SelectResult& result, const std::function<void(double)>& progress)
+std::string selectFinish(const MaskEdit& edit, SelectResult& result, const std::function<void(double)>& progress)
 {
     if (!g_session) {
         return "no selection is in progress";
@@ -1783,17 +2209,23 @@ std::string selectFinish(const std::vector<SelectPoint>& points, const SelectReq
         const int rw = s.rw, rh = s.rh, W = s.W, H = s.H;
         const float k = static_cast<float>(rw) / W;   // frame pixels per full-image pixel
 
-        bool anyAdd = false;
-        for (const SelectPoint& p : points) {
-            anyAdd = anyAdd || p.add;
-        }
-        if (!anyAdd) {
+        const std::vector<SelectPoint>& points = edit.points;
+        const size_t rn = static_cast<size_t>(rw) * rh;
+        std::vector<float> P(rn, 0.f);   // final probabilities at frame size
+        float quality = 0.f, agree = 0.f;
+        result.zoomed = false;
+        result.tiles = 0;
+        std::vector<unsigned char> M1;
+        std::string err;
+
+        if (!anyAddPoint(points) && edit.ops.empty() && !edit.invert) {
             return "nothing";
         }
 
+        if (anyAddPoint(points)) {
         // ---- pass 1: the whole frame
         report(0.03);
-        std::string err = encodeFrame();
+        err = encodeFrame();
         if (!err.empty()) {
             return err;
         }
@@ -1801,15 +2233,7 @@ std::string selectFinish(const std::vector<SelectPoint>& points, const SelectReq
         SamQuery q1;
         std::vector<PointPx> px;
         toQuery(points, static_cast<float>(rw), static_cast<float>(rh), q1, px, rw, rh);
-        if (box && box->useBox) {
-            q1.useBox = true;
-            q1.bx0 = static_cast<float>(box->bx0 * rw);
-            q1.by0 = static_cast<float>(box->by0 * rh);
-            q1.bx1 = static_cast<float>(box->bx1 * rw);
-            q1.by1 = static_cast<float>(box->by1 * rh);
-        }
         std::vector<float> L1;
-        float quality = 0.f, agree = 0.f;
         err = samDecode(q1, rw, rh, L1, quality, agree);
         if (!err.empty()) {
             return err;
@@ -1818,13 +2242,12 @@ std::string selectFinish(const std::vector<SelectPoint>& points, const SelectReq
 
         // Decide uncertain areas as a whole: smooth the logits along the image structure,
         // then drop specks and fill pinholes.
-        const size_t rn = static_cast<size_t>(rw) * rh;
         std::vector<float> S1(rn);
         for (size_t i = 0; i < rn; ++i) {
             S1[i] = std::min(8.f, std::max(-8.f, L1[i]));
         }
         guidedFilter(rgb.data(), rw, rh, S1, std::max(4, std::max(rw, rh) / 85), 1e-3f, false);
-        std::vector<unsigned char> M1(rn);
+        M1.resize(rn);
         for (size_t i = 0; i < rn; ++i) {
             M1[i] = S1[i] > 0.f;
         }
@@ -1844,15 +2267,10 @@ std::string selectFinish(const std::vector<SelectPoint>& points, const SelectReq
                 }
             }
         }
-        if (bx1 < bx0 || by1 < by0) {
-            return "nothing";
-        }
+        const bool found = bx1 >= bx0 && by1 >= by0;
         ++bx1;
         ++by1;
-
-        std::vector<float> P(rn, 0.f);   // final probabilities at frame size
-        result.zoomed = false;
-        result.tiles = 0;
+        if (found) {
 
         const double fbx0 = bx0 / k, fby0 = by0 / k, fbx1 = bx1 / k, fby1 = by1 / k;   // full-image pixels
         const double want = std::max(fbx1 - fbx0, fby1 - fby0) * 1.6 + 64.0;
@@ -1996,7 +2414,7 @@ std::string selectFinish(const std::vector<SelectPoint>& points, const SelectReq
         L1.shrink_to_fit();
         report(0.88);
 
-        // ---- final clean-up: no specks, no pinholes
+        // ---- clean-up of the AI part: no specks, no pinholes
         for (size_t i = 0; i < rn; ++i) {
             M1[i] = P[i] > 0.5f;
         }
@@ -2010,6 +2428,17 @@ std::string selectFinish(const std::vector<SelectPoint>& points, const SelectReq
             }
         }
         before.clear();
+        }   // found
+        }   // AI points
+        M1.clear();
+        M1.shrink_to_fit();
+
+        // ---- hand-made parts, grow/shrink, feather, invert
+        report(0.92);
+        {
+            const Xform t = { static_cast<double>(rw), static_cast<double>(rh), 0.0, 0.0 };
+            finishTouches(P, rw, rh, edit, t, rgb.data());
+        }
 
         result.w = rw;
         result.h = rh;
@@ -2074,12 +2503,12 @@ std::string selectObject(const char* encoderPath, const char* decoderPath, const
 {
     std::string err = selectBegin(encoderPath, decoderPath, render, nullptr);
     if (err.empty()) {
-        std::vector<SelectPoint> points;
-        points.push_back({ request.cx, request.cy, true });
+        MaskEdit edit;
+        edit.points.push_back({ request.cx, request.cy, true });
         for (const SelectPoint& p : request.more) {
-            points.push_back(p);
+            edit.points.push_back(p);
         }
-        err = selectFinish(points, &request, result, progress);
+        err = selectFinish(edit, result, progress);
     }
     selectEnd();
     return err;
@@ -2100,12 +2529,12 @@ std::string selectBegin(const char*, const char*, const RenderFn&, const std::fu
     return "built without ONNX Runtime";
 }
 
-std::string selectPreview(const std::vector<SelectPoint>&, int, int, std::vector<unsigned char>&, int&, int&, double&)
+std::string selectView(const MaskEdit&, double, double, double, int, int, std::vector<unsigned char>&, double&, double&, double&, double&)
 {
     return "built without ONNX Runtime";
 }
 
-std::string selectFinish(const std::vector<SelectPoint>&, const SelectRequest*, SelectResult&, const std::function<void(double)>&)
+std::string selectFinish(const MaskEdit&, SelectResult&, const std::function<void(double)>&)
 {
     return "built without ONNX Runtime";
 }

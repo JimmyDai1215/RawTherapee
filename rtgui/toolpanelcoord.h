@@ -240,6 +240,8 @@ private:
     Gtk::Widget* prevPage;
 
 public:
+    // brings the Local Adjustments tab to the front, unfolded (after a mask was made)
+    void showLocalAdjustments();
     enum class Panel {
         FAVORITE,
         EXPOSURE,

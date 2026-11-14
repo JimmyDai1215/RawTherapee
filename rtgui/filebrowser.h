@@ -77,6 +77,8 @@ protected:
     Gtk::MenuItem* untrash;
     Gtk::MenuItem* develop;
     Gtk::MenuItem* developfast;
+    Gtk::MenuItem* aiDenoiseItem;
+    Gtk::MenuItem* aiUpscaleItem;
     Gtk::MenuItem* rename;
     Gtk::MenuItem* remove;
     Gtk::MenuItem* removeInclProc;

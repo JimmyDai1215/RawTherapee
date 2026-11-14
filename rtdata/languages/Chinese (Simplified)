@@ -1016,10 +1016,10 @@ IPTCPANEL_SOURCE;来源
 IPTCPANEL_TITLE;标题
 MAIN_BUTTON_AIDENOISE;AI降噪
 MAIN_BUTTON_AIDENOISE_TOOLTIP;用神经网络对当前照片的 RAW 数据降噪，并在原图旁保存为新的 RAW 文件（DNG）。\n当前的调整会复制到新文件。
-MAIN_BUTTON_AIMASK;AI蒙版
+MAIN_BUTTON_AIMASK;蒙版
 MAIN_BUTTON_AIMASKSHOW;显示蒙版
 MAIN_BUTTON_AIMASKSHOW_TOOLTIP;在预览里把当前局部调整点的 AI 蒙版标成红色。只是显示用，不会进入保存的图像。
-MAIN_BUTTON_AIMASK_TOOLTIP;用神经网络选中当前局部调整点中心所在的物体，并把选区作为该点的形状。
+MAIN_BUTTON_AIMASK_TOOLTIP;新建、编辑或删除蒙版（AI 点选、画笔、多边形、渐变）。\n选中蒙版后，右侧「局部调整」里的所有工具都只作用于蒙版内。
 MAIN_BUTTON_AIUPSCALE;AI放大2x
 MAIN_BUTTON_AIUPSCALE_TOOLTIP;按当前的调整显影照片，再用神经网络把宽和高各放大到 2 倍，在原图旁保存为 16 位 TIFF。
 MAIN_BUTTON_FULLSCREEN;全屏
@@ -2390,8 +2390,8 @@ TP_LOCALLAB_RET_TOOLNAME;去雾 & Retinex
 TP_LOCALLAB_REWEI;再加权迭代
 TP_LOCALLAB_RGB;RGB色调曲线
 TP_LOCALLAB_RGBCURVE_TOOLTIP;RGB模式下有四个选择：标准，加权标准，亮度，以及仿胶片式
-TP_LOCALLAB_ROW_NVIS;隐藏
-TP_LOCALLAB_ROW_VIS;可见
+TP_LOCALLAB_ROW_NVIS;控制框已隐藏
+TP_LOCALLAB_ROW_VIS;控制框已显示
 TP_LOCALLAB_SATUR;饱和度
 TP_LOCALLAB_SATURV;饱和度 (s)
 TP_LOCALLAB_SENSI;范围
@@ -4994,3 +4994,41 @@ TP_WBALANCE_STUDLABEL1;相关系数：%1 遍数：%2 最佳备选=%3
 TP_WBALANCE_STUDLABEL_TOOLTIP;显示计算出的 Student 相关系数。\n数值越低越好，<0.005 为优秀，\n<0.01 为良好，>0.5 为差。\n数值低并不代表白平衡正确：\n如果光源不标准，结果可能不稳定。\n数值 1000 表示使用了之前的计算结果，\n结果很可能是好的。\n\n遍数：执行的遍数。\nAlt_temp：备选色温。
 !//TP_WBALANCE_ITCWBNOPURPLE_TOOLTIP;By default when "Inpaint opposed" is activated, purple colors are not taken into account. However, if the image does not need highlight reconstruction, or if this image naturally contains purple tints (flowers, etc.), it may be necessary to deactivate, to take into account all the colors.
 !//TP_WBALANCE_ITCWB_FORCED;Forces use of the entire CIE diagram
+
+MAIN_MASK_NEW;新建蒙版…
+MAIN_MASK_EDIT;编辑蒙版「%1」…
+MAIN_MASK_DELETE;删除蒙版「%1」
+MAIN_MASK_DELETE_CONFIRM;删除蒙版「%1」以及它上面的所有调整？
+MAIN_MASK_NAME;蒙版 %1
+MASKEDIT_TITLE;蒙版编辑器
+MASKEDIT_TOOL_AI;AI 点选
+MASKEDIT_TOOL_BRUSH;画笔
+MASKEDIT_TOOL_POLYGON;多边形
+MASKEDIT_TOOL_GRADIENT;渐变
+MASKEDIT_TOOL_AI_TOOLTIP;点一下物体，自动选中它
+MASKEDIT_TOOL_BRUSH_TOOLTIP;手动涂抹蒙版
+MASKEDIT_TOOL_POLYGON_TOOLTIP;用直线边勾出一块区域
+MASKEDIT_TOOL_GRADIENT_TOOLTIP;沿拖动方向逐渐变淡的蒙版
+MASKEDIT_BRUSHSIZE;画笔大小
+MASKEDIT_FEATHER;羽化
+MASKEDIT_GROW;收缩/扩张
+MASKEDIT_INVERT;反选
+MASKEDIT_UNDO;撤销
+MASKEDIT_RESET;清空
+MASKEDIT_FIT;适应窗口
+MASKEDIT_APPLY;使用此蒙版
+MASKEDIT_INFO;AI 点：%1　笔画/形状：%2　缩放：%3%%
+MASKEDIT_HELP_AI;左键：把点到的物体加入蒙版。右键（或 Shift+左键）：从蒙版中减去。滚轮缩放，Ctrl+拖动或中键拖动移动画面。
+MASKEDIT_HELP_BRUSH;左键拖动：涂抹。右键拖动：擦除。滚轮缩放，Ctrl+拖动或中键拖动移动画面。
+MASKEDIT_HELP_POLYGON;左键逐点落下顶点，双击闭合并加入蒙版；右键闭合并从蒙版中减去这块区域。
+MASKEDIT_HELP_GRADIENT;从蒙版最强的位置拖到完全消失的位置。右键拖动：从蒙版中减去一个渐变。
+MASKEDIT_LUMA;亮度范围
+MASKEDIT_LUMA_TOOLTIP;只保留照片亮度在两个滑块之间的部分（左：最暗，右：最亮）。例如只选天空里的亮部，或者只选某个物体的暗部。
+AIBATCH_MENU_DENOISE;AI 降噪（所选照片）
+AIBATCH_MENU_UPSCALE;AI 放大 2x（所选照片）
+AIBATCH_DENOISE_INTRO;对 %1 张照片做 AI 降噪。每张都会在原图旁边生成一个新的 RAW 文件（_AI.dng），并带上原来的调整。
+AIBATCH_UPSCALE_INTRO;对 %1 张照片做 AI 放大 2x。每张都按当前的调整显影，在原图旁边保存为 16 位 TIFF（_2x.tif）。
+AIBATCH_STOP;处理完这张后停止
+AIBATCH_STOPPING;（正在停止…）
+AIBATCH_DONE;完成：%1 / %2 张。
+AIBATCH_FOLDER;保存在：%1

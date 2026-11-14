@@ -89,6 +89,30 @@ struct SelectPoint {
     bool add;      // true: this belongs to the selection; false: this does not
 };
 
+// A hand-made part of a mask.
+struct MaskOp {
+    int type = 0;             // 0 = brush stroke, 1 = polygon, 2 = linear gradient (from full to none)
+    bool add = true;          // add to the mask, or take away from it
+    double radius = 0.01;     // brush radius as a fraction of the image width
+    std::vector<double> xy;   // x0, y0, x1, y1, ... each 0..1 of the image
+};
+
+// Everything a mask is made from: AI points, hand-made parts (applied in order), and
+// finishing touches.
+struct MaskEdit {
+    std::vector<SelectPoint> points;
+    std::vector<MaskOp> ops;
+    double feather = 0.0;     // softness of the edge, fraction of the image width
+    double grow = 0.0;        // > 0 grows, < 0 shrinks the mask, fraction of the image width
+    bool invert = false;
+    double lumaLo = 0.0;      // only keep the mask where the photo's brightness (0..1) is
+    double lumaHi = 1.0;      // between these two
+};
+
+// Text form of a MaskEdit, to store it next to the mask file.
+std::string editToText(const MaskEdit& edit);
+bool editFromText(const std::string& text, MaskEdit& edit);
+
 struct SelectRequest {
     double cx = 0.5, cy = 0.5;     // a point on the object, 0..1 of the full image
     bool useBox = false;           // optional box around the object, 0..1
@@ -125,16 +149,21 @@ std::string selectObject(const char* encoderPath, const char* decoderPath, const
 #endif
 
 // The same in steps, for interactive use: selectBegin develops the frame and loads it into
-// the network (slow); selectPreview then answers within a fraction of a second for any set
-// of points and returns the frame with the rough selection in red; selectFinish makes the
+// the network (slow); selectView then answers within a fraction of a second for any state
+// of the mask and returns the photo with the rough mask in red; selectFinish makes the
 // final, refined mask; selectEnd frees everything. One session at a time.
 #ifdef _WIN32
 std::string selectBegin(const wchar_t* encoderPath, const wchar_t* decoderPath, const RenderFn& render, const std::function<void(double)>& progress);
 #else
 std::string selectBegin(const char* encoderPath, const char* decoderPath, const RenderFn& render, const std::function<void(double)>& progress);
 #endif
-std::string selectPreview(const std::vector<SelectPoint>& points, int maxW, int maxH, std::vector<unsigned char>& rgb, int& w, int& h, double& area);
-std::string selectFinish(const std::vector<SelectPoint>& points, const SelectRequest* box, SelectResult& result, const std::function<void(double)>& progress);
+// Draws the current state of the mask over the photo. (cx, cy) is the image point (0..1) at
+// the centre of the view, zoom 1 shows the whole photo, larger values magnify.
+// scaleX/scaleY receive the number of output pixels per image width/height, offX/offY the
+// output position of the image's top-left corner (to convert mouse positions).
+std::string selectView(const MaskEdit& edit, double cx, double cy, double zoom, int outW, int outH,
+                       std::vector<unsigned char>& rgb, double& scaleX, double& scaleY, double& offX, double& offY);
+std::string selectFinish(const MaskEdit& edit, SelectResult& result, const std::function<void(double)>& progress);
 void selectEnd();
 
 }

@@ -183,6 +183,9 @@ LocallabTool::LocallabTool(Gtk::Box* content, Glib::ustring toolName, Glib::ustr
     RTImage* const removeImage = Gtk::manage(new RTImage("cancel-small", Gtk::ICON_SIZE_BUTTON));
     removeEvBox->add(*removeImage);
     titleBox->pack_end(*removeEvBox, Gtk::PACK_SHRINK, 1);
+    // tools are not added/removed any more: all of them are there, switched on or off
+    removeEvBox->set_no_show_all(true);
+    removeEvBox->hide();
     if (needMode) {
         complexity->append(M("TP_LOCALLAB_MODE_EXPERT"));
         complexity->append(M("TP_LOCALLAB_MODE_NORMAL"));
@@ -211,6 +214,31 @@ LocallabTool::LocallabTool(Gtk::Box* content, Glib::ustring toolName, Glib::ustr
     // Create panel for specific widget tools
     totalBox->pack_start(*content, Gtk::PACK_SHRINK, 0);
     exp->add(*totalBox, false);
+
+    // A folded tool is just its title: the complexity selector only shows while it is unfolded.
+    complexity->set_no_show_all(true);
+    complexity->hide();
+    totalBox->signal_map().connect([this]() {
+        complexity->show();
+    });
+    totalBox->signal_unmap().connect([this]() {
+        complexity->hide();
+    });
+
+    // Moving a slider of a tool that is switched off switches it on, like in the main tools.
+    autoEnable = Gtk::GestureMultiPress::create(*totalBox);
+    autoEnable->set_propagation_phase(Gtk::PHASE_CAPTURE);
+    autoEnable->set_button(1);
+    autoEnable->signal_pressed().connect([this](int, double, double) {
+        if (!isLocActivated || exp->getEnabled()) {
+            return;
+        }
+        const GdkEvent* const ev = gtk_gesture_get_last_event(GTK_GESTURE(autoEnable->gobj()), gtk_gesture_single_get_current_sequence(GTK_GESTURE_SINGLE(autoEnable->gobj())));
+        GtkWidget* const w = ev ? gtk_get_event_widget(const_cast<GdkEvent*>(ev)) : nullptr;
+        if (w && (GTK_IS_RANGE(w) || GTK_IS_SPIN_BUTTON(w))) {
+            exp->setEnabled(true);
+        }
+    });
 }
 
 LocallabTool::~LocallabTool()
@@ -1301,7 +1329,7 @@ void LocallabColor::read(const rtengine::procparams::ProcParams* pp, const Param
     if (index < (int)pp->locallab.spots.size()) {
         const LocallabParams::LocallabSpot& spot = pp->locallab.spots.at(index);
 
-        exp->set_visible(spot.visicolor);
+        exp->set_visible(true); // every tool is always shown for the selected spot
         exp->setEnabled(spot.expcolor);
         complexity->set_active(spot.complexcolor);
 
@@ -3269,7 +3297,7 @@ void LocallabExposure::read(const rtengine::procparams::ProcParams* pp, const Pa
     if (index < (int)pp->locallab.spots.size()) {
         const LocallabParams::LocallabSpot& spot = pp->locallab.spots.at(index);
 
-        exp->set_visible(spot.visiexpose);
+        exp->set_visible(true); // every tool is always shown for the selected spot
         exp->setEnabled(spot.expexpose);
         complexity->set_active(spot.complexexpose);
 /*
@@ -5123,7 +5151,7 @@ void LocallabShadow::read(const rtengine::procparams::ProcParams* pp, const Para
     if (index < (int)pp->locallab.spots.size()) {
         const LocallabParams::LocallabSpot& spot = pp->locallab.spots.at(index);
 
-        exp->set_visible(spot.visishadhigh);
+        exp->set_visible(true); // every tool is always shown for the selected spot
         exp->setEnabled(spot.expshadhigh);
         complexity->set_active(spot.complexshadhigh);
 
@@ -7257,7 +7285,7 @@ void LocallabVibrance::read(const rtengine::procparams::ProcParams* pp, const Pa
     if (index < (int)pp->locallab.spots.size()) {
         const LocallabParams::LocallabSpot& spot = pp->locallab.spots.at(index);
 
-        exp->set_visible(spot.visivibrance);
+        exp->set_visible(true); // every tool is always shown for the selected spot
         exp->setEnabled(spot.expvibrance);
         complexity->set_active(spot.complexvibrance);
 
@@ -8046,7 +8074,7 @@ void LocallabSoft::read(const rtengine::procparams::ProcParams* pp, const Params
     if (index < (int)pp->locallab.spots.size()) {
         const LocallabParams::LocallabSpot& spot = pp->locallab.spots.at(index);
 
-        exp->set_visible(spot.visisoft);
+        exp->set_visible(true); // every tool is always shown for the selected spot
         exp->setEnabled(spot.expsoft);
         complexity->set_active(spot.complexsoft);
 
@@ -9396,7 +9424,7 @@ void LocallabBlur::read(const rtengine::procparams::ProcParams* pp, const Params
     if (index < (int)pp->locallab.spots.size()) {
         const LocallabParams::LocallabSpot& spot = pp->locallab.spots.at(index);
 
-        exp->set_visible(spot.visiblur);
+        exp->set_visible(true); // every tool is always shown for the selected spot
         exp->setEnabled(spot.expblur);
         complexity->set_active(spot.complexblur);
 

@@ -163,6 +163,8 @@ set(NONCLISOURCEFILES
     labgrid.cc
     lockablecolorpicker.cc
     crashlog.cc
+    aibatch.cc
+    aimaskeditor.cc
     ainoise.cc
     airawcore.cc
     keyremap.cc
@@ -307,19 +309,25 @@ target_link_libraries(rth-cli PRIVATE
     ${EXTRA_LIB_RTGUI}
 )
 
-# Optional AI denoise. Only the ONNX Runtime headers are needed at build time;
-# onnxruntime.dll is loaded on demand at run time (Windows only).
-set(ONNXRT_INCLUDE_DIR "" CACHE PATH "Folder with the ONNX Runtime headers (enables AI denoise)")
-if(WIN32 AND ONNXRT_INCLUDE_DIR AND EXISTS "${ONNXRT_INCLUDE_DIR}/onnxruntime_cxx_api.h")
-    message(STATUS "ONNX Runtime headers found: AI denoise enabled")
+# Optional AI functions. Only the ONNX Runtime headers are needed at build time on
+# Windows, where onnxruntime.dll is loaded on demand at run time. Elsewhere (used for
+# testing) the library given in ONNXRT_LIBRARY is linked.
+set(ONNXRT_INCLUDE_DIR "" CACHE PATH "Folder with the ONNX Runtime headers (enables the AI functions)")
+set(ONNXRT_LIBRARY "" CACHE FILEPATH "ONNX Runtime library to link (not needed on Windows)")
+if(ONNXRT_INCLUDE_DIR AND EXISTS "${ONNXRT_INCLUDE_DIR}/onnxruntime_cxx_api.h" AND (WIN32 OR ONNXRT_LIBRARY))
+    message(STATUS "ONNX Runtime headers found: AI functions enabled")
     target_compile_definitions(rth PRIVATE HAVE_ONNXRT)
     target_compile_definitions(rth-cli PRIVATE HAVE_ONNXRT)
     # only this file includes the ONNX Runtime headers, which need C++17
     set_source_files_properties(airawcore.cc PROPERTIES
         COMPILE_OPTIONS "-std=gnu++17"
         INCLUDE_DIRECTORIES "${ONNXRT_INCLUDE_DIR}")
+    if(NOT WIN32)
+        target_link_libraries(rth PRIVATE "${ONNXRT_LIBRARY}")
+        target_link_libraries(rth-cli PRIVATE "${ONNXRT_LIBRARY}")
+    endif()
 else()
-    message(STATUS "ONNX Runtime headers not given: AI denoise disabled")
+    message(STATUS "ONNX Runtime headers not given: AI functions disabled")
 endif()
 
 if(TCMALLOC_FOUND)
