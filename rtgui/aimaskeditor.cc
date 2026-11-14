@@ -457,7 +457,7 @@ bool AiMaskEditor::onDraw(const Cairo::RefPtr<Cairo::Context>& cr)
         }
         cr->stroke();
         for (size_t i = 0; i + 1 < pending_.size(); i += 2) {
-            cr->arc(pending_[i] * scaleX_ + offX_, pending_[i + 1] * scaleY_ + offY_, 3.0, 0.0, 2.0 * M_PI);
+            cr->arc(pending_[i] * scaleX_ + offX_, pending_[i + 1] * scaleY_ + offY_, 3.0, 0.0, 2.0 * G_PI);
             cr->fill();
         }
     }
@@ -475,10 +475,10 @@ bool AiMaskEditor::onDraw(const Cairo::RefPtr<Cairo::Context>& cr)
         const double r = std::max(1.0, size_.get_value() / 1000.0 * scaleX_);
         cr->set_line_width(1.0);
         cr->set_source_rgb(0.0, 0.0, 0.0);
-        cr->arc(lastX_, lastY_, r + 1.0, 0.0, 2.0 * M_PI);
+        cr->arc(lastX_, lastY_, r + 1.0, 0.0, 2.0 * G_PI);
         cr->stroke();
         cr->set_source_rgb(1.0, 1.0, 1.0);
-        cr->arc(lastX_, lastY_, r, 0.0, 2.0 * M_PI);
+        cr->arc(lastX_, lastY_, r, 0.0, 2.0 * G_PI);
         cr->stroke();
     }
     return true;
